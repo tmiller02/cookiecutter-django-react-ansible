@@ -1,0 +1,12 @@
+---
+
+- name: ensure SELinux is installed
+  become: yes
+  yum:
+    name: selinux-policy
+    state: present
+
+- name: enable SELinux
+  selinux:
+    policy: targeted
+    state: enforcing

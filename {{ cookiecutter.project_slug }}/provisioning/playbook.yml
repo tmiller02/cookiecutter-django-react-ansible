@@ -1,9 +1,11 @@
 ---
 
 - hosts: all
-  tasks:
+  pre_tasks:
     - name: check connectivity to all hosts
       ping:
+  roles:
+    - base
 
 - hosts: database
   become: yes

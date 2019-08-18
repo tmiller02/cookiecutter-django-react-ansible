@@ -1,6 +1,7 @@
 ---
 
 - hosts: all
+  become: yes
   pre_tasks:
     - name: check connectivity to all hosts
       ping:

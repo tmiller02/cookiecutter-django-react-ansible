@@ -2,8 +2,37 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "centos/7"
-    config.vm.box_check_update = true
-    config.vagrant.plugins = ["vagrant-vbguest"]
-    config.vbguest.auto_update = true
+
+  config.vagrant.plugins = ["vagrant-vbguest"]
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = true
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  config.vbguest.auto_update = true
+
+  config.vm.define "node1" do |machine|
+    machine.vm.network "private_network", ip: "172.17.177.21"
+    machine.vm.provider "virtualbox" do |virtualbox|
+      virtualbox.name = "{{ cookiecutter.project_slug }}_node1"
+    end
+
+  end
+
+  config.vm.define "controller" do |machine|
+    machine.vm.provider "virtualbox" do |virtualbox|
+      virtualbox.name = "{{ cookiecutter.project_slug }}_controller"
+      virtualbox.memory = 512
+    end
+    machine.vm.provision "ansible_local" do |ansible|
+      ansible.playbook = "playbook.yml"
+      ansible.provisioning_path = "/vagrant/provisioning"
+      ansible.config_file = "ansible-vagrant.cfg"
+      ansible.install_mode = "pip_args_only"
+      ansible.pip_install_cmd = "sudo yum install -y epel-release && sudo yum install -y python2-pip"
+      ansible.pip_args = "-r /vagrant/provisioning/requirements.txt"
+      ansible.verbose = false
+      ansible.limit = "all"
+      ansible.inventory_path = "environments/dev/inventory.yml"
+    end
+  end
+
 end

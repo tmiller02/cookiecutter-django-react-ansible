@@ -29,6 +29,8 @@ Vagrant.configure("2") do |config|
       ansible.install_mode = "pip_args_only"
       ansible.pip_install_cmd = "sudo yum install -y epel-release && sudo yum install -y python2-pip"
       ansible.pip_args = "-r /vagrant/provisioning/requirements.txt"
+      ansible.galaxy_role_file = "requirements.yml"
+      ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file} --force"
       ansible.verbose = false
       ansible.limit = "all"
       ansible.inventory_path = "environments/dev/inventory.yml"

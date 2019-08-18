@@ -4,3 +4,8 @@
   tasks:
     - name: check connectivity to all hosts
       ping:
+
+- hosts: database
+  become: yes
+  roles:
+    - geerlingguy.postgresql

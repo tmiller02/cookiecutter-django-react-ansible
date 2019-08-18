@@ -5,3 +5,7 @@ all:
     node1:
       ansible_ssh_host: "172.17.177.21"
       ansible_ssh_private_key_file: "/vagrant/.vagrant/machines/node1/virtualbox/private_key"
+  children:
+    database:
+      hosts:
+        node1:

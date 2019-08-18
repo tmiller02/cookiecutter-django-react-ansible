@@ -8,4 +8,4 @@
 - hosts: database
   become: yes
   roles:
-    - geerlingguy.postgresql
+    - postgresql

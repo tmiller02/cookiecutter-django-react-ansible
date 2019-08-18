@@ -9,12 +9,11 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
   config.vbguest.auto_update = true
 
-  config.vm.define "node1" do |machine|
+  config.vm.define "node1", primary: true do |machine|
     machine.vm.network "private_network", ip: "172.17.177.21"
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_node1"
     end
-
   end
 
   config.vm.define "controller" do |machine|

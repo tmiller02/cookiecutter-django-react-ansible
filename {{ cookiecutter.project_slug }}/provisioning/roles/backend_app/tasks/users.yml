@@ -1,0 +1,12 @@
+---
+{% raw %}
+- name: create the backend app group
+  group:
+    name: "{{ backend_app_group }}"
+    system: yes
+
+- name: create the backend app user
+  user:
+    name: "{{ backend_app_user }}"
+    group: "{{ backend_app_group }}"
+{% endraw %}

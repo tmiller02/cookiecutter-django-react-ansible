@@ -1,6 +1,7 @@
 ---
-
 {% raw %}
+- include_tasks: users.yml
+
 - name: synchronize backend_app
   synchronize:
     src: "{{ playbook_dir }}/../backend_app/"

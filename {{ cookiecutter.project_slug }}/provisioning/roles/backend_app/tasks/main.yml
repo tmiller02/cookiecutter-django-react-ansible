@@ -1,0 +1,10 @@
+---
+
+{% raw %}
+- name: synchronize backend_app
+  synchronize:
+    src: "{{ playbook_dir }}/../backend_app/"
+    dest: "{{ backend_app_dir }}"
+    delete: yes
+  when: backend_app_rsync
+{% endraw %}

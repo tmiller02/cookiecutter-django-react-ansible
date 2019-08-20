@@ -1,0 +1,3 @@
+---
+
+backend_app_dir: "/opt/{{ cookiecutter.project_slug }}"

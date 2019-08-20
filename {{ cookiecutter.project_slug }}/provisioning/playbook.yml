@@ -12,3 +12,8 @@
   become: yes
   roles:
     - postgresql
+
+- hosts: webserver
+  become: yes
+  roles:
+    - backend_app

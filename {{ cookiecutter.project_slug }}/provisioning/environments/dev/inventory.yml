@@ -9,3 +9,6 @@ all:
     database:
       hosts:
         node1:
+    webserver:
+      hosts:
+        node1:

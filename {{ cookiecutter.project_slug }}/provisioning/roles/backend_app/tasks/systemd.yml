@@ -1,0 +1,14 @@
+---
+{% raw %}
+- name: add gunicorn config
+  template:
+    src: gunicorn.cfg.j2
+    dest: "{{ backend_app_dir }}/gunicorn.cfg"
+    owner: "{{ backend_app_user }}"
+    group: "{{ backend_app_group }}"
+
+- name: add systemd unit file
+  template:
+    src: systemd_service.j2
+    dest: "/etc/systemd/system/{{ backend_app_systemd_unit_name }}.service"
+{% endraw %}

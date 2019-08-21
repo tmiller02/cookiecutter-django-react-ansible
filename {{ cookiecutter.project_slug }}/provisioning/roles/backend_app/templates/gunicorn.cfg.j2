@@ -1,0 +1,5 @@
+{% raw %}
+{{ ansible_managed | comment }}
+bind = "localhost:8080"
+workers = {{ backend_app_gunicorn_worker_count }}
+{% endraw %}

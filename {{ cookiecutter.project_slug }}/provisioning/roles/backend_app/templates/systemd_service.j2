@@ -1,0 +1,18 @@
+[Unit]
+Description = {{ cookiecutter.project_name }}
+After = network.target
+{% raw %}
+[Service]
+RuntimeDirectory = {{ backend_app_systemd_runtime_dir }}
+PIDFile = {{ backend_app_systemd_pid_file }}
+User = {{ backend_app_user }}
+Group = {{ backend_app_group }}
+WorkingDirectory = {{ backend_app_dir }}
+ExecStart = {{ backend_app_virtualenv_dir }}/bin/gunicorn \
+            --pid {{ backend_app_systemd_pid_file }} \
+            {{ backend_app_wsgi }}
+ExecReload = /bin/kill -s HUP $MAINPID
+ExecStop = /bin/kill -s TERM $MAINPID
+{% endraw %}
+[Install]
+WantedBy = multi-user.target

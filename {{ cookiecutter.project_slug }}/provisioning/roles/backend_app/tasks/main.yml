@@ -10,4 +10,7 @@
     dest: "{{ backend_app_dir }}"
     delete: yes
   when: backend_app_rsync
+
+- include_tasks: systemd.yml
+
 {% endraw %}

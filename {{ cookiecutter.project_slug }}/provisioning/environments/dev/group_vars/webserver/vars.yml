@@ -1,3 +1,5 @@
 ---
 
 backend_app_rsync: no
+backend_app_gid: 1234
+backend_app_uid: 1234

@@ -20,4 +20,11 @@
     name:
       - pip-tools==4.0.0
 
+- name: install requirements using pip-sync
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync"
+  args:
+    chdir: "{{ backend_app_dir }}"
+
 {% endraw %}

@@ -1,0 +1,23 @@
+---
+{% raw %}
+- name: install epel-release
+  yum:
+    name: epel-release
+
+- name: install python packages
+  yum:
+    name:
+      - python2-pip
+      - python36
+      - python36-pip
+
+- name: set up virtualenv
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  pip:
+    virtualenv: "{{ backend_app_virtualenv_dir }}"
+    virtualenv_command: /usr/bin/python3.6 -m venv
+    name:
+      - pip-tools==4.0.0
+
+{% endraw %}

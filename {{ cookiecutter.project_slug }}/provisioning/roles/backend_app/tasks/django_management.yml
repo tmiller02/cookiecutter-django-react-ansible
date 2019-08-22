@@ -1,0 +1,10 @@
+---
+{% raw %}
+- name: run database migrations
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  django_manage:
+    command: migrate
+    app_path: "{{ backend_app_dir }}"
+    virtualenv: "{{ backend_app_virtualenv_dir }}"
+{% endraw %}

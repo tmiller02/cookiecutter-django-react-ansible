@@ -1,9 +1,9 @@
 ---
 
 backend_app_dir: "/opt/{{ cookiecutter.project_slug }}"
-backend_app_user: "{{ cookiecutter.backend_user }}"
-backend_app_group: "{{ cookiecutter.backend_group }}"
-backend_app_virtualenv_dir: "/home/{{ cookiecutter.backend_user }}/{{ cookiecutter.project_slug }}_virtualenv"
+backend_app_user: "{{ cookiecutter.project_slug }}"
+backend_app_group: "{{ cookiecutter.project_slug }}"
+backend_app_virtualenv_dir: "/home/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}_virtualenv"
 backend_app_systemd_runtime_dir: "{{ cookiecutter.project_slug }}"
 {% raw %}backend_app_systemd_pid_file: "/run/{{ backend_app_systemd_runtime_dir }}/gunicorn.pid"{% endraw %}
 backend_app_systemd_unit_name: "{{ cookiecutter.project_slug }}"

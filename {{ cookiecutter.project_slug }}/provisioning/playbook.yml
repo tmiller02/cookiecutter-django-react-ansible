@@ -13,6 +13,8 @@
   become: yes
   roles:
     - postgresql
+  vars_files:
+    - vars/postgresql.yml
 
 - hosts: backend
   become: yes

@@ -1,6 +1,4 @@
 {
     "project_name": "My Project",
-    "project_slug": "{{ cookiecutter.project_name.lower() | replace(' ', '_') | replace('-', '_') | replace('.', '_') | trim() }}",
-    "backend_user": "{{ cookiecutter.project_slug }}",
-    "backend_group": "{{ cookiecutter.backend_user }}"
+    "project_slug": "{{ cookiecutter.project_name.lower() | replace(' ', '_') | replace('-', '_') | replace('.', '_') | trim() }}"
 }

@@ -1,3 +1,3 @@
 ---
 
-database_password: "dev_db_password"
+database_password: "$DATABASE PASSWORD$"

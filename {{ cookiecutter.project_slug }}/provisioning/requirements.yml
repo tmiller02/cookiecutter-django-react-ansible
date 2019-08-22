@@ -2,3 +2,6 @@
 
 - src: geerlingguy.postgresql
   version: "1.4.6"
+
+- src: nginxinc.nginx
+  version: "0.12.0"

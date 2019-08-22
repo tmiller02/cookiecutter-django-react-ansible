@@ -7,13 +7,17 @@
       ping:
   roles:
     - base
+    - firewalld
 
 - hosts: database
   become: yes
   roles:
     - postgresql
 
-- hosts: webserver
+- hosts: backend
   become: yes
   roles:
     - backend_app
+    - nginxinc.nginx
+  vars_files:
+    - vars/nginx_backend.yml

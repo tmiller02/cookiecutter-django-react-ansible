@@ -1,0 +1,28 @@
+---
+
+nginx_http_template_enable: true
+
+nginx_http_template:
+  backend:
+    port: 80
+    server_name: localhost
+    reverse_proxy:
+      locations:
+        backend:
+          location: /
+          proxy_pass: http://backend_servers
+          proxy_set_header:
+            header_host:
+              name: Host
+              value: $host
+    upstreams:
+      upstream_1:
+        name: backend_servers
+        lb_method: least_conn
+        zone_name: backend
+        zone_size: 64k
+        sticky_cookie: false
+        servers:
+          backend_server_1:
+            address: localhost
+            port: 8080

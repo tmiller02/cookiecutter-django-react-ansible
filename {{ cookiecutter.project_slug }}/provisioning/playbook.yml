@@ -14,7 +14,7 @@
   roles:
     - postgresql
   vars_files:
-    - vars/postgresql.yml
+    - vars/database.yml
 
 - hosts: backend
   become: yes
@@ -22,4 +22,5 @@
     - backend_app
     - nginxinc.nginx
   vars_files:
+    - vars/database.yml
     - vars/nginx_backend.yml

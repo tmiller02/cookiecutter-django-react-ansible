@@ -5,3 +5,4 @@ backend_app_gunicorn_worker_count: 4
 backend_app_gid: 1234
 backend_app_uid: 1234
 backend_app_debug: true
+backend_app_database_host: "127.0.0.1"

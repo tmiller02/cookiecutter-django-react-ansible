@@ -1,0 +1,16 @@
+---
+
+database_name: "{{ cookiecutter.project_slug }}"
+database_user: "{{ cookiecutter.project_slug }}"
+{% raw %}
+backend_app_database_name: "{{ database_name }}"
+backend_app_database_user: "{{ database_user }}"
+backend_app_database_password: "{{ database_password }}"
+
+postgresql_databases:
+  - name: "{{ database_name }}"
+
+postgresql_users:
+  - name: "{{ database_user }}"
+    password: "{{ database_password }}"
+{% endraw %}

@@ -1,8 +1,0 @@
----
-
-postgresql_databases:
-  - name: "{{ cookiecutter.project_slug }}"
-
-postgresql_users:
-  - name: "{{ cookiecutter.project_slug }}"
-    password: "{%raw%}{{ database_password }}{%endraw%}"

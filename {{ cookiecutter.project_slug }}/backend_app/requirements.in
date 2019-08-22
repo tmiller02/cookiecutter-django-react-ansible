@@ -1,6 +1,8 @@
 black>=19.3b0
 coverage>=4.5.4
 Django>=2.2.4
+django-environ>=0.4.5
 djangorestframework>=3.10.2
 gunicorn>=19.9.0
 ipython>=7.7.0
+psycopg2-binary>=2.8.3

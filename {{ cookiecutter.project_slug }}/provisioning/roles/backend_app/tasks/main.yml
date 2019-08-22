@@ -14,5 +14,13 @@
       - "--delete-excluded"
   when: backend_app_rsync
 
+- name: template settings
+  template:
+    src: settings.env.j2
+    dest: "{{ backend_app_settings_file }}"
+    owner: "{{ backend_app_user }}"
+    group: "{{ backend_app_group }}"
+    mode: "u=rw,g=,o="
+
 - include_tasks: systemd.yml
 {% endraw %}

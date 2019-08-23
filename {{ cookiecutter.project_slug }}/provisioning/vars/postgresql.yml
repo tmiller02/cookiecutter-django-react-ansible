@@ -1,0 +1,9 @@
+---
+{% raw %}
+postgresql_databases:
+  - name: "{{ database_name }}"
+
+postgresql_users:
+  - name: "{{ database_user }}"
+    password: "{{ database_password }}"
+{% endraw %}

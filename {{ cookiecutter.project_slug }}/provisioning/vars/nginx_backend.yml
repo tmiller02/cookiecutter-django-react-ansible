@@ -1,5 +1,5 @@
 ---
-
+{% raw %}
 nginx_http_template_enable: true
 
 nginx_http_template:
@@ -15,6 +15,14 @@ nginx_http_template:
             header_host:
               name: Host
               value: $host
+    web_server:
+      locations:
+        backend_static:
+          location: /static/
+          html_file_location: "{{ backend_app_static_dir }}"
+          html_file_name: "index.html"
+          autoindex: false
+      http_demo_conf: false
     upstreams:
       upstream_1:
         name: backend_servers
@@ -26,3 +34,4 @@ nginx_http_template:
           backend_server_1:
             address: localhost
             port: 8080
+{% endraw %}

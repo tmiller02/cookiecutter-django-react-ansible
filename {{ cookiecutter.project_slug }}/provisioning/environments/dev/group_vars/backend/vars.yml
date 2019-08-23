@@ -1,5 +1,5 @@
 ---
-
+{% raw %}
 backend_app_rsync: no
 backend_app_gunicorn_worker_count: 4
 backend_app_gid: 1234
@@ -7,3 +7,8 @@ backend_app_uid: 1234
 backend_app_debug: true
 backend_app_database_host: "127.0.0.1"
 backend_app_secret_key: "$DJANGO SECRET KEY$"
+backend_app_allowed_hosts:
+  - "localhost"
+  - "127.0.0.1"
+  - "{{ inventory_hostname }}"
+{% endraw %}

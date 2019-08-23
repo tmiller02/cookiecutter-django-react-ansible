@@ -11,4 +11,12 @@
   template:
     src: systemd_service.j2
     dest: "/etc/systemd/system/{{ backend_app_systemd_unit_name }}.service"
+
+- name: start and enable the systemd unit
+  systemd:
+    daemon_reload: yes
+    name: "{{ backend_app_systemd_unit_name }}"
+    enabled: yes
+    state: started
+
 {% endraw %}

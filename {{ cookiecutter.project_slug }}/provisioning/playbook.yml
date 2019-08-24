@@ -1,5 +1,5 @@
 ---
-
+{% raw %}
 - hosts: all
   become: yes
   pre_tasks:
@@ -21,9 +21,16 @@
   become: yes
   roles:
     - backend_app
-    - nginxinc.nginx
+    - geerlingguy.nginx
+  tasks:
+    - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+      seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
   vars_files:
     - vars/shared.yml
     - vars/backend_app.yml
     - vars/postgresql.yml
     - vars/nginx_backend.yml
+{% endraw %}

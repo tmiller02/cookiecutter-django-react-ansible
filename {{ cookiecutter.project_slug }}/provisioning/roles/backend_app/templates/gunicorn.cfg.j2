@@ -1,5 +1,6 @@
 {% raw %}
 {{ ansible_managed | comment }}
-bind = "localhost:8080"
+bind = "127.0.0.1:8080"
 workers = {{ backend_app_gunicorn_worker_count }}
+pidfile = "{{ backend_app_systemd_pid_file }}"
 {% endraw %}

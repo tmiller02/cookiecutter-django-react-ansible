@@ -1,37 +1,26 @@
 ---
 {% raw %}
-nginx_http_template_enable: true
+nginx_remove_default_vhost: yes
 
-nginx_http_template:
-  backend:
-    port: 80
-    server_name: localhost
-    reverse_proxy:
-      locations:
-        backend:
-          location: /
-          proxy_pass: http://backend_servers
-          proxy_set_header:
-            header_host:
-              name: Host
-              value: $host
-    web_server:
-      locations:
-        backend_static:
-          location: /static/
-          html_file_location: "{{ backend_app_static_dir }}"
-          html_file_name: "index.html"
-          autoindex: false
-      http_demo_conf: false
-    upstreams:
-      upstream_1:
-        name: backend_servers
-        lb_method: least_conn
-        zone_name: backend
-        zone_size: 64k
-        sticky_cookie: false
-        servers:
-          backend_server_1:
-            address: localhost
-            port: 8080
+nginx_upstreams:
+  - name: backend_app
+    strategy: least_conn
+    servers:
+      - "127.0.0.1:8080 fail_timeout=0"
+
+nginx_vhosts:
+  - listen: "80"
+    server_name: "localhost"
+    nginx_error_log: "/var/log/nginx/backend_app_error.log warn"
+    nginx_access_log: "/var/log/nginx/backend_app_access.log main buffer=16k"
+    state: "present"
+    filename: "backend_app.conf"
+    extra_parameters: |
+      location / {
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header Host $http_host;
+          proxy_redirect off;
+          proxy_pass http://backend_app;
+      }
 {% endraw %}

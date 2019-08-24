@@ -9,3 +9,8 @@
   selinux:
     policy: targeted
     state: enforcing
+
+- name: install libsemanage-python
+  yum:
+    name: libsemanage-python
+    state: present

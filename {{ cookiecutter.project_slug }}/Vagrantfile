@@ -3,13 +3,21 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vagrant.plugins = ["vagrant-vbguest"]
+  config.vagrant.plugins = [
+    "vagrant-vbguest",
+    "vagrant-hostmanager",
+  ]
   config.vm.box = "centos/7"
   config.vm.box_check_update = true
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vbguest.auto_update = true
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.manage_guest = false
 
-  config.vm.define "node1", primary: true do |machine|
+  config.vm.define "{{ cookiecutter.project_slug }}_dev", primary: true do |machine|
+    machine.vm.hostname = "{{ cookiecutter.dev_vm_hostname }}"
+    machine.hostmanager.aliases = ["api.{{ cookiecutter.dev_vm_hostname }}",]
     machine.vm.synced_folder(
       "./backend_app",
       "/opt/{{ cookiecutter.project_slug }}_backend",
@@ -18,7 +26,7 @@ Vagrant.configure("2") do |config|
     )
     machine.vm.network "private_network", ip: "172.17.177.21"
     machine.vm.provider "virtualbox" do |virtualbox|
-      virtualbox.name = "{{ cookiecutter.project_slug }}_node1"
+      virtualbox.name = "{{ cookiecutter.project_slug }}_dev"
     end
   end
 
@@ -36,6 +44,7 @@ Vagrant.configure("2") do |config|
   # which increases the system resources used for this dev environment.
   config.vm.define "controller" do |machine|
     machine.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+    machine.vm.network "private_network", ip: "172.17.177.20"
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_controller"
       virtualbox.memory = 512

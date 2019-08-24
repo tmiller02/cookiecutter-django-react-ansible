@@ -51,6 +51,10 @@ To get started, run:
   $ cd {{ cookiecutter.project_slug }}
   $ vagrant up --provision
     
+Once provisioning has finished, you can access the dev VM at \
+http://{{ cookiecutter.dev_vm_hostname }} or \
+http://api.{{ cookiecutter.dev_vm_hostname }}
+    
 Check the documentation at  {{ cookiecutter.project_slug }}/README.md for more.
 """
 

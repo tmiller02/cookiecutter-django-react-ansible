@@ -1,6 +1,6 @@
 ---
 
-- name: install yum-cron.
+- name: install yum-cron
   yum:
     name: yum-cron
     state: present

@@ -10,7 +10,7 @@
     policy: targeted
     state: enforcing
 
-- name: install libsemanage-python
+- name: install libsemanage-python for managing SELinux settings in Ansible
   yum:
     name: libsemanage-python
     state: present

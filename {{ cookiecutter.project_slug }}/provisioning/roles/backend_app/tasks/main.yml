@@ -22,6 +22,14 @@
     group: "{{ backend_app_group }}"
     mode: "u=rw,g=,o="
 
+- name: ensure static directory exists
+  file:
+    path: "{{ backend_app_static_root }}"
+    state: directory
+    owner: "{{ backend_app_user }}"
+    group: "{{ backend_app_group }}"
+    mode: "u=rwx,g=rx,o=rx"
+
 - include_tasks: django_management.yml
 
 - include_tasks: systemd.yml

@@ -7,4 +7,13 @@
     command: migrate
     app_path: "{{ backend_app_dir }}"
     virtualenv: "{{ backend_app_virtualenv_dir }}"
+
+- name: run collect static files
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  django_manage:
+    command: "collectstatic --clear"
+    app_path: "{{ backend_app_dir }}"
+    virtualenv: "{{ backend_app_virtualenv_dir }}"
+
 {% endraw %}

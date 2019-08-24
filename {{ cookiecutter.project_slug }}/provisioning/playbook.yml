@@ -19,15 +19,15 @@
 
 - hosts: backend
   become: yes
-  roles:
-    - backend_app
-    - geerlingguy.nginx
-  tasks:
+  pre_tasks:
     - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
       seboolean:
         name: httpd_can_network_connect
         state: yes
         persistent: yes
+  roles:
+    - backend_app
+    - geerlingguy.nginx
   vars_files:
     - vars/shared.yml
     - vars/backend_app.yml

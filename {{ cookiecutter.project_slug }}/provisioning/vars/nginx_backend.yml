@@ -11,8 +11,6 @@ nginx_upstreams:
 nginx_vhosts:
   - listen: "80"
     server_name: "localhost"
-    nginx_error_log: "/var/log/nginx/backend_app_error.log warn"
-    nginx_access_log: "/var/log/nginx/backend_app_access.log main buffer=16k"
     state: "present"
     filename: "backend_app.conf"
     extra_parameters: |
@@ -22,5 +20,9 @@ nginx_vhosts:
           proxy_set_header Host $http_host;
           proxy_redirect off;
           proxy_pass http://backend_app;
+      }
+
+      location /static {
+          alias {{ static_root }};
       }
 {% endraw %}

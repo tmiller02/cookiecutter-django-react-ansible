@@ -22,5 +22,5 @@ Memory usage: ------- ${MEMORY_USED} / ${MEMORY_TOTAL}
 Swap in use: -------- ${SWAP_IN_USE}
 "
 if [ ${NEEDS_RESTARTING_RC} -ne 0 ]; then
-  echo -e "${YELLOW}${BOLD}${NEEDS_RESTARTING_OUTPUT}${END_COLOR}"
+  echo -e "${YELLOW}${BOLD}${NEEDS_RESTARTING_OUTPUT}${END_COLOR}\n"
 fi

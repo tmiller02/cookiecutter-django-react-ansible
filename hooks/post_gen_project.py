@@ -42,12 +42,14 @@ def set_database_password(file_path):
 success_message = """
 This project has the following requirements. Make sure these are installed \
 before getting started:
-    \u2022 VirtualBox - https://www.virtualbox.org/
-    \u2022 Vagrant - https://www.vagrantup.com/
+
+  \u2022 VirtualBox - https://www.virtualbox.org/
+  \u2022 Vagrant - https://www.vagrantup.com/
     
 To get started, run:
-    $ cd {{ cookiecutter.project_slug }}
-    $ vagrant up --provision
+
+  $ cd {{ cookiecutter.project_slug }}
+  $ vagrant up --provision
     
 Check the documentation at  {{ cookiecutter.project_slug }}/README.md for more.
 """

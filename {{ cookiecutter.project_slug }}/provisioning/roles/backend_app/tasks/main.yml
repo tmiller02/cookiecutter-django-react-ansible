@@ -4,6 +4,11 @@
 
 - include_tasks: virtualenv.yml
 
+# WARNING - this task deletes the destination folder contents when syncing.
+#
+# Any files which aren't managed via ansible (e.g. media files) should never
+# be written to the 'backend_app' folder on the destination host if this task
+# is being run, since this will cause those files to be deleted.
 - name: synchronize backend_app
   synchronize:
     src: "{{ playbook_dir }}/../backend_app/"

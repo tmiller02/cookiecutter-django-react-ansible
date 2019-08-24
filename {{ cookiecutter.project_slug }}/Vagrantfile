@@ -22,6 +22,18 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  # We spin up a second VM and execute ansible using the ansible_local vagrant
+  # provisioner, as opposed to executing ansible directly from the host
+  # machine.
+  #
+  # This helps simplify the initial setup process, creates a
+  # consistent provisioning environment and allows us to provision a
+  # dev environment on host machines where Ansible is not supported,
+  # such as Windows.
+  # (see https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html#can-ansible-run-on-windows )
+  #
+  # However, this process does result in the creation of a 'controller' VM,
+  # which increases the system resources used for this dev environment.
   config.vm.define "controller" do |machine|
     machine.vm.synced_folder ".", "/vagrant", type: "virtualbox"
     machine.vm.provider "virtualbox" do |virtualbox|
@@ -42,6 +54,8 @@ Vagrant.configure("2") do |config|
       ansible.limit = "all"
       ansible.inventory_path = "environments/dev/inventory.yml"
     end
+    # Shut down the controller VM once it has finished provisioning the other VMs.
+    # machine.vm.provision "shell", inline: "shutdown -h now"
   end
 
 end

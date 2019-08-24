@@ -3,3 +3,5 @@
 - import_tasks: selinux.yml
 
 - import_tasks: yum_cron.yml
+
+- import_tasks: login_info.yml

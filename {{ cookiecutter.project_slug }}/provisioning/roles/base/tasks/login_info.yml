@@ -1,0 +1,14 @@
+---
+
+- name: ensure yum-utils is installed
+  yum:
+    name: yum-utils
+    state: present
+
+- name: add custom info message on login
+  template:
+    src: login_info.sh.j2
+    dest: /etc/profile.d/login_info.sh
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"

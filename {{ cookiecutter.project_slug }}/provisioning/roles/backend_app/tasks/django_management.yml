@@ -3,6 +3,7 @@
 - name: run database migrations
   become: yes
   become_user: "{{ backend_app_user }}"
+  run_once: yes
   django_manage:
     command: "migrate --noinput"
     app_path: "{{ backend_app_dir }}"

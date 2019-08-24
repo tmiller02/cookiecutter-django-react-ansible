@@ -2,14 +2,16 @@ import os
 import random
 import string
 
+OKGREEN = "\033[32m"
+BOLD = "\033[1m"
+ENDC = "\033[0m"
+
 
 def generate_random_string(length):
     choices = set(string.ascii_letters + string.digits + string.punctuation)
     unsuitable = {"'", '"', "$", "\\"}
     choices = tuple(choices.difference(unsuitable))
-    return ''.join([
-        random.SystemRandom().choice(choices) for _ in range(length)
-    ])
+    return "".join([random.SystemRandom().choice(choices) for _ in range(length)])
 
 
 def substitute_pattern_in_file(file_path, pattern, value):
@@ -23,23 +25,46 @@ def substitute_pattern_in_file(file_path, pattern, value):
 
 def set_django_secret_key(file_path):
     substitute_pattern_in_file(
-        file_path, pattern="$DJANGO SECRET KEY$",
-        value=generate_random_string(length=50)
+        file_path,
+        pattern="$DJANGO SECRET KEY$",
+        value=generate_random_string(length=50),
     )
 
 
 def set_database_password(file_path):
     substitute_pattern_in_file(
-        file_path, pattern="$DATABASE PASSWORD$",
-        value=generate_random_string(length=60)
+        file_path,
+        pattern="$DATABASE PASSWORD$",
+        value=generate_random_string(length=60),
     )
 
 
+success_message = """
+This project has the following requirements. Make sure these are installed \
+before getting started:
+    \u2022 VirtualBox - https://www.virtualbox.org/
+    \u2022 Vagrant - https://www.vagrantup.com/
+    
+To get started, run:
+    $ cd {{ cookiecutter.project_slug }}
+    $ vagrant up --provision
+    
+Check the documentation at  {{ cookiecutter.project_slug }}/README.md for more.
+"""
+
+
+def print_success():
+    print(
+        "\n" + OKGREEN + BOLD + "Your project has been generated successfully." + ENDC
+    )
+    print(success_message)
+
+
 if __name__ == "__main__":
-    dev_group_vars = os.path.join(
-        'provisioning', 'environments', 'dev', 'group_vars')
-    dev_backend_vars = os.path.join(dev_group_vars, 'backend', 'vars.yml')
-    dev_all_vars = os.path.join(dev_group_vars, 'all', 'vars.yml')
+    dev_group_vars = os.path.join("provisioning", "environments", "dev", "group_vars")
+    dev_backend_vars = os.path.join(dev_group_vars, "backend", "vars.yml")
+    dev_all_vars = os.path.join(dev_group_vars, "all", "vars.yml")
 
     set_django_secret_key(dev_backend_vars)
     set_database_password(dev_all_vars)
+    print_success()

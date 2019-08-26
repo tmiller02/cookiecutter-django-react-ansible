@@ -1,2 +1,3 @@
 /.vagrant/
 /provisioning/galaxy_roles/
+/backend_app/settings.env

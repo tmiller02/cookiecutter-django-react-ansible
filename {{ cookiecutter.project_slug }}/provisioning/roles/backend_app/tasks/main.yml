@@ -2,30 +2,42 @@
 {% raw %}
 - include_tasks: users.yml
 
-- include_tasks: virtualenv.yml
+- name: ensure backend app root folder exists with correct ownership
+  file:
+    path: "{{ backend_app_root }}"
+    state: directory
+    owner: "{{ backend_app_user }}"
+    group: "{{ backend_app_group }}"
 
-# WARNING - this task deletes the destination folder contents when syncing.
-#
-# Any files which aren't managed via ansible (e.g. media files) should never
-# be written to the 'backend_app' folder on the destination host if this task
-# is being run, since this will cause those files to be deleted.
-- name: synchronize backend_app
-  synchronize:
-    src: "{{ playbook_dir }}/../backend_app/"
-    dest: "{{ backend_app_dir }}"
-    delete: yes
-    rsync_opts:
-      - "--exclude=__pycache__"
-      - "--delete-excluded"
-  when: backend_app_rsync
+- import_tasks: run_deploy.yml
+  when: backend_app_run_deploy | bool
 
-- name: template settings
+- import_tasks: virtualenv.yml
+
+- name: template settings into the new release path
   template:
     src: settings.env.j2
-    dest: "{{ backend_app_dir }}/settings.env"
+    dest: "{{ deploy_helper.new_release_path }}/settings.env"
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
     mode: "u=rw,g=,o="
+
+- name: add gunicorn config to the new release path
+  template:
+    src: gunicorn.cfg.j2
+    dest: "{{ deploy_helper.new_release_path }}/gunicorn.cfg"
+    owner: "{{ backend_app_user }}"
+    group: "{{ backend_app_group }}"
+
+- name: finalize the deploy, removing the unfinished file and switching the 'current' symlink
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  deploy_helper:
+    path: "{{ backend_app_root }}"
+    release: '{{ deploy_helper.new_release }}'
+    state: finalize
+    keep_releases: 10
+  when: backend_app_run_deploy | bool
 
 - name: ensure static directory exists
   file:
@@ -35,7 +47,7 @@
     group: "{{ backend_app_group }}"
     mode: "u=rwx,g=rx,o=rx"
 
-- include_tasks: django_management.yml
+- import_tasks: django_management.yml
 
-- include_tasks: systemd.yml
+- import_tasks: systemd.yml
 {% endraw %}

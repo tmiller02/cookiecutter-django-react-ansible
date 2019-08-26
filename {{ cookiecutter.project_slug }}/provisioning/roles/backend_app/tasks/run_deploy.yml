@@ -1,0 +1,42 @@
+---
+{% raw %}
+# Deploy the project using the 'deploy_helper' ansible module. This copies the backend_app
+# code into a unique release folder, with the 'current' symlink pointing to the latest
+# release.
+#
+# This can be helpful if you need to quickly rolling back to a previous release (by just
+# changing the 'current' symlink to point to a different folder and restarting the
+# systemd service). However, bear in mind that this approach may not be sufficient
+# depending on  what has changed between releases, ie you may need to also consider
+# changes made in database migrations and static files.
+#
+# See https://docs.ansible.com/ansible/latest/modules/deploy_helper_module.html#deploy-helper-module
+# for more info.
+
+- name: initialize the deploy root and gather facts
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  deploy_helper:
+    path: "{{ backend_app_root }}"
+    state: present
+    shared_path: ""
+
+- name: synchronize backend_app to the new release folder
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  synchronize:
+    src: "{{ playbook_dir }}/../backend_app/"
+    dest: "{{ deploy_helper.new_release_path }}"
+    rsync_opts:
+      - "--exclude=__pycache__"
+      - "--exclude=settings.env"
+      - "--chown={{ backend_app_user }}:{{ backend_app_group }}"
+
+- name: add an unfinished file to allow cleanup on successful finalize
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  file:
+    path: '{{ deploy_helper.new_release_path }}/{{ deploy_helper.unfinished_filename }}'
+    state: touch
+
+  {% endraw %}

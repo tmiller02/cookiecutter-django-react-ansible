@@ -6,7 +6,7 @@
   run_once: yes
   django_manage:
     command: "migrate --noinput"
-    app_path: "{{ backend_app_dir }}"
+    app_path: "{{ backend_app_current_release }}"
     virtualenv: "{{ backend_app_virtualenv_dir }}"
 
 - name: run collect static files
@@ -14,7 +14,7 @@
   become_user: "{{ backend_app_user }}"
   django_manage:
     command: "collectstatic --clear --noinput"
-    app_path: "{{ backend_app_dir }}"
+    app_path: "{{ backend_app_current_release }}"
     virtualenv: "{{ backend_app_virtualenv_dir }}"
 
 {% endraw %}

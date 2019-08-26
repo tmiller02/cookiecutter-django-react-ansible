@@ -25,6 +25,5 @@
   become_user: "{{ backend_app_user }}"
   command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync"
   args:
-    chdir: "{{ backend_app_dir }}"
-
+    chdir: "{{ deploy_helper.new_release_path }}"
 {% endraw %}

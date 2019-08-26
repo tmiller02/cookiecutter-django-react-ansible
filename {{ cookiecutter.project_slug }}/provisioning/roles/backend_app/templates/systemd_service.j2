@@ -7,7 +7,7 @@ RuntimeDirectory = {{ backend_app_systemd_runtime_dir }}
 PIDFile = {{ backend_app_systemd_pid_file }}
 User = {{ backend_app_user }}
 Group = {{ backend_app_group }}
-WorkingDirectory = {{ backend_app_dir }}
+WorkingDirectory = {{ backend_app_current_release }}
 ExecStart = {{ backend_app_virtualenv_dir }}/bin/gunicorn \
             --config gunicorn.cfg \
             {{ backend_app_wsgi }}

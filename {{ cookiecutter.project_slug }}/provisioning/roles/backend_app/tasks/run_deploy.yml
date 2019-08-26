@@ -4,11 +4,14 @@
 # code into a unique release folder, with the 'current' symlink pointing to the latest
 # release.
 #
-# This can be helpful if you need to quickly rolling back to a previous release (by just
-# changing the 'current' symlink to point to a different folder and restarting the
-# systemd service). However, bear in mind that this approach may not be sufficient
-# depending on  what has changed between releases, ie you may need to also consider
-# changes made in database migrations and static files.
+# These tasks are used when running a full deployment of the backend application
+# (i.e. when deploying to a production server).
+#
+# This deploy strategy can be helpful if you need to quickly roll back to a previous
+# release (by just changing the 'current' symlink to point to a different folder and
+# restarting the systemd service). However, bear in mind that this approach may not be
+# sufficient depending on what has changed between releases. For example, you may need
+# to also consider changes made in database migrations and static files.
 #
 # See https://docs.ansible.com/ansible/latest/modules/deploy_helper_module.html#deploy-helper-module
 # for more info.

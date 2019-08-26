@@ -10,7 +10,10 @@
     group: "{{ backend_app_group }}"
 
 - import_tasks: run_deploy.yml
-  when: backend_app_run_deploy | bool
+  when: not backend_app_vagrant_mount | bool
+
+- import_tasks: vagrant_mount.yml
+  when: backend_app_vagrant_mount | bool
 
 - import_tasks: virtualenv.yml
 
@@ -38,7 +41,7 @@
     state: finalize
     clean: yes
     keep_releases: 10
-  when: backend_app_run_deploy | bool
+  when: not backend_app_vagrant_mount | bool
 
 - name: ensure static directory exists
   file:

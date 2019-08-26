@@ -1,6 +1,6 @@
 ---
 {% raw %}
-backend_app_run_deploy: yes
+backend_app_vagrant_mount: yes
 backend_app_gunicorn_worker_count: 4
 backend_app_gid: 1234
 backend_app_uid: 1234

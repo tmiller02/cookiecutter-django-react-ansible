@@ -1,0 +1,16 @@
+---
+{% raw %}
+# Tasks to be run when the backend_app code is made available on the target machine
+# via a vagrant mount from the host machine (i.e. when using a dev VM).
+#
+# The Vagrantfile has been configured to sync the 'backend_app' folder on the host
+# machine to the 'current' folder on the target machine, so we don't need to do anything
+# else to make any code changes available on the target machine (compare to the tasks
+# in 'run_deploy.yml').
+
+- name: set deploy_helper facts needed by other tasks
+  set_fact:
+    deploy_helper:
+      new_release_path: "{{ backend_app_root }}/current"
+      current_path:  "{{ backend_app_root }}/current"
+{% endraw %}

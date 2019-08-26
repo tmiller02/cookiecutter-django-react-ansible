@@ -9,7 +9,7 @@ ENDC = "\033[0m"
 
 def generate_random_string(length):
     choices = set(string.ascii_letters + string.digits + string.punctuation)
-    unsuitable = {"'", '"', "$", "\\"}
+    unsuitable = {"'", '"', "$", "\\", "%"}
     choices = tuple(choices.difference(unsuitable))
     return "".join([random.SystemRandom().choice(choices) for _ in range(length)])
 

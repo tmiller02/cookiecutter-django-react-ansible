@@ -1,5 +1,5 @@
 ---
-{% raw %}
+{% raw -%}
 # Deploy the project using the 'deploy_helper' ansible module. This copies the backend_app
 # code into a unique release folder, with the 'current' symlink pointing to the latest
 # release.
@@ -41,5 +41,4 @@
   file:
     path: '{{ deploy_helper.new_release_path }}/{{ deploy_helper.unfinished_filename }}'
     state: touch
-
-  {% endraw %}
+{% endraw %}

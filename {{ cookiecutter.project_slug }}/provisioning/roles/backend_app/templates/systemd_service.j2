@@ -1,3 +1,4 @@
+{% raw %}{{ ansible_managed | comment }}{% endraw %}
 [Unit]
 Description = {{ cookiecutter.project_name }}
 After = network.target

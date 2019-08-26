@@ -1,5 +1,5 @@
 ---
-{% raw %}
+{% raw -%}
 # Tasks to be run when the backend_app code is made available on the target machine
 # via a vagrant mount from the host machine (i.e. when using a dev VM).
 #

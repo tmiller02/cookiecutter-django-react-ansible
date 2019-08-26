@@ -2,9 +2,9 @@ import os
 import random
 import string
 
-OKGREEN = "\033[32m"
+GREEN = "\033[32m"
 BOLD = "\033[1m"
-ENDC = "\033[0m"
+END_COLOR = "\033[0m"
 
 
 def generate_random_string(length):
@@ -61,7 +61,7 @@ Check the documentation at  {{ cookiecutter.project_slug }}/README.md for more.
 
 def print_success():
     print(
-        "\n" + OKGREEN + BOLD + "Your project has been generated successfully." + ENDC
+        "\n" + GREEN + BOLD + "Your project has been generated successfully." + END_COLOR
     )
     print(success_message)
 

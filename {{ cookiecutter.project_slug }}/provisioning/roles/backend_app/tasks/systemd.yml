@@ -1,6 +1,5 @@
 ---
 {% raw %}
-
 - name: add systemd unit file
   template:
     src: systemd_service.j2

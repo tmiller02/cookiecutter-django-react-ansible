@@ -8,6 +8,12 @@
     command: "migrate --noinput"
     app_path: "{{ deploy_helper.current_path }}"
     virtualenv: "{{ deploy_helper.current_path }}/venv"
+  register:
+    django_manage_migrate
+
+- name: display migrate output
+  debug:
+    msg: "{{ django_manage_migrate.out }}"
 
 - name: run collect static files
   become: yes
@@ -16,5 +22,10 @@
     command: "collectstatic --clear --noinput"
     app_path: "{{ deploy_helper.current_path }}"
     virtualenv: "{{ deploy_helper.current_path }}/venv"
+  register:
+    django_manage_collectstatic
 
+- name: display collectstatic output
+  debug:
+    msg: "{{ django_manage_collectstatic.out }}"
 {% endraw %}

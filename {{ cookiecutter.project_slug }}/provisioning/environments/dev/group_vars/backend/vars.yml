@@ -1,4 +1,6 @@
 ---
+
+backend_server_name: "api.{{ cookiecutter.dev_vm_hostname }}"
 {% raw %}
 backend_app_vagrant_mount: yes
 backend_app_gunicorn_worker_count: 4
@@ -10,6 +12,5 @@ backend_app_secret_key: "$DJANGO SECRET KEY$"
 backend_app_allowed_hosts:
   - "localhost"
   - "127.0.0.1"
-  - "{{ inventory_hostname }}"
-  - "api.{{ inventory_hostname }}"
+  - "{{ backend_server_name }}"
 {% endraw %}

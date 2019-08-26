@@ -9,8 +9,15 @@ nginx_upstreams:
       - "127.0.0.1:8080 fail_timeout=0"
 
 nginx_vhosts:
+  # catch-all configuration to validate the 'Host' HTTP header. A request which does
+  # not match the specified 'server_name' will be returned a 404 response. See
+  # https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/#allowed-hosts
+  # for more.
+  - listen: "80 default_server"
+    server_name: "_"
+    return: "404"
   - listen: "80"
-    server_name: "localhost"
+    server_name: "{{ backend_server_name }}"
     state: "present"
     filename: "backend_app.conf"
     extra_parameters: |

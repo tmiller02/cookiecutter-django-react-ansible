@@ -36,6 +36,7 @@
     path: "{{ backend_app_root }}"
     release: '{{ deploy_helper.new_release }}'
     state: finalize
+    clean: yes
     keep_releases: 10
   when: backend_app_run_deploy | bool
 

@@ -1,5 +1,5 @@
 ---
-
+{% raw %}
 - name: ensure firewalld is installed
   yum:
     name: firewalld
@@ -10,3 +10,21 @@
     name: firewalld
     state: started
     enabled: yes
+
+- name: expose http in firewalld to 'backend' hosts
+  firewalld:
+    service: http
+    immediate: yes
+    permanent: yes
+    state: enabled
+  when: "'backend' in group_names"
+
+- name: apply additional firewalld rules
+  firewalld:
+    service: "{{ item.service | default(omit) }}"
+    port: "{{ item.port | default(omit) }}"
+    immediate: yes
+    permanent: yes
+    state: "{{ item.state }}"
+  loop: "{{ firewalld_additional_rules }}"
+{% endraw %}

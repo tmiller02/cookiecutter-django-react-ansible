@@ -1,5 +1,9 @@
 ---
 {% raw %}
+postgresql_global_config_options:
+  - option: listen_addresses
+    value: '*'
+
 postgresql_databases:
   - name: "{{ database_name }}"
 

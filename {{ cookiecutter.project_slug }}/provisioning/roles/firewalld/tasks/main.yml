@@ -11,13 +11,43 @@
     state: started
     enabled: yes
 
-- name: expose http in firewalld to 'backend' hosts
+- name: expose http in firewalld on 'backend' hosts to the 'public' zone
   firewalld:
+    zone: public
     service: http
     immediate: yes
     permanent: yes
     state: enabled
   when: "'backend' in group_names"
+
+- block:
+  - name: define the 'backend' firewalld zone
+    firewalld:
+      zone: backend
+      state: present
+      permanent: yes
+
+  - name: reload firewalld
+    command: "firewall-cmd --reload"
+
+  - name: add entries in firewalld_backend_ip_addresses to the 'backend' firewalld zone
+    firewalld:
+      zone: backend
+      source: "{{ item }}"
+      immediate: yes
+      permanent: yes
+      state: enabled
+    with_items: "{{ firewalld_backend_ip_addresses }}"
+
+  - name: expose port 5432/tcp for postgres to the 'backend' firewalld zone
+    firewalld:
+      zone: backend
+      port: "5432/tcp"
+      immediate: yes
+      permanent: yes
+      state: enabled
+
+  when: "'database' in group_names"
 
 - name: apply additional firewalld rules
   firewalld:
@@ -26,5 +56,6 @@
     immediate: yes
     permanent: yes
     state: "{{ item.state }}"
+    zone: "{{ item.zone | default(omit) }}"
   loop: "{{ firewalld_additional_rules }}"
 {% endraw %}

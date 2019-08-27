@@ -1,5 +1,6 @@
 {
     "project_name": "My Project",
     "project_slug": "{{ cookiecutter.project_name.lower() | replace(' ', '_') | replace('-', '_') | replace('.', '_') | trim() }}",
-    "dev_vm_hostname": "{{ cookiecutter.project_slug | replace('_', '-') }}.localhost"
+    "dev_vm_hostname": "{{ cookiecutter.project_slug | replace('_', '-') }}.localhost",
+    "db_vm_hostname": "db.{{ cookiecutter.dev_vm_hostname }}"
 }

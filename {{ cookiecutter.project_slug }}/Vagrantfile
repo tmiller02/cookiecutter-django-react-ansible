@@ -3,13 +3,26 @@
 
 Vagrant.configure("2") do |config|
 
+  if Vagrant::Util::Platform.windows? then
+    def running_as_admin
+      # query the LOCAL SERVICE account reg key (requires admin privileges)
+      system('reg query "HKU\S-1-5-19"', :out => File::NULL)
+    end
+
+    unless running_as_admin
+      puts "Admin rights are required to create symlinks. Try running this Vagrantfile again from an admin command prompt."
+      exit 1
+    end
+  end
+
   config.vagrant.plugins = [
     "vagrant-vbguest",
     "vagrant-hostmanager",
   ]
   config.vm.box = "centos/7"
   config.vm.box_check_update = true
-  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  # disable the default vagrant mount. We configure custom mounts on the VM separately.
+  config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vbguest.auto_update = true
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
@@ -54,6 +67,9 @@ Vagrant.configure("2") do |config|
   # which increases the system resources used for this dev environment.
   config.vm.define "controller" do |machine|
     machine.vm.network "private_network", ip: "172.17.177.20"
+    machine.vm.synced_folder "./provisioning", "/provisioning", type: "virtualbox"
+    machine.vm.synced_folder "./.vagrant/machines", "/vagrant_machines", type: "virtualbox"
+
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_controller"
       virtualbox.memory = 256
@@ -61,11 +77,11 @@ Vagrant.configure("2") do |config|
     machine.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.playbook = "playbook.yml"
-      ansible.provisioning_path = "/vagrant/provisioning"
+      ansible.provisioning_path = "/provisioning"
       ansible.config_file = "ansible-vagrant.cfg"
       ansible.install_mode = "pip_args_only"
       ansible.pip_install_cmd = "sudo yum install -y epel-release && sudo yum install -y python2-pip"
-      ansible.pip_args = "-r /vagrant/provisioning/requirements.txt"
+      ansible.pip_args = "-r /provisioning/requirements.txt"
       ansible.galaxy_role_file = "requirements.yml"
       ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file} --force"
       ansible.verbose = false

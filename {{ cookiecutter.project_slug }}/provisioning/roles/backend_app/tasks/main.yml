@@ -43,6 +43,13 @@
     keep_releases: 10
   when: not backend_app_vagrant_mount | bool
 
+- name: add rc file which can be used to activate the virtualenv
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  template:
+    src: venvrc.j2
+    dest: "~/.venvrc"
+
 - name: ensure static directory exists
   file:
     path: "{{ backend_app_static_root }}"

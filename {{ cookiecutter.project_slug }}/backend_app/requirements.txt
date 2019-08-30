@@ -69,6 +69,13 @@ django==2.2.4 \
 djangorestframework==3.10.2 \
     --hash=sha256:42979bd5441bb4d8fd69d0f385024a114c3cae7df0f110600b718751250f6929 \
     --hash=sha256:aedb48010ebfab9651aaab1df5fd3b4848eb4182afc909852a2110c24f89a359
+entrypoints==0.3 \
+    --hash=sha256:589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19 \
+    --hash=sha256:c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451 \
+    # via flake8
+flake8==3.7.8 \
+    --hash=sha256:19241c1cbc971b9962473e4438a2ca19749a7dd002dd1a946eaba171b4114548 \
+    --hash=sha256:8e9dfa3cecb2400b3738a42c54c3043e821682b9c840b0448c0503f781130696
 gunicorn==19.9.0 \
     --hash=sha256:aa8e0b40b4157b36a5df5e599f45c9c76d6af43845ba3b3b0efe2c70473c2471 \
     --hash=sha256:fa2662097c66f920f53f70621c6c58ca4a3c4d3434205e608e121b5b3b71f4f3
@@ -76,13 +83,17 @@ ipython-genutils==0.2.0 \
     --hash=sha256:72dd37233799e619666c9f639a9da83c34013a73e8bbc79a7a6348d93c61fab8 \
     --hash=sha256:eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b887c628ba8 \
     # via traitlets
-ipython==7.7.0 \
-    --hash=sha256:1d3a1692921e932751bc1a1f7bb96dc38671eeefdc66ed33ee4cbc57e92a410e \
-    --hash=sha256:537cd0176ff6abd06ef3e23f2d0c4c2c8a4d9277b7451544c6cbf56d1c79a83d
+ipython==7.8.0 \
+    --hash=sha256:c4ab005921641e40a68e405e286e7a1fcc464497e14d81b6914b4fd95e5dee9b \
+    --hash=sha256:dd76831f065f17bddd7eaa5c781f5ea32de5ef217592cf019e34043b56895aa1
 jedi==0.15.1 \
     --hash=sha256:786b6c3d80e2f06fd77162a07fed81b8baa22dde5d62896a790a331d6ac21a27 \
     --hash=sha256:ba859c74fa3c966a22f2aeebe1b74ee27e2a462f56d3f5f7ca4a59af61bfe42e \
     # via ipython
+mccabe==0.6.1 \
+    --hash=sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42 \
+    --hash=sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f \
+    # via flake8
 parso==0.5.1 \
     --hash=sha256:63854233e1fadb5da97f2744b6b24346d2750b85965e7e399bec1620232797dc \
     --hash=sha256:666b0ee4a7a1220f65d367617f2cd3ffddff3e205f3f16a0284df30e774c2a9c \
@@ -133,6 +144,14 @@ ptyprocess==0.6.0 \
     --hash=sha256:923f299cc5ad920c68f2bc0bc98b75b9f838b93b599941a6b63ddbc2476394c0 \
     --hash=sha256:d7cc528d76e76342423ca640335bd3633420dc1366f258cb31d05e865ef5ca1f \
     # via pexpect
+pycodestyle==2.5.0 \
+    --hash=sha256:95a2219d12372f05704562a14ec30bc76b05a5b297b21a5dfe3f6fac3491ae56 \
+    --hash=sha256:e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c \
+    # via flake8
+pyflakes==2.1.1 \
+    --hash=sha256:17dbeb2e3f4d772725c777fabc446d5634d1038f234e77343108ce445ea69ce0 \
+    --hash=sha256:d976835886f8c5b31d47970ed689944a0262b5f3afa00a5a7b4dc81e5449f8a2 \
+    # via flake8
 pygments==2.4.2 \
     --hash=sha256:71e430bc85c88a430f000ac1d9b331d2407f681d6f6aec95e8bcfbc3df5b0127 \
     --hash=sha256:881c4c157e45f30af185c1ffe8d549d48ac9127433f2c380c24b84572ad66297 \

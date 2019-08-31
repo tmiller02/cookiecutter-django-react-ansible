@@ -1,0 +1,46 @@
+pipeline {
+
+    // This Jenkinsfile requires the following Jenkins plugins:
+    //   * AnsiColor
+
+    agent any
+
+    stages {
+        stage('Provision') {
+            steps {
+                echo 'Ensure vagrant plugins are installed'
+                sh 'vagrant plugin install vagrant-vbguest vagrant-hostmanager'
+
+                echo 'Provisioning the Vagrant VMs...'
+                // If viewing live console output, you may need to refresh
+                // at this point to see colour output properly, see
+                // https://github.com/jenkinsci/ansicolor-plugin/issues/136
+                ansiColor('xterm') {
+                    sh 'vagrant up --provision'
+                }
+            }
+        }
+
+        stage('Run checks') {
+            steps {
+                echo 'Checking for known vulnerabilities using "safety"...'
+                sh './vagrant_ssh.sh make safety_check'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                echo 'Running unit tests...'
+                sh './vagrant_ssh.sh make test'
+            }
+        }
+    }
+
+    post {
+        cleanup {
+            echo 'Halting Vagrant VMs...'
+            sh 'vagrant halt'
+        }
+    }
+
+}

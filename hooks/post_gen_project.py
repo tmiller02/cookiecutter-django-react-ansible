@@ -15,12 +15,12 @@ def generate_random_string(length):
 
 
 def substitute_pattern_in_file(file_path, pattern, value):
-    with open(file_path, "r+") as file_obj:
-        contents = file_obj.read()
+    with open(file_path, "r+") as open_file:
+        contents = open_file.read()
         contents = contents.replace(pattern, value)
-        file_obj.seek(0)
-        file_obj.write(contents)
-        file_obj.truncate()
+        open_file.seek(0)
+        open_file.write(contents)
+        open_file.truncate()
 
 
 def set_django_secret_key(file_path):
@@ -37,6 +37,30 @@ def set_database_password(file_path):
         pattern="$DATABASE PASSWORD$",
         value=generate_random_string(length=60),
     )
+
+
+def convert_crlf_to_lf():
+    """Convert the line endings of all files in the current working directory to LF.
+
+    If cookiecutter is run on Windows to generate the project, all files are
+    initially written with CRLF line endings. This breaks the shebang line in
+    files such as manage.py, so we convert all line endings to LF."""
+
+    crlf_line_ending = b'\r\n'
+    lf_line_ending = b'\n'
+
+    for dir_path, _, filenames in os.walk(os.getcwd()):
+        for filename in filenames:
+            file_path = os.path.join(dir_path, filename)
+
+            with open(file_path, 'rb') as open_file:
+                content = open_file.read()
+
+            content = content.replace(crlf_line_ending, lf_line_ending)
+
+            with open(file_path, 'wb') as open_file:
+                open_file.write(content)
+                open_file.truncate()
 
 
 success_message = """
@@ -67,6 +91,8 @@ def print_success():
 
 
 if __name__ == "__main__":
+    convert_crlf_to_lf()
+
     dev_group_vars = os.path.join("provisioning", "environments", "dev", "group_vars")
     dev_backend_vars = os.path.join(dev_group_vars, "backend", "vars.yml")
     dev_all_vars = os.path.join(dev_group_vars, "all", "vars.yml")

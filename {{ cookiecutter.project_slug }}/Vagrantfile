@@ -68,7 +68,15 @@ Vagrant.configure("2") do |config|
   config.vm.define "controller" do |machine|
     machine.vm.network "private_network", ip: "172.17.177.20"
     machine.vm.synced_folder "./provisioning", "/provisioning", type: "virtualbox"
-    machine.vm.synced_folder "./.vagrant/machines", "/vagrant_machines", type: "virtualbox"
+    # Mount the folder containing the dev vm ssh keys with explicit file
+    # permissions. This addresses 'unprotected private key file' errors on
+    # Windows, due to mounts on Windows having 777 file permissions by default.
+    machine.vm.synced_folder(
+      "./.vagrant/machines",
+      "/vagrant_machines",
+      type: "virtualbox",
+      mount_options: ["fmode=600"]
+    )
 
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_controller"

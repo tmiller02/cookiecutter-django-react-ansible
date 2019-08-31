@@ -43,6 +43,21 @@
     keep_releases: 10
   when: not backend_app_vagrant_mount | bool
 
+# Note - this uses the open vulnerability database which is updated on a monthly basis.
+# To get access to vulnerabilities as soon as they are added, you will need a Safety
+# API key. See https://pypi.org/project/safety/ for more.
+#
+# Note also that this doesn't fail the playbook if vulnerable packages are found, this
+# only displays the report in the ansible output.
+- name: display a report of the python dependencies using 'safety'
+  become: yes
+  become_user: "{{ backend_app_user }}"
+  command: make safety_check
+  args:
+    chdir: "{{ deploy_helper.current_path }}"
+  ignore_errors: yes
+  register: safety_check_result
+
 - name: add rc file which can be used to activate the virtualenv
   become: yes
   become_user: "{{ backend_app_user }}"

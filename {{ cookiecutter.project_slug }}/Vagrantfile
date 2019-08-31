@@ -30,7 +30,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "dev", primary: true do |machine|
     machine.vm.hostname = "{{ cookiecutter.dev_vm_hostname }}"
-    machine.hostmanager.aliases = ["api.{{ cookiecutter.dev_vm_hostname }}",]
     machine.vm.synced_folder(
       "./backend_app",
       "/opt/{{ cookiecutter.project_slug }}_backend/current",

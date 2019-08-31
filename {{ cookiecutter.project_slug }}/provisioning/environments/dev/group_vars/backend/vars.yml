@@ -1,6 +1,6 @@
 ---
 
-backend_server_name: "api.{{ cookiecutter.dev_vm_hostname }}"
+backend_server_name: "{{ cookiecutter.dev_vm_hostname }}"
 {% raw %}
 backend_app_vagrant_mount: yes
 backend_app_gunicorn_worker_count: 4
@@ -9,10 +9,6 @@ backend_app_uid: 1234
 backend_app_debug: true
 backend_app_database_host: "172.17.177.22"
 backend_app_secret_key: "$DJANGO SECRET KEY$"
-backend_app_allowed_hosts:
-  - "localhost"
-  - "127.0.0.1"
-  - "{{ backend_server_name }}"
 
 # Ensure the django dev server is accessible
 firewalld_additional_rules:

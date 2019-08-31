@@ -12,3 +12,6 @@ format:
 
 lint:
 	$(ACTIVATE_VENV) && flake8 --config .flake8 .
+
+safety_check:
+	$(ACTIVATE_VENV) && safety check

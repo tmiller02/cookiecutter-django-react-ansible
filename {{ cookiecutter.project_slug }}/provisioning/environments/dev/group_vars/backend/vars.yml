@@ -13,4 +13,10 @@ backend_app_allowed_hosts:
   - "localhost"
   - "127.0.0.1"
   - "{{ backend_server_name }}"
+
+# Ensure the django dev server is accessible
+firewalld_additional_rules:
+  - port: "8000/tcp"
+    state: "enabled"
+    zone: "public"
 {% endraw %}

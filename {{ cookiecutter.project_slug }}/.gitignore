@@ -1,3 +1,5 @@
 /.vagrant/
 /provisioning/galaxy_roles/
 /backend_app/settings.env
+/backend_app/venv/
+/backend_app/coverage_html_report/

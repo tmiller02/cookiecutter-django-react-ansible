@@ -12,9 +12,9 @@ pipeline {
                 sh 'vagrant plugin install vagrant-vbguest vagrant-hostmanager'
 
                 echo 'Provisioning the Vagrant VMs...'
-                // If viewing live console output, you may need to refresh
-                // at this point to see colour output properly, see
-                // https://github.com/jenkinsci/ansicolor-plugin/issues/136
+                echo 'If viewing live console output, you may need to refresh'
+                echo 'at this point to see colour output properly, see'
+                echo 'https://github.com/jenkinsci/ansicolor-plugin/issues/136'
                 ansiColor('xterm') {
                     sh 'vagrant up --provision'
                 }

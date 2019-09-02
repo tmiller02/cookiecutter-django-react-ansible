@@ -63,7 +63,7 @@ def convert_crlf_to_lf():
                 open_file.truncate()
 
 
-success_message = """
+success_message = u"""
 This project has the following requirements. Make sure these are installed \
 before getting started:
 

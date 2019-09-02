@@ -49,8 +49,10 @@
 # To get access to vulnerabilities as soon as they are added, you will need a Safety
 # API key. See https://pypi.org/project/safety/ for more.
 #
-# Note also that this doesn't fail the playbook if vulnerable packages are found, this
-# only displays the report in the ansible output.
+# Note also that this doesn't fail the playbook if vulnerable packages are found. This
+# only displays the report in the ansible output, so we don't cause any deployment to
+# fail unexpectedly. There is a dedicated 'Run checks' step in the Jenkinsfile which
+# *will* cause the Jenkins job to fail if a vulnerable package is detected.
 - name: display a report of the python dependencies using 'safety'
   become: yes
   become_user: "{{ backend_app_user }}"

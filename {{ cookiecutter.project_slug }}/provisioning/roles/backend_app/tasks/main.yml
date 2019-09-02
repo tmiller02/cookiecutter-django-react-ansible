@@ -1,5 +1,7 @@
 ---
 {% raw %}
+- include_tasks: install_selenium_dependencies.yml
+
 - include_tasks: users.yml
 
 - name: ensure backend app root folder exists with correct ownership

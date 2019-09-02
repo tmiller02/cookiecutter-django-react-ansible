@@ -1,8 +1,11 @@
 ---
-
-- name: install firefox
+{% raw %}
+- name: install packages used with selenium and X11 forwarding
   yum:
-    name: firefox
+    name:
+      - firefox
+      - xorg-x11-xauth
+      - xorg-x11-utils
     state: present
 
 - name: stat geckodriver
@@ -21,3 +24,4 @@
     src: "https://github.com/mozilla/geckodriver/releases/download/v{{ backend_app_geckodriver_version }}/geckodriver-v{{ backend_app_geckodriver_version }}-linux64.tar.gz"
     dest: /usr/local/bin
   when: not geckodriver_stat.stat.exists or geckodriver_version_command.stdout != backend_app_geckodriver_version
+{% endraw %}

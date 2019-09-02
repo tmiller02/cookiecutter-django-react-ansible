@@ -30,6 +30,12 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "dev", primary: true do |machine|
     machine.vm.hostname = "{{ cookiecutter.dev_vm_hostname }}"
+
+    # Enables X11 forwarding. This can be useful when running Selenium tests
+    # since you can see exactly what's happening in the browser during the tests.
+    # This requires an X11 server on your host machine, see https://www.xquartz.org
+    # for Mac hosts.
+    machine.ssh.forward_x11 = true
     machine.vm.synced_folder(
       "./backend_app",
       "/opt/{{ cookiecutter.project_slug }}_backend/current",

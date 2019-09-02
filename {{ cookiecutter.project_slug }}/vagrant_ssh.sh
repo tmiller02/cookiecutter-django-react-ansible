@@ -16,10 +16,22 @@
 #  To enter the django shell:
 #
 #    $ ./vagrant_ssh.sh python manage.py shell
+#
+#  To start firefox via X11 forwarding (assuming you have a running X11 server):
+#
+#    $ ./vagrant_ssh.sh firefox
+#
 
 if [ $# -eq 0 ]
   then
-    vagrant ssh -c "sudo -iu {{ cookiecutter.project_slug }} bash --rcfile .venvrc -i";
+    vagrant ssh -c "
+      XAUTH_COOKIE=\$(xauth list | tail -n 1) &&
+      sudo -u {{ cookiecutter.project_slug }} xauth add \$XAUTH_COOKIE &&
+      sudo -i -u {{ cookiecutter.project_slug }} bash --rcfile .venvrc";
   else
-    vagrant ssh -c "sudo -iu {{ cookiecutter.project_slug }} bash -c '. ~/.venvrc && $*'";
+    vagrant ssh -c "
+      XAUTH_COOKIE=\$(xauth list | tail -n 1) &&
+      sudo -u {{ cookiecutter.project_slug }} xauth add \$XAUTH_COOKIE &&
+      sudo -i -u {{ cookiecutter.project_slug }} bash -c '. ~/.venvrc && $*'
+    ";
 fi

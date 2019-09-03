@@ -10,4 +10,5 @@ postgresql_databases:
 postgresql_users:
   - name: "{{ database_user }}"
     password: "{{ database_password }}"
+    role_attr_flags: CREATEDB
 {% endraw %}

@@ -1,6 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+$dev_vm_post_up_script = <<-SCRIPT
+sudo mount /opt/{{ cookiecutter.project_slug }}_backend/current/venv &> /dev/null || true
+sudo systemctl restart {{ cookiecutter.project_slug }} || true
+SCRIPT
+
 Vagrant.require_version ">= 2.2.5"
 
 Vagrant.configure("2") do |config|
@@ -46,14 +51,17 @@ Vagrant.configure("2") do |config|
     )
 
     machine.trigger.after :up do |trigger|
-      trigger.name = "Mount venv directory"
       # Ensure that the 'venv' folder is mounted after vagrant has configured its
-      # mounts if running 'vagrant up' without re-provisioning  (ie instead of
-      # 'vagrant up --provision'). This mount command would fail on an initial
-      # 'vagrant up' without '|| true' since this trigger is executed after 'up'
-      # but  *before* the ansible provisioning is run (which adds this mount
-      # configuration into /etc/fstab).
-      trigger.run_remote = {inline: "sudo mount /opt/{{ cookiecutter.project_slug }}_backend/current/venv &> /dev/null || true"}
+      # mounts if running 'vagrant up' without re-provisioning (ie instead of
+      # 'vagrant up --provision'). Restart the backend app service - systemd may
+      # set this unit as failed shortly after boot since the files within the
+      # vagrant mount won't be available initially. These commands would fail
+      # on an initial 'vagrant up' without '|| true' since this trigger is
+      # executed after 'up' but *before* the ansible provisioning is run
+      # (which adds this mount configuration into /etc/fstab and creates the
+      # systemd service).
+      trigger.name = "Mount venv directory and restart backend app service"
+      trigger.run_remote = {inline: $dev_vm_post_up_script}
     end
 
     machine.vm.network "private_network", ip: "172.17.177.21"

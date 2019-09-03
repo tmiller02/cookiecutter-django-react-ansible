@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
     # Enables X11 forwarding. This can be useful when running Selenium tests
     # since you can see exactly what's happening in the browser during the tests.
     # This requires an X11 server on your host machine, see https://www.xquartz.org
-    # for Mac hosts.
+    # for Mac hosts or http://x.cygwin.com for Windows hosts.
     machine.ssh.forward_x11 = true
     machine.vm.synced_folder(
       "./backend_app",
@@ -50,9 +50,9 @@ Vagrant.configure("2") do |config|
       # Ensure that the 'venv' folder is mounted after vagrant has configured its
       # mounts if running 'vagrant up' without re-provisioning  (ie instead of
       # 'vagrant up --provision'). This mount command would fail on an initial
-      # 'vagrant up' without || true since this trigger is executed after 'up'
-      # but  *before* the ansible provisioning is run, and the entry to
-      # /etc/fstab is added via ansible.
+      # 'vagrant up' without '|| true' since this trigger is executed after 'up'
+      # but  *before* the ansible provisioning is run (which adds this mount
+      # configuration into /etc/fstab).
       trigger.run_remote = {inline: "sudo mount /opt/{{ cookiecutter.project_slug }}_backend/current/venv &> /dev/null || true"}
     end
 

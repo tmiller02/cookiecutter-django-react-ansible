@@ -5,7 +5,7 @@
     name:
       - firefox
       - xorg-x11-xauth
-      - xorg-x11-utils
+      - xorg-x11-apps
     state: present
 
 - name: stat geckodriver

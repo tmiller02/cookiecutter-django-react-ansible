@@ -10,11 +10,11 @@
 
 - name: stat geckodriver
   stat:
-    path: /usr/local/bin/geckodriver
+    path: /usr/bin/geckodriver
   register: geckodriver_stat
 
 - name: get geckodriver version
-  shell: "/usr/local/bin/geckodriver --version | awk 'NR==1 {print $2}'"
+  shell: "/usr/bin/geckodriver --version | awk 'NR==1 {print $2}'"
   register: geckodriver_version_command
   when: geckodriver_stat.stat.exists
 
@@ -22,6 +22,6 @@
   unarchive:
     remote_src: yes
     src: "https://github.com/mozilla/geckodriver/releases/download/v{{ backend_app_geckodriver_version }}/geckodriver-v{{ backend_app_geckodriver_version }}-linux64.tar.gz"
-    dest: /usr/local/bin
+    dest: /usr/bin
   when: not geckodriver_stat.stat.exists or geckodriver_version_command.stdout != backend_app_geckodriver_version
 {% endraw %}

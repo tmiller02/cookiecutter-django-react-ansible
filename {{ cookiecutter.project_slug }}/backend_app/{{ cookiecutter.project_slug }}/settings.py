@@ -178,3 +178,13 @@ LOGGING = {
         },
     }
 }
+
+# Settings that are applied when running tests
+
+# Whether to run the browser used by Selenium in headless mode. Running in
+# headless mode means a display server isn't needed to run the tests. Set this
+# to False to see the browser when running the tests (assuming you have set up
+# X11 forwarding). See the SeleniumLiveServerTestCase class at
+# tests/helpers.py for usage.
+
+SELENIUM_TESTS_RUN_HEADLESS = True

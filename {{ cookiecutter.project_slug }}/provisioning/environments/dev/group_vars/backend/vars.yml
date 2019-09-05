@@ -15,4 +15,7 @@ firewalld_additional_rules:
   - port: "8000/tcp"
     state: "enabled"
     zone: "public"
+
+ssl_provider: 'selfsigned'
+ssl_csr_name: "backend_app.csr"
 {% endraw %}

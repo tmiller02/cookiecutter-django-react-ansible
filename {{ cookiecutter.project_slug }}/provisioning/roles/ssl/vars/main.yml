@@ -1,0 +1,5 @@
+---
+{% raw %}
+ssl_private_key_path: "/etc/pki/tls/private/{{ ssl_private_key_name }}"
+ssl_certificate_path: "/etc/pki/tls/certs/{{ ssl_certificate_name }}"
+{% endraw %}

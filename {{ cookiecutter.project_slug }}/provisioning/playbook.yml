@@ -27,10 +27,9 @@
         persistent: yes
   roles:
     - backend_app
+    - ssl
     - geerlingguy.nginx
   vars_files:
     - vars/shared.yml
-    - vars/backend_app.yml
-    - vars/postgresql.yml
-    - vars/nginx_backend.yml
+    - vars/backend.yml
 {% endraw %}

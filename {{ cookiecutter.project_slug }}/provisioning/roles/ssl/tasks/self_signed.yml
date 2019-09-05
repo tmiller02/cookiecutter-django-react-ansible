@@ -1,0 +1,34 @@
+---
+{% raw %}
+- assert:
+    that:
+      - ssl_csr_name is defined
+
+- set_fact:
+    ssl_csr_path: "/etc/pki/tls/csr/{{ ssl_csr_name }}"
+
+- name: create a directory for storing certificate signing requests
+  file:
+    state: directory
+    path: "/etc/pki/tls/csr/"
+    owner: root
+    group: root
+
+- name: generate an OpenSSL private key.
+  openssl_privatekey:
+    path: "{{ ssl_private_key_path }}"
+    backup: yes
+
+- name: generate an OpenSSL certificate signing request
+  openssl_csr:
+    path: "{{ ssl_csr_path }}"
+    privatekey_path: "{{ ssl_private_key_path }}"
+    common_name: "{{ ssl_common_name }}"
+
+- name: generate a self-signed OpenSSL certificate
+  openssl_certificate:
+    path: "{{ ssl_certificate_path }}"
+    privatekey_path: "{{ ssl_private_key_path }}"
+    csr_path: "{{ ssl_csr_path }}"
+    provider: selfsigned
+{% endraw %}

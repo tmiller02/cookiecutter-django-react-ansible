@@ -11,13 +11,16 @@
     state: started
     enabled: yes
 
-- name: expose http in firewalld on 'backend' hosts to the 'public' zone
+- name: expose http and https in firewalld on 'backend' hosts to the 'public' zone
   firewalld:
     zone: public
-    service: http
+    service: "{{ item }}"
     immediate: yes
     permanent: yes
     state: enabled
+  with_items:
+    - http
+    - https
   when: "'backend' in group_names"
 
 - block:

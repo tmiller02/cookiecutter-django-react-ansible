@@ -4,8 +4,6 @@
     that:
       - ssl_provider is defined
       - ssl_provider in ['selfsigned']
-      - ssl_private_key_name is defined
-      - ssl_certificate_name is defined
 
 - name: install packages required for interacting with OpenSSL
   yum:

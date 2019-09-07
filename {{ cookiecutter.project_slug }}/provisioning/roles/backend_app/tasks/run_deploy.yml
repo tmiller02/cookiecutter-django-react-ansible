@@ -16,6 +16,11 @@
 # See https://docs.ansible.com/ansible/latest/modules/deploy_helper_module.html#deploy-helper-module
 # for more info.
 
+- name: install rsync
+  yum:
+    name: rsync
+    state: present
+
 - name: initialize the deploy root and gather facts
   become: yes
   become_user: "{{ backend_app_user }}"
@@ -33,6 +38,7 @@
     rsync_opts:
       - "--exclude=__pycache__"
       - "--exclude=settings.env"
+      - "--exclude=venv/"
       - "--chown={{ backend_app_user }}:{{ backend_app_group }}"
 
 - name: add an unfinished file to allow cleanup on successful finalize

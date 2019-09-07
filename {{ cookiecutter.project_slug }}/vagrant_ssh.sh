@@ -25,13 +25,17 @@
 if [ $# -eq 0 ]
   then
     vagrant ssh -c "
-      XAUTH_COOKIE=\$(xauth list | tail -n 1) &&
-      sudo -u {{ cookiecutter.project_slug }} xauth add \$XAUTH_COOKIE &&
+      if test -f '/home/vagrant/.Xauthority'; then
+        XAUTH_COOKIE=\$(xauth list | tail -n 1) &&
+        sudo -u {{ cookiecutter.project_slug }} xauth add \$XAUTH_COOKIE
+      fi
       sudo -i -u {{ cookiecutter.project_slug }} bash --rcfile .venvrc";
   else
     vagrant ssh -c "
-      XAUTH_COOKIE=\$(xauth list | tail -n 1) &&
-      sudo -u {{ cookiecutter.project_slug }} xauth add \$XAUTH_COOKIE &&
+      if test -f '/home/vagrant/.Xauthority; then
+        XAUTH_COOKIE=\$(xauth list | tail -n 1) &&
+        sudo -u {{ cookiecutter.project_slug }} xauth add \$XAUTH_COOKIE
+      fi
       sudo -i -u {{ cookiecutter.project_slug }} bash -c '. ~/.venvrc && $*'
     ";
 fi

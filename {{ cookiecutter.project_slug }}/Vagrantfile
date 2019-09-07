@@ -3,7 +3,7 @@
 
 $dev_vm_post_up_script = <<-SCRIPT
 sudo mount /opt/{{ cookiecutter.project_slug }}_backend/current/venv &> /dev/null || true
-sudo systemctl restart {{ cookiecutter.project_slug }} || true
+sudo systemctl restart {{ cookiecutter.project_slug }} &> /dev/null || true
 SCRIPT
 
 Vagrant.require_version ">= 2.2.5"

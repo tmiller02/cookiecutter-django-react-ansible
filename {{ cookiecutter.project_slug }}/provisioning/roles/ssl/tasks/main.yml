@@ -10,6 +10,6 @@
     name: python2-cryptography
     state: present
 
-- import_tasks: self_signed.yml
+- import_tasks: selfsigned.yml
   when: ssl_provider == 'selfsigned'
 {% endraw %}

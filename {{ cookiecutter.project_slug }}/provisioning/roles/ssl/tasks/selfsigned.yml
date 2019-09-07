@@ -1,6 +1,7 @@
 ---
 {% raw %}
-- assert:
+- name: assert that required variables are defined
+  assert:
     that:
       - ssl_csr_name is defined
 
@@ -16,19 +17,19 @@
 
 - name: generate an OpenSSL private key.
   openssl_privatekey:
-    path: "{{ ssl_private_key_path }}"
+    path: "{{ ssl_private_key_dest }}"
     backup: yes
 
 - name: generate an OpenSSL certificate signing request
   openssl_csr:
     path: "{{ ssl_csr_path }}"
-    privatekey_path: "{{ ssl_private_key_path }}"
+    privatekey_path: "{{ ssl_private_key_dest }}"
     common_name: "{{ ssl_common_name }}"
 
 - name: generate a self-signed OpenSSL certificate
   openssl_certificate:
-    path: "{{ ssl_certificate_path }}"
-    privatekey_path: "{{ ssl_private_key_path }}"
+    path: "{{ ssl_certificate_dest }}"
+    privatekey_path: "{{ ssl_private_key_dest }}"
     csr_path: "{{ ssl_csr_path }}"
     provider: selfsigned
 {% endraw %}

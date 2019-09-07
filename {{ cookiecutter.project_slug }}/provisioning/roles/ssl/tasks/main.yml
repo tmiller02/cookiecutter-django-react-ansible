@@ -1,9 +1,10 @@
 ---
 {% raw %}
-- assert:
+- name: assert that required variables are defined
+  assert:
     that:
       - ssl_provider is defined
-      - ssl_provider in ['selfsigned']
+      - ssl_provider in ['selfsigned', 'copy']
 
 - name: install packages required for interacting with OpenSSL
   yum:
@@ -12,4 +13,7 @@
 
 - import_tasks: selfsigned.yml
   when: ssl_provider == 'selfsigned'
+
+- import_tasks: copy.yml
+  when: ssl_provider == 'copy'
 {% endraw %}

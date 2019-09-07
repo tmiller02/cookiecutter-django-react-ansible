@@ -1,0 +1,24 @@
+---
+{% raw %}
+- name: assert that required variables are defined
+  assert:
+    that:
+      - ssl_private_key_src is defined
+      - ssl_certificate_src is defined
+
+- name: copy private key
+  copy:
+    src: "{{ ssl_private_key_src }}"
+    dest: "{{ ssl_private_key_dest }}"
+    owner: root
+    group: root
+    mode: "u=rw,o=,o="
+
+- name: copy certificate
+  copy:
+    src: "{{ ssl_certificate_src }}"
+    dest: "{{ ssl_certificate_dest }}"
+    owner: root
+    group: root
+    mode: "u=rw,o=r,o=r"
+{% endraw %}

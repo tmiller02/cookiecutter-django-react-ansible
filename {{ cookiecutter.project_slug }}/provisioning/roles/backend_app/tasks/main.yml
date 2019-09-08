@@ -35,13 +35,13 @@
     group: "{{ backend_app_group }}"
 
 - name: finalize the deploy, removing the unfinished file and switching the 'current' symlink
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   deploy_helper:
     path: "{{ backend_app_root }}"
     release: '{{ deploy_helper.new_release }}'
     state: finalize
-    clean: yes
+    clean: true
     keep_releases: 10
   when: not backend_app_vagrant_mount | bool
 
@@ -54,16 +54,16 @@
 # fail unexpectedly. There is a dedicated 'Run checks' step in the Jenkinsfile which
 # *will* cause the Jenkins job to fail if a vulnerable package is detected.
 - name: display a report of the python dependencies using 'safety'
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   command: make safety_check
   args:
     chdir: "{{ deploy_helper.current_path }}"
-  ignore_errors: yes
+  ignore_errors: true
   register: safety_check_result
 
 - name: add rc file which can be used to activate the virtualenv
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   template:
     src: venvrc.j2

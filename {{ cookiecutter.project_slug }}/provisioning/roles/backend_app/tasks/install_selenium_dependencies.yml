@@ -20,7 +20,7 @@
 
 - name: download geckodriver
   unarchive:
-    remote_src: yes
+    remote_src: true
     src: "https://github.com/mozilla/geckodriver/releases/download/v{{ backend_app_geckodriver_version }}/geckodriver-v{{ backend_app_geckodriver_version }}-linux64.tar.gz"
     dest: /usr/bin
   when: not geckodriver_stat.stat.exists or geckodriver_version_command.stdout != backend_app_geckodriver_version

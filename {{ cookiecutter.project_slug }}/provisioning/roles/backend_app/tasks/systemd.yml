@@ -7,8 +7,8 @@
 
 - name: enable and restart the systemd unit
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
     name: "{{ backend_app_systemd_unit_name }}"
-    enabled: yes
+    enabled: true
     state: restarted
 {% endraw %}

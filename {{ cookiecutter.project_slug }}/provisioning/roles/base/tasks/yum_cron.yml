@@ -9,7 +9,7 @@
   systemd:
     name: yum-cron
     state: started
-    enabled: yes
+    enabled: true
 
 - name: configure yum-cron to apply updates automatically
   lineinfile:

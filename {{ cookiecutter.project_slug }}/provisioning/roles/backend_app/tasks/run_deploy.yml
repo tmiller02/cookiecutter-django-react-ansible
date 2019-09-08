@@ -22,7 +22,7 @@
     state: present
 
 - name: initialize the deploy root and gather facts
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   deploy_helper:
     path: "{{ backend_app_root }}"
@@ -30,7 +30,7 @@
     shared_path: ""
 
 - name: synchronize backend_app to the new release folder
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   synchronize:
     src: "{{ playbook_dir }}/../backend_app/"
@@ -42,7 +42,7 @@
       - "--chown={{ backend_app_user }}:{{ backend_app_group }}"
 
 - name: add an unfinished file to allow cleanup on successful finalize
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   file:
     path: '{{ deploy_helper.new_release_path }}/{{ deploy_helper.unfinished_filename }}'

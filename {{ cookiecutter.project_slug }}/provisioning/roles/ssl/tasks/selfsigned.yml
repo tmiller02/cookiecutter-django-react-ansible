@@ -10,7 +10,7 @@
 - name: generate an OpenSSL private key.
   openssl_privatekey:
     path: "{{ ssl_private_key_dest }}"
-    backup: yes
+    backup: true
 
 - name: generate an OpenSSL certificate signing request
   openssl_csr:

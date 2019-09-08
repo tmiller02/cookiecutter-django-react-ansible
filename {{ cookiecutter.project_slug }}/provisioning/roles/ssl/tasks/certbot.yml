@@ -72,6 +72,6 @@
   systemd:
     name: certbot-renew.timer
     state: started
-    enabled: yes
+    enabled: true
 
 {% endraw %}

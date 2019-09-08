@@ -9,14 +9,14 @@
   systemd:
     name: firewalld
     state: started
-    enabled: yes
+    enabled: true
 
 - name: expose http and https in firewalld on 'backend' hosts to the 'public' zone
   firewalld:
     zone: public
     service: "{{ item }}"
-    immediate: yes
-    permanent: yes
+    immediate: true
+    permanent: true
     state: enabled
   with_items:
     - http
@@ -28,7 +28,7 @@
     firewalld:
       zone: backend
       state: present
-      permanent: yes
+      permanent: true
 
   - name: reload firewalld
     command: "firewall-cmd --reload"
@@ -37,8 +37,8 @@
     firewalld:
       zone: backend
       source: "{{ item }}"
-      immediate: yes
-      permanent: yes
+      immediate: true
+      permanent: true
       state: enabled
     with_items: "{{ firewalld_backend_ip_addresses }}"
 
@@ -46,8 +46,8 @@
     firewalld:
       zone: backend
       port: "5432/tcp"
-      immediate: yes
-      permanent: yes
+      immediate: true
+      permanent: true
       state: enabled
 
   when: "'database' in group_names"
@@ -56,8 +56,8 @@
   firewalld:
     service: "{{ item.service | default(omit) }}"
     port: "{{ item.port | default(omit) }}"
-    immediate: yes
-    permanent: yes
+    immediate: true
+    permanent: true
     state: "{{ item.state }}"
     zone: "{{ item.zone | default(omit) }}"
   loop: "{{ firewalld_additional_rules }}"

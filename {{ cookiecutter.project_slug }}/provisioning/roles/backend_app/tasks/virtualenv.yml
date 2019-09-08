@@ -12,7 +12,7 @@
       - python36-pip
 
 - name: set up virtualenv in new release path
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   pip:
     virtualenv: "{{ deploy_helper.new_release_path }}/venv"
@@ -21,7 +21,7 @@
       - pip-tools==4.0.0
 
 - name: install requirements using pip-sync
-  become: yes
+  become: true
   become_user: "{{ backend_app_user }}"
   command: "venv/bin/pip-sync"
   args:

@@ -14,7 +14,7 @@ ssl_common_name: "{{ backend_server_name }}"
 ssl_private_key_name: "backend_app.pem"
 ssl_certificate_name: "backend_app.crt"
 
-nginx_remove_default_vhost: yes
+nginx_remove_default_vhost: true
 
 nginx_upstreams:
   - name: backend_app

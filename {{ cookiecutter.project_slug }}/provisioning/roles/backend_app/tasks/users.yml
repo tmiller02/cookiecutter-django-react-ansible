@@ -3,7 +3,7 @@
 - name: create the backend app group
   group:
     name: "{{ backend_app_group }}"
-    system: yes
+    system: true
     gid: "{{ backend_app_gid | default(omit) }}"
 
 - name: create the backend app user

@@ -1,7 +1,7 @@
 ---
 {% raw %}
 - hosts: all
-  become: yes
+  become: true
   pre_tasks:
     - name: check connectivity to all hosts
       ping:
@@ -10,7 +10,7 @@
     - firewalld
 
 - hosts: database
-  become: yes
+  become: true
   roles:
     - postgresql
   vars_files:
@@ -18,13 +18,13 @@
     - vars/postgresql.yml
 
 - hosts: backend
-  become: yes
+  become: true
   pre_tasks:
     - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
       seboolean:
         name: httpd_can_network_connect
-        state: yes
-        persistent: yes
+        state: true
+        persistent: true
   roles:
     - backend_app
     - ssl

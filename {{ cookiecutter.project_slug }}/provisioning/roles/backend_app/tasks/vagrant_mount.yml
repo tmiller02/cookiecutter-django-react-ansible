@@ -12,7 +12,7 @@
   set_fact:
     deploy_helper:
       new_release_path: "{{ backend_app_root }}/current"
-      current_path:  "{{ backend_app_root }}/current"
+      current_path: "{{ backend_app_root }}/current"
 
 # Create a separate bind mount for the directory where the virtualenv is installed.
 # It is desirable to have the virtualenv exist within the code directory with the
@@ -27,7 +27,7 @@
 # contents from the vagrant mount, thereby avoiding this performance impact.
 
 - name: create directory for bind mount of virtualenv
-  become: yes
+  become: true
   file:
     path: "/home/{{ backend_app_user }}/venv"
     state: directory

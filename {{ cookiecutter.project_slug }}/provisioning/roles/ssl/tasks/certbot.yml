@@ -7,6 +7,12 @@
 - name: install epel-release
   yum:
     name: epel-release
+    state: present
+
+- name: install certbot
+  yum:
+    name: certbot
+    state: present
 
 - name: stop conflicting services when generating a certificate
   systemd:
@@ -23,9 +29,44 @@
       --email {{ ssl_certbot_email }}
       --domains {{ ssl_common_name }}
 
+- name: create a symbolic link to the letsencrypt private key
+  file:
+    src: "/etc/letsencrypt/live/{{ ssl_common_name }}/privkey.pem"
+    dest: "{{ ssl_private_key_dest }}"
+    state: link
+
+- name: Create a symbolic link to the letsencrypt certificate chain
+  file:
+    src: "/etc/letsencrypt/live/{{ ssl_common_name }}/fullchain.pem"
+    dest: "{{ ssl_certificate_dest }}"
+    state: link
+
 - name: start conflicting services
   systemd:
     name: "{{ item }}"
     state: started
   with_items: "{{ ssl_certbot_stop_services }}"
+
+- name: add pre renewal hook to stop services
+  template:
+    src: certbot_pre_renew.sh
+    dest: /etc/letsencrypt/renewal-hooks/pre/certbot_pre_renew.sh
+    owner: root
+    group: root
+    mode: "u=rwx,g=r,o=r"
+
+- name: add post renewal hook to start services
+  template:
+    src: certbot_post_renew.sh
+    dest: /etc/letsencrypt/renewal-hooks/post/certbot_post_renew.sh
+    owner: root
+    group: root
+    mode: "u=rwx,g=r,o=r"
+
+- name: start and enable the certbot-renew systemd timer
+  systemd:
+    name: certbot-renew.timer
+    state: started
+    enabled: yes
+
 {% endraw %}

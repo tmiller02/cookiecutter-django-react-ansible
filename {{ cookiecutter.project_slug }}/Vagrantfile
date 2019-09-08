@@ -132,7 +132,7 @@ Vagrant.configure("2") do |config|
       ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file}"
       ansible.verbose = false
       ansible.limit = "all"
-      ansible.inventory_path = "environments/dev/inventory.yml"
+      ansible.inventory_path = "environments/dev/inventory"
     end
     # Shut down the controller VM once it has finished provisioning the other VMs.
     # machine.vm.provision "shell", inline: "shutdown -h now"

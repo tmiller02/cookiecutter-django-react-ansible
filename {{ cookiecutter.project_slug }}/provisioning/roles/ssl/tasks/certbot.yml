@@ -14,11 +14,15 @@
     name: certbot
     state: present
 
+- name: populate service facts
+  service_facts:
+
 - name: stop conflicting services when generating a certificate
   systemd:
     name: "{{ item }}"
     state: stopped
-  with_items: "{{ ssl_certbot_stop_services }}"
+  when: "item in ansible_facts.services"
+  loop: "{{ ssl_certbot_stop_services }}"
 
 - name: generate certificate using certbot
   command: >-
@@ -45,7 +49,8 @@
   systemd:
     name: "{{ item }}"
     state: started
-  with_items: "{{ ssl_certbot_stop_services }}"
+  when: "item in ansible_facts.services"
+  loop: "{{ ssl_certbot_stop_services }}"
 
 - name: add pre renewal hook to stop services
   template:

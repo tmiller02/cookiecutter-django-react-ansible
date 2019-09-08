@@ -1,0 +1,4 @@
+---
+
+ssl_certbot_stop_services:
+  - nginx

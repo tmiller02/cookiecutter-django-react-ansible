@@ -1,0 +1,31 @@
+---
+{% raw %}
+- assert:
+    that:
+      ssl_certbot_email is defined
+
+- name: install epel-release
+  yum:
+    name: epel-release
+
+- name: stop conflicting services when generating a certificate
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+  with_items: "{{ ssl_certbot_stop_services }}"
+
+- name: generate certificate using certbot
+  command: >-
+    certbot certonly
+      --standalone
+      --noninteractive
+      --agree-tos
+      --email {{ ssl_certbot_email }}
+      --domains {{ ssl_common_name }}
+
+- name: start conflicting services
+  systemd:
+    name: "{{ item }}"
+    state: started
+  with_items: "{{ ssl_certbot_stop_services }}"
+{% endraw %}

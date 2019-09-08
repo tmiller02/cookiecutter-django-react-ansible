@@ -1,7 +1,6 @@
 ---
 
 backend_server_name: "{{ cookiecutter.dev_vm_hostname }}"
-{% raw %}
 backend_app_vagrant_mount: yes
 backend_app_gunicorn_worker_count: 4
 backend_app_gid: 1234
@@ -17,5 +16,3 @@ firewalld_additional_rules:
     zone: "public"
 
 ssl_provider: 'selfsigned'
-ssl_csr_name: "backend_app.csr"
-{% endraw %}

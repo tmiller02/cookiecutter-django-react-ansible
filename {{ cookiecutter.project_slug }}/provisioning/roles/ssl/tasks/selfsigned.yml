@@ -1,13 +1,5 @@
 ---
 {% raw %}
-- name: assert that required variables are defined
-  assert:
-    that:
-      - ssl_csr_name is defined
-
-- set_fact:
-    ssl_csr_path: "/etc/pki/tls/csr/{{ ssl_csr_name }}"
-
 - name: create a directory for storing certificate signing requests
   file:
     state: directory

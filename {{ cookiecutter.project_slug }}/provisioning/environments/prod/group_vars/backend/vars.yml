@@ -1,0 +1,16 @@
+#---
+#
+#backend_server_name: "<your-production-server-cname>"
+#
+#backend_app_vagrant_mount: false
+#backend_app_gunicorn_worker_count: 4
+#backend_app_debug: false
+#backend_app_database_host: "<your-production-database-host>"
+## To generate a new secret key using django:
+## $ python manage.py shell
+## >>> from django.core.management import utils
+## >>> utils.get_random_secret_key()
+#backend_app_secret_key: "<your-production-django-secret-key>"
+#
+#ssl_provider: 'certbot'
+#ssl_certbot_email: '<your-certbot-notification-email>'

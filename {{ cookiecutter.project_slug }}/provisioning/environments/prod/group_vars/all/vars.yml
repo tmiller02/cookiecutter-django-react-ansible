@@ -1,0 +1,6 @@
+#---
+#
+#database_password: "<your-production-database-password>"
+#
+#firewalld_backend_ip_addresses:
+# - <your-production-backend-ip-address>

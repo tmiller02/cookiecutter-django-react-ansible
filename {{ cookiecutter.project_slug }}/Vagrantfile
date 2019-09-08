@@ -7,6 +7,9 @@ sudo systemctl restart {{ cookiecutter.project_slug }} &> /dev/null || true
 SCRIPT
 
 $controller_vm_setup_script = <<-SCRIPT
+if ! grep -q "cd /vagrant/provisioning" /home/vagrant/.bashrc ; then 
+  echo "cd /vagrant/provisioning" >> /home/vagrant/.bashrc 
+fi
 sudo yum install -y epel-release
 sudo yum install -y python36 python36-pip python36-devel sshpass
 # Vagrant doesn't allow us to specify which version of pip/python is used to

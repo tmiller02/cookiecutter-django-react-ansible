@@ -130,6 +130,7 @@ STATIC_ROOT = env.str('STATIC_ROOT')
 
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Logging configuration
 # https://docs.djangoproject.com/en/2.2/topics/logging/

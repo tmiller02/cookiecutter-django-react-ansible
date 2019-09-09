@@ -5,3 +5,19 @@
 - import_tasks: yum_cron.yml
 
 - import_tasks: login_info.yml
+
+- name: install epel-release
+  yum:
+    name: epel-release
+
+- name: install useful packages
+  yum:
+    name:
+      - atop
+      - htop
+      - lsof
+      - nano
+      - net-tools
+      - nmap
+      - vim-enhanced
+    state: present

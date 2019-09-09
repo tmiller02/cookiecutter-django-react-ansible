@@ -16,6 +16,8 @@ ssl_certificate_name: "backend_app.crt"
 
 nginx_remove_default_vhost: true
 
+nginx_server_tokens: "off"
+
 nginx_upstreams:
   - name: backend_app
     strategy: least_conn

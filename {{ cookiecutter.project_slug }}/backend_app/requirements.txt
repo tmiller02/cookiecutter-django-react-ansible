@@ -74,9 +74,6 @@ django-environ==0.4.5 \
 django==2.2.5 \
     --hash=sha256:148a4a2d1a85b23883b0a4e99ab7718f518a83675e4485e44dc0c1d36988c5fa \
     --hash=sha256:deb70aa038e59b58593673b15e9a711d1e5ccd941b5973b30750d5d026abfd56
-djangorestframework==3.10.2 \
-    --hash=sha256:42979bd5441bb4d8fd69d0f385024a114c3cae7df0f110600b718751250f6929 \
-    --hash=sha256:aedb48010ebfab9651aaab1df5fd3b4848eb4182afc909852a2110c24f89a359
 dparse==0.4.1 \
     --hash=sha256:00a5fdfa900629e5159bf3600d44905b333f4059a3366f28e0dbd13eeab17b19 \
     --hash=sha256:cef95156fa0adedaf042cd42f9990974bec76f25dfeca4dc01f381a243d5aa5b \

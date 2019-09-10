@@ -26,6 +26,7 @@
   become_user: "{{ backend_app_user }}"
   deploy_helper:
     path: "{{ backend_app_root }}"
+    release: "{{ backend_app_release_version }}"
     state: present
     shared_path: ""
 

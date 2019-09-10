@@ -1,0 +1,16 @@
+---
+
+- name: add the yarn repo
+  yum_repository:
+    name: yarn
+    description: Yarn Repository
+    baseurl: https://dl.yarnpkg.com/rpm/
+    gpgcheck: yes
+    gpgkey: https://dl.yarnpkg.com/rpm/pubkey.gpg
+
+- name: install node.js and yarn
+  yum:
+    name:
+      - nodejs
+      - yarn
+    state: present

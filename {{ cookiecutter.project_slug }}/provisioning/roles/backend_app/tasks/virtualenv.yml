@@ -1,9 +1,5 @@
 ---
 {% raw %}
-- name: install epel-release
-  yum:
-    name: epel-release
-
 - name: install python packages
   yum:
     name:

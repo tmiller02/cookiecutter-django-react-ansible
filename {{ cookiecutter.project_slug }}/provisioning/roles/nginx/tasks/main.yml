@@ -1,0 +1,10 @@
+---
+
+- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+  seboolean:
+    name: httpd_can_network_connect
+    state: true
+    persistent: true
+
+- import_role:
+    name: geerlingguy.nginx

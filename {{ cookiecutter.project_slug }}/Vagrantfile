@@ -12,11 +12,7 @@ if ! grep -q "cd /vagrant/provisioning" /home/vagrant/.bashrc ; then
 fi
 # install ansible requirements
 sudo yum install -y epel-release
-sudo yum install -y python36 python36-pip python36-devel sshpass
-# Vagrant doesn't allow us to specify which version of pip/python is used to
-# install our provisioning requirements when using the 'ansible_local'
-# provisioner, so we set the system default to Python 3.
-sudo alternatives --install /usr/bin/pip pip /usr/bin/pip3.6 1
+sudo yum install -y python2-pip python-devel sshpass
 SCRIPT
 
 Vagrant.require_version ">= 2.2.5"

@@ -1,6 +1,6 @@
 #---
 #
-#backend_server_name: "<your-production-server-cname>"
+#backend_server_name: "<your-production-server-backend-cname>"
 #
 #backend_app_vagrant_mount: false
 #backend_app_gunicorn_worker_count: 4

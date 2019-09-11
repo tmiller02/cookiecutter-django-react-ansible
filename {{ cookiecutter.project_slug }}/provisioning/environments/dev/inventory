@@ -7,5 +7,8 @@
 [backend]
 {{ cookiecutter.dev_vm_hostname }}
 
+[frontend]
+{{ cookiecutter.dev_vm_hostname }}
+
 [database]
 {{ cookiecutter.db_vm_hostname }}

@@ -1,0 +1,3 @@
+---
+
+frontend_server_name: "{{ cookiecutter.dev_vm_hostname }}"

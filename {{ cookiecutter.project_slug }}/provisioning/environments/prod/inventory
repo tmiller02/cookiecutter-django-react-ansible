@@ -1,5 +1,8 @@
 #[backend]
 #<your-backend-host.com>
 #
+#[frontend]
+#<your-backend-host.com>
+#
 #[database]
 #<your-database-host.com>

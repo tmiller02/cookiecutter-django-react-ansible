@@ -41,4 +41,13 @@
   become: true
   roles:
     - yarn
+
+- hosts: frontend
+  become: true
+  roles:
+    - ssl
+    - nginx
+  vars_files:
+    - vars/shared.yml
+    - vars/frontend.yml
 {% endraw %}

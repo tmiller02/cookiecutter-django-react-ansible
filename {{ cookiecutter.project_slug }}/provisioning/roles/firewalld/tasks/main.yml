@@ -21,7 +21,7 @@
   with_items:
     - http
     - https
-  when: "'backend' in group_names"
+  when: "'backend' in group_names or 'frontend' in group_names"
 
 - block:
   - name: define the 'backend' firewalld zone

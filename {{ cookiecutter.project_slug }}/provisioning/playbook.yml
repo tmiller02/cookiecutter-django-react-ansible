@@ -41,6 +41,8 @@
   become: true
   roles:
     - yarn
+  vars:
+    ansible_python_interpreter: "/usr/bin/python"
 
 - hosts: frontend
   become: true

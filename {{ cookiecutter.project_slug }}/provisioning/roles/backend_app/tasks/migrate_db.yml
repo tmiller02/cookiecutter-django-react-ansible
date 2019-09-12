@@ -14,18 +14,4 @@
 - name: display migrate output
   debug:
     msg: "{{ django_manage_migrate.out }}"
-
-- name: run collect static files
-  become: true
-  become_user: "{{ backend_app_user }}"
-  django_manage:
-    command: "collectstatic --clear --noinput"
-    app_path: "{{ deploy_helper.current_path }}"
-    virtualenv: "{{ deploy_helper.current_path }}/venv"
-  register:
-    django_manage_collectstatic
-
-- name: display collectstatic output
-  debug:
-    msg: "{{ django_manage_collectstatic.out }}"
 {% endraw %}

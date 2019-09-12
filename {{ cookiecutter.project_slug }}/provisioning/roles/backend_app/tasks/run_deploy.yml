@@ -11,7 +11,7 @@
 # release (by just changing the 'current' symlink to point to a different folder and
 # restarting the systemd service). However, bear in mind that this approach may not be
 # sufficient depending on what has changed between releases. For example, you may need
-# to also consider changes made in database migrations and static files.
+# to also consider changes made to the database by migrations.
 #
 # See https://docs.ansible.com/ansible/latest/modules/deploy_helper_module.html#deploy-helper-module
 # for more info.
@@ -40,6 +40,7 @@
       - "--exclude=__pycache__"
       - "--exclude=settings.env"
       - "--exclude=venv/"
+      - "--exclude=static_root/"
       - "--chown={{ backend_app_user }}:{{ backend_app_group }}"
 
 - name: add an unfinished file to allow cleanup on successful finalize

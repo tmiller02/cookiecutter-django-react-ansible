@@ -34,6 +34,20 @@
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
 
+- name: run collect static files
+  become: true
+  become_user: "{{ backend_app_user }}"
+  django_manage:
+    command: "collectstatic --clear --noinput"
+    app_path: "{{ deploy_helper.new_release_path }}"
+    virtualenv: "{{ deploy_helper.new_release_path }}/venv"
+  register:
+    django_manage_collectstatic
+
+- name: display collectstatic output
+  debug:
+    msg: "{{ django_manage_collectstatic.out }}"
+
 - name: finalize the deploy, removing the unfinished file and switching the 'current' symlink
   become: true
   become_user: "{{ backend_app_user }}"
@@ -69,15 +83,16 @@
     src: venvrc.j2
     dest: "~/.venvrc"
 
-- name: ensure static directory exists
+- name: ensure symlink to backend_app_static_root exists
   file:
-    path: "{{ backend_app_static_root }}"
-    state: directory
+    state: link
+    src: "{{ deploy_helper.current_path }}/static_root"
+    dest: "{{ backend_app_static_root }}"
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
     mode: "u=rwx,g=rx,o=rx"
 
-- import_tasks: django_management.yml
+- import_tasks: migrate_db.yml
 
 - import_tasks: systemd.yml
 {% endraw %}

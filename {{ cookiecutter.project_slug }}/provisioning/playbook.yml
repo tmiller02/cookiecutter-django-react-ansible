@@ -30,9 +30,9 @@
 - hosts: backend
   become: true
   roles:
-    - backend_app
     - ssl
     - nginx
+    - backend_app
   vars_files:
     - vars/shared.yml
     - vars/backend.yml

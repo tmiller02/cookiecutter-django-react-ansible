@@ -1,0 +1,21 @@
+---
+{% raw %}
+- name: install yarn packages
+  command: yarn install
+  args:
+    chdir: "{{ playbook_dir }}/../frontend_app/"
+
+- name: build the frontend app bundle
+  command: yarn build
+  args:
+    chdir: "{{ playbook_dir }}/../frontend_app/"
+
+# Note that this doesn't fail the playbook if vulnerable packages are found.
+# This only displays the report in the ansible output, so we don't cause any
+# deployment to fail unexpectedly.
+- name: run yarn audit
+  command: yarn audit
+  args:
+    chdir: "{{ playbook_dir }}/../frontend_app/"
+  ignore_errors: true
+{% endraw %}

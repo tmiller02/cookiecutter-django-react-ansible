@@ -1,5 +1,5 @@
 ---
-
+{% raw %}
 - name: add the yarn repo
   yum_repository:
     name: yarn
@@ -8,9 +8,14 @@
     gpgcheck: yes
     gpgkey: https://dl.yarnpkg.com/rpm/pubkey.gpg
 
+- name: add the node.js 10 repo
+  yum:
+    name: "https://rpm.nodesource.com/pub_10.x/el/{{ ansible_distribution_major_version }}/x86_64/nodesource-release-el{{ ansible_distribution_major_version }}-1.noarch.rpm"
+    state: present
+
 - name: install node.js and yarn
   yum:
     name:
       - nodejs
       - yarn
-    state: present
+{% endraw %}

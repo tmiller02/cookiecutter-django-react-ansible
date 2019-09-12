@@ -7,8 +7,8 @@ sudo systemctl restart {{ cookiecutter.project_slug }} &> /dev/null || true
 SCRIPT
 
 $controller_vm_setup_script = <<-SCRIPT
-if ! grep -q "cd /vagrant/provisioning" /home/vagrant/.bashrc ; then 
-  echo "cd /vagrant/provisioning" >> /home/vagrant/.bashrc 
+if ! grep -q "cd /vagrant/provisioning" ~/.bashrc ; then 
+  echo "cd /vagrant/provisioning" >> ~/.bashrc 
 fi
 # install ansible requirements
 sudo yum install -y epel-release
@@ -63,19 +63,16 @@ Vagrant.configure("2") do |config|
       mount_options: ["uid=1234", "gid=1234"]
     )
 
-    machine.trigger.after :up do |trigger|
-      # Ensure that the 'venv' folder is mounted after vagrant has configured its
-      # mounts if running 'vagrant up' without re-provisioning (ie instead of
-      # 'vagrant up --provision'). Restart the backend app service - systemd may
-      # set this unit as failed shortly after boot since the files within the
-      # vagrant mount won't be available initially. These commands would fail
-      # on an initial 'vagrant up' without '|| true' since this trigger is
-      # executed after 'up' but *before* the ansible provisioning is run
-      # (which adds this mount configuration into /etc/fstab and creates the
-      # systemd service).
-      trigger.name = "Mount venv directory and restart backend app service"
-      trigger.run_remote = {inline: $dev_vm_post_up_script}
-    end
+    # Ensure that the 'venv' folder is mounted after vagrant has configured its
+    # mounts if running 'vagrant up' without re-provisioning (ie instead of
+    # 'vagrant up --provision'). Restart the backend app service - systemd may
+    # set this unit as failed shortly after boot since the files within the
+    # vagrant mount won't be available initially. These commands would fail
+    # on an initial 'vagrant up' without '|| true' since this trigger is
+    # executed after 'up' but *before* the ansible provisioning is run
+    # (which adds this mount configuration into /etc/fstab and creates the
+    # systemd service).
+    machine.vm.provision "shell", inline: $dev_vm_post_up_script, run: "always"
 
     machine.vm.network "private_network", ip: "172.17.177.21"
     machine.vm.provider "virtualbox" do |virtualbox|
@@ -123,7 +120,7 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 256
     end
 
-    machine.vm.provision "shell", inline: $controller_vm_setup_script
+    machine.vm.provision "shell", inline: $controller_vm_setup_script, privileged: false
 
     machine.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"

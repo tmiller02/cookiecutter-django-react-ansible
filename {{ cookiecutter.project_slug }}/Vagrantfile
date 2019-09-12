@@ -117,7 +117,7 @@ Vagrant.configure("2") do |config|
 
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_controller"
-      virtualbox.memory = 256
+      virtualbox.memory = 512
     end
 
     machine.vm.provision "shell", inline: $controller_vm_setup_script, privileged: false

@@ -8,8 +8,8 @@ RuntimeDirectory = {{ backend_app_systemd_runtime_dir }}
 PIDFile = {{ backend_app_systemd_pid_file }}
 User = {{ backend_app_user }}
 Group = {{ backend_app_group }}
-WorkingDirectory = {{ deploy_helper.current_path }}
-ExecStart = {{ deploy_helper.current_path }}/venv/bin/gunicorn \
+WorkingDirectory = {{ backend_app_deploy_helper.current_path }}
+ExecStart = {{ backend_app_deploy_helper.current_path }}/venv/bin/gunicorn \
             --config gunicorn.cfg \
             {{ backend_app_wsgi }}
 ExecReload = /bin/kill -s HUP $MAINPID

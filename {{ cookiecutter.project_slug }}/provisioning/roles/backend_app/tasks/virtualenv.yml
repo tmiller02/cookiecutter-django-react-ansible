@@ -11,7 +11,7 @@
   become: true
   become_user: "{{ backend_app_user }}"
   pip:
-    virtualenv: "{{ deploy_helper.new_release_path }}/venv"
+    virtualenv: "{{ backend_app_deploy_helper.new_release_path }}/venv"
     virtualenv_command: /usr/bin/python3.6 -m venv
     name:
       - pip-tools==4.1.0
@@ -21,5 +21,5 @@
   become_user: "{{ backend_app_user }}"
   command: "venv/bin/pip-sync"
   args:
-    chdir: "{{ deploy_helper.new_release_path }}"
+    chdir: "{{ backend_app_deploy_helper.new_release_path }}"
 {% endraw %}

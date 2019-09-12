@@ -6,8 +6,8 @@
   run_once: true
   django_manage:
     command: "migrate --noinput"
-    app_path: "{{ deploy_helper.current_path }}"
-    virtualenv: "{{ deploy_helper.current_path }}/venv"
+    app_path: "{{ backend_app_deploy_helper.current_path }}"
+    virtualenv: "{{ backend_app_deploy_helper.current_path }}/venv"
   register:
     django_manage_migrate
 

@@ -3,8 +3,10 @@
 backend_app_database_name: "{{ database_name }}"
 backend_app_database_user: "{{ database_user }}"
 backend_app_database_password: "{{ database_password }}"
-backend_app_static_root: "{{ static_root }}"
-backend_app_systemd_runtime_dir: "{{ systemd_backend_runtime_dir }}"
+backend_app_static_root: "/usr/share/nginx/backend_app_static"
+{% endraw %}
+backend_app_systemd_runtime_dir: "{{ cookiecutter.project_slug }}"
+{% raw %}
 backend_app_allowed_hosts:
   - "localhost"
   - "127.0.0.1"
@@ -45,7 +47,7 @@ nginx_vhosts:
       }
 
       location /static {
-          alias {{ static_root }};
+          alias {{ backend_app_static_root }};
       }
 
       ssl_certificate /etc/pki/tls/certs/{{ ssl_certificate_name }};

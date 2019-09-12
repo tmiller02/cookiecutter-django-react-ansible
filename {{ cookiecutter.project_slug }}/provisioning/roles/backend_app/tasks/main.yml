@@ -22,7 +22,7 @@
 - name: template settings into the new release path
   template:
     src: settings.env.j2
-    dest: "{{ deploy_helper.new_release_path }}/settings.env"
+    dest: "{{ backend_app_deploy_helper.new_release_path }}/settings.env"
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
     mode: "u=rw,g=,o="
@@ -30,7 +30,7 @@
 - name: add gunicorn config to the new release path
   template:
     src: gunicorn.cfg.j2
-    dest: "{{ deploy_helper.new_release_path }}/gunicorn.cfg"
+    dest: "{{ backend_app_deploy_helper.new_release_path }}/gunicorn.cfg"
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
 
@@ -39,8 +39,8 @@
   become_user: "{{ backend_app_user }}"
   django_manage:
     command: "collectstatic --clear --noinput"
-    app_path: "{{ deploy_helper.new_release_path }}"
-    virtualenv: "{{ deploy_helper.new_release_path }}/venv"
+    app_path: "{{ backend_app_deploy_helper.new_release_path }}"
+    virtualenv: "{{ backend_app_deploy_helper.new_release_path }}/venv"
   register:
     django_manage_collectstatic
 
@@ -53,7 +53,7 @@
   become_user: "{{ backend_app_user }}"
   deploy_helper:
     path: "{{ backend_app_root }}"
-    release: '{{ deploy_helper.new_release }}'
+    release: '{{ backend_app_deploy_helper.new_release }}'
     state: finalize
     clean: true
     keep_releases: 10
@@ -72,7 +72,7 @@
   become_user: "{{ backend_app_user }}"
   command: make safety_check
   args:
-    chdir: "{{ deploy_helper.current_path }}"
+    chdir: "{{ backend_app_deploy_helper.current_path }}"
   ignore_errors: true
 
 - name: add rc file which can be used to activate the virtualenv
@@ -85,7 +85,7 @@
 - name: ensure symlink to backend_app_static_root exists
   file:
     state: link
-    src: "{{ deploy_helper.current_path }}/static_root"
+    src: "{{ backend_app_deploy_helper.current_path }}/static_root"
     dest: "{{ backend_app_static_root }}"
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"

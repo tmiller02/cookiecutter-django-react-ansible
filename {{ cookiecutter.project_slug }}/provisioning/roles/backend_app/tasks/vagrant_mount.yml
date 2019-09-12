@@ -10,7 +10,7 @@
 
 - name: set deploy_helper facts needed by other tasks
   set_fact:
-    deploy_helper:
+    backend_app_deploy_helper:
       new_release_path: "{{ backend_app_root }}/current"
       current_path: "{{ backend_app_root }}/current"
 

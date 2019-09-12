@@ -2,10 +2,8 @@
 
 # Variables which are shared across different roles or different plays.
 
-systemd_backend_runtime_dir: "{{ cookiecutter.project_slug }}"
 database_name: "{{ cookiecutter.project_slug }}"
 database_user: "{{ cookiecutter.project_slug }}"
-static_root: "/usr/share/nginx/backend_app_static"
 
 nginx_remove_default_vhost: true
 

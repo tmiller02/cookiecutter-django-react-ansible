@@ -24,6 +24,7 @@
     - name: "Set release version facts"
       set_fact:
         backend_app_release_version: "{{ release_version }}"
+        frontend_app_release_version: "{{ release_version }}"
   roles:
     - base
     - firewalld
@@ -51,6 +52,7 @@
   roles:
     - ssl
     - nginx
+    - frontend_app
   vars_files:
     - vars/shared.yml
     - vars/frontend.yml

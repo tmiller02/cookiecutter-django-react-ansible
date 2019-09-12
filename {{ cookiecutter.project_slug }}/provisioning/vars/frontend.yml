@@ -1,4 +1,6 @@
 ---
+
+frontend_app_root: "/opt/{{ cookiecutter.project_slug }}_frontend"
 {% raw %}
 ssl_common_name: "{{ frontend_server_name }}"
 ssl_private_key_name: "frontend_app.pem"

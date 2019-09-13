@@ -1,39 +1,70 @@
 pipeline {
 
-    // This Jenkinsfile requires the following Jenkins plugins:
+    // This Jenkinsfile requires the following additional Jenkins plugins:
     //   * AnsiColor
 
     agent any
 
+    options {
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        VAGRANT_FORCE_COLOR = "1"
+    }
+
     stages {
         stage('Provision') {
             steps {
+
+                echo """
+                    If viewing live console output, you may need to refresh
+                    at this point to see colour output properly, see
+                    https://github.com/jenkinsci/ansicolor-plugin/issues/136
+                """.stripIndent()
+
                 echo 'Ensure vagrant plugins are installed'
-                sh 'vagrant plugin install vagrant-vbguest vagrant-hostmanager'
+
+                ansiColor('xterm') {
+                    sh 'vagrant plugin install vagrant-vbguest vagrant-hostmanager'
+                }
 
                 echo 'Provisioning the Vagrant VMs...'
-                echo 'If viewing live console output, you may need to refresh'
-                echo 'at this point to see colour output properly, see'
-                echo 'https://github.com/jenkinsci/ansicolor-plugin/issues/136'
+
                 ansiColor('xterm') {
                     sh 'vagrant up --provision'
                 }
             }
         }
 
-        stage('Run checks') {
+        stage('Run backend tests') {
             steps {
-                echo 'Checking for known vulnerabilities using "safety"...'
-                sh './vagrant_ssh.sh make safety_check'
+                echo 'Running unit tests...'
+                sh './ssh_backend.sh make test'
             }
         }
 
-        stage('Run tests') {
+        stage('Run frontend tests') {
             steps {
                 echo 'Running unit tests...'
-                sh './vagrant_ssh.sh make test'
+                sh 'vagrant ssh controller -c "cd /vagrant/frontend_app && yarn test"'
             }
         }
+
+        stage('Run backend checks') {
+            steps {
+                echo 'Checking for known vulnerabilities using "safety"...'
+                sh './ssh_backend.sh make safety_check'
+            }
+        }
+
+        stage('Run frontend checks') {
+            steps {
+                echo 'Checking for known vulnerabilities using "yarn audit"...'
+                sh 'vagrant ssh controller -c "cd /vagrant/frontend_app && yarn audit"'
+            }
+        }
+
     }
 
     post {

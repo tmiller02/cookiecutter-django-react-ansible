@@ -10,5 +10,17 @@ def validate_slug_regex():
         sys.exit(1)
 
 
+def validate_hostnames():
+    hostnames = [
+        "{{ cookiecutter.frontend_app_hostname }}",
+        "{{ cookiecutter.backend_app_hostname }}",
+        "{{ cookiecutter.database_hostname }}"
+    ]
+    if len(set(hostnames)) != len(hostnames):
+        print("ERROR: all hostnames must be unique")
+        sys.exit(1)
+
+
 if __name__ == "__main__":
     validate_slug_regex()
+    validate_hostnames()

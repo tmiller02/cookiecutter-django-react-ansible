@@ -42,8 +42,9 @@ options. Once you've provided these values, your project will be generated.
 ```
 project_name [My Project]: My Project
 project_slug [my_project]: my_project
-dev_vm_hostname [my-project.localhost]: my-project.localhost
-db_vm_hostname [db.my-project.localhost]: db.my-project.localhost
+frontend_app_hostname [my-project.localhost]: my-project.localhost
+backend_app_hostname [api.my-project.localhost]: api.my-project.localhost
+database_hostname [db.my-project.localhost]: db.my-project.localhost
 ```
 
 Enter the project and take a look around:
@@ -75,7 +76,7 @@ $ vagrant up --provision
 ```
     
 Once provisioning has finished, you can access the dev VM at the hostname you
-set for the `dev_vm_hostname` option, eg https://my-project.localhost.
+set for the `backend_app_hostname` option, eg https://my-project.localhost.
 
 ## Next Steps
 

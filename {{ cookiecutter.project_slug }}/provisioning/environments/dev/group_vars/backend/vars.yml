@@ -1,6 +1,6 @@
 ---
 
-backend_server_name: "{{ cookiecutter.dev_vm_hostname }}"
+backend_server_name: "{{ cookiecutter.backend_app_hostname }}"
 
 backend_app_vagrant_mount: true
 backend_app_gunicorn_worker_count: 4

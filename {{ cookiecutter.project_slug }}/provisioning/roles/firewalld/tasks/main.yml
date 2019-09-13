@@ -18,7 +18,7 @@
     immediate: true
     permanent: true
     state: enabled
-  with_items:
+  loop:
     - http
     - https
   when: "'backend' in group_names or 'frontend' in group_names"
@@ -40,7 +40,7 @@
       immediate: true
       permanent: true
       state: enabled
-    with_items: "{{ firewalld_backend_ip_addresses }}"
+    loop: "{{ firewalld_backend_ip_addresses }}"
 
   - name: expose port 5432/tcp for postgres to the 'backend' firewalld zone
     firewalld:

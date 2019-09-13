@@ -41,4 +41,15 @@
     opts: bind,noauto
     state: mounted
     fstype: none
+
+# We can't change the context of files within the vagrant mount, which means
+# that nginx would not be able to serve the static files from static_root/.
+# We disable this selinux check when using a vagrant mount to address this.
+# An alternative solution could be to collect static files to /usr/share/nginx
+# instead, but be mindful that these static files would no longer be rolled
+# back if switching the 'current' symlink following the deployment strategy
+# in run_deploy.yml.
+- selinux_permissive:
+    name: httpd_t
+    permissive: true
 {% endraw %}

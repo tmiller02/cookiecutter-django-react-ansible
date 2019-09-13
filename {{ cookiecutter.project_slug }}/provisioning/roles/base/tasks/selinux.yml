@@ -1,16 +1,14 @@
 ---
 
-- name: ensure SELinux is installed
+- name: ensure SELinux and python requirements are installed
   yum:
-    name: selinux-policy
+    name:
+      - selinux-policy
+      - policycoreutils-python
+      - libsemanage-python
     state: present
 
 - name: enable SELinux
   selinux:
     policy: targeted
     state: enforcing
-
-- name: install libsemanage-python for managing SELinux settings in Ansible
-  yum:
-    name: libsemanage-python
-    state: present

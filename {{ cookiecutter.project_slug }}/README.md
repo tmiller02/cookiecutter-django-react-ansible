@@ -1,12 +1,14 @@
-# Cookiecutter Django Ansible Jumpstart
+# Cookiecutter Django React Ansible
 
-`cookiecutter-django-ansible-jumpstart` is a 
+`cookiecutter-django-react-ansible` is a 
 [cookiecutter](https://github.com/pydanny/cookiecutter) template for setting up
-a Django 2.2 project with Ansible provisioning and some opinionated defaults.
+a Django 2.2 & React project with Ansible provisioning and some opinionated defaults.
 
 ## Key Features and Technologies
 * Django 2.2
 * Python 3.6
+* React using the [create-react-app](https://github.com/facebook/create-react-app) script
+* TypeScript
 * Follows the [12-Factor methodology](https://12factor.net/)
 * Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/),
   Firefox and optional X11 forwarding
@@ -33,7 +35,7 @@ $ pip install "cookiecutter>=1.6.0"
 Next, run cookiecutter against this project:
 
 ```
-$ cookiecutter cookiecutter-django-ansible-jumpstart
+$ cookiecutter cookiecutter-django-react-ansible
 ```
 
 You'll be prompted for some values. Answer these prompts with your desired
@@ -75,8 +77,10 @@ $ cd my_project
 $ vagrant up --provision
 ```
     
-Once provisioning has finished, you can access the dev VM at the hostname you
-set for the `backend_app_hostname` option, eg https://my-project.localhost.
+Once provisioning has finished, you can access the django app at the hostname you
+set for the `backend_app_hostname` option, e.g. https://api.my-project.localhost.
+You can access the react app at the hostname you set for the
+`frontend_app_hostname`, e.g. https://my-project.localhost.
 
 ## Next Steps
 

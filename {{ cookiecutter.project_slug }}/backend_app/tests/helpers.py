@@ -14,7 +14,7 @@ class SeleniumLiveServerTestCase(StaticLiveServerTestCase):
         options.add_argument("--width=1024")
         options.add_argument("--height=768")
         if settings.SELENIUM_TESTS_RUN_HEADLESS:
-            options.set_headless()
+            options.headless = True
 
         cls.selenium = Firefox(options=options)
         cls.selenium.implicitly_wait(10)

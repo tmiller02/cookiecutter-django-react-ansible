@@ -82,15 +82,6 @@
     src: venvrc.j2
     dest: "~/.venvrc"
 
-- name: ensure symlink to backend_app_static_root exists
-  file:
-    state: link
-    src: "{{ backend_app_deploy_helper.current_path }}/static_root"
-    dest: "{{ backend_app_static_root }}"
-    owner: "{{ backend_app_user }}"
-    group: "{{ backend_app_group }}"
-    mode: "u=rwx,g=rx,o=rx"
-
 - import_tasks: migrate_db.yml
 
 - import_tasks: systemd.yml

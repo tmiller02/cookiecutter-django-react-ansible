@@ -1,0 +1,3 @@
+---
+
+frontend_app_root: "/opt/{{ cookiecutter.project_slug }}_frontend"

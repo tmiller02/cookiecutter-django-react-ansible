@@ -23,11 +23,9 @@ nginx_vhosts:
   - listen: "443 ssl"
     server_name: "{{ frontend_server_name }}"
     filename: "02_frontend_app.conf"
+    root: "{{ frontend_app_root }}/current/"
+    index: "index.html"
     extra_parameters: |
-      location / {
-          alias {{ frontend_app_root }}/current/;
-      }
-
       ssl_certificate /etc/pki/tls/certs/{{ ssl_certificate_name }};
       ssl_certificate_key /etc/pki/tls/private/{{ ssl_private_key_name }};
 {% endraw %}

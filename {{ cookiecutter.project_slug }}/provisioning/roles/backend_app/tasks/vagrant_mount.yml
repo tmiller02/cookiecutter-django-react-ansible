@@ -49,7 +49,8 @@
 # instead, but be mindful that these static files would no longer be rolled
 # back if switching the 'current' symlink following the deployment strategy
 # in run_deploy.yml.
-- selinux_permissive:
+- name: configure selinux to be permissive for the httpd_t domain
+  selinux_permissive:
     name: httpd_t
     permissive: true
 {% endraw %}

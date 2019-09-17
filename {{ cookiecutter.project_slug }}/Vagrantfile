@@ -33,6 +33,19 @@ if Vagrant::Util::Platform.windows? then
   end
 end
 
+if Vagrant.has_plugin?("vagrant-vbguest") then
+  class CustomVbGuestInstaller < VagrantVbguest::Installers::CentOS
+    def install(opts=nil, &block)
+      communicate.sudo('yum -y update', opts, &block)
+      communicate.sudo('shutdown -r now', opts, &block)
+      begin
+        sleep 5
+      end until communicate.ready?
+      super
+    end
+  end
+end
+
 Vagrant.configure("2") do |config|
 
   config.vagrant.plugins = [
@@ -43,7 +56,12 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = true
   # disable the default vagrant mount. We configure custom mounts on the VM separately.
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vbguest.auto_update = true
+
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.installer = CustomVbGuestInstaller
+    config.vbguest.auto_update = true
+  end
+
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
   config.hostmanager.manage_guest = true
@@ -64,15 +82,13 @@ Vagrant.configure("2") do |config|
       mount_options: ["uid=1234", "gid=1234"]
     )
 
-    # Ensure that the 'venv' folder is mounted after vagrant has configured its
-    # mounts if running 'vagrant up' without re-provisioning (ie instead of
-    # 'vagrant up --provision'). Restart the backend app service - systemd may
-    # set this unit as failed shortly after boot since the files within the
-    # vagrant mount won't be available initially. These commands would fail
-    # on an initial 'vagrant up' without '|| true' since this trigger is
-    # executed after 'up' but *before* the ansible provisioning is run
-    # (which adds this mount configuration into /etc/fstab and creates the
-    # systemd service).
+    # Ensure that the 'venv' folder is mounted after vagrant has configured
+    # its synced folders. Restart the backend app service - systemd may set
+    # this unit as failed shortly after boot since the files within the
+    # vagrant mount won't be available initially. These commands would fail on
+    # an initial 'vagrant up' without '|| true' since this script is executed
+    # *before* the first ansible provisioning is run (which adds this mount
+    # configuration into /etc/fstab and creates the systemd service).
     machine.vm.provision "shell", inline: $dev_vm_post_up_script, run: "always"
 
     machine.vm.network "private_network", ip: "172.17.177.21"

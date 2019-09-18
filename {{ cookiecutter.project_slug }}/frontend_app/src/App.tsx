@@ -14,7 +14,15 @@ const Home: React.FC = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Backend app API url:{" "}
+          <a
+            className="App-link"
+            href={process.env.REACT_APP_BACKEND_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {process.env.REACT_APP_BACKEND_URL}
+          </a>
         </p>
         <a
           className="App-link"

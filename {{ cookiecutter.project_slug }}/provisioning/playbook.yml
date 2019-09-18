@@ -10,6 +10,8 @@
         tasks_from: build.yml
   vars:
     ansible_python_interpreter: "/usr/bin/python"
+  vars_files:
+    - vars/frontend.yml
 
 - hosts: all
   become: true

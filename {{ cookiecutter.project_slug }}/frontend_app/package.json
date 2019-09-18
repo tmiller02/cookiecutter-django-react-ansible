@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.18",
-    "@types/node": "12.7.5",
+    "@types/node": "^12.7.5",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
     "@types/react-router-dom": "^4.3.5",
@@ -16,9 +16,10 @@
     "typescript": "3.6.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "check-environment": "node checkEnvironment.js",
+    "start": "yarn run check-environment && react-scripts start",
+    "build": "yarn run check-environment && react-scripts build",
+    "test": "yarn run check-environment && react-scripts test",
     "eject": "react-scripts eject",
     "prettier": " prettier --write \"src/**/*.{ts,tsx}\""
   },

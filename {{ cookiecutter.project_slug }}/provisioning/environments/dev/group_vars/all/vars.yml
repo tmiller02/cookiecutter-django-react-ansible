@@ -1,5 +1,7 @@
 ---
 
+backend_server_name: "{{ cookiecutter.backend_app_hostname }}"
+
 database_password: "$DATABASE PASSWORD$"
 
 firewalld_backend_ip_addresses:

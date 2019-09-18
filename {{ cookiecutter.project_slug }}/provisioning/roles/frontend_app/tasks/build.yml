@@ -9,6 +9,8 @@
   command: yarn build
   args:
     chdir: "{{ playbook_dir }}/../frontend_app/"
+  environment:
+    REACT_APP_BACKEND_URL: "{{ frontend_app_backend_url }}"
 
 # Note that this doesn't fail the playbook if vulnerable packages are found.
 # This only displays the report in the ansible output so we don't cause any

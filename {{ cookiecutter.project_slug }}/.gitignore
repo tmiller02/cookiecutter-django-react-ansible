@@ -1,3 +1,7 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+/.idea/
 /.vagrant/
 /provisioning/galaxy_roles/
 /backend_app/settings.env
@@ -5,3 +9,4 @@
 /backend_app/static_root/
 /backend_app/coverage_html_report/
 /frontend_app/node_modules/
+/frontend_app/build/

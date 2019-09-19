@@ -1,0 +1,34 @@
+---
+{% raw %}
+# These tasks perform a basic sanity check that you're deploying the version of
+# the project that you expect. When the next release of a project is ready, it
+# should be tagged with a release version.
+#
+# You should confirm that you're using this tagged release when running a deploy
+# to the production environment.
+
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- import_tasks: check_vars.yml
+
+- name: prompt when the git working directory is not clean
+  block:
+    - name: run git status
+      command: git status --porcelain
+      register: deploy_check_status_command
+
+    - name: display a prompt when the git working directory is not clean
+      pause:
+        prompt: |
+          WARNING: There appear to be uncommitted changes in your working directory:
+
+          {{ deploy_check_status_command.stdout }}
+
+          Press Crtl+C then A to abort, or press Enter to continue anyway.
+      when: "deploy_check_status_command.stdout != ''"
+  when: deploy_check_display_confirmation_prompts | bool
+
+- import_tasks: git_tag.yml
+
+{% endraw %}

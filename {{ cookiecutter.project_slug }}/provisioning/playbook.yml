@@ -2,6 +2,7 @@
 {% raw %}
 - hosts: localhost
   roles:
+    - deploy_check
     - yarn
   tasks:
     - name: build frontend app
@@ -18,18 +19,19 @@
   pre_tasks:
     - name: check connectivity to all hosts
       ping:
-    - name: "Set release version fact"
+  roles:
+    - base
+    - firewalld
+  tasks:
+    - name: "Set release version facts"
       set_fact:
-        release_version: "{{ lookup('pipe','date \"+%Y-%m-%d-%H-%M-%S-%Z\"') }}"
+        release_date: "{{ lookup('pipe','date \"+%Y-%m-%d-%H-%M-%S-%Z\"') }}"
       delegate_to: localhost
       run_once: true
     - name: "Set release version facts"
       set_fact:
-        backend_app_release_version: "{{ release_version }}"
-        frontend_app_release_version: "{{ release_version }}"
-  roles:
-    - base
-    - firewalld
+        backend_app_release_version: "{{ hostvars['localhost']['deploy_check_tag'] }}-{{ release_date }}"
+        frontend_app_release_version: "{{ hostvars['localhost']['deploy_check_tag'] }}-{{ release_date }}"
 
 - hosts: database
   become: true

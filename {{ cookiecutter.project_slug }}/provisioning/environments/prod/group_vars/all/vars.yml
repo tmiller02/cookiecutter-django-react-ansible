@@ -2,6 +2,8 @@
 #
 #backend_server_name: "<your-production-server-backend-cname>"
 #
+#frontend_server_name: "<your-production-server-frontend-cname>"
+#
 #database_password: "<your-production-database-password>"
 #
 #firewalld_backend_ip_addresses:

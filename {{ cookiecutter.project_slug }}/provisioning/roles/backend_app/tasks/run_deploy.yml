@@ -45,6 +45,8 @@
       - "--exclude=settings.env"
       - "--exclude=venv/"
       - "--exclude=static_root/"
+      - "--exclude=.git/"
+      - "--exclude=.DS_Store"
       - "--chown={{ backend_app_user }}:{{ backend_app_group }}"
 
 - name: add an unfinished file to allow cleanup on successful finalize

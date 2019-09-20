@@ -2,6 +2,8 @@
 
 deploy_check_display_confirmation_prompts: false
 
+base_show_production_login_message: false
+
 backend_server_name: "{{ cookiecutter.backend_app_hostname }}"
 
 frontend_server_name: "{{ cookiecutter.frontend_app_hostname }}"

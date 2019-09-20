@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-
+{% raw %}
 MEMORY_TOTAL=$(free -m | grep "Mem" | awk '{print $2" MB";}')
 MEMORY_USED=$(free -m | grep "Mem" | awk '{print $3" MB";}')
 SWAP_IN_USE=$(free -m | grep "Swap" | awk '{print $3" MB";}')
@@ -8,8 +8,10 @@ LOAD_5=$(< /proc/loadavg awk \{'print $2'\})
 LOAD_15=$(< /proc/loadavg awk \{'print $3'\})
 NEEDS_RESTARTING_OUTPUT=$(needs-restarting -r)
 NEEDS_RESTARTING_RC=$?
+SHOW_PRODUCTION_WARNING_MESSAGE={{ base_show_production_login_message | bool | lower }}
 
 YELLOW="\e[33m"
+RED="\e[31m"
 BOLD="\e[1m"
 END_COLOR="\e[0m"
 
@@ -21,6 +23,18 @@ CPU usage: ---------- ${LOAD_1}, ${LOAD_5}, ${LOAD_15} (1, 5, 15 min)
 Memory usage: ------- ${MEMORY_USED} / ${MEMORY_TOTAL}
 Swap in use: -------- ${SWAP_IN_USE}
 "
+
 if [ ${NEEDS_RESTARTING_RC} -ne 0 ]; then
   echo -e "${YELLOW}${BOLD}${NEEDS_RESTARTING_OUTPUT}${END_COLOR}\n"
 fi
+
+read -r -d '' PRODUCTION_WARNING_MESSAGE_CONTENTS << EOF
+╔═══════════════════════════════════════════════════════════╗
+║ WARNING: This is a production host. Proceed with caution. ║
+╚═══════════════════════════════════════════════════════════╝
+EOF
+
+if $SHOW_PRODUCTION_WARNING_MESSAGE ; then
+  echo -e "${RED}${BOLD}${PRODUCTION_WARNING_MESSAGE_CONTENTS}${END_COLOR}\n"
+fi
+{% endraw %}

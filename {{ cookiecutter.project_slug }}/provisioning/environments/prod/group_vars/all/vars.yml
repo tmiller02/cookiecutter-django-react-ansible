@@ -1,5 +1,9 @@
 #---
 #
+#deploy_check_display_confirmation_prompts: true
+#
+#base_show_production_login_message: true
+#
 #backend_server_name: "<your-production-server-backend-cname>"
 #
 #frontend_server_name: "<your-production-server-frontend-cname>"

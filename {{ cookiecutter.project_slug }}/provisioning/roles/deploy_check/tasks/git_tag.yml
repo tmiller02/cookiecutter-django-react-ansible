@@ -1,7 +1,7 @@
 ---
 {% raw %}
 - name: get the current git tag
-  command: "git describe HEAD --tags"
+  command: "git describe HEAD --tags --exact-match"
   register:
     deploy_check_get_tags_command
   failed_when: false

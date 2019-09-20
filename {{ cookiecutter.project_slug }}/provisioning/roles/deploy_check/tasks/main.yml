@@ -10,7 +10,10 @@
 - include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- import_tasks: check_vars.yml
+- name: sanity check some variables
+  assert:
+    that:
+      - "frontend_server_name != backend_server_name"
 
 - name: prompt when the git working directory is not clean
   block:

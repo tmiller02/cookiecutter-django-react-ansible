@@ -1,6 +1,0 @@
----
-
-- name: sanity check some variables
-  assert:
-    that:
-      - "frontend_server_name != backend_server_name"

@@ -13,5 +13,3 @@ firewalld_additional_rules:
   - port: "8000/tcp"
     state: "enabled"
     zone: "public"
-
-ssl_provider: 'selfsigned'

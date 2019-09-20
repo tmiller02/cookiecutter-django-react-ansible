@@ -8,3 +8,6 @@
 #
 #firewalld_backend_ip_addresses:
 # - <your-production-backend-ip-address>
+#
+#ssl_provider: 'certbot'
+#ssl_certbot_email: '<your-certbot-notification-email>'

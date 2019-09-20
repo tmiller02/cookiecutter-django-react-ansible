@@ -10,5 +10,3 @@
 ## >>> utils.get_random_secret_key()
 #backend_app_secret_key: "<your-production-django-secret-key>"
 #
-#ssl_provider: 'certbot'
-#ssl_certbot_email: '<your-certbot-notification-email>'

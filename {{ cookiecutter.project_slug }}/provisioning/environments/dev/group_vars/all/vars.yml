@@ -10,3 +10,5 @@ database_password: "$DATABASE PASSWORD$"
 
 firewalld_backend_ip_addresses:
   - 172.17.177.21
+
+ssl_provider: 'selfsigned'

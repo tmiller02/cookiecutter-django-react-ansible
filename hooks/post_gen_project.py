@@ -103,4 +103,5 @@ if __name__ == "__main__":
 
     set_django_secret_key(dev_backend_vars)
     set_database_password(dev_all_vars)
+
     print_success()

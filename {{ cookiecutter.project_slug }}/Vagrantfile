@@ -110,7 +110,7 @@ Vagrant.configure("2") do |config|
     # By default Vagrant adds the host's name to the loopback address when
     # setting machine.vm.hostname. This can result in unexpected behaviour
     # when attempting to bind to the host like we do in
-    # frontend_app/start_local_dev.sh, so instead we use a hostname alias
+    # frontend_app/start_dev_server.sh, so instead we use a hostname alias
     # and set the hostname later on in an inline script.
     # See See https://github.com/hashicorp/vagrant/issues/7263 for more.
     machine.hostmanager.aliases = ["{{ cookiecutter.controller_hostname }}"]

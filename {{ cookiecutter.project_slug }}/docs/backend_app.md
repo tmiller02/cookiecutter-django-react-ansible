@@ -35,7 +35,7 @@ script to do this in a single step:
 ```
 
 You can view pages being served by this dev server by going to
-http://{{ cookiecutter.backend_app_hostname}}:8000.
+http://{{ cookiecutter.backend_app_hostname }}:8000.
 
 Note that the dev server url is **http** (not **https**) and is on port
 **8000**. Make sure not to confuse this url with the https url, which is served
@@ -45,7 +45,7 @@ instead by NGINX and gunicorn. Unlike the django dev server, these will
 ## Running Tests
 
 Tests are set up to use the `unittest` framework (Django's default). The
-backend app includes a `Makefile` with a shortcut for running the tests with
+backend app includes a `Makefile` with a command for running the tests with
 coverage analysis:
 
 ```
@@ -60,10 +60,10 @@ $ ./ssh_backend.sh
 (venv) [{{ cookiecutter.project_slug }}]$ python manage.py test
 ```
 
-### Selenium X11 forwarding
+### Selenium X11 forwarding (Optional)
 
-The tests have been set up so selenium may be used for any browser-reliant
-tests.
+The tests have been set up so Selenium and Firefox may be used for any
+browser-reliant tests.
 
 The browser is set up to run in headless mode by default. However, if you
 have an X11 server running on your host machine, you can change this to display
@@ -82,8 +82,8 @@ $ ./ssh_backend.sh
 
 If all is working as expected, you should see a new window with eyes appear.
 
-To display the selenium browser, set the `SELENIUM_TESTS_RUN_HEADLESS` setting
-to `False` and re-run the tests:
+To display Firefox, set the `SELENIUM_TESTS_RUN_HEADLESS` to `False` in
+`settings.py`and re-run the tests:
 
 ```
 (venv) [{{ cookiecutter.project_slug }}]$ make test

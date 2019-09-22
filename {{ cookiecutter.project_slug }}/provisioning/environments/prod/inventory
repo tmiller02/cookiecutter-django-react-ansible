@@ -2,7 +2,7 @@
 #<your-backend-host.com>
 #
 #[frontend]
-#<your-backend-host.com>
+#<your-frontend-host.com>
 #
 #[database]
 #<your-database-host.com>

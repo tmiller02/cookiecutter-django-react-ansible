@@ -3,9 +3,11 @@
 ## Overview
 
 The 'Frontend App' uses [Create React App](https://github.com/facebook/create-react-app)
-with [TypeScript](https://www.typescriptlang.org) and [react-router](https://reacttraining.com/react-router/).
+with [TypeScript](https://www.typescriptlang.org) and
+[react-router](https://reacttraining.com/react-router/).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more in the
+[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
@@ -27,7 +29,7 @@ the console.
 
 Note: the `start` and `test` scripts in `package.json` have been extended
 with a bash script to load some dev environment variables. If you want to run
-the dev server directly on a Windows host, you will need to use an alternative
+the dev server directly on a Windows host you will need to use an alternative
 to the Windows command prompt, such as Cygwin.
 
 ## Running the dev server from the controller VM
@@ -80,5 +82,5 @@ and visit https://{{ cookiecutter.frontend_app_dev_hostname }}.
 The production build of the frontend app is served with NGINX. All http
 requests are redirected to https. The contents of `build/static/` are served as
 regular files, with all other urls are redirected to `index.html` if a file with
-a matching file is not found. We rely on `react-router` to handle matching/non
+a matching name is not found. We rely on `react-router` to handle matching/non
 matching routes accordingly.

@@ -90,6 +90,7 @@ To display Firefox, set the `SELENIUM_TESTS_RUN_HEADLESS` to `False` in
 ```
 
 ## Formatting and Linting
+
 This project is set up with the [black](https://github.com/psf/black) code
 formatter and [flake8](http://flake8.pycqa.org/en/latest/) for linting.
 
@@ -133,9 +134,9 @@ The Ansible provisioning adds a `settings.env` file which is then loaded via
 
 ## Serving in Production
 
-The django app is run as a systemd service (`{{ cookiecutter.project_slug }}.service`) with gunicorn which exposes the
+The django app is run as a systemd service
+(`{{ cookiecutter.project_slug }}.service`) with gunicorn which exposes the 
 application on localhost:8080. NGINX is configured as a reverse proxy for this
 location. You can access the django app being served via NGINX by going to
 http://{{ cookiecutter.backend_app_dev_hostname }} (note that you may need to
 restart the systemd service to pick up any code changes.)
-

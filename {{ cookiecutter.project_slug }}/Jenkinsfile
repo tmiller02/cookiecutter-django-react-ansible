@@ -47,7 +47,7 @@ pipeline {
         stage('Run frontend tests') {
             steps {
                 echo 'Running unit tests...'
-                sh 'vagrant ssh controller -c "cd /vagrant/frontend_app && yarn test"'
+                sh 'vagrant ssh controller -c "cd /vagrant/frontend_app && CI=true yarn test"'
             }
         }
 

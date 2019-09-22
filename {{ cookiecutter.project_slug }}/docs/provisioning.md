@@ -23,7 +23,8 @@ The Vagrantfile has also been configured with some plugins to minimise manual
 steps when setting up a dev environment. These are:
   
   * `vagrant-vbguest` for installing VirtualBox guest additions.
-  * `vagrant-hostmanager` for updating the hosts files
+  * `vagrant-hostmanager` for updating the `/etc/hosts` files on the host
+    and guest machines.
   
 ### Provisioning the Dev Environment
 
@@ -34,16 +35,17 @@ $ vagrant up --provision
 ```
 
 You may need to re-run this command if Vagrant needed to install plugins.
-You may also be prompted for a password if the vagrant-vbguest plugin is
-making changes to your `/etc/hosts` file.
 
-# Production Environment
+You may also be prompted for a password if the `vagrant-hostmanager` plugin is
+making changes to the `/etc/hosts` file on your host machine.
+
+## Production Environment
 
 This project includes a sample production environment. All hosts that are added
-to the inventory should be running CentOS 7.
+to the inventory should be running CentOS 7. See the README at
+`provisioning/prod/README.txt` for more.
 
-See the README at `provisioning/prod/README.txt` for more. You are strongly
-advised to use [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html),
+You are strongly advised to use [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html),
 and remember to never add sensitive information such as production passwords or
 keys into version control in plain text!
   
@@ -57,16 +59,17 @@ environment, you should ensure that:
 * You have added a git tag with the release version
 
 If you haven't followed these steps, you will be prompted by the `deploy_check`
-role. This role will also prompt you to confirm that the git tag it finds is
-what you expect.
+role when running the ansible playbook. This role will also prompt you to
+confirm that the git tag it finds is what you expect.
 
-The ansible command to deploy to production will vary depending on how your
-production environment is configured. You may also need to update `ansible.cfg`
-depending on the environment. For example, you may need to set
+The `ansible-playbook` command to deploy to production will vary depending on
+how your production environment is configured. You may also need to update
+`ansible.cfg` depending on the environment. For example, you may need to set
 `host_key_checking = no` if using password authentication (although you're 
 encouraged to use SSH keys instead).
 
-An example for provisioning to the prod environment:
+An example for provisioning to the production environment using the
+`controller` VM:
 
 ```
 $ ./ssh_provisioning.sh
@@ -87,7 +90,7 @@ $ source my_provisioning_venv/bin/activate
 (my_provisioning_venv) $ ansible-playbook playbook.yml --inventory environments/prod/inventory --user <myuser> --private-key <my-private-key>
 ```
 
-# Limitations and Warnings
+## Limitations and Warnings
 
 ### Security
 
@@ -100,7 +103,7 @@ to minimise the risk of users inadvertently locking themselves out of their own
 servers.
 
 You may want to also consider disabling root login, mandating SSH key based
-authentication, adding SSH monitoring tools such as fail2ban and adding a
+authentication, adding SSH monitoring tools such as `fail2ban` and adding a
 centralised logging server.
 
 ### Backups
@@ -132,6 +135,8 @@ using a different approach for generating production certificates.
 
 The `base` role is set to configure `yum-cron` to automatically install updates.
 This should help ensure that servers are up to date, but unmanaged system updates
-may introduce an element of risk which may not be appropriate for your use case.
+may introduce an element of risk and instability which may not be appropriate
+for your use case.
+
 If you'd like to disable automatic yum updates, set
 `base_install_updates_automatically` to `false` in `environments/prod/group_vars/all`. 

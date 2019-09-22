@@ -8,7 +8,7 @@ LOAD_5=$(< /proc/loadavg awk \{'print $2'\})
 LOAD_15=$(< /proc/loadavg awk \{'print $3'\})
 NEEDS_RESTARTING_OUTPUT=$(needs-restarting -r)
 NEEDS_RESTARTING_RC=$?
-SHOW_PRODUCTION_WARNING_MESSAGE={{ base_show_production_login_message | bool | lower }}
+SHOW_PRODUCTION_WARNING_MESSAGE={{ base_show_production_login_warning | bool | lower }}
 
 YELLOW="\e[33m"
 RED="\e[31m"

@@ -1,5 +1,5 @@
 ---
-
+{% raw %}
 - name: install yum-cron
   yum:
     name: yum-cron
@@ -16,3 +16,4 @@
     dest: "/etc/yum/yum-cron.conf"
     regexp: 'apply_updates'
     line: "apply_updates = {{ base_install_updates_automatically | bool | ternary('yes', 'no') }}"
+{% endraw }

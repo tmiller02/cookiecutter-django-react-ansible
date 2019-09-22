@@ -11,8 +11,8 @@
     state: started
     enabled: true
 
-- name: configure yum-cron to apply updates automatically
+- name: configure 'apply_updates' for yum-cron
   lineinfile:
     dest: "/etc/yum/yum-cron.conf"
     regexp: 'apply_updates'
-    line: 'apply_updates = yes'
+    line: "apply_updates = {{ base_install_updates_automatically | bool | ternary('yes', 'no') }}"

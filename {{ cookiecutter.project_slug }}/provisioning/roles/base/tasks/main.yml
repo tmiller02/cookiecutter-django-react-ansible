@@ -3,7 +3,6 @@
 - import_tasks: selinux.yml
 
 - import_tasks: yum_cron.yml
-  when: base_install_updates_automatically
 
 - import_tasks: login_info.yml
 

@@ -6,7 +6,6 @@ from django.conf import settings
 
 
 class SeleniumLiveServerTestCase(StaticLiveServerTestCase):
-
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

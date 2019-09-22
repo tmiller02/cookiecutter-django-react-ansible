@@ -2,14 +2,14 @@
 # entries for the hosts in this environment via the "vagrant-hostmanager"
 #plugin. So, we only need to configure the appropriate ssh key for each host.
 
-{{ cookiecutter.backend_app_hostname }} ansible_ssh_private_key_file="/vagrant_machines/dev/virtualbox/private_key"
-{{ cookiecutter.database_hostname }} ansible_ssh_private_key_file="/vagrant_machines/db/virtualbox/private_key"
+{{ cookiecutter.backend_app_dev_hostname }} ansible_ssh_private_key_file="/vagrant_machines/dev/virtualbox/private_key"
+{{ cookiecutter.database_dev_hostname }} ansible_ssh_private_key_file="/vagrant_machines/db/virtualbox/private_key"
 
 [backend]
-{{ cookiecutter.backend_app_hostname }}
+{{ cookiecutter.backend_app_dev_hostname }}
 
 [frontend]
-{{ cookiecutter.backend_app_hostname }}
+{{ cookiecutter.backend_app_dev_hostname }}
 
 [database]
-{{ cookiecutter.database_hostname }}
+{{ cookiecutter.database_dev_hostname }}

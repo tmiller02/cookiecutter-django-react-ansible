@@ -35,7 +35,7 @@ script to do this in a single step:
 ```
 
 You can view pages being served by this dev server by going to
-http://{{ cookiecutter.backend_app_hostname }}:8000.
+http://{{ cookiecutter.backend_app_dev_hostname }}:8000.
 
 Note that the dev server url is **http** (not **https**) and is on port
 **8000**. Make sure not to confuse this url with the https url, which is served
@@ -136,6 +136,6 @@ The Ansible provisioning adds a `settings.env` file which is then loaded via
 The django app is run as a systemd service (`{{ cookiecutter.project_slug }}.service`) with gunicorn which exposes the
 application on localhost:8080. NGINX is configured as a reverse proxy for this
 location. You can access the django app being served via NGINX by going to
-http://{{ cookiecutter.backend_app_hostname}} (note that you may need to
+http://{{ cookiecutter.backend_app_dev_hostname }} (note that you may need to
 restart the systemd service to pick up any code changes.)
 

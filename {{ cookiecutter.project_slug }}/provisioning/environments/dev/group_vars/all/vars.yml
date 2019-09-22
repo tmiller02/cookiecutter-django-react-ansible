@@ -5,9 +5,9 @@ deploy_check_display_confirmation_prompts: false
 base_show_production_login_message: false
 base_install_updates_automatically: true
 
-backend_server_name: "{{ cookiecutter.backend_app_hostname }}"
+backend_server_name: "{{ cookiecutter.backend_app_dev_hostname }}"
 
-frontend_server_name: "{{ cookiecutter.frontend_app_hostname }}"
+frontend_server_name: "{{ cookiecutter.frontend_app_dev_hostname }}"
 
 database_password: "$DATABASE PASSWORD$"
 

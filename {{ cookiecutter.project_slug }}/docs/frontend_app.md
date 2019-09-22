@@ -26,7 +26,7 @@ $ ./ssh_frontend.sh
 [vagrant@controller frontend_app]$ ./start_dev_server.sh
 ```
 
-You can then access the dev server at http://{{ cookiecutter.frontend_app_hostname }}:3000
+You can then access the dev server at http://{{ cookiecutter.frontend_app_dev_hostname }}:3000
 
 ## Formatting
 

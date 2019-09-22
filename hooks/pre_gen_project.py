@@ -12,9 +12,9 @@ def validate_slug_regex():
 
 def validate_hostnames():
     hostnames = [
-        "{{ cookiecutter.frontend_app_hostname }}",
-        "{{ cookiecutter.backend_app_hostname }}",
-        "{{ cookiecutter.database_hostname }}"
+        "{{ cookiecutter.frontend_app_dev_hostname }}",
+        "{{ cookiecutter.backend_app_dev_hostname }}",
+        "{{ cookiecutter.database_dev_hostname }}"
         "{{ cookiecutter.controller_hostname }}"
     ]
     if len(set(hostnames)) != len(hostnames):

@@ -77,11 +77,11 @@ To get started, run:
     
 Once provisioning has finished, you can access the backend app at:
 
-  https://{{ cookiecutter.backend_app_hostname }}
+  https://{{ cookiecutter.backend_app_dev_hostname }}
 
 and the frontend app at:
 
-  https://{{ cookiecutter.frontend_app_hostname }}
+  https://{{ cookiecutter.frontend_app_dev_hostname }}
     
 Check the documentation at  {{ cookiecutter.project_slug }}/README.md for more.
 """

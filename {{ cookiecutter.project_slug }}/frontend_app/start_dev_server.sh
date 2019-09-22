@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export REACT_APP_BACKEND_URL="https://{{ cookiecutter.backend_app_hostname }}"
+export REACT_APP_BACKEND_URL="https://{{ cookiecutter.backend_app_dev_hostname }}"
 
 # See https://create-react-app.dev/docs/advanced-configuration
 # Adjust configuration as required when running the frontend app dev server from

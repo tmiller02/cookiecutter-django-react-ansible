@@ -90,6 +90,8 @@ $ source my_provisioning_venv/bin/activate
 (my_provisioning_venv) $ ansible-playbook playbook.yml --inventory environments/prod/inventory --user <myuser> --private-key <my-private-key>
 ```
 
+If you run the ansible directly from your host machine, you'll need to also install yarn.
+
 ## Limitations and Warnings
 
 ### Security

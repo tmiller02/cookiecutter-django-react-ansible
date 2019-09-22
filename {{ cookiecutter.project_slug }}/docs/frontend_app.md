@@ -14,7 +14,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Running the dev server on your host machine
 
-If you have `yarn` installed on you host machine, you can start the dev server
+If you have `yarn` installed on your host machine, you can start the dev server
 by running `yarn start`:
 
 ```

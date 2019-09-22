@@ -95,13 +95,11 @@ Vagrant.configure("2") do |config|
   end
 
   # We spin up another VM and execute ansible using the ansible_local vagrant
-  # provisioner, as opposed to executing ansible directly from the host
-  # machine.
+  # provisioner, as opposed to executing ansible directly from the host machine.
   #
-  # This helps simplify the initial setup process, creates a
-  # consistent provisioning environment and allows us to provision a
-  # dev environment on host machines where Ansible is not supported,
-  # such as Windows.
+  # This helps simplify the initial setup process, creates a  consistent
+  # provisioning environment and allows us to provision a  dev environment on
+  # host machines where Ansible is not supported, such as Windows.
   # (see https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html#can-ansible-run-on-windows )
   #
   # However, this process does result in the creation of a 'controller' VM,
@@ -109,10 +107,10 @@ Vagrant.configure("2") do |config|
   config.vm.define "controller" do |machine|
     # By default Vagrant adds the host's name to the loopback address when
     # setting machine.vm.hostname. This can result in unexpected behaviour
-    # when attempting to bind to the host like we do in
-    # frontend_app/start_dev_server.sh, so instead we use a hostname alias
-    # and set the hostname later on in an inline script.
-    # See See https://github.com/hashicorp/vagrant/issues/7263 for more.
+    # when attempting to bind to the host, like the frontend app dev server does
+    # when running 'yarn start'. So we instead use a hostname alias and set the
+    # hostname later on ourselves in an inline script.
+    # See https://github.com/hashicorp/vagrant/issues/7263 for more.
     machine.hostmanager.aliases = ["{{ cookiecutter.controller_hostname }}"]
     machine.vm.network "private_network", ip: "172.17.177.20"
     machine.vm.synced_folder "./", "/vagrant", type: "virtualbox"
@@ -136,14 +134,16 @@ Vagrant.configure("2") do |config|
       # install ansible requirements
       yum install -y epel-release
       yum install -y python36 python36-pip python36-devel sshpass
-      # Vagrant doesn't allow us to specify which version of pip/python is used to
-      # install our provisioning requirements when using the 'ansible_local'
-      # provisioner, so we set the system default to Python 3.
+      # Vagrant doesn't allow us to specify which version of pip/python is used
+      # to install our provisioning requirements when using the 'ansible_local'
+      # provisioner, so we set the system default to Python 3 on the controller VM.
       alternatives --install /usr/bin/pip pip /usr/bin/pip3.6 1
     SCRIPT
 
     machine.vm.provision "shell", inline: $controller_vm_setup_script, privileged: true
 
+    # See https://www.vagrantup.com/docs/provisioning/ansible_local.html and
+    # https://www.vagrantup.com/docs/provisioning/ansible_common.html
     machine.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.playbook = "playbook.yml"

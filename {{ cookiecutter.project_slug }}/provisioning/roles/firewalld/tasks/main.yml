@@ -11,7 +11,7 @@
     state: started
     enabled: true
 
-- name: expose http and https in firewalld on 'backend' hosts to the 'public' zone
+- name: expose http and https in firewalld on 'backend' and 'frontend' hosts to the 'public' zone
   firewalld:
     zone: public
     service: "{{ item }}"

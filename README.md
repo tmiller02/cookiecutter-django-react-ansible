@@ -35,6 +35,7 @@ $ pip install "cookiecutter>=1.6.0"
 Next, run cookiecutter against this project:
 
 ```
+$ git clone https://github.com/tmiller02/cookiecutter-django-react-ansible.git
 $ cookiecutter cookiecutter-django-react-ansible
 ```
 
@@ -47,6 +48,7 @@ project_slug [my_project]: my_project
 frontend_app_dev_hostname [my-project.local]: my-project.local
 backend_app_dev_hostname [api.my-project.local]: api.my-project.local
 database_dev_hostname [db.my-project.local]: db.my-project.local
+controller_hostname [controller.my-project.local]:
 ```
 
 Enter the project and take a look around:

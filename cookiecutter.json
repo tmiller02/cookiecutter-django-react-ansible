@@ -5,5 +5,8 @@
     "frontend_app_dev_hostname": "{{ cookiecutter.project_slug | replace('_', '-') }}.local",
     "backend_app_dev_hostname": "api.{{ cookiecutter.project_slug | replace('_', '-') }}.local",
     "database_dev_hostname": "db.{{ cookiecutter.project_slug | replace('_', '-') }}.local",
-    "controller_hostname": "controller.{{ cookiecutter.project_slug | replace('_', '-') }}.local"
+    "controller_hostname": "controller.{{ cookiecutter.project_slug | replace('_', '-') }}.local",
+    "vagrant_yum_proxy": "",
+    "vagrant_http_proxy": "",
+    "vagrant_https_proxy": ""
 }

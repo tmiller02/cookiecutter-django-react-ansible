@@ -6,13 +6,13 @@
 - import_role:
     name: geerlingguy.postgresql
   vars:
-    postgresql_enablerepo: pgdg11
+    postgresql_enablerepo: pgdg12
     postgresql_packages:
-      - postgresql11
-      - postgresql11-server
-      - postgresql11-contrib
-      - postgresql11-libs
-    postgresql_data_dir: /var/lib/pgsql/11/data
-    postgresql_bin_path: /usr/pgsql-11/bin/
-    postgresql_config_path: /var/lib/pgsql/11/data
-    postgresql_daemon: postgresql-11
+      - postgresql12
+      - postgresql12-server
+      - postgresql12-contrib
+      - postgresql12-libs
+    postgresql_data_dir: /var/lib/pgsql/12/data
+    postgresql_bin_path: /usr/pgsql-12/bin/
+    postgresql_config_path: /var/lib/pgsql/12/data
+    postgresql_daemon: postgresql-12

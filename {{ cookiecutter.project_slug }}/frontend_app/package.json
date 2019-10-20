@@ -16,9 +16,9 @@
     "typescript": "^3.6.3"
   },
   "scripts": {
-    "start": ". set_dev_env_vars.sh && node check_environment.js && react-scripts start",
+    "start": ". ./set_dev_env_vars.sh && node check_environment.js && react-scripts start",
     "build": "node check_environment.js && react-scripts build",
-    "test": ". set_dev_env_vars.sh && node check_environment.js && react-scripts test",
+    "test": ". ./set_dev_env_vars.sh && node check_environment.js && react-scripts test",
     "eject": "react-scripts eject",
     "prettier": " prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
   },

@@ -15,19 +15,6 @@ if Vagrant::Util::Platform.windows? then
   end
 end
 
-if Vagrant.has_plugin?("vagrant-vbguest") then
-  class CustomVbGuestInstaller < VagrantVbguest::Installers::CentOS
-    def install(opts=nil, &block)
-      communicate.sudo('yum -y update', opts, &block)
-      communicate.sudo('shutdown -r now', opts, &block)
-      begin
-        sleep 5
-      end until communicate.ready?
-      super
-    end
-  end
-end
-
 Vagrant.configure("2") do |config|
 
   config.vagrant.plugins = [
@@ -46,11 +33,7 @@ Vagrant.configure("2") do |config|
     config.proxy.https = "{{ cookiecutter.vagrant_https_proxy }}"
   end
 
-  if Vagrant.has_plugin?("vagrant-vbguest") then
-    config.vbguest.installer = CustomVbGuestInstaller
-    config.vbguest.auto_update = true
-  end
-
+  config.vbguest.auto_update = true
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
   config.hostmanager.manage_guest = true

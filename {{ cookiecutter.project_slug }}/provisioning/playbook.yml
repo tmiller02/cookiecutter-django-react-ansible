@@ -3,7 +3,8 @@
 - hosts: localhost
   roles:
     - deploy_check
-    - yarn
+    - { role: geerlingguy.nodejs, become: yes }
+    - { role: tmiller02.yarn, become: yes }
   tasks:
     - name: build frontend app
       include_role:

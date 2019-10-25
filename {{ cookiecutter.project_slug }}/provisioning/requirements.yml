@@ -5,3 +5,9 @@
 
 - src: geerlingguy.nginx
   version: "2.7.0"
+
+- src: geerlingguy.nodejs
+  version: "5.0.0"
+
+- src: tmiller02.yarn
+  version: "0.1.0"

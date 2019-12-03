@@ -3,9 +3,17 @@
 - include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
+# Having an active 'postgresql' module stream for the default CentOS 8 versions
+# can prevent dnf/yum from finding our desired postgresql packages.
+- name: disable the AppStream postgresql module
+  become: yes
+  command: yum module disable postgresql -y
+  warn: no
+
 - import_role:
     name: geerlingguy.postgresql
   vars:
+    postgresql_version: "12"
     postgresql_enablerepo: pgdg12
     postgresql_packages:
       - postgresql12

@@ -16,7 +16,7 @@
 # This only displays the report in the ansible output so we don't cause any
 # deployment to fail unexpectedly.
 - name: run yarn audit
-  command: yarn audit
+  command: yarn audit --no-color
   args:
     chdir: "{{ playbook_dir }}/../frontend_app/"
   ignore_errors: true

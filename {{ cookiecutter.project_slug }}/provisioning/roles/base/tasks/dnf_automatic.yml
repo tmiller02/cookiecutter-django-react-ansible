@@ -11,9 +11,9 @@
     regexp: 'apply_updates'
     line: "apply_updates = {{ base_install_updates_automatically | bool | ternary('yes', 'no') }}"
 
-- name: start and enable dnf-automatic
+- name: start and enable dnf-automatic timer
   systemd:
-    name: dnf-automatic
+    name: dnf-automatic.timer
     state: started
     enabled: true
 {% endraw %}

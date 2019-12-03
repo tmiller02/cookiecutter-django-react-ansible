@@ -5,7 +5,7 @@
       ssl_certbot_email is defined
 
 - name: install certbot
-  yum:
+  dnf:
     name: certbot
     state: present
 

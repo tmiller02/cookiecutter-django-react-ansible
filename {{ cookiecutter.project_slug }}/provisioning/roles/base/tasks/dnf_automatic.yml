@@ -1,0 +1,19 @@
+---
+  {% raw %}
+- name: install dnf-automatic
+  dnf:
+    name: dnf-automatic
+    state: present
+
+- name: configure 'apply_updates' for dnf-automatic
+  lineinfile:
+    dest: "/etc/dnf/automatic.conf"
+    regexp: 'apply_updates'
+    line: "apply_updates = {{ base_install_updates_automatically | bool | ternary('yes', 'no') }}"
+
+- name: start and enable dnf-automatic
+  systemd:
+    name: dnf-automatic
+    state: started
+    enabled: true
+{% endraw %}

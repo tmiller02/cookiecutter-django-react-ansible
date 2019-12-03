@@ -2,7 +2,7 @@
 
 - import_tasks: selinux.yml
 
-- import_tasks: yum_cron.yml
+- import_tasks: dnf_automatic.yml
 
 - import_tasks: login_info.yml
 
@@ -11,7 +11,7 @@
     name: epel-release
 
 - name: install useful packages
-  yum:
+  dnf:
     name:
       - atop
       - htop

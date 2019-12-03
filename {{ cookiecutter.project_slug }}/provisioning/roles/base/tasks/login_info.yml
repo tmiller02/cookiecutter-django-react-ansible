@@ -1,7 +1,7 @@
 ---
 
 - name: ensure yum-utils is installed
-  yum:
+  dnf:
     name: yum-utils
     state: present
 

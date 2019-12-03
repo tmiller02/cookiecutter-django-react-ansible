@@ -1,17 +1,25 @@
 ---
 {% raw %}
+- hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+  - name: install python3 and python3-pip
+    raw: dnf install -y python3 python3-pip
+  - name: set ansible_python_interpreter
+    set_fact:
+      ansible_python_interpreter: "/usr/bin/python3"
+
 - hosts: localhost
   roles:
     - deploy_check
-    - { role: geerlingguy.nodejs, become: yes }
-    - { role: tmiller02.yarn, become: yes }
+    - { role: geerlingguy.nodejs, become: true }
+    - { role: tmiller02.yarn, become: true }
   tasks:
     - name: build frontend app
       include_role:
         name: frontend_app
         tasks_from: build.yml
-  vars:
-    ansible_python_interpreter: "/usr/bin/python"
   vars_files:
     - vars/frontend.yml
 

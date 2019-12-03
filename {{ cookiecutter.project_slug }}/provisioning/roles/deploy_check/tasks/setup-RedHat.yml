@@ -2,6 +2,6 @@
 
 - name: ensure git is installed
   become: yes
-  yum:
+  dnf:
     name: git
     state: present

@@ -1,11 +1,11 @@
 ---
 
 - name: ensure SELinux and python requirements are installed
-  yum:
+  dnf:
     name:
       - selinux-policy
-      - policycoreutils-python
-      - libsemanage-python
+      - python3-policycoreutils
+      - python3-libsemanage
     state: present
 
 - name: enable SELinux

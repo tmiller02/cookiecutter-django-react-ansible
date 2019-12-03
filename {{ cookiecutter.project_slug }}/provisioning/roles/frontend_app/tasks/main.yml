@@ -4,7 +4,7 @@
 # for more info.
 
 - name: install rsync
-  yum:
+  dnf:
     name: rsync
     state: present
 

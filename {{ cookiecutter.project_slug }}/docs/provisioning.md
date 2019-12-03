@@ -6,7 +6,7 @@ This project uses [Ansible](https://docs.ansible.com/ansible/latest/index.html)
 to provision code and [Vagrant](https://www.vagrantup.com) to manage VMs for
 the dev environment.
 
-All hosts are [CentOS 7](https://www.centos.org).
+All hosts are [CentOS 8](https://www.centos.org).
 
 ## Dev Environment
 
@@ -135,7 +135,7 @@ using a different approach for generating production certificates.
 
 ### Automatic yum updates
 
-The `base` role is set to configure `yum-cron` to automatically install updates.
+The `base` role is set to configure `dnf-automatic` to automatically install updates.
 This should help ensure that servers are up to date, but unmanaged system updates
 may introduce an element of risk and instability which may not be appropriate
 for your use case.

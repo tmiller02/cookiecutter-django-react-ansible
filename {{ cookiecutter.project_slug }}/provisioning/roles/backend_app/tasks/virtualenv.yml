@@ -1,12 +1,5 @@
 ---
 {% raw %}
-- name: install python packages
-  yum:
-    name:
-      - python2-pip
-      - python36
-      - python36-pip
-
 - name: set up virtualenv in new release path
   become: true
   become_user: "{{ backend_app_user }}"

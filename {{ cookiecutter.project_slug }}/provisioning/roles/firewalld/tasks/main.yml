@@ -1,7 +1,7 @@
 ---
 {% raw %}
 - name: ensure firewalld is installed
-  yum:
+  dnf:
     name: firewalld
     state: present
 

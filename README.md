@@ -17,7 +17,7 @@ a Django 2.2 & React project with Ansible provisioning and some opinionated defa
 * Ansible 2.8 for provisioning
 * PostgreSQL 12
 * NGINX web server
-* CentOS 7
+* CentOS 8
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
   SSL certificates for production, auto-generated self-signed SSL certificates for development.
 * Checks to python dependencies provided via [pyup.io](https://pyup.io/)

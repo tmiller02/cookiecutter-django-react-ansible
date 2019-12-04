@@ -7,8 +7,9 @@
 # can prevent dnf/yum from finding our desired postgresql packages.
 - name: disable the AppStream postgresql module
   become: yes
-  command: yum module disable postgresql -y
-  warn: no
+  command:
+    cmd: yum module disable postgresql -y
+    warn: no
 
 - import_role:
     name: geerlingguy.postgresql
@@ -24,3 +25,4 @@
     postgresql_bin_path: /usr/pgsql-12/bin/
     postgresql_config_path: /var/lib/pgsql/12/data
     postgresql_daemon: postgresql-12
+    postgresql_python_library: python3-psycopg2

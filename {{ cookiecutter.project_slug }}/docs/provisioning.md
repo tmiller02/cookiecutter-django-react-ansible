@@ -42,7 +42,7 @@ making changes to the `/etc/hosts` file on your host machine.
 ## Production Environment
 
 This project includes a sample production environment. All hosts that are added
-to the inventory should be running CentOS 7. See the README at
+to the inventory should be running CentOS 8. See the README at
 `provisioning/prod/README.txt` for more.
 
 You are strongly advised to use [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html),

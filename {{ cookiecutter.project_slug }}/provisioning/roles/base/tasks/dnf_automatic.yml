@@ -1,5 +1,5 @@
 ---
-  {% raw %}
+{% raw %}
 - name: install dnf-automatic
   dnf:
     name: dnf-automatic

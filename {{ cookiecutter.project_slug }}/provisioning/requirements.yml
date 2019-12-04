@@ -11,3 +11,6 @@
 
 - src: tmiller02.yarn
   version: "0.1.0"
+
+- src: tmiller02.neofetch
+  version: "0.1.0"

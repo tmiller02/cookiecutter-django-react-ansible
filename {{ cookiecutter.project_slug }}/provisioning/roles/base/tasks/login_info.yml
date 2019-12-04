@@ -1,14 +1,27 @@
 ---
 
-- name: ensure yum-utils is installed
-  dnf:
-    name: yum-utils
-    state: present
+- import_role:
+    name: tmiller02.neofetch
 
-- name: add custom info message on login
+- name: ensure neofetch config directory exists
+  file:
+    path: "/etc/neofetch/"
+    state: "directory"
+    owner: "root"
+    group: "root"
+    mode: "u=rwx,g=rx,o=rx"
+
+- name: add the custom neofetch config
   template:
-    src: login_info.sh.j2
-    dest: /etc/profile.d/login_info.sh
+    src: neofetch_config.conf.j2
+    dest: /etc/neofetch/neofetch_custom_config.conf
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+
+- name: add the login
+  template:
+    src: neofetch.sh.j2
+    dest: /etc/profile.d/neofetch.sh
     owner: root
     group: root
-    mode: "u=rw,g=r,o=r"

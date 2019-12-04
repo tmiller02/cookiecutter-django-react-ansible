@@ -4,11 +4,11 @@
 
 - import_tasks: dnf_automatic.yml
 
-- import_tasks: login_info.yml
-
 - name: install epel-release
   yum:
     name: epel-release
+
+- import_tasks: login_info.yml
 
 - name: install useful packages
   dnf:

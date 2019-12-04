@@ -1,5 +1,15 @@
+{% raw %}
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
+
+SHOW_PRODUCTION_WARNING_MESSAGE={{ base_show_production_login_warning | bool | lower }}
+
+print_warnings() {
+    if $SHOW_PRODUCTION_WARNING_MESSAGE ; then
+        prin "$(color 1)WARNING: This is a production host."
+    fi
+}
+
 print_info() {
     info title
     info underline
@@ -34,7 +44,9 @@ print_info() {
     # info "Users" users
     # info "Locale" locale  # This only works on glibc systems.
 
-    info cols
+    # info cols
+
+    print_warnings
 }
 
 
@@ -762,3 +774,4 @@ background_color=
 # Default: 'off'
 # Values: 'on', 'off'
 stdout="off"
+{% endraw %}

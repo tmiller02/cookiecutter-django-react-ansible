@@ -1,5 +1,10 @@
 ---
 {% raw %}
+
+- name: enable the PowerTools repo
+  command: dnf config-manager --enable PowerTools
+  warn: false
+
 - name: install packages used with selenium and X11 forwarding
   dnf:
     name:

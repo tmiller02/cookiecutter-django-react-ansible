@@ -19,7 +19,7 @@
     group: "root"
     mode: "u=rw,g=r,o=r"
 
-- name: add the login
+- name: add the profile.d neofetch script
   template:
     src: neofetch.sh.j2
     dest: /etc/profile.d/neofetch.sh

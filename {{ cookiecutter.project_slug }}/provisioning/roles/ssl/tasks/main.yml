@@ -8,7 +8,7 @@
 
 - name: install packages required for interacting with OpenSSL
   dnf:
-    name: python2-cryptography
+    name: python3-cryptography
     state: present
 
 - import_tasks: selfsigned.yml

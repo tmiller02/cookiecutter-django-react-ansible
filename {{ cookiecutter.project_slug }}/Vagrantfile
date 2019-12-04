@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     "vagrant-hostmanager",
   ]
   config.vm.box = "centos/8"
-  config.vm.box_check_update = true
+  config.vm.box_check_update = false
   # disable the default vagrant mount. We configure custom mounts on the VM separately.
   config.vm.synced_folder ".", "/vagrant", disabled: true
 

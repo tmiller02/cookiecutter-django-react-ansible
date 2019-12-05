@@ -1,6 +1,5 @@
 ---
 {% raw %}
-
 - name: enable the PowerTools repo
   command:
     cmd: dnf config-manager --enable PowerTools

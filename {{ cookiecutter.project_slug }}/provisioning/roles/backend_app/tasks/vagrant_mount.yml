@@ -29,14 +29,14 @@
 - name: create directory for bind mount of virtualenv
   become: true
   file:
-    path: "/home/{{ backend_app_user }}/venv"
+    path: "{{ backend_app_vagrant_venv_bind_mount }}"
     state: directory
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
 
 - name: create a bind mount from the venv directory to the vagrant synced directory
   mount:
-    src: "/home/{{ backend_app_user }}/venv"
+    src: "{{ backend_app_vagrant_venv_bind_mount }}"
     path: "{{ backend_app_deploy_helper.new_release_path }}/venv"
     opts: bind,noauto
     state: mounted

@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
 
-if [ -n "$PS1" ]; then
+if [[ ( -n "$SSH_CLIENT" || -n "$SSH_TTY" ) && -n "$PS1" ]]; then
   /usr/local/bin/neofetch --config /etc/neofetch/neofetch_custom_config.conf
 fi

@@ -25,6 +25,7 @@ steps when setting up a dev environment. These are:
   * `vagrant-vbguest` for installing VirtualBox guest additions.
   * `vagrant-hostmanager` for updating the `/etc/hosts` files on the host
     and guest machines.
+  * `vagrant-proxyconf` for managing proxy settings.
   
 ### Provisioning the Dev Environment
 
@@ -115,10 +116,10 @@ backup strategy in place that you check regularly.
 
 ### Load balancing
 
-This project will work out of the box on small scale production environments,
-such as when the 'frontend app' and 'backend app' are co-located (like the
-'dev' environment), or when the 'frontend app' and 'backend app' are each
-provisioned to a separate host.
+This project will work out of the box on small scale production environments
+when using certbot, such as when the 'frontend app' and 'backend app' are
+co-located (like the 'dev' environment), or when the 'frontend app' and
+'backend app' are each provisioned to a separate host.
 
 However, you will need to modify this project if you want to horizontally scale
 to more hosts behind a load balancer. Production certificates are set to be
@@ -128,17 +129,17 @@ a different server may respond to the LetsEncrypt challenge.
 
 ### Certificate Update Process
 
-The certificates in the production environment are regenerated with certbot in
-`standalone` mode. This approach means the NGINX webserver gets automatically
-stopped briefly around every 60 days. If this doesn't suit your needs, consider
-using a different approach for generating production certificates.
+The certificates in the sample Ansible production environment are regenerated
+with certbot in `standalone` mode. This approach means the NGINX webserver gets
+automatically stopped briefly around every 60 days. If this doesn't suit your
+needs, consider using a different approach for generating production certificates.
 
-### Automatic yum updates
+### Automatic dnf updates
 
 The `base` role is set to configure `dnf-automatic` to automatically install updates.
 This should help ensure that servers are up to date, but unmanaged system updates
 may introduce an element of risk and instability which may not be appropriate
 for your use case.
 
-If you'd like to disable automatic yum updates, set
+If you'd like to disable automatic package updates, set
 `base_install_updates_automatically` to `false` in `environments/prod/group_vars/all`. 

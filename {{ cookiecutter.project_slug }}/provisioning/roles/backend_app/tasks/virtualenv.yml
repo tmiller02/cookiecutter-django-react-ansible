@@ -1,5 +1,11 @@
 ---
 {% raw %}
+- name: install additional required python packages
+  become: true
+  yum:
+    name: python36-devel
+    state: present
+
 - name: set up virtualenv in new release path
   become: true
   become_user: "{{ backend_app_user }}"

@@ -23,7 +23,7 @@ nginx_vhosts:
   # not match the specified 'server_name' will be returned a 404 response. See
   # https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/#allowed-hosts
   # for more.
-  - listen: "443 ssl"
+  - listen: "443 ssl http2"
     server_name: "_"
     return: "404"
     filename: "01_backend_ssl_catchall.conf"
@@ -31,7 +31,7 @@ nginx_vhosts:
       ssl_certificate /etc/pki/tls/certs/{{ ssl_certificate_name }};
       ssl_certificate_key /etc/pki/tls/private/{{ ssl_private_key_name }};
 
-  - listen: "443 ssl"
+  - listen: "443 ssl http2"
     server_name: "{{ backend_server_name }}"
     filename: "02_backend_app.conf"
     extra_parameters: |

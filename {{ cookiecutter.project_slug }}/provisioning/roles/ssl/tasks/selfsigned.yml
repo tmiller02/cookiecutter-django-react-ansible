@@ -17,6 +17,13 @@
     path: "{{ ssl_csr_path }}"
     privatekey_path: "{{ ssl_private_key_dest }}"
     common_name: "{{ ssl_common_name }}"
+    use_common_name_for_san: yes
+    key_usage:
+      - nonRepudiation
+      - digitalSignature
+      - keyEncipherment
+    extended_key_usage:
+      - serverAuth
 
 - name: generate a self-signed OpenSSL certificate
   openssl_certificate:
@@ -24,4 +31,6 @@
     privatekey_path: "{{ ssl_private_key_dest }}"
     csr_path: "{{ ssl_csr_path }}"
     provider: selfsigned
+    selfsigned_not_after: "+365d"
+
 {% endraw %}

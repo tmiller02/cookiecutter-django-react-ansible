@@ -16,4 +16,4 @@ ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
 {% endraw %}
 [Install]
-WantedBy = multi-user.target
+WantedBy={% if backend_app_vagrant_mount %}{{ backend_app_venv_mount_systemd_name }}{% else %}multi-user.target{% endif %}

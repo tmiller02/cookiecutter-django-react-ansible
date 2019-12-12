@@ -63,20 +63,6 @@ Vagrant.configure("2") do |config|
       mount_options: ["uid=1234", "gid=1234"]
     )
 
-    $dev_vm_post_up_script = <<-SCRIPT
-      # Ensure that the 'venv' folder is mounted after vagrant has configured
-      # its synced folders. Restart the backend app service - systemd may set
-      # this unit as failed shortly after boot since the files within the
-      # vagrant mount won't be available initially. These commands would fail on
-      # an initial 'vagrant up' without '|| true' since this script is executed
-      # *before* the first ansible provisioning is run (which adds this mount
-      # configuration into /etc/fstab and creates the systemd service).
-      mount /opt/{{ cookiecutter.project_slug }}_backend/current/venv &> /dev/null || true
-      systemctl restart {{ cookiecutter.project_slug }} &> /dev/null || true
-    SCRIPT
-
-    machine.vm.provision "shell", inline: $dev_vm_post_up_script, run: "always", privileged: true
-
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_dev"
       virtualbox.memory = 1024

@@ -26,21 +26,44 @@
 # By creating a separate bind mount for the virtualenv folder we exclude its
 # contents from the vagrant mount, thereby avoiding this performance impact.
 
-- name: create directory for bind mount of virtualenv
+- name: determine the systemd .mount name for the vagrant mount
+  command:
+    cmd: systemd-escape --path "{{ backend_app_deploy_helper.new_release_path }}" --suffix=mount
+  register: backend_app_vagrant_mount_systemd_cmd
+
+- set_fact:
+    backend_app_vagrant_mount_systemd_name: "{{ backend_app_vagrant_mount_systemd_cmd.stdout }}"
+
+- name: determine the systemd .mount name for the venv bind mount
+  command:
+    cmd: systemd-escape --path "{{ backend_app_deploy_helper.new_release_path }}/venv" --suffix=mount
+  register: backend_app_venv_mount_systemd_cmd
+
+- set_fact:
+    backend_app_venv_mount_systemd_name: "{{ backend_app_venv_mount_systemd_cmd.stdout }}"
+
+- name: create directories for virtualenv bind mount
   become: true
   file:
-    path: "{{ backend_app_vagrant_venv_bind_mount }}"
+    path: "{{ item }}"
     state: directory
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
+  with_items:
+    - "{{ backend_app_vagrant_venv_bind_mount }}"
+    - "{{ backend_app_deploy_helper.new_release_path }}/venv"
 
-- name: create a bind mount from the venv directory to the vagrant synced directory
-  mount:
-    src: "{{ backend_app_vagrant_venv_bind_mount }}"
-    path: "{{ backend_app_deploy_helper.new_release_path }}/venv"
-    opts: bind,noauto
-    state: mounted
-    fstype: none
+- name: add a bind .mount file from the venv directory to the vagrant synced directory
+  template:
+    src: systemd_venv_mount.j2
+    dest: "/etc/systemd/system/{{ backend_app_venv_mount_systemd_name }}"
+
+- name: start and enable the systemd bind mount from the venv directory.
+  systemd:
+    daemon_reload: true
+    name: "{{ backend_app_venv_mount_systemd_name }}"
+    enabled: true
+    state: started
 
 # We can't change the context of files within the vagrant mount, which means
 # that nginx would not be able to serve the static files from static_root/.

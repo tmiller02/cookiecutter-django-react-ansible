@@ -1,0 +1,15 @@
+{% raw %}
+[Unit]
+Conflicts=umount.target
+After={{ backend_app_vagrant_mount_systemd_name }}
+Before={{ backend_app_systemd_unit_name }}
+
+[Mount]
+What={{ backend_app_vagrant_venv_bind_mount }}
+Where={{ backend_app_deploy_helper.new_release_path }}/venv
+Type=none
+Options=bind
+
+[Install]
+WantedBy={{ backend_app_vagrant_mount_systemd_name }}
+{% endraw %}

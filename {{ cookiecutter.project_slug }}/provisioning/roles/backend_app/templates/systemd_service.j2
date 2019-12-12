@@ -14,6 +14,6 @@ ExecStart = {{ backend_app_deploy_helper.current_path }}/venv/bin/gunicorn \
             {{ backend_app_asgi }}
 ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
-{% endraw %}
 [Install]
 WantedBy={% if backend_app_vagrant_mount %}{{ backend_app_venv_mount_systemd_name }}{% else %}multi-user.target{% endif %}
+{% endraw %}

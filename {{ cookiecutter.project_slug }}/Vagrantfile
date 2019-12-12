@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
     fi
   SCRIPT
 
-  config.vm.provision "shell", inline: $dnf_proxy_script, run: "always", privileged: true
+  config.vm.provision "shell", inline: $dnf_proxy_script, privileged: true
 
   config.vm.define "dev", primary: true do |machine|
     machine.vm.hostname = "{{ cookiecutter.frontend_app_dev_hostname }}"

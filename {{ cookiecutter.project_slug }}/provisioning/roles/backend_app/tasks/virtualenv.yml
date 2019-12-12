@@ -13,7 +13,7 @@
     virtualenv: "{{ backend_app_deploy_helper.new_release_path }}/venv"
     virtualenv_command: /usr/bin/python3.6 -m venv
     name:
-      - pip-tools==4.2.0
+      - pip-tools==4.3.0
 
 - name: install requirements using pip-sync
   become: true

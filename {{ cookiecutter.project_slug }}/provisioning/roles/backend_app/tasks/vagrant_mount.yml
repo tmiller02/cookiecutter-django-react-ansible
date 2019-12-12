@@ -29,18 +29,18 @@
 - name: determine the systemd .mount name for the vagrant mount
   command:
     cmd: systemd-escape --path "{{ backend_app_deploy_helper.new_release_path }}" --suffix=mount
-  register: backend_app_vagrant_mount_systemd_cmd
+  register: backend_app_vagrant_systemd_mount_cmd
 
 - set_fact:
-    backend_app_vagrant_mount_systemd_name: "{{ backend_app_vagrant_mount_systemd_cmd.stdout }}"
+    backend_app_vagrant_systemd_mount_name: "{{ backend_app_vagrant_systemd_mount_cmd.stdout }}"
 
 - name: determine the systemd .mount name for the venv bind mount
   command:
     cmd: systemd-escape --path "{{ backend_app_deploy_helper.new_release_path }}/venv" --suffix=mount
-  register: backend_app_venv_mount_systemd_cmd
+  register: backend_app_vagrant_venv_systemd_mount_cmd
 
 - set_fact:
-    backend_app_venv_mount_systemd_name: "{{ backend_app_venv_mount_systemd_cmd.stdout }}"
+    backend_app_vagrant_venv_systemd_mount_name: "{{ backend_app_vagrant_venv_systemd_mount_cmd.stdout }}"
 
 - name: create directories for virtualenv bind mount
   become: true
@@ -56,12 +56,12 @@
 - name: add a bind .mount file from the venv directory to the vagrant synced directory
   template:
     src: systemd_venv_mount.j2
-    dest: "/etc/systemd/system/{{ backend_app_venv_mount_systemd_name }}"
+    dest: "/etc/systemd/system/{{ backend_app_vagrant_venv_systemd_mount_name }}"
 
 - name: start and enable the systemd bind mount from the venv directory.
   systemd:
     daemon_reload: true
-    name: "{{ backend_app_venv_mount_systemd_name }}"
+    name: "{{ backend_app_vagrant_venv_systemd_mount_name }}"
     enabled: true
     state: started
 

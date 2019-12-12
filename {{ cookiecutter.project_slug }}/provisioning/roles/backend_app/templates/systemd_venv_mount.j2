@@ -1,7 +1,7 @@
 {% raw %}
 [Unit]
 Conflicts=umount.target
-After={{ backend_app_vagrant_mount_systemd_name }}
+After={{ backend_app_vagrant_systemd_mount_name }}
 Before={{ backend_app_systemd_unit_name }}
 
 [Mount]
@@ -11,5 +11,5 @@ Type=none
 Options=bind
 
 [Install]
-WantedBy={{ backend_app_vagrant_mount_systemd_name }}
+WantedBy={{ backend_app_vagrant_systemd_mount_name }}
 {% endraw %}

@@ -1,8 +1,6 @@
 {% raw %}
 [Unit]
 Conflicts=umount.target
-After={{ backend_app_vagrant_systemd_mount_name }}
-Before={{ backend_app_systemd_unit_name }}
 
 [Mount]
 What={{ backend_app_vagrant_venv_bind_mount }}

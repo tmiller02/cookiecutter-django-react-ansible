@@ -13,20 +13,6 @@
       - xorg-x11-apps
     state: present
 
-- name: stat geckodriver
-  stat:
-    path: /usr/bin/geckodriver
-  register: geckodriver_stat
-
-- name: get geckodriver version
-  shell: "/usr/bin/geckodriver --version | awk 'NR==1 {print $2}'"
-  register: geckodriver_version_command
-  when: geckodriver_stat.stat.exists
-
-- name: download geckodriver
-  unarchive:
-    remote_src: true
-    src: "https://github.com/mozilla/geckodriver/releases/download/v{{ backend_app_geckodriver_version }}/geckodriver-v{{ backend_app_geckodriver_version }}-linux64.tar.gz"
-    dest: /usr/bin
-  when: not geckodriver_stat.stat.exists or geckodriver_version_command.stdout != backend_app_geckodriver_version
+- import_role:
+    name: tmiller02.geckodriver
 {% endraw %}

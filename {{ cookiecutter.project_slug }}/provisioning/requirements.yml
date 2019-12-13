@@ -14,3 +14,6 @@
 
 - src: tmiller02.neofetch
   version: "0.1.0"
+
+- src: tmiller02.geckodriver
+  version: "0.1.0"

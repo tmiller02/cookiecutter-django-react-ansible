@@ -15,7 +15,9 @@ class SeleniumLiveServerTestCase(StaticLiveServerTestCase):
         if settings.SELENIUM_TESTS_RUN_HEADLESS:
             options.headless = True
 
-        cls.selenium = Firefox(options=options)
+        cls.selenium = Firefox(
+            executable_path="/usr/local/bin/geckodriver", options=options
+        )
         cls.selenium.implicitly_wait(10)
 
     @classmethod

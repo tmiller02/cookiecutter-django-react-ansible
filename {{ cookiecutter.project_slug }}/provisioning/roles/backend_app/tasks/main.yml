@@ -26,7 +26,7 @@
     state: touch
   with_items:
     - "settings.env"
-    - "gunicorn.cfg"
+    - "gunicorn_config.py"
 
 - name: template settings into the new release path
   template:
@@ -38,8 +38,8 @@
 
 - name: add gunicorn config to the new release path
   template:
-    src: gunicorn.cfg.j2
-    dest: "{{ backend_app_deploy_helper.new_release_path }}/gunicorn.cfg"
+    src: gunicorn_config.py.j2
+    dest: "{{ backend_app_deploy_helper.new_release_path }}/gunicorn_config.py"
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
 

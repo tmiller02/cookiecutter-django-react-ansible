@@ -47,10 +47,10 @@ options. Once you've provided these values, your project will be generated.
 ```
 project_name [My Project]: My Project
 project_slug [my_project]: my_project
-frontend_app_dev_hostname [my-project.local]: my-project.local
-backend_app_dev_hostname [api.my-project.local]: api.my-project.local
-database_dev_hostname [db.my-project.local]: db.my-project.local
-controller_hostname [controller.my-project.local]:
+frontend_app_dev_hostname [my-project.test]]]: my-project.vagrant
+backend_app_dev_hostname [api.my-project.vagrant]: api.my-project.vagrant
+database_dev_hostname [db.my-project.vagrant]: db.my-project.vagrant
+controller_hostname [controller.my-project.vagrant]:
 ```
 
 Enter the project and take a look around:
@@ -82,9 +82,9 @@ $ vagrant up --provision
 ```
     
 Once provisioning has finished, you can access the django app at the hostname you
-set for the `backend_app_dev_hostname` option, e.g. https://api.my-project.local.
+set for the `backend_app_dev_hostname` option, e.g. https://api.my-project.vagrant.
 You can access the react app at the hostname you set for the
-`frontend_app_dev_hostname`, e.g. https://my-project.local.
+`frontend_app_dev_hostname`, e.g. https://my-project.vagrant.
 
 ## Next Steps
 

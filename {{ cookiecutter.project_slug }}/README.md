@@ -39,3 +39,4 @@ Read the following documentation for more information:
 * [Backend App](docs/backend_app.md)
 * [Frontend App](docs/frontend_app.md)
 * [Provisioning](docs/provisioning.md)
+* [Load Testing](docs/other_tools/load_testing.md)

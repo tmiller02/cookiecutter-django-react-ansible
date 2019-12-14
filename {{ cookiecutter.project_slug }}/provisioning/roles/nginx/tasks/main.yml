@@ -1,12 +1,13 @@
 ---
 
-# Having an active 'nginx' module stream for the default CentOS 8 versions
-# can prevent dnf/yum from finding packages provided by the 'nginx' yum repository
-# added by the geerlingguy.nginx role.
-- name: disable the AppStream nginx module
+# Having an active nginx module stream for the default CentOS 8 versions
+# can prevent dnf/yum from finding packages provided by the nginx yum repository
+# added by the geerlingguy.nginx role. Also disable the php module which depends on
+# the nginx module and can generate yum warning messages if left enabled.
+- name: disable the AppStream nginx and php module
   become: yes
   command:
-    cmd: yum module disable nginx -y
+    cmd: yum module disable nginx php -y
     warn: no
 
 - name: Set httpd_can_network_connect flag on and keep it persistent across reboots

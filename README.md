@@ -6,8 +6,6 @@ a Django 3.0 & React project with Ansible provisioning and some opinionated defa
 
 ## Key Features and Technologies
 * Django 3.0
-* Initial [django asynchronous support](https://docs.djangoproject.com/en/3.0/topics/async/)
-  via [gunicorn](https://gunicorn.org/) and [uvicorn](https://www.uvicorn.org/).
 * Python 3.6
 * React using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript

@@ -5,8 +5,12 @@
 - import_tasks: dnf_automatic.yml
 
 - name: install epel-release
-  yum:
+  dnf:
     name: epel-release
+
+- name: update dnf cache
+  dnf:
+    update_cache: yes
 
 - import_tasks: login_info.yml
 

@@ -2,7 +2,7 @@
 {% raw %}
 - name: install additional required python packages
   become: true
-  yum:
+  dnf:
     name: python36-devel
     state: present
 

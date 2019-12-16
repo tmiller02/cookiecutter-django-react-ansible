@@ -66,6 +66,7 @@ Vagrant.configure("2") do |config|
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_dev"
       virtualbox.memory = 1024
+      virtualbox.cpus = 1
     end
   end
 

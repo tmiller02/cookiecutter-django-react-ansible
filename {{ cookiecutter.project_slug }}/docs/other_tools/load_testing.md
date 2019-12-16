@@ -19,6 +19,11 @@ $ source ~/Virtualenvs/load_testing/bin/activate
 (load_testing)$ pip install -r requirements.txt
 ```
 
+Don't forget that running django with `DEBUG=True` incurs a substantial performance
+impact. For this quick test we'll set `DEBUG=False` in the backend_app/settings.env
+file and restart the gunicorn workers by running
+`sudo systemctl restart {{ cookiecutter.project_slug }}` on the 'dev' VM.
+
 Then we'll start locust pointing to our dev environment:
 
 ```

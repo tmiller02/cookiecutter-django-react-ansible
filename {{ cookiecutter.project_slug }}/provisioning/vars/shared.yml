@@ -9,6 +9,9 @@ nginx_remove_default_vhost: true
 
 nginx_server_tokens: "off"
 
+nginx_extra_conf_options: |
+  worker_rlimit_nofile 4096;
+
 nginx_extra_http_options: |
   ssl_session_timeout 1h;
   ssl_session_cache shared:SSL:10m;

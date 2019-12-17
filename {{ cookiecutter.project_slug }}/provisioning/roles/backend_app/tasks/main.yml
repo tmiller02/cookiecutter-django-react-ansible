@@ -36,13 +36,6 @@
     group: "{{ backend_app_group }}"
     mode: "u=rw,g=,o="
 
-- name: add gunicorn config to the new release path
-  template:
-    src: gunicorn_config.py.j2
-    dest: "{{ backend_app_deploy_helper.new_release_path }}/gunicorn_config.py"
-    owner: "{{ backend_app_user }}"
-    group: "{{ backend_app_group }}"
-
 - name: run collect static files
   become: true
   become_user: "{{ backend_app_user }}"

@@ -9,7 +9,7 @@ RequiresMountsFor={{ backend_app_deploy_helper.current_path }} {{ backend_app_de
 
 [Service]
 RuntimeDirectory = {{ backend_app_systemd_runtime_dir }}
-PIDFile = {{ backend_app_systemd_pid_file }}
+PIDFile = {{ backend_app_gunicorn_pid_file }}
 User = {{ backend_app_user }}
 Group = {{ backend_app_group }}
 WorkingDirectory = {{ backend_app_deploy_helper.current_path }}

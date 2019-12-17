@@ -4,7 +4,6 @@ __pycache__/
 /.idea/
 /.vagrant/
 /provisioning/galaxy_roles/
-/backend_app/gunicorn_config.py
 /backend_app/settings.env
 /backend_app/venv/
 /backend_app/static_root/

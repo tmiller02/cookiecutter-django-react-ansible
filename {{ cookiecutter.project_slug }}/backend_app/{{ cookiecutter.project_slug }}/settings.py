@@ -127,6 +127,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "same-origin"
 
 # Logging configuration
 # https://docs.djangoproject.com/en/3.0/topics/logging/

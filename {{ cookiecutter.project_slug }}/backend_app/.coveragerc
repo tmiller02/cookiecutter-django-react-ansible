@@ -1,6 +1,9 @@
 [run]
+source = .
 branch = True
-omit = venv/*
+omit =
+  venv/*
+  tests/*
 
 [report]
 show_missing = True

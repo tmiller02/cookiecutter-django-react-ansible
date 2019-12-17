@@ -8,7 +8,7 @@
 - name: disable the AppStream postgresql module
   become: yes
   command:
-    cmd: yum module disable postgresql -y
+    cmd: dnf module disable postgresql -y
     warn: no
 
 - import_role:

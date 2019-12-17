@@ -7,7 +7,7 @@
 - name: disable the AppStream nginx and php module
   become: yes
   command:
-    cmd: yum module disable nginx php -y
+    cmd: dnf module disable nginx php -y
     warn: no
 
 - name: Set httpd_can_network_connect flag on and keep it persistent across reboots

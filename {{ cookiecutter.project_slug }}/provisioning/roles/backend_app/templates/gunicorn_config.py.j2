@@ -1,8 +1,6 @@
 {% raw -%}
 {{ ansible_managed | comment }}
 from multiprocessing import cpu_count
-
-worker_class = "uvicorn.workers.UvicornWorker"
 bind = "127.0.0.1:8080"
 workers = cpu_count() * 2 + 1
 pidfile = "{{ backend_app_systemd_pid_file }}"

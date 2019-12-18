@@ -2,10 +2,10 @@
 
 ## Overview
 
-This project comes with a sample locustfile for running [Locust](https://locust.io/), a
-popular event-based load testing tool. Locust can be used to figure out how many 
-concurrent users a system can handle, and can help identify bottlenecks in your
-application.
+The [load_testing](../../other_tools/load_testing) directory contains a sample
+locustfile for running [Locust](https://locust.io/), a popular event-based load testing
+tool. Locust can be used to figure out how many concurrent users a system can handle,
+and can help identify bottlenecks in your application.
 
 ## Getting Started
 

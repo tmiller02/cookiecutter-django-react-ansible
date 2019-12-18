@@ -38,10 +38,14 @@ $ vagrant up --provision
 You may need to re-run this command if Vagrant needed to install plugins.
 
 You may also be prompted for a password if the `vagrant-hostmanager` plugin is
-making changes to the `/etc/hosts` file on your host machine. You can avoid
-being prompted for a password by 
+making changes to the `/etc/hosts` file on your host machine.
+
+> **WARNING**: Never edit a sudoers file with a regular text editor!  Always use the visudo command instead!
+
+You can avoid being prompted for a password by 
 [configuring passwordless sudo](https://github.com/devopsgroup-io/vagrant-hostmanager#passwordless-sudo)
-for the command used by this plugin.
+for the command used by this plugin. Make sure you use `visudo` to edit this 
+sudoers file to ensure you don't leave the sudoers configuration in a broken state.
 
 ## Production Environment
 

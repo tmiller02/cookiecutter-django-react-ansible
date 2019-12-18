@@ -150,3 +150,7 @@ for your use case.
 
 If you'd like to disable automatic package updates, set
 `base_install_updates_automatically` to `false` in `environments/prod/group_vars/all`. 
+
+Keep in mind that some updates (such as kernel updates) require a reboot to take
+effect. You still need to occasionally reboot the system to ensure that updates
+are applied, `dnf-automatic` won't take care of this for you.

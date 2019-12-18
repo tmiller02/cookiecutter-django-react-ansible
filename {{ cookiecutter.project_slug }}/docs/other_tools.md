@@ -1,13 +1,15 @@
-# Load Testing
+# Other Tools
 
-## Overview
+## Load Testing
 
-The [load_testing](../../other_tools/load_testing) directory contains a sample
+### Overview
+
+The [load_testing](../other_tools/load_testing) directory contains a sample
 locustfile for running [Locust](https://locust.io/), a popular event-based load testing
 tool. Locust can be used to figure out how many concurrent users a system can handle,
 and can help identify bottlenecks in your application.
 
-## Getting Started
+### Getting Started
 
 First let's create a virtualenv to install the locust python packages:
 
@@ -32,9 +34,23 @@ LOCUST_HOST=https://{{ cookiecutter.backend_app_dev_hostname }} locust -f locust
 
 And you can start using locust at http://localhost:8089
 
-## Next Steps
+### Next Steps
 
 This sample locustfile is very simple, it just makes GET requests to the admin url of the
 django application. As you develop your application you should update the locustfile
 with more advanced tasksets that represent the real world usage patterns of your
 application. See the [locust docs](https://docs.locust.io/en/stable/) for more.
+
+## Testssl
+
+### Overview
+
+The [testssl_dev.sh](../other_tools/testssl_dev.sh) script can be used to test the
+TLS/SSL encryption configuration of hosts in the 'dev' environment with
+[testssl.sh](https://github.com/drwetter/testssl.sh/).
+
+Example usage:
+
+    cd {{ cookiecutter.project_slug }}
+    vagrant up --provision
+    ./other_tools/testssl_dev.sh

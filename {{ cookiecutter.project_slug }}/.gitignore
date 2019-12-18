@@ -8,5 +8,6 @@ __pycache__/
 /backend_app/venv/
 /backend_app/static_root/
 /backend_app/coverage_html_report/
+/backend_app/geckodriver.log
 /frontend_app/node_modules/
 /frontend_app/build/

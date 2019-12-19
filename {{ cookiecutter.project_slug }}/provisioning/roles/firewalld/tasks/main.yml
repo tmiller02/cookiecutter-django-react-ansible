@@ -60,5 +60,6 @@
     permanent: true
     state: "{{ item.state }}"
     zone: "{{ item.zone | default(omit) }}"
+  when: item.when | bool
   loop: "{{ firewalld_additional_rules }}"
 {% endraw %}

@@ -13,5 +13,18 @@ database_password: "$DATABASE PASSWORD$"
 
 firewalld_backend_ip_addresses:
   - 172.17.177.21
-
+{% raw %}
+firewalld_additional_rules:
+  # Ensure the django dev server is accessible from any address
+  - port: "8000/tcp"
+    state: "enabled"
+    zone: "public"
+    when: "{{ 'frontend' in group_names }}"
+  # Ensure the postgres server is accessible from any address. Don't set this
+  # in a production environment!
+  - port: "5432/tcp"
+    state: "enabled"
+    zone: "public"
+    when: "{{ 'database' in group_names }}"
+{% endraw %}
 ssl_provider: 'selfsigned'

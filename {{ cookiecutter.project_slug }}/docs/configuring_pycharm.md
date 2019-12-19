@@ -5,7 +5,7 @@
 To ensure that many PyCharm features work correctly, we need to configure PyCharm to use
 the Python interpreter from our Vagrant VM.
 
-Go to `File → Settings → Project Interpreter`. Click the gear icon and click 'Add'.
+Go to `File → Settings → Project → Project Interpreter`. Click the gear icon and click 'Add'.
 
 ![Add Project Interpreter](images/add-project-interpreter.png "Add Project Interpreter")
 

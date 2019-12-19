@@ -40,3 +40,4 @@ Read the following documentation for more information:
 * [Frontend App](docs/frontend_app.md)
 * [Provisioning](docs/provisioning.md)
 * [Other Tools](docs/other_tools.md)
+* [Configuring PyCharm](docs/configuring_pycharm.md)

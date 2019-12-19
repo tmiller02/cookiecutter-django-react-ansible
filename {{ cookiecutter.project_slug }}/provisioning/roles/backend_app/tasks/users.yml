@@ -4,11 +4,9 @@
   group:
     name: "{{ backend_app_group }}"
     system: true
-    gid: "{{ backend_app_gid | default(omit) }}"
 
 - name: create the backend app user
   user:
     name: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
-    uid: "{{ backend_app_uid | default(omit) }}"
 {% endraw %}

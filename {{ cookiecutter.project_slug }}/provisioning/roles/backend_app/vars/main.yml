@@ -1,8 +1,6 @@
 ---
 
 backend_app_root: "/opt/{{ cookiecutter.project_slug }}_backend"
-backend_app_user: "{{ cookiecutter.project_slug }}"
-backend_app_group: "{{ cookiecutter.project_slug }}"
 backend_app_systemd_runtime_dir: "{{ cookiecutter.project_slug }}"
 backend_app_vagrant_venv_bind_mount: "/opt/{{ cookiecutter.project_slug }}_vagrant_venv"
 {% raw %}backend_app_gunicorn_pid_file: "/var/run/{{ backend_app_systemd_runtime_dir }}/gunicorn.pid"{% endraw %}

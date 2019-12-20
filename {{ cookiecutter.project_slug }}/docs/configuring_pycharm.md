@@ -24,4 +24,23 @@ listed.
 
 ![Vagrant Interpreter](images/vagrant-interpreter.png "Vagrant Interpreter")
 
-Click 'OK'. 
+Click 'OK' again. PyCharm will spend the next couple of minutes indexing:
+
+![PyCharm Indexing](images/pycharm-indexing.png "PyCharm Indexing")
+
+Once it's finished indexing you should be ready to go.
+
+## Running backend app tests from PyCharm
+
+This project comes with several preconfigured PyCharm run configurations
+
+> If you seeing a red cross next to the django run configurations,
+> click 'Edit Configurations' and set the 'Python Interpreter' for each
+> django configuration as the Remote Python from Vagrant VM 'dev'.
+
+![PyCharm Run Configurations](images/pycharm-run-configurations.png "PyCharm Run Configurations")
+
+To run the unit tests for the django backend app, select 'Backend app tests' and
+click the green play button:
+
+![Backend App Tests](images/backend-app-tests.png "Backend App Tests")

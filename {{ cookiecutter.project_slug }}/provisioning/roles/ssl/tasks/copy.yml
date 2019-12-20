@@ -13,6 +13,7 @@
     owner: root
     group: root
     mode: "u=rw,o=,o="
+  notify: "updated ssl"
 
 - name: copy certificate
   copy:
@@ -21,4 +22,5 @@
     owner: root
     group: root
     mode: "u=rw,o=r,o=r"
+  notify: "updated ssl"
 {% endraw %}

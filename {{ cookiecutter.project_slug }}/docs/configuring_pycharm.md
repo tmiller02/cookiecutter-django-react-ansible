@@ -2,6 +2,10 @@
 
 ## Setting up a Remote Python Interpreter
 
+> Support for Vagrant Python interpreters is a feature of PyCharm Professional.
+> If you don't see an option to add a Vagrant interpreter you may be using
+> PyCharm Community Edition.
+
 To ensure that many PyCharm features work correctly, we need to configure PyCharm to use
 the Python interpreter from our Vagrant VM.
 

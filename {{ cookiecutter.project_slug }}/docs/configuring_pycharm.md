@@ -34,7 +34,7 @@ Once it's finished indexing you should be ready to go.
 
 This project comes with several preconfigured PyCharm run configurations
 
-> If you seeing a red cross next to the django run configurations,
+> **INFO**: If you seeing a red cross next to the django run configurations,
 > click 'Edit Configurations' and set the 'Python Interpreter' for each
 > django configuration as the Remote Python from Vagrant VM 'dev'.
 
@@ -44,3 +44,13 @@ To run the unit tests for the django backend app, select 'Backend app tests' and
 click the green play button:
 
 ![Backend App Tests](images/backend-app-tests.png "Backend App Tests")
+
+## Running frontend app tests from PyCharm
+
+> **INFO**: You need to have `node` and `yarn` installed on your host machine to
+> run these commands from PyCharm.
+
+To run the unit tests for the react frontend app, select 'Frontend app tests' and
+click the green play button:
+
+![Frontend App Tests](images/frontend-app-tests.png "Frontend App Tests")

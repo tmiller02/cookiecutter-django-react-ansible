@@ -22,4 +22,5 @@
   command: "venv/bin/pip-sync"
   args:
     chdir: "{{ backend_app_deploy_helper.new_release_path }}"
+  changed_when: true
 {% endraw %}

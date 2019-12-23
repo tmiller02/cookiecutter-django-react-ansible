@@ -1,12 +1,12 @@
 ---
 {% raw %}
 - name: install yarn packages
-  command: yarn install
+  command: yarn install --frozen-lockfile
   args:
     chdir: "{{ playbook_dir }}/../frontend_app/"
 
 - name: build the frontend app bundle
-  command: yarn build
+  command: yarn run build
   args:
     chdir: "{{ playbook_dir }}/../frontend_app/"
   environment:

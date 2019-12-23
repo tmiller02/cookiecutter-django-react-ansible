@@ -76,6 +76,7 @@
   args:
     chdir: "{{ backend_app_deploy_helper.current_path }}"
   ignore_errors: true
+  changed_when: false
 
 - name: add rc file which can be used to activate the virtualenv
   become: true

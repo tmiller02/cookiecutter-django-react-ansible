@@ -29,17 +29,21 @@
 - name: determine the systemd .mount name for the vagrant mount
   command:
     cmd: systemd-escape --path "{{ backend_app_deploy_helper.new_release_path }}" --suffix=mount
+  changed_when: false
   register: backend_app_vagrant_systemd_mount_cmd
 
-- set_fact:
+- name: set mount name fact
+  set_fact:
     backend_app_vagrant_systemd_mount_name: "{{ backend_app_vagrant_systemd_mount_cmd.stdout }}"
 
 - name: determine the systemd .mount name for the venv bind mount
   command:
     cmd: systemd-escape --path "{{ backend_app_deploy_helper.new_release_path }}/venv" --suffix=mount
+  changed_when: false
   register: backend_app_vagrant_venv_systemd_mount_cmd
 
-- set_fact:
+- name: set venv mount name fact
+  set_fact:
     backend_app_vagrant_venv_systemd_mount_name: "{{ backend_app_vagrant_venv_systemd_mount_cmd.stdout }}"
 
 - name: create directories for virtualenv bind mount

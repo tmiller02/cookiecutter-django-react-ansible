@@ -17,7 +17,8 @@
     shared_path: ""
   register: frontend_app_deploy_helper_output
 
-- set_fact:
+- name: set deploy helper fact
+  set_fact:
     frontend_app_deploy_helper: "{{ frontend_app_deploy_helper_output['ansible_facts']['deploy_helper'] }}"
 
 - name: synchronize the frontend_app build to the new release folder

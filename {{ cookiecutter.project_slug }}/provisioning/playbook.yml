@@ -5,7 +5,7 @@
   become: true
   tasks:
   - name: install python3 and python3-pip
-    raw: dnf install -y python3 python3-pip
+    raw: dnf install -y python3 python3-pip # noqa 301
   - name: set ansible_python_interpreter
     set_fact:
       ansible_python_interpreter: "/usr/bin/python3"

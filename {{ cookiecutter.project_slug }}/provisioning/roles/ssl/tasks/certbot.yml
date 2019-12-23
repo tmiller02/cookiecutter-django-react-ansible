@@ -1,6 +1,7 @@
 ---
 {% raw %}
-- assert:
+- name: assert required variables are defined
+  assert:
     that:
       ssl_certbot_email is defined
 

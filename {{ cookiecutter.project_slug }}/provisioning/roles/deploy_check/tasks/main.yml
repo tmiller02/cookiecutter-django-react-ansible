@@ -18,7 +18,7 @@
 - name: prompt when the git working directory is not clean
   block:
     - name: run git status
-      command: git status --porcelain
+      command: git status --porcelain # noqa 303
       register: deploy_check_status_command
 
     - name: display a prompt when the git working directory is not clean
@@ -29,7 +29,7 @@
           {{ deploy_check_status_command.stdout }}
 
           Press Crtl+C then A to abort, or press Enter to continue anyway.
-      when: "deploy_check_status_command.stdout != ''"
+      when: "deploy_check_status_command.stdout | length > 0"
   when: deploy_check_display_confirmation_prompts | bool
 
 - import_tasks: git_tag.yml

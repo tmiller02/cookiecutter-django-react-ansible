@@ -20,4 +20,5 @@
   args:
     chdir: "{{ playbook_dir }}/../frontend_app/"
   ignore_errors: true
+  changed_when: false
 {% endraw %}

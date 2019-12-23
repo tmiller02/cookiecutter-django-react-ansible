@@ -16,7 +16,8 @@
           Press Crtl+C then A to abort, or press Enter to continue anyway.
       when: deploy_check_display_confirmation_prompts | bool
 
-    - set_fact:
+    - name: set deploy check tag fact
+      set_fact:
         deploy_check_tag: "no-tag"
   when: "deploy_check_get_tags_command.rc != 0"
 
@@ -30,7 +31,8 @@
           Press Crtl+C then A to abort, or press Enter to continue.
       when: deploy_check_display_confirmation_prompts | bool
 
-    - set_fact:
+    - name: set deploy check tag fact
+      set_fact:
         deploy_check_tag: "{{ deploy_check_get_tags_command.stdout }}"
   when: "deploy_check_get_tags_command.rc == 0"
 {% endraw %}

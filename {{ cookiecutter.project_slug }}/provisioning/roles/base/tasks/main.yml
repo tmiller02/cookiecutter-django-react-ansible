@@ -7,10 +7,9 @@
 - name: install epel-release
   dnf:
     name: epel-release
+  notify: "update dnf cache"
 
-- name: update dnf cache
-  dnf:
-    update_cache: yes
+- meta: flush_handlers
 
 - import_tasks: login_info.yml
 

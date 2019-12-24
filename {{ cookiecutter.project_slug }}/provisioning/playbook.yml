@@ -4,8 +4,12 @@
   gather_facts: false
   become: true
   tasks:
-  - name: install python3 and python3-pip
-    raw: dnf install -y python3 python3-pip # noqa 301
+  - name: install python 3.6
+    raw: rpm -q python36 || dnf install -y python36
+    changed_when: true
+  - name: install pip
+    raw: rpm -q python3-pip || dnf install -y python3-pip
+    changed_when: true
   - name: set ansible_python_interpreter
     set_fact:
       ansible_python_interpreter: "/usr/bin/python3"

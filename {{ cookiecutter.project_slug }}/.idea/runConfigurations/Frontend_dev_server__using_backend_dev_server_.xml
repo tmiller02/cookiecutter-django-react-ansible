@@ -1,13 +1,15 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Frontend app tests" type="js.build_tools.npm">
+  <configuration default="false" name="Frontend dev server (using backend dev server)" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/frontend_app/package.json" />
     <command value="run" />
     <scripts>
-      <script value="test" />
+      <script value="start" />
     </scripts>
     <node-interpreter value="node" />
     <package-manager value="yarn" />
-    <envs />
+    <envs>
+      <env name="REACT_APP_BACKEND_URL" value="http://{{ cookiecutter.backend_app_dev_hostname }}:8000" />
+    </envs>
     <method v="2" />
   </configuration>
 </component>

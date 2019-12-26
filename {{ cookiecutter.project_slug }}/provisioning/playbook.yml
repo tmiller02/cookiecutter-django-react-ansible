@@ -4,11 +4,8 @@
   gather_facts: false
   become: true
   tasks:
-  - name: install python 3.6
-    raw: rpm -q python36 || dnf install -y python36
-    changed_when: true
-  - name: install pip
-    raw: rpm -q python3-pip || dnf install -y python3-pip
+  - name: install python 3.6 and pip
+    raw: dnf install -y python36 python3-pip
     changed_when: true
   - name: set ansible_python_interpreter
     set_fact:

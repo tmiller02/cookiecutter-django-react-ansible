@@ -1,12 +1,12 @@
 black>=19.3b0
 coverage>=5.0.1
-Django>=3.0.1
+Django>=3.0.2
 django-environ>=0.4.5
 django-extensions>=2.2.5
 djangorestframework>=3.11.0
 flake8>=3.7.8
 gunicorn>=19.9.0
-ipython>=7.10.2
+ipython>=7.11.1
 psycopg2-binary>=2.8.3
 safety>=1.8.5
 selenium>=3.141.0

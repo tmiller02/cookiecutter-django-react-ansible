@@ -82,8 +82,8 @@ Vagrant.configure("2") do |config|
   # We spin up another VM and execute ansible using the ansible_local vagrant
   # provisioner, as opposed to executing ansible directly from the host machine.
   #
-  # This helps simplify the initial setup process, creates a  consistent
-  # provisioning environment and allows us to provision a  dev environment on
+  # This helps simplify the initial setup process, creates a consistent
+  # provisioning environment and allows us to provision a dev environment on
   # host machines where Ansible is not supported, such as Windows.
   # (see https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html#can-ansible-run-on-windows )
   #
@@ -92,9 +92,9 @@ Vagrant.configure("2") do |config|
   config.vm.define "controller" do |machine|
     # By default Vagrant adds the host's name to the loopback address when
     # setting machine.vm.hostname. This can result in unexpected behaviour
-    # when attempting to bind to the host, like the frontend app dev server does
-    # when running 'yarn start'. So we instead use a hostname alias and set the
-    # hostname later on ourselves in an inline script.
+    # when attempting to bind to the host, such as when running the frontend
+    # app dev server with 'yarn start'. So, we instead use a hostname alias and
+    # set the hostname later on ourselves in an inline shell script.
     # See https://github.com/hashicorp/vagrant/issues/7263 for more.
     machine.hostmanager.aliases = ["{{ cookiecutter.controller_hostname }}"]
     machine.vm.network "private_network", ip: "172.17.177.20"
@@ -115,7 +115,7 @@ Vagrant.configure("2") do |config|
     end
 
     $controller_vm_setup_script = <<-SCRIPT
-      sudo hostnamectl set-hostname controller.my-project.vagrant
+      sudo hostnamectl set-hostname {{ cookiecutter.controller_hostname }}
       # install ansible requirements
       for package in 'epel-release' 'python36' 'python3-pip' 'sshpass' 'openssl-devel';
         do
@@ -133,7 +133,7 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "playbook.yml"
       ansible.provisioning_path = "/vagrant/provisioning"
       ansible.config_file = "ansible-vagrant.cfg"
-      ansible.install = false
+      ansible.install = false # we do this in the above inline setup script
       ansible.galaxy_role_file = "requirements.yml"
       ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file}"
       ansible.verbose = false

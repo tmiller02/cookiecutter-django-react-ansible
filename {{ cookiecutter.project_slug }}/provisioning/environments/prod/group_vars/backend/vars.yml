@@ -10,6 +10,8 @@
 ## $ python manage.py shell
 ## >>> from django.core.management import utils
 ## >>> utils.get_random_secret_key()
+##
+## See README.txt - store sensitive variables like this using ansible vault
 #backend_app_secret_key: "<your-production-django-secret-key>"
 #backend_app_cors_origin_whitelist:
 #  - "https://{{ frontend_server_name }}"

@@ -9,6 +9,7 @@
 #
 #frontend_server_name: "<your-production-server-frontend-cname>"
 #
+## See README.txt - store sensitive variables like this using ansible vault
 #database_password: "<your-production-database-password>"
 #
 #firewalld_backend_ip_addresses:

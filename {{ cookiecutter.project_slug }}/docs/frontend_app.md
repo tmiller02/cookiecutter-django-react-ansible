@@ -77,6 +77,13 @@ vagrant up --provision
 
 and visit https://{{ cookiecutter.frontend_app_dev_hostname }}.
 
+You can also use ansible tags to limit the playbook to just the tasks needed to
+update the frontend app:
+
+```
+VAGRANT_ANSIBLE_TAGS=update_frontend_app vagrant up --provision
+```
+
 ## Serving in Production
 
 The production build of the frontend app is served with NGINX. All http

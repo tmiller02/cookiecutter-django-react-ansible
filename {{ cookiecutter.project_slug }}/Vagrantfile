@@ -139,6 +139,7 @@ Vagrant.configure("2") do |config|
       ansible.verbose = false
       ansible.limit = "all,localhost"
       ansible.inventory_path = "environments/dev/inventory"
+      ansible.tags = ENV["VAGRANT_ANSIBLE_TAGS"] || "all"
     end
     # Shut down the controller VM once it has finished provisioning the other VMs.
     # machine.vm.provision "shell", inline: "shutdown -h now"

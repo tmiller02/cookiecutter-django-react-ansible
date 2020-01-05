@@ -13,14 +13,15 @@
 
 - hosts: localhost
   roles:
-    - deploy_check
+    - { role: deploy_check, tags: [always] }
     - { role: geerlingguy.nodejs, become: true }
     - { role: tmiller02.yarn, become: true }
   tasks:
     - name: build frontend app
-      include_role:
+      import_role:
         name: frontend_app
         tasks_from: build.yml
+      tags: [update_frontend_app]
   vars_files:
     - vars/frontend.yml
 
@@ -38,10 +39,12 @@
         release_date: "{{ lookup('pipe','date \"+%Y-%m-%d-%H-%M-%S-%Z\"') }}"
       delegate_to: localhost
       run_once: true
+      tags: [always]
     - name: "Set release version facts"
       set_fact:
         backend_app_release_version: "{{ hostvars['localhost']['deploy_check_tag'] }}-{{ release_date }}"
         frontend_app_release_version: "{{ hostvars['localhost']['deploy_check_tag'] }}-{{ release_date }}"
+      tags: [always]
 
 - hosts: database
   become: true
@@ -56,7 +59,7 @@
   roles:
     - ssl
     - nginx
-    - backend_app
+    - { role: backend_app, tags: [update_backend_app] }
   vars_files:
     - vars/shared.yml
     - vars/backend.yml
@@ -66,7 +69,7 @@
   roles:
     - ssl
     - nginx
-    - frontend_app
+    - { role: frontend_app, tags: [update_frontend_app] }
   vars_files:
     - vars/shared.yml
     - vars/frontend.yml

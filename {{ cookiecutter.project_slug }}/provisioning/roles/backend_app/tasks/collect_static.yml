@@ -1,0 +1,16 @@
+---
+{% raw %}
+- name: run collect static files
+  become: true
+  become_user: "{{ backend_app_user }}"
+  django_manage:
+    command: "collectstatic --clear --noinput"
+    app_path: "{{ backend_app_deploy_helper.new_release_path }}"
+    virtualenv: "{{ backend_app_deploy_helper.new_release_path }}/venv"
+  register:
+    django_manage_collectstatic
+
+- name: display collectstatic output
+  debug:
+    msg: "{{ django_manage_collectstatic.out }}"
+{% endraw %}

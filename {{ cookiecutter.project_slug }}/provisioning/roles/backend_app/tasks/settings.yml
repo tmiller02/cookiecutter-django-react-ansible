@@ -1,0 +1,19 @@
+---
+{% raw %}
+# Workaround for https://github.com/ansible/ansible/issues/56243
+- name: ensure files already exists at template destinations to work around 'invalid selinux context' issue
+  file:
+    path: "{{ backend_app_deploy_helper.new_release_path }}/{{ item }}"
+    state: touch
+  with_items:
+    - "settings.env"
+    - "gunicorn_config.py"
+
+- name: template settings into the new release path
+  template:
+    src: settings.env.j2
+    dest: "{{ backend_app_deploy_helper.new_release_path }}/settings.env"
+    owner: "{{ backend_app_user }}"
+    group: "{{ backend_app_group }}"
+    mode: "u=rw,g=,o="
+{% endraw %}

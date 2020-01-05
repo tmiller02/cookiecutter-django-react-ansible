@@ -19,36 +19,9 @@
 
 - import_tasks: virtualenv.yml
 
-# Workaround for https://github.com/ansible/ansible/issues/56243
-- name: ensure files already exists at template destinations to work around 'invalid selinux context' issue
-  file:
-    path: "{{ backend_app_deploy_helper.new_release_path }}/{{ item }}"
-    state: touch
-  with_items:
-    - "settings.env"
-    - "gunicorn_config.py"
+- import_tasks: settings.yml
 
-- name: template settings into the new release path
-  template:
-    src: settings.env.j2
-    dest: "{{ backend_app_deploy_helper.new_release_path }}/settings.env"
-    owner: "{{ backend_app_user }}"
-    group: "{{ backend_app_group }}"
-    mode: "u=rw,g=,o="
-
-- name: run collect static files
-  become: true
-  become_user: "{{ backend_app_user }}"
-  django_manage:
-    command: "collectstatic --clear --noinput"
-    app_path: "{{ backend_app_deploy_helper.new_release_path }}"
-    virtualenv: "{{ backend_app_deploy_helper.new_release_path }}/venv"
-  register:
-    django_manage_collectstatic
-
-- name: display collectstatic output
-  debug:
-    msg: "{{ django_manage_collectstatic.out }}"
+- import_tasks: collect_static.yml
 
 - name: finalize the deploy, removing the unfinished file and switching the 'current' symlink
   become: true
@@ -60,6 +33,13 @@
     clean: true
     keep_releases: 10
   when: not backend_app_vagrant_mount | bool
+
+- name: add rc file which can be used to activate the virtualenv
+  become: true
+  become_user: "{{ backend_app_user }}"
+  template:
+    src: venvrc.j2
+    dest: "~/.venvrc"
 
 # Note - this uses the open vulnerability database which is updated on a monthly basis.
 # To get access to vulnerabilities as soon as they are added, you will need a Safety
@@ -77,13 +57,6 @@
     chdir: "{{ backend_app_deploy_helper.current_path }}"
   ignore_errors: true
   changed_when: false
-
-- name: add rc file which can be used to activate the virtualenv
-  become: true
-  become_user: "{{ backend_app_user }}"
-  template:
-    src: venvrc.j2
-    dest: "~/.venvrc"
 
 - import_tasks: migrate_db.yml
 

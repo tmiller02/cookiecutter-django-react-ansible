@@ -45,7 +45,7 @@ options. Once you've provided these values, your project will be generated.
 ```
 project_name [My Project]: My Project
 project_slug [my_project]: my_project
-frontend_app_dev_hostname [my-project.test]]]: my-project.vagrant
+frontend_app_dev_hostname [my-project.test]: my-project.vagrant
 backend_app_dev_hostname [api.my-project.vagrant]: api.my-project.vagrant
 database_dev_hostname [db.my-project.vagrant]: db.my-project.vagrant
 controller_hostname [controller.my-project.vagrant]:

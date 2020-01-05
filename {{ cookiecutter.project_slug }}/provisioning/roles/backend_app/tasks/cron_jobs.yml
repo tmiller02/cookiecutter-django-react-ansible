@@ -1,0 +1,10 @@
+---
+{% raw %}
+- name: add django clearsessions cron job
+  cron:
+    name: django clearsessions
+    minute: "0"
+    hour: "10"
+    user: "{{ backend_app_user }}"
+    job: ". ~/.venvrc && python manage.py clearsessions"
+{% endraw %}

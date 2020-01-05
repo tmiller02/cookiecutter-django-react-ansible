@@ -61,4 +61,6 @@
 - import_tasks: migrate_db.yml
 
 - import_tasks: systemd.yml
+
+- import_tasks: cron_jobs.yml
 {% endraw %}

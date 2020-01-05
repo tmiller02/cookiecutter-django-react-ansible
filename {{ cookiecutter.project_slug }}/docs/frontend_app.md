@@ -81,6 +81,6 @@ and visit https://{{ cookiecutter.frontend_app_dev_hostname }}.
 
 The production build of the frontend app is served with NGINX. All http
 requests are redirected to https. The contents of `build/static/` are served as
-regular files, with all other urls are redirected to `index.html` if a file with
+regular files, with all other urls served using `index.html` if a file with
 a matching name is not found. We rely on `react-router` to handle matching/non
 matching routes accordingly.

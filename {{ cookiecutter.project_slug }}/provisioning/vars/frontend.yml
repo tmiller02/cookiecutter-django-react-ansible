@@ -28,6 +28,8 @@ nginx_vhosts:
     root: "{{ frontend_app_root }}/current/"
     index: "index.html"
     extra_parameters: |
+      add_header Content-Security-Policy "default-src 'self';";
+
       location /static {
           # serve static files as normal
       }

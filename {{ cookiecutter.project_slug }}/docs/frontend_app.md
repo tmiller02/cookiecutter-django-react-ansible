@@ -75,7 +75,8 @@ If you want to see this build in action on the Vagrant dev environment, run:
 vagrant up --provision
 ```
 
-and visit https://{{ cookiecutter.frontend_app_dev_hostname }}.
+and visit https://{{ cookiecutter.frontend_app_dev_hostname }} where it is being
+served via NGINX on the 'dev' Vagrant VM.
 
 You can also use ansible tags to limit the playbook to just the tasks needed to
 update the frontend app:

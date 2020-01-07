@@ -21,7 +21,7 @@
 
 To provision the development environment, run:
 ```
-$ cd my_project
+$ cd {{ cookiecutter.project_slug }}
 $ vagrant up --provision
 ```
 

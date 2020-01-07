@@ -7,4 +7,13 @@
     hour: "10"
     user: "{{ backend_app_user }}"
     job: ". ~/.venvrc && python manage.py clearsessions"
+
+- name: add cron job to delete expired jwt tokens
+  cron:
+    name: "django flushexpiredtokens"
+    minute: "0"
+    hour: "8"
+    job: ". ~/.venvrc && python manage.py flushexpiredtokens"
+    user: "{{ backend_app_user }}"
+  run_once: true
 {% endraw %}

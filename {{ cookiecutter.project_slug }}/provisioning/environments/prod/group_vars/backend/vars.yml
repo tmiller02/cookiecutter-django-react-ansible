@@ -13,6 +13,7 @@
 ##
 ## See README.txt - store sensitive variables like this using ansible vault
 #backend_app_secret_key: "<your-production-django-secret-key>"
+#backend_app_jwt_signing_key: "<your-production-jwt-signing-key>"
 #backend_app_cors_origin_whitelist:
 #  - "https://{{ frontend_server_name }}"
 #backend_app_allowed_hosts:

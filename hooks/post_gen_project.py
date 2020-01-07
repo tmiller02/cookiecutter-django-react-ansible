@@ -31,6 +31,14 @@ def set_django_secret_key(file_path):
     )
 
 
+def set_jwt_signing_key(file_path):
+    substitute_pattern_in_file(
+        file_path,
+        pattern="$JWT SIGNING KEY$",
+        value=generate_random_string(length=50),
+    )
+
+
 def set_database_password(file_path):
     substitute_pattern_in_file(
         file_path,
@@ -102,6 +110,7 @@ if __name__ == "__main__":
     dev_all_vars = os.path.join(dev_group_vars, "all", "vars.yml")
 
     set_django_secret_key(dev_backend_vars)
+    set_jwt_signing_key(dev_backend_vars)
     set_database_password(dev_all_vars)
 
     print_success()

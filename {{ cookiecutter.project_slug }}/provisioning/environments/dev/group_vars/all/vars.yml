@@ -19,7 +19,7 @@ firewalld_additional_rules:
   - port: "8000/tcp"
     state: "enabled"
     zone: "public"
-    when: "{{ 'frontend' in group_names }}"
+    when: "{{ 'backend' in group_names }}"
   # Ensure the postgres server is accessible from any address. Don't set this
   # in a production environment!
   - port: "5432/tcp"

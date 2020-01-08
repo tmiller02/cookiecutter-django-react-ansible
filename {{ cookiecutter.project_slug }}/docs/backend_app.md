@@ -104,7 +104,7 @@ $ ./ssh_backend.sh
 And to run `flake8`: 
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ make format
+(venv) [{{ cookiecutter.project_slug }}]$ make lint
 ```
 
 ## Updating Dependencies

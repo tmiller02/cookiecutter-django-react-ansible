@@ -11,8 +11,11 @@ frontend_server_name: "{{ cookiecutter.frontend_app_dev_hostname }}"
 
 database_password: "$DATABASE PASSWORD$"
 
-firewalld_backend_ip_addresses:
-  - 172.17.177.21
+firewalld_zones:
+  - name: backend
+    ip_addresses:
+     - 172.17.177.21
+
 {% raw %}
 firewalld_additional_rules:
   # Ensure the django dev server is accessible from any address

@@ -27,9 +27,13 @@
 
 - hosts: all
   become: true
+  vars_files:
+    - vars/shared.yml
   pre_tasks:
     - name: check connectivity to all hosts
       ping:
+    - set_fact:
+        firewalld_rules: "{{ firewalld_base_rules + firewalld_additional_rules }}"
   roles:
     - base
     - firewalld

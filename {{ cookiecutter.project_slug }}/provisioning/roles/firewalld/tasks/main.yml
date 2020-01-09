@@ -1,7 +1,7 @@
 ---
 {% raw %}
 - name: ensure firewalld is installed
-  dnf:
+  yum:
     name: firewalld
     state: present
 
@@ -11,48 +11,12 @@
     state: started
     enabled: true
 
-- name: expose http and https in firewalld on 'backend' and 'frontend' hosts to the 'public' zone
-  firewalld:
-    zone: public
-    service: "{{ item }}"
-    immediate: true
-    permanent: true
-    state: enabled
-  loop:
-    - http
-    - https
-  when: "'backend' in group_names or 'frontend' in group_names"
+- include_tasks: add_zone.yml
+  loop: "{{ firewalld_zones }}"
+  loop_control:
+    loop_var: firewalld_zone
 
-- block:
-  - name: define the 'backend' firewalld zone
-    firewalld:
-      zone: backend
-      state: present
-      permanent: true
-
-  - name: reload firewalld
-    command: "firewall-cmd --reload"
-
-  - name: add entries in firewalld_backend_ip_addresses to the 'backend' firewalld zone
-    firewalld:
-      zone: backend
-      source: "{{ item }}"
-      immediate: true
-      permanent: true
-      state: enabled
-    loop: "{{ firewalld_backend_ip_addresses }}"
-
-  - name: expose port 5432/tcp for postgres to the 'backend' firewalld zone
-    firewalld:
-      zone: backend
-      port: "5432/tcp"
-      immediate: true
-      permanent: true
-      state: enabled
-
-  when: "'database' in group_names"
-
-- name: apply additional firewalld rules
+- name: apply firewalld rules
   firewalld:
     service: "{{ item.service | default(omit) }}"
     port: "{{ item.port | default(omit) }}"
@@ -61,5 +25,5 @@
     state: "{{ item.state }}"
     zone: "{{ item.zone | default(omit) }}"
   when: item.when | bool
-  loop: "{{ firewalld_additional_rules }}"
+  loop: "{{ firewalld_rules }}"
 {% endraw %}

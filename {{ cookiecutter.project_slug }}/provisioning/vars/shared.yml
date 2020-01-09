@@ -4,7 +4,23 @@
 
 database_name: "{{ cookiecutter.project_slug }}"
 database_user: "{{ cookiecutter.project_slug }}"
+{% raw %}
+firewalld_base_rules:
+  - service: "http"
+    state: "enabled"
+    zone: "public"
+    when: "{{ 'backend' in group_names }}"
 
+  - service: "https"
+    state: "enabled"
+    zone: "public"
+    when: "{{ 'backend' in group_names }}"
+
+  - port: "5432/tcp"
+    state: "enabled"
+    zone: "backend"
+    when: "{{ 'database' in group_names }}"
+{% endraw %}
 nginx_remove_default_vhost: true
 
 nginx_server_tokens: "off"

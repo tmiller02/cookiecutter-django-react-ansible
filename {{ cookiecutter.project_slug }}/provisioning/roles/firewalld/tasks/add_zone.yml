@@ -1,0 +1,20 @@
+---
+{% raw %}
+- name: define the '{{ firewalld_zone.name }}' firewalld zone
+  firewalld:
+    zone: "{{ firewalld_zone.name }}"
+    state: present
+    permanent: true
+
+- name: reload firewalld
+  command: "firewall-cmd --reload"
+
+- name: add ip entries into the '{{ firewalld_zone.name }}' firewalld zone
+  firewalld:
+    zone: "{{ firewalld_zone.name }}"
+    source: "{{ item }}"
+    immediate: true
+    permanent: true
+    state: enabled
+  loop: "{{ firewalld_zone.ip_addresses }}"
+{% endraw %}

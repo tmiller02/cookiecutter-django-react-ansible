@@ -1,5 +1,5 @@
 black>=19.3b0
-coverage>=5.0.2
+coverage[toml]>=5.0.2
 Django>=3.0.2
 django-cors-headers>=3.2.1
 django-environ>=0.4.5

@@ -24,6 +24,10 @@ Vagrant.configure("2") do |config|
   ]
   config.vm.box = "centos/8"
   config.vm.box_check_update = false
+  # The "centos/8" vagrant box download url seems to be broken for the moment following
+  # the release of CentOS 8.1, so we explicitly set the correct box url.
+  # See https://bugs.centos.org/view.php?id=16931
+  config.vm.box_url = "http://cloud.centos.org/centos/8/x86_64/images/CentOS-8-Vagrant-8.1.1911-20200113.3.x86_64.vagrant-virtualbox.box"
   # disable the default vagrant mount. We configure custom mounts on the VM separately.
   config.vm.synced_folder ".", "/vagrant", disabled: true
 

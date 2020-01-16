@@ -4,13 +4,13 @@
   gather_facts: false
   become: true
   tasks:
-    - name: install python 3.6 and pip
-      raw: dnf install -y python36 python3-pip
-      changed_when: true
     - name: set ansible facts
       set_fact:
         ansible_python_interpreter: "/usr/bin/python3"
         any_errors_fatal: true
+    - name: install python 3.6 and pip
+      raw: dnf install -y python36 python3-pip
+      changed_when: true
     - name: check connectivity to all hosts
       ping:
 

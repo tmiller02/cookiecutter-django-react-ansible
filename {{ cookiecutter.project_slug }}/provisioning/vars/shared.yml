@@ -1,6 +1,6 @@
 ---
 
-# Variables which are shared across different roles or different plays.
+# Variables that are shared across different roles or different plays.
 
 database_name: "{{ cookiecutter.project_slug }}"
 database_user: "{{ cookiecutter.project_slug }}"

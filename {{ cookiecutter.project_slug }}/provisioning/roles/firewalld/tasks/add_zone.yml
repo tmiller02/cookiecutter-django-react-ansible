@@ -5,9 +5,11 @@
     zone: "{{ firewalld_zone.name }}"
     state: present
     permanent: true
+  register: firewalld_zone_state
 
-- name: reload firewalld
+- name: reload firewalld # noqa 503
   command: "firewall-cmd --reload"
+  when: firewalld_zone_state.changed
 
 - name: add ip entries into the '{{ firewalld_zone.name }}' firewalld zone
   firewalld:

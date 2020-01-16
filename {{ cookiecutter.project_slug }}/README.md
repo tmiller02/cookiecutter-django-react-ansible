@@ -39,5 +39,6 @@ Read the following documentation for more information:
 * [Backend App](docs/backend_app.md)
 * [Frontend App](docs/frontend_app.md)
 * [Provisioning](docs/provisioning.md)
+* [Limitations and Warnings](docs/limitations_and_warnings.md)
 * [Other Tools](docs/other_tools.md)
 * [Configuring PyCharm](docs/configuring_pycharm.md)

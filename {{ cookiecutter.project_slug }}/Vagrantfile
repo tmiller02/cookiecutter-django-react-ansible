@@ -31,6 +31,14 @@ Vagrant.configure("2") do |config|
   # disable the default vagrant mount. We configure custom mounts on the VM separately.
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
+  # There seems to be a VirtualBox bug where the VirtualBox processes on the host machine
+  # can get stuck at 100% after resuming from sleep on macOS hosts, even when the guest
+  # machines are idle. We disable audio devices on all VMs as a workaround.
+  # See https://www.virtualbox.org/ticket/18089
+  config.vm.provider "virtualbox" do |virtualbox|
+    virtualbox.customize ["modifyvm", :id, "--audio", "none"]
+  end
+
   config.yum_proxy.http = "{{ cookiecutter.vagrant_yum_proxy }}"
   config.proxy.http = "{{ cookiecutter.vagrant_http_proxy }}"
   config.proxy.https = "{{ cookiecutter.vagrant_https_proxy }}"

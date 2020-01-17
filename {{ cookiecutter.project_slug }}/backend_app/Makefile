@@ -3,7 +3,7 @@
 
 test:
 	. ~/.venvrc
-	coverage run --rcfile=".coveragerc" manage.py test
+	coverage run manage.py test
 	coverage html
 	echo Coverage html report written to coverage_html_report/index.html
 	coverage erase

@@ -1,7 +1,6 @@
 import os
 import random
 import string
-import mimetypes
 
 GREEN = "\033[32m"
 BOLD = "\033[1m"

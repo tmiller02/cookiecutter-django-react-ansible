@@ -31,9 +31,10 @@
     shared_path: ""
   register: backend_app_deploy_helper_output
 
-- name: set backend_app_deploy_helper fact
+- name: set backend_app_deploy_helper and backend_app_virtualenv_dir facts
   set_fact:
     backend_app_deploy_helper: "{{ backend_app_deploy_helper_output['ansible_facts']['deploy_helper'] }}"
+    backend_app_virtualenv_dir: "{{ backend_app_deploy_helper.new_release_path }}/venv"
 
 - name: synchronize backend_app to the new release folder
   become: true

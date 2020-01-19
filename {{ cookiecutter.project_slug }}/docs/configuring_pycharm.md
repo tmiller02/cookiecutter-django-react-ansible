@@ -15,7 +15,7 @@ Go to `File → Settings → Project → Project Interpreter`. Click the gear ic
 
 Select 'Vagrant' from the side panel. Change the 'Vagrant Instance Folder' to your
 project's directory, select the 'dev' VM, and set the 'Python Interpreter Path' to
-`/opt/{{ cookiecutter.project_slug }}_backend/current/venv/bin/python`.
+`/opt/{{ cookiecutter.project_slug }}_backend/venv/bin/python`.
 
 ![Configure Vagrant Interpreter](images/configure-vagrant-interpreter.png "Configure Vagrant Interpreter")
 

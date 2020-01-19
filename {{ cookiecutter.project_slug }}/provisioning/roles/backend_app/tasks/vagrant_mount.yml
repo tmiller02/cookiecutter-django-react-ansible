@@ -3,28 +3,30 @@
 # Tasks to be run when the backend_app code is made available on the target machine
 # via a vagrant mount from the host machine (i.e. when using a dev VM).
 #
-# The Vagrantfile has been configured to sync the 'backend_app' folder on the host
-# machine to the 'current' folder on the target machine, so we don't need to do anything
-# else to make any code changes available on the target machine (compare to the tasks
-# in 'run_deploy.yml').
+# The Vagrantfile has been configured to mount the 'current' folder on the target
+# machine to the 'backend_app' folder on the host machine, so we don't need to do
+# anything else to make any code changes available on the target machine (compare to
+# the tasks in 'run_deploy.yml').
+#
+# We configure the 'venv' folder to be alongside (rather than within) the 'current'
+# directory when running a Vagrant environment.
+#
+# It is desirable to have the virtualenv exist within the code directory with the
+# deployment strategy used in 'run_deploy.yml', since rolling back by changing the
+# 'current' symlink will roll back both the code and the virtualenv. However, running a
+# virtualenv from within a vagrant mounted directory comes with a substantial
+# performance impact, especially with the StatReloader as used by default when running
+# django runserver.
+#
+# By creating a separate bind mount for the virtualenv folder we exclude its
+# contents from the vagrant mount, thereby avoiding this performance impact.
 
-- name: set deploy_helper facts needed by other tasks
+- name: set deploy_helper and backend_app_virtualenv_dir facts needed by other tasks
   set_fact:
     backend_app_deploy_helper:
       new_release_path: "{{ backend_app_root }}/current"
       current_path: "{{ backend_app_root }}/current"
-
-# Create a separate bind mount for the directory where the virtualenv is installed.
-# It is desirable to have the virtualenv exist within the code directory with the
-# deployment strategy used in 'run_deploy.yml', since rolling back by changing the
-# 'current' symlink will roll back both the code and the virtualenv.
-#
-# However, running a virtualenv from within a vagrant mounted directory comes with
-# a substantial performance impact, especially with the StatReloader as used by
-# default when running django runserver.
-#
-# By creating a separate bind mount for the virtualenv folder we exclude its
-# contents from the vagrant mount, thereby avoiding this performance impact.
+    backend_app_virtualenv_dir: "{{ backend_app_root }}/venv"
 
 - name: determine the systemd .mount name for the vagrant mount
   command:
@@ -35,39 +37,6 @@
 - name: set mount name fact
   set_fact:
     backend_app_vagrant_systemd_mount_name: "{{ backend_app_vagrant_systemd_mount_cmd.stdout }}"
-
-- name: determine the systemd .mount name for the venv bind mount
-  command:
-    cmd: systemd-escape --path "{{ backend_app_deploy_helper.new_release_path }}/venv" --suffix=mount
-  changed_when: false
-  register: backend_app_vagrant_venv_systemd_mount_cmd
-
-- name: set venv mount name fact
-  set_fact:
-    backend_app_vagrant_venv_systemd_mount_name: "{{ backend_app_vagrant_venv_systemd_mount_cmd.stdout }}"
-
-- name: create directories for virtualenv bind mount
-  become: true
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ backend_app_user }}"
-    group: "{{ backend_app_group }}"
-  with_items:
-    - "{{ backend_app_vagrant_venv_bind_mount }}"
-    - "{{ backend_app_deploy_helper.new_release_path }}/venv"
-
-- name: add a bind .mount file from the venv directory to the vagrant synced directory
-  template:
-    src: systemd_venv_mount.j2
-    dest: "/etc/systemd/system/{{ backend_app_vagrant_venv_systemd_mount_name }}"
-
-- name: start and enable the systemd bind mount from the venv directory.
-  systemd:
-    daemon_reload: true
-    name: "{{ backend_app_vagrant_venv_systemd_mount_name }}"
-    enabled: true
-    state: started
 
 # We can't change the context of files within the vagrant mount, which means
 # that nginx would not be able to serve the static files from static_root/.

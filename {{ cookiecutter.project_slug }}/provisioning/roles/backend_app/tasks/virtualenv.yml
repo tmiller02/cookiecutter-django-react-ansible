@@ -10,7 +10,7 @@
   become: true
   become_user: "{{ backend_app_user }}"
   pip:
-    virtualenv: "{{ backend_app_deploy_helper.new_release_path }}/venv"
+    virtualenv: "{{ backend_app_virtualenv_dir }}"
     virtualenv_command: /usr/bin/python3.6 -m venv
     name:
       - pip==19.3.1
@@ -19,7 +19,7 @@
 - name: install requirements using pip-sync
   become: true
   become_user: "{{ backend_app_user }}"
-  command: "venv/bin/pip-sync"
+  command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync"
   args:
     chdir: "{{ backend_app_deploy_helper.new_release_path }}"
   changed_when: true

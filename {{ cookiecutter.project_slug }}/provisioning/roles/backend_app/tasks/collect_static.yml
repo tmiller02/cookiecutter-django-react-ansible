@@ -6,7 +6,7 @@
   django_manage:
     command: "collectstatic --clear --noinput"
     app_path: "{{ backend_app_deploy_helper.new_release_path }}"
-    virtualenv: "{{ backend_app_deploy_helper.new_release_path }}/venv"
+    virtualenv: "{{ backend_app_virtualenv_dir }}"
   register:
     django_manage_collectstatic
 

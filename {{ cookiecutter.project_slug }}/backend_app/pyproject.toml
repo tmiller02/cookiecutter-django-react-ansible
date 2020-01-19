@@ -2,3 +2,14 @@
 line-length = 88
 target-version = ['py36']
 exclude = '/(venv)/'
+
+[tool.coverage.run]
+source = ["."]
+branch = true
+omit = ["venv/*", "tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.coverage.html]
+directory = "coverage_html_report"

@@ -4,12 +4,15 @@
   gather_facts: false
   become: true
   tasks:
-  - name: install python 3.6 and pip
-    raw: dnf install -y python36 python3-pip
-    changed_when: true
-  - name: set ansible_python_interpreter
-    set_fact:
-      ansible_python_interpreter: "/usr/bin/python3"
+    - name: set ansible facts
+      set_fact:
+        ansible_python_interpreter: "/usr/bin/python3"
+        any_errors_fatal: true
+    - name: install python 3.6 and pip
+      raw: dnf install -y python36 python3-pip
+      changed_when: true
+    - name: check connectivity to all hosts
+      ping:
 
 - hosts: localhost
   roles:
@@ -27,9 +30,11 @@
 
 - hosts: all
   become: true
+  vars_files:
+    - vars/shared.yml
   pre_tasks:
-    - name: check connectivity to all hosts
-      ping:
+    - set_fact:
+        firewalld_rules: "{{ firewalld_base_rules + firewalld_additional_rules }}"
   roles:
     - base
     - firewalld

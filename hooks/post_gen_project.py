@@ -64,6 +64,13 @@ def convert_crlf_to_lf():
             with open(file_path, 'rb') as open_file:
                 content = open_file.read()
 
+            # rough way of detecting whether this is a text file or not. We don't
+            # want to make any modifications to binary files such as images.
+            try:
+                content.decode('utf-8')
+            except UnicodeDecodeError:
+                continue
+
             content = content.replace(crlf_line_ending, lf_line_ending)
 
             with open(file_path, 'wb') as open_file:

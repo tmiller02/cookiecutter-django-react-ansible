@@ -2,7 +2,7 @@
 
 ## Overview
 
-The 'Backend App' uses the [Django web framework](https://www.djangoproject.com)
+The backend app uses the [Django web framework](https://www.djangoproject.com)
 and follows the [twelve factor app](https://12factor.net) approach.
 
 ## Running the Django Dev Server
@@ -94,7 +94,7 @@ To display Firefox, set the `SELENIUM_TESTS_RUN_HEADLESS` to `False` in
 This project is set up with the [black](https://github.com/psf/black) code
 formatter and [flake8](http://flake8.pycqa.org/en/latest/) for linting.
 
-To run the `black` formatter:
+To run the black formatter:
 
 ```
 $ ./ssh_backend.sh
@@ -104,7 +104,7 @@ $ ./ssh_backend.sh
 And to run `flake8`: 
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ make format
+(venv) [{{ cookiecutter.project_slug }}]$ make lint
 ```
 
 ## Updating Dependencies
@@ -117,14 +117,14 @@ defined in a `requirements.in` file.
 To upgrade a top-level dependency, edit `requirements.in` and then run:
 
 ```
-pip-compile --generate-hashes --output-file=requirements.txt requirements.in
+pip-compile --allow-unsafe --generate-hashes --output-file=requirements.txt requirements.in
 ```
 
 To upgrade all packages whilst fulfilling the constraints in the `requirements.in`
 file: 
 
 ```
-pip-compile --generate-hashes --upgrade --output-file=requirements.txt requirements.in
+pip-compile --allow-unsafe --generate-hashes --upgrade --output-file=requirements.txt requirements.in
 ```
 
 ## Django Settings

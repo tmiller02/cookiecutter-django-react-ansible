@@ -13,7 +13,7 @@
     virtualenv: "{{ backend_app_virtualenv_dir }}"
     virtualenv_command: /usr/bin/python3.6 -m venv
     name:
-      - pip==20.0.1
+      - pip==20.0.2
       - pip-tools==4.4.0
 
 - name: install requirements using pip-sync

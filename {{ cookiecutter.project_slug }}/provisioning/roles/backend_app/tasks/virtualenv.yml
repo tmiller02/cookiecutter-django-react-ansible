@@ -14,7 +14,7 @@
     virtualenv_command: /usr/bin/python3.6 -m venv
     name:
       - pip==20.0.2
-      - pip-tools==4.4.0
+      - pip-tools==4.4.1
 
 - name: install requirements using pip-sync
   become: true

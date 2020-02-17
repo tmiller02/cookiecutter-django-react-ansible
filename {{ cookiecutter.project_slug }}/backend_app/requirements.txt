@@ -77,9 +77,9 @@ django-cors-headers==3.2.1 \
 django-environ==0.4.5 \
     --hash=sha256:6c9d87660142608f63ec7d5ce5564c49b603ea8ff25da595fd6098f6dc82afde \
     --hash=sha256:c57b3c11ec1f319d9474e3e5a79134f40174b17c7cc024bbb2fad84646b120c4
-django-extensions==2.2.6 \
-    --hash=sha256:4524eca892d23fa6e93b0620901983b287ff5dc806f1b978d6a98541f06b9471 \
-    --hash=sha256:936e8e3962024d3c75ea54f4e0248002404ca7ca7fb698430e60b06b5555b4e7
+django-extensions==2.2.8 \
+    --hash=sha256:1a03c4e8bade575f8c2be6c76456f8a2be3f9b02ab9f47d3535afa9562dc0493 \
+    --hash=sha256:2699cc1d6fb4bd393c0b5832fea4bc685f2ace5800b3c9ff222b2080f161ac04
 django==3.0.3 \
     --hash=sha256:2f1ba1db8648484dd5c238fb62504777b7ad090c81c5f1fd8d5eb5ec21b5f283 \
     --hash=sha256:c91c91a7ad6ef67a874a4f76f58ba534f9208412692a840e1d125eb5c279cb0a
@@ -295,7 +295,7 @@ wcwidth==0.1.8 \
     # via prompt-toolkit
 
 # The following packages are considered to be unsafe in a requirements file:
-setuptools==45.1.0 \
-    --hash=sha256:68e7fd3508687f94367f1aa090a3ed921cd045a60b73d8b0aa1f305199a0ca28 \
-    --hash=sha256:91f72d83602a6e5e4a9e4fe296e27185854038d7cbda49dcd7006c4d3b3b89d5 \
+setuptools==45.2.0 \
+    --hash=sha256:316484eebff54cc18f322dea09ed031b7e3eb00811b19dcedb09bc09bba7d93d \
+    --hash=sha256:89c6e6011ec2f6d57d43a3f9296c4ef022c2cbf49bab26b407fe67992ae3397f \
     # via gunicorn, ipython, safety

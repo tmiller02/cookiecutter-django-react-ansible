@@ -1,5 +1,5 @@
 black>=19.3b0
-coverage[toml]>=5.0.2
+coverage[toml]>=5.0.4
 Django>=3.0.4
 django-cors-headers>=3.2.1
 django-environ>=0.4.5
@@ -9,5 +9,5 @@ flake8>=3.7.8
 gunicorn>=19.9.0
 ipython>=7.11.1
 psycopg2-binary>=2.8.3
-safety>=1.8.5
+safety>=1.8.7
 selenium>=3.141.0

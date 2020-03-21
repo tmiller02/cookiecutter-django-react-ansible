@@ -18,7 +18,7 @@
 # performance impact, especially with the StatReloader as used by default when running
 # django runserver.
 #
-# By creating a separate bind mount for the virtualenv folder we exclude its
+# By locating the virtualenv directory alongside the 'current' directory we exclude its
 # contents from the vagrant mount, thereby avoiding this performance impact.
 
 - name: set deploy_helper and backend_app_virtualenv_dir facts needed by other tasks

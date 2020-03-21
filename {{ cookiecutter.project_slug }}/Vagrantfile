@@ -129,7 +129,8 @@ Vagrant.configure("2") do |config|
     $controller_vm_setup_script = <<-SCRIPT
       sudo hostnamectl set-hostname {{ cookiecutter.controller_hostname }}
       # install ansible requirements
-      sudo dnf install -y epel-release python36 python3-pip sshpass openssl-devel
+      sudo dnf install -y epel-release
+      sudo dnf install -y python36 python3-pip sshpass openssl-devel
       pip3 install -r /vagrant/provisioning/requirements.txt --user
     SCRIPT
 

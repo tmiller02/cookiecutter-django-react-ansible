@@ -1,9 +1,9 @@
 black>=19.3b0
 coverage[toml]>=5.0.4
-Django>=3.0.4
+Django>=3.0.5
 django-cors-headers>=3.2.1
 django-environ>=0.4.5
-django-extensions>=2.2.8
+django-extensions>=2.2.9
 djangorestframework>=3.11.0
 flake8>=3.7.8
 gunicorn>=19.9.0

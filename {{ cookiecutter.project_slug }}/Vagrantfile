@@ -3,6 +3,8 @@
 
 Vagrant.require_version ">= 2.2.5"
 
+# Workaround for issue seen where the guest additions may fail to install with
+# a message like "Error: Unknown repo: 'C*-base'" if the box isn't up to date.
 if Vagrant.has_plugin?("vagrant-vbguest") then
   class CustomVbGuestInstaller < VagrantVbguest::Installers::CentOS
     def install(opts=nil, &block)
@@ -30,11 +32,11 @@ end
 
 Vagrant.configure("2") do |config|
 
-  config.vagrant.plugins = [
-    "vagrant-proxyconf",
-    "vagrant-vbguest",
-    "vagrant-hostmanager",
-  ]
+  config.vagrant.plugins = {
+    "vagrant-proxyconf" => {"version" => ">=2.0.10"},
+    "vagrant-vbguest" => {"version" => ">=0.24.0"},
+    "vagrant-hostmanager" => {"version" => ">=1.8.9"}
+  }
   config.vm.box = "centos/8"
   config.vm.box_check_update = false
   # disable the default vagrant mount. We configure custom mounts on the VM separately.

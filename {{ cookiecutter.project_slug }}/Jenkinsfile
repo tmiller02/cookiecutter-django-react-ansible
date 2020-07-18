@@ -17,12 +17,6 @@ pipeline {
         stage('Provision') {
             steps {
 
-                echo """
-                    If viewing live console output, you may need to refresh
-                    at this point to see colour output properly, see
-                    https://github.com/jenkinsci/ansicolor-plugin/issues/136
-                """.stripIndent()
-
                 echo 'Ensure vagrant plugins are installed'
 
                 ansiColor('xterm') {

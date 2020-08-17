@@ -1,9 +1,11 @@
 ---
 {% raw %}
-- name: install additional required python packages
+- name: install python packages
   become: true
   dnf:
-    name: python36-devel
+    name:
+      - python38
+      - python38-devel
     state: present
 
 - name: set up virtualenv in new release path
@@ -11,7 +13,7 @@
   become_user: "{{ backend_app_user }}"
   pip:
     virtualenv: "{{ backend_app_virtualenv_dir }}"
-    virtualenv_command: /usr/bin/python3.6 -m venv
+    virtualenv_command: /usr/bin/python3.8 -m venv
     name:
       - pip==20.0.2
       - pip-tools==5.0.0

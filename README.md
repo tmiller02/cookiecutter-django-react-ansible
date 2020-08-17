@@ -6,7 +6,7 @@ a Django 3.1 & React project with Ansible provisioning and some opinionated defa
 
 ## Key Features and Technologies
 * Django 3.1
-* Python 3.6
+* Python 3.8
 * React using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
 * Follows the [12-Factor methodology](https://12factor.net/)

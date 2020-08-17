@@ -6,10 +6,10 @@
   tasks:
     - name: set ansible facts
       set_fact:
-        ansible_python_interpreter: "/usr/bin/python3"
+        ansible_python_interpreter: "/usr/bin/python3.6"
         any_errors_fatal: true
     - name: install python 3.6 and pip
-      raw: dnf install -y python36 python3-pip
+      raw: dnf install -y python3 python3-pip
       changed_when: true
     - name: check connectivity to all hosts
       ping:

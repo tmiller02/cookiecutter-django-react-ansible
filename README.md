@@ -48,7 +48,7 @@ project_slug [my_project]: my_project
 frontend_app_dev_hostname [my-project.test]: my-project.vagrant
 backend_app_dev_hostname [api.my-project.vagrant]: api.my-project.vagrant
 database_dev_hostname [db.my-project.vagrant]: db.my-project.vagrant
-controller_hostname [controller.my-project.vagrant]: controller.my-project.vagrant
+provisioner_hostname [provisioner.my-project.vagrant]: provisioner.my-project.vagrant
 # if you aren't using a proxy just leave these blank
 vagrant_yum_proxy []: 
 vagrant_http_proxy []: 

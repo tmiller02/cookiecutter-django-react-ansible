@@ -32,17 +32,17 @@ with a bash script to load some dev environment variables. If you want to run
 the dev server directly on a Windows host you will need to use an alternative
 to the Windows command prompt, such as Cygwin.
 
-## Running the dev server from the controller VM
+## Running the dev server from the provisioner VM
 
 If you don't have `yarn` installed on your host machine you can start the dev
-server on the `controller` VM instead, although you may find this to be slower:
+server on the `provisioner` VM instead, although you may find this to be slower:
 
 ```
 $ ./ssh_frontend.sh
-[vagrant@controller frontend_app]$ yarn run start
+[vagrant@provisioner frontend_app]$ yarn run start
 ```
 
-You can then access the dev server at http://{{ cookiecutter.controller_hostname }}:3000
+You can then access the dev server at http://{{ cookiecutter.provisioner_hostname }}:3000
 
 ## Formatting
 

@@ -19,7 +19,7 @@ def validate_hostnames():
         "{{ cookiecutter.frontend_app_dev_hostname }}",
         "{{ cookiecutter.backend_app_dev_hostname }}",
         "{{ cookiecutter.database_dev_hostname }}"
-        "{{ cookiecutter.controller_hostname }}",
+        "{{ cookiecutter.provisioner_hostname }}",
     ]
     if len(set(hostnames)) != len(hostnames):
         print("ERROR: all hostnames must be unique")

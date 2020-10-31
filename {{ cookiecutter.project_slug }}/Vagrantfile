@@ -146,7 +146,8 @@ Vagrant.configure("2") do |config|
       # install ansible requirements
       sudo dnf install -y epel-release
       sudo dnf install -y python36 python3-pip sshpass openssl-devel
-      pip3 install -r /vagrant/provisioning/requirements.txt --user
+      python3.6 -m venv ~/provisioning_venv --system-site-packages
+      ~/provisioning_venv/bin/pip install -r /vagrant/provisioning/requirements.txt
     SCRIPT
 
     machine.vm.provision "shell", inline: $provisioner_vm_setup_script, privileged: false, name: "ansible setup"
@@ -156,11 +157,12 @@ Vagrant.configure("2") do |config|
     machine.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.playbook = "playbook.yml"
+      ansible.playbook_command = "~/provisioning_venv/bin/ansible-playbook"
       ansible.provisioning_path = "/vagrant/provisioning"
       ansible.config_file = "ansible-vagrant.cfg"
       ansible.install = false # we do this in the above inline setup script
       ansible.galaxy_role_file = "requirements.yml"
-      ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file}"
+      ansible.galaxy_command = "~/provisioning_venv/bin/ansible-galaxy install --role-file=%{role_file}"
       ansible.verbose = false
       ansible.limit = "all,localhost"
       ansible.inventory_path = "environments/dev/inventory"

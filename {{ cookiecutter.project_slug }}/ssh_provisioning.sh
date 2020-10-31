@@ -13,4 +13,4 @@ if [ "$OSTYPE" = "cygwin" ]; then
   export VAGRANT_PREFER_SYSTEM_BIN=1
 fi
 
-vagrant ssh provisioner -c "bash --init-file <(echo \". \"\$HOME/.bashrc\"; cd /vagrant/provisioning\")"
+vagrant ssh provisioner -c "bash --init-file <(echo \". \"\$HOME/.bashrc\"; . \"\$HOME/provisioning_venv/bin/activate\"; cd /vagrant/provisioning\")"

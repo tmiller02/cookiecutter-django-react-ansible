@@ -14,15 +14,15 @@
 - import_role:
     name: geerlingguy.postgresql
   vars:
-    postgresql_version: "12"
-    postgresql_enablerepo: pgdg12
+    postgresql_version: "13"
+    postgresql_enablerepo: pgdg13
     postgresql_packages:
-      - postgresql12
-      - postgresql12-server
-      - postgresql12-contrib
-      - postgresql12-libs
-    postgresql_data_dir: /var/lib/pgsql/12/data
-    postgresql_bin_path: /usr/pgsql-12/bin/
-    postgresql_config_path: /var/lib/pgsql/12/data
-    postgresql_daemon: postgresql-12
+      - postgresql13
+      - postgresql13-server
+      - postgresql13-contrib
+      - postgresql13-libs
+    postgresql_data_dir: /var/lib/pgsql/13/data
+    postgresql_bin_path: /usr/pgsql-13/bin/
+    postgresql_config_path: /var/lib/pgsql/13/data
+    postgresql_daemon: postgresql-13
     postgresql_python_library: python3-psycopg2

@@ -15,7 +15,7 @@ a Django 3.1 & React project with Ansible provisioning and some opinionated defa
 * Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)
 * Works on Linux, macOS and Windows host environments
 * Ansible 2.10 for provisioning
-* PostgreSQL 12
+* PostgreSQL 13
 * NGINX web server set up with HTTP/2 support
 * CentOS 8
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)

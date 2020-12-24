@@ -17,11 +17,11 @@ end
 
 Vagrant.configure("2") do |config|
 
-  config.vagrant.plugins = [
-    "vagrant-proxyconf",
-    "vagrant-vbguest",
-    "vagrant-hostmanager",
-  ]
+  config.vagrant.plugins = {
+    "vagrant-proxyconf" => {"version" => ">=2.0.10"},
+    "vagrant-vbguest" => {"version" => ">=0.24.0"},
+    "vagrant-hostmanager" => {"version" => ">=1.8.9"}
+  }
 
   config.vm.box = "ubuntu/focal64"
   # disable the default vagrant mount. We configure custom mounts on the VM separately.
@@ -85,16 +85,16 @@ Vagrant.configure("2") do |config|
   # host machines where Ansible is not supported, such as Windows.
   # (see https://docs.ansible.com/ansible/latest/user_guide/windows_faq.html#can-ansible-run-on-windows )
   #
-  # However, this process does result in the creation of a 'controller' VM,
+  # However, this process does result in the creation of a 'provisioner' VM,
   # which increases the system resources used for this dev environment.
-  config.vm.define "controller" do |machine|
+  config.vm.define "provisioner" do |machine|
     # By default Vagrant adds the host's name to the loopback address when
     # setting machine.vm.hostname. This can result in unexpected behaviour
     # when attempting to bind to the host, such as when running the frontend
     # app dev server with 'yarn start'. So, we instead use a hostname alias and
     # set the hostname later on ourselves in an inline shell script.
     # See https://github.com/hashicorp/vagrant/issues/7263 for more.
-    machine.hostmanager.aliases = ["{{ cookiecutter.controller_hostname }}"]
+    machine.hostmanager.aliases = ["{{ cookiecutter.provisioner_hostname }}"]
     machine.vm.network "private_network", ip: "172.17.177.20"
     machine.vm.synced_folder "./", "/vagrant", type: "virtualbox"
     # Mount the folder containing the dev vm ssh keys with explicit file
@@ -108,12 +108,12 @@ Vagrant.configure("2") do |config|
     )
 
     machine.vm.provider "virtualbox" do |virtualbox|
-      virtualbox.name = "{{ cookiecutter.project_slug }}_controller"
+      virtualbox.name = "{{ cookiecutter.project_slug }}_provisioner"
       virtualbox.memory = 1024
     end
 
-    $controller_vm_setup_script = <<-SCRIPT
-      sudo hostnamectl set-hostname {{ cookiecutter.controller_hostname }}
+    $provisioner_vm_setup_script = <<-SCRIPT
+      sudo hostnamectl set-hostname {{ cookiecutter.provisioner_hostname }}
       # install ansible requirements
       sudo apt-get update
       sudo apt-get install -y python3 python3-venv python3-pip python3-apt sshpass libssl-dev
@@ -123,7 +123,7 @@ Vagrant.configure("2") do |config|
       pip install -r /vagrant/provisioning/requirements.txt
     SCRIPT
 
-    machine.vm.provision "shell", inline: $controller_vm_setup_script, privileged: false, name: "ansible setup"
+    machine.vm.provision "shell", inline: $provisioner_vm_setup_script, privileged: false, name: "ansible setup"
 
     # See https://www.vagrantup.com/docs/provisioning/ansible_local.html and
     # https://www.vagrantup.com/docs/provisioning/ansible_common.html
@@ -141,7 +141,7 @@ Vagrant.configure("2") do |config|
       ansible.inventory_path = "environments/dev/inventory"
       ansible.tags = ENV["VAGRANT_ANSIBLE_TAGS"] || "all"
     end
-    # Shut down the controller VM once it has finished provisioning the other VMs.
+    # Shut down the provisioner VM once it has finished provisioning the other VMs.
     # machine.vm.provision "shell", inline: "shutdown -h now"
   end
 

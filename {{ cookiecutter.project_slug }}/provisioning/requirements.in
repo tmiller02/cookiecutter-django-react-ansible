@@ -1,2 +1,1 @@
-ansible>=2.9.7
-pip-tools>=5.0.0
+ansible

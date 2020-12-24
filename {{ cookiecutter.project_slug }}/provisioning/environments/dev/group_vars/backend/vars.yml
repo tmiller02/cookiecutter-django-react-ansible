@@ -9,7 +9,7 @@ backend_app_secret_key: "$DJANGO SECRET KEY$"
 backend_app_cors_origin_whitelist:
   - "https://{{ frontend_server_name }}"
   - "http://localhost:3000"
-  - {% endraw %}"http://{{ cookiecutter.controller_hostname }}:3000"
+  - {% endraw %}"http://{{ cookiecutter.provisioner_hostname }}:3000"
 {% raw %}
 backend_app_allowed_hosts:
   - "localhost"

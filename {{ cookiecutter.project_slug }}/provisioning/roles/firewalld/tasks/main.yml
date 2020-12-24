@@ -1,7 +1,7 @@
 ---
 {% raw %}
 - name: ensure firewalld is installed
-  yum:
+  apt:
     name: firewalld
     state: present
 
@@ -17,7 +17,7 @@
     loop_var: firewalld_zone
 
 - name: apply firewalld rules
-  firewalld:
+  ansible.posix.firewalld:
     service: "{{ item.service | default(omit) }}"
     port: "{{ item.port | default(omit) }}"
     immediate: true

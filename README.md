@@ -2,10 +2,10 @@
 
 cookiecutter-django-react-ansible is a 
 [cookiecutter](https://github.com/pydanny/cookiecutter) template for setting up
-a Django 3.0 & React project with Ansible provisioning and some opinionated defaults.
+a Django 3.1 & React project with Ansible provisioning and some opinionated defaults.
 
 ## Key Features and Technologies
-* Django 3.0
+* Django 3.1
 * Python 3.8
 * React using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
@@ -14,7 +14,7 @@ a Django 3.0 & React project with Ansible provisioning and some opinionated defa
   Firefox and optional X11 forwarding
 * Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)
 * Works on Linux, macOS and Windows host environments
-* Ansible 2.9 for provisioning
+* Ansible 2.10 for provisioning
 * PostgreSQL 12
 * NGINX web server set up with HTTP/2 support
 * Ubuntu 20.04 (Focal Fossa)
@@ -48,7 +48,7 @@ project_slug [my_project]: my_project
 frontend_app_dev_hostname [my-project.test]: my-project.vagrant
 backend_app_dev_hostname [api.my-project.vagrant]: api.my-project.vagrant
 database_dev_hostname [db.my-project.vagrant]: db.my-project.vagrant
-controller_hostname [controller.my-project.vagrant]: controller.my-project.vagrant
+provisioner_hostname [provisioner.my-project.vagrant]: provisioner.my-project.vagrant
 # if you aren't using a proxy just leave these blank
 vagrant_apt_proxy []: 
 vagrant_http_proxy []: 

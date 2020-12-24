@@ -17,12 +17,6 @@ pipeline {
         stage('Provision') {
             steps {
 
-                echo """
-                    If viewing live console output, you may need to refresh
-                    at this point to see colour output properly, see
-                    https://github.com/jenkinsci/ansicolor-plugin/issues/136
-                """.stripIndent()
-
                 echo 'Ensure vagrant plugins are installed'
 
                 ansiColor('xterm') {
@@ -47,7 +41,7 @@ pipeline {
         stage('Run frontend tests') {
             steps {
                 echo 'Running unit tests...'
-                sh 'vagrant ssh controller -c "cd /vagrant/frontend_app && CI=true yarn test"'
+                sh 'vagrant ssh provisioner -c "cd /vagrant/frontend_app && CI=true yarn test"'
             }
         }
 
@@ -61,7 +55,7 @@ pipeline {
         stage('Run frontend checks') {
             steps {
                 echo 'Checking for known vulnerabilities using "yarn audit"...'
-                sh 'vagrant ssh controller -c "cd /vagrant/frontend_app && yarn audit"'
+                sh 'vagrant ssh provisioner -c "cd /vagrant/frontend_app && yarn audit"'
             }
         }
 

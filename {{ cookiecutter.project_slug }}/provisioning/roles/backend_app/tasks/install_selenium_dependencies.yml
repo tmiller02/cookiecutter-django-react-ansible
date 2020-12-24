@@ -1,18 +1,12 @@
 ---
-{% raw %}
-- name: enable the PowerTools repo
-  command:
-    cmd: dnf config-manager --enable PowerTools
-    warn: false
 
 - name: install packages used with selenium and X11 forwarding
-  dnf:
+  apt:
     name:
       - firefox
-      - xorg-x11-xauth
-      - xorg-x11-apps
+      - xauth
+      - x11-apps
     state: present
 
 - import_role:
     name: tmiller02.geckodriver
-{% endraw %}

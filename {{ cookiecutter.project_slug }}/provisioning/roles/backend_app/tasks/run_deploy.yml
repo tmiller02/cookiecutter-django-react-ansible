@@ -17,7 +17,7 @@
 # for more info.
 
 - name: install rsync
-  dnf:
+  apt:
     name: rsync
     state: present
 

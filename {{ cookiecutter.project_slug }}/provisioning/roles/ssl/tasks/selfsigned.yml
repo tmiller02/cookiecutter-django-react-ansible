@@ -3,7 +3,7 @@
 - name: create a directory for storing certificate signing requests
   file:
     state: directory
-    path: "/etc/pki/tls/csr/"
+    path: "/etc/ssl/csr/"
     owner: root
     group: root
 

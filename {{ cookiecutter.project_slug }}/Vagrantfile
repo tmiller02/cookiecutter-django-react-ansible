@@ -3,19 +3,6 @@
 
 Vagrant.require_version ">= 2.2.5"
 
-if Vagrant.has_plugin?("vagrant-vbguest") then
-  class CustomVbGuestInstaller < VagrantVbguest::Installers::CentOS
-    def install(opts=nil, &block)
-      communicate.sudo('yum -y update', opts, &block)
-      communicate.sudo('shutdown -r now', opts, &block)
-      begin
-        sleep 5
-      end until communicate.ready?
-      super
-    end
-  end
-end
-
 if Vagrant::Util::Platform.windows? then
   def running_as_admin?
     # query the LOCAL SERVICE account reg key (requires admin privileges)
@@ -35,8 +22,8 @@ Vagrant.configure("2") do |config|
     "vagrant-vbguest",
     "vagrant-hostmanager",
   ]
-  config.vm.box = "centos/8"
-  config.vm.box_check_update = false
+
+  config.vm.box = "ubuntu/focal64"
   # disable the default vagrant mount. We configure custom mounts on the VM separately.
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
@@ -48,29 +35,15 @@ Vagrant.configure("2") do |config|
     virtualbox.customize ["modifyvm", :id, "--audio", "none"]
   end
 
-  config.yum_proxy.http = "{{ cookiecutter.vagrant_yum_proxy }}"
+  config.apt_proxy.http = "{{ cookiecutter.vagrant_apt_proxy }}"
   config.proxy.http = "{{ cookiecutter.vagrant_http_proxy }}"
   config.proxy.https = "{{ cookiecutter.vagrant_https_proxy }}"
 
-  if Vagrant.has_plugin?("vagrant-vbguest") then
-    config.vbguest.installer = CustomVbGuestInstaller
-    config.vbguest.auto_update = true
-  end
+  config.vbguest.auto_update = true
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
   config.hostmanager.manage_guest = true
-
-  $dnf_proxy_script = <<-SCRIPT
-    # the vagrant-proxyconf plugin doesn't support dnf yet, so we append
-    # a proxy entry into the dnf.conf file here if applicable.
-    VAGRANT_YUM_PROXY="{{ cookiecutter.vagrant_yum_proxy }}"
-    if [ ! -z "$VAGRANT_YUM_PROXY" ]; then
-      sed -n -i -e '/^proxy=/!p' -e "\\$aproxy=$VAGRANT_YUM_PROXY" /etc/dnf/dnf.conf
-    fi
-  SCRIPT
-
-  config.vm.provision "shell", inline: $dnf_proxy_script, privileged: true, name: "dnf proxy config"
 
   config.vm.define "dev", primary: true do |machine|
     machine.vm.hostname = "{{ cookiecutter.frontend_app_dev_hostname }}"
@@ -136,15 +109,18 @@ Vagrant.configure("2") do |config|
 
     machine.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "{{ cookiecutter.project_slug }}_controller"
-      virtualbox.memory = 512
+      virtualbox.memory = 1024
     end
 
     $controller_vm_setup_script = <<-SCRIPT
       sudo hostnamectl set-hostname {{ cookiecutter.controller_hostname }}
       # install ansible requirements
-      sudo dnf install -y epel-release
-      sudo dnf install -y python36 python3-pip sshpass openssl-devel
-      pip3 install -r /vagrant/provisioning/requirements.txt --user
+      sudo apt-get update
+      sudo apt-get install -y python3 python3-venv python3-pip python3-apt sshpass libssl-dev
+      python3.8 -m venv ~/provision_venv --system-site-packages
+      source ~/provision_venv/bin/activate
+      pip install pip==20.3.3 wheel==0.36.2
+      pip install -r /vagrant/provisioning/requirements.txt
     SCRIPT
 
     machine.vm.provision "shell", inline: $controller_vm_setup_script, privileged: false, name: "ansible setup"
@@ -154,11 +130,12 @@ Vagrant.configure("2") do |config|
     machine.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.playbook = "playbook.yml"
+      ansible.playbook_command = "~/provision_venv/bin/ansible-playbook"
       ansible.provisioning_path = "/vagrant/provisioning"
       ansible.config_file = "ansible-vagrant.cfg"
       ansible.install = false # we do this in the above inline setup script
       ansible.galaxy_role_file = "requirements.yml"
-      ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file}"
+      ansible.galaxy_command = " ~/provision_venv/bin/ansible-galaxy install --role-file=%{role_file}"
       ansible.verbose = false
       ansible.limit = "all,localhost"
       ansible.inventory_path = "environments/dev/inventory"

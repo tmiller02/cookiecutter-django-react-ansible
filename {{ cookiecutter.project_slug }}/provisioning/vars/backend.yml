@@ -23,8 +23,8 @@ nginx_vhosts:
     return: "404"
     filename: "01_backend_ssl_catchall.conf"
     extra_parameters: |
-      ssl_certificate /etc/pki/tls/certs/{{ ssl_certificate_name }};
-      ssl_certificate_key /etc/pki/tls/private/{{ ssl_private_key_name }};
+      ssl_certificate /etc/ssl/certs/{{ ssl_certificate_name }};
+      ssl_certificate_key /etc/ssl/private/{{ ssl_private_key_name }};
 
   - listen: "443 ssl http2"
     server_name: "{{ backend_server_name }}"
@@ -42,7 +42,7 @@ nginx_vhosts:
           alias {{ backend_app_root }}/current/static_root;
       }
 
-      ssl_certificate /etc/pki/tls/certs/{{ ssl_certificate_name }};
-      ssl_certificate_key /etc/pki/tls/private/{{ ssl_private_key_name }};
+      ssl_certificate /etc/ssl/certs/{{ ssl_certificate_name }};
+      ssl_certificate_key /etc/ssl/private/{{ ssl_private_key_name }};
 
 {% endraw %}

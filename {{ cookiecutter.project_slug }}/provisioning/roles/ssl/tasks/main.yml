@@ -7,7 +7,7 @@
       - ssl_provider in ['selfsigned', 'copy', 'certbot']
 
 - name: install packages required for interacting with OpenSSL
-  dnf:
+  apt:
     name: python3-cryptography
     state: present
 

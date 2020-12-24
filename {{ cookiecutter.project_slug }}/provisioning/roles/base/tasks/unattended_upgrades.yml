@@ -1,0 +1,13 @@
+---
+{% raw %}
+- name: install unattended-upgrades
+  apt:
+    name: unattended-upgrades
+    state: present
+
+- name: configure Unattended-Upgrade
+  lineinfile:
+    dest: "/etc/apt/apt.conf.d/20auto-upgrades"
+    regexp: "^APT::Periodic::Unattended-Upgrade"
+    line: "APT::Periodic::Unattended-Upgrade \"{{ base_install_updates_automatically | bool | ternary(1, 0) }}\";"
+{% endraw %}

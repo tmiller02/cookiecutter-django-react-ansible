@@ -6,7 +6,7 @@ This project uses [Ansible](https://docs.ansible.com/ansible/latest/index.html)
 to provision code and [Vagrant](https://www.vagrantup.com) to manage VMs for
 the dev environment.
 
-All hosts are [CentOS 8](https://www.centos.org).
+All hosts are [Ubuntu 20.04 (Focal Fossa)](https://releases.ubuntu.com/20.04/).
 
 ## Development Environment
 
@@ -53,7 +53,7 @@ into recovery mode to fix.
 ## Production Environment
 
 This project includes a sample production environment. All hosts that are added
-to the inventory should be running CentOS 8. See the README at
+to the inventory should be running Ubuntu 20.04 (Focal Fossa). See the README at
 `provisioning/prod/README.txt` for more.
 
 You are strongly advised to use [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html),

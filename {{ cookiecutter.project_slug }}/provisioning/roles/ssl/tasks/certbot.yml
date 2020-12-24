@@ -6,7 +6,7 @@
       ssl_certbot_email is defined
 
 - name: install certbot
-  dnf:
+  apt:
     name: certbot
     state: present
 

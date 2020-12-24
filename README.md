@@ -6,7 +6,7 @@ a Django 3.0 & React project with Ansible provisioning and some opinionated defa
 
 ## Key Features and Technologies
 * Django 3.0
-* Python 3.6
+* Python 3.8
 * React using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
 * Follows the [12-Factor methodology](https://12factor.net/)
@@ -17,7 +17,7 @@ a Django 3.0 & React project with Ansible provisioning and some opinionated defa
 * Ansible 2.9 for provisioning
 * PostgreSQL 12
 * NGINX web server set up with HTTP/2 support
-* CentOS 8
+* Ubuntu 20.04 (Focal Fossa)
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
   SSL certificates for production, auto-generated self-signed SSL certificates for development.
 * Checks to python dependencies provided via [pyup.io](https://pyup.io/)
@@ -50,7 +50,7 @@ backend_app_dev_hostname [api.my-project.vagrant]: api.my-project.vagrant
 database_dev_hostname [db.my-project.vagrant]: db.my-project.vagrant
 controller_hostname [controller.my-project.vagrant]: controller.my-project.vagrant
 # if you aren't using a proxy just leave these blank
-vagrant_yum_proxy []: 
+vagrant_apt_proxy []: 
 vagrant_http_proxy []: 
 vagrant_https_proxy []:
 ```

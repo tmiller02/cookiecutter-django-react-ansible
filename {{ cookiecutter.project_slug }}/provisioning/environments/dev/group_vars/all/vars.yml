@@ -12,22 +12,22 @@ frontend_app_backend_url: "https://{{ backend_server_name }}:4000"
 
 database_password: "$DATABASE PASSWORD$"
 
-firewalld_zones:
-  - name: backend
-    ip_addresses:
-     - 172.17.177.21
+ufw_firewall_database_allow_from_ip:
+ - 172.17.177.21
 
-firewalld_additional_rules:
+ufw_firewall_additional_rules:
   # Ensure the django dev server is accessible from any address
-  - port: "8000/tcp"
-    state: "enabled"
-    zone: "public"
+  - port: "4001"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: ["any"]
     when: "{{ 'backend' in group_names }}"
   # Ensure the postgres server is accessible from any address. Don't set this
   # in a production environment!
-  - port: "5432/tcp"
-    state: "enabled"
-    zone: "public"
+  - port: "5432"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: ["any"]
     when: "{{ 'database' in group_names }}"
 {% endraw %}
 ssl_provider: 'selfsigned'

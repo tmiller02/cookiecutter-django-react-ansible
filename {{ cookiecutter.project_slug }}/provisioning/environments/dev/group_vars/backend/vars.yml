@@ -7,12 +7,7 @@ backend_app_debug: true
 backend_app_database_host: "172.18.177.22"
 backend_app_secret_key: "$DJANGO SECRET KEY$"
 backend_app_cors_origin_whitelist:
-  - "https://{{ frontend_server_name }}"
+  - "https://localhost:5000"
+  - "http://localhost:5001"
   - "http://localhost:3000"
-  - {% endraw %}"http://{{ cookiecutter.provisioner_hostname }}:3000"
-{% raw %}
-backend_app_allowed_hosts:
-  - "localhost"
-  - "127.0.0.1"
-  - "{{ backend_server_name }}"
 {% endraw %}

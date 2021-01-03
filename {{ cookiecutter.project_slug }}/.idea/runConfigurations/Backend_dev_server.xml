@@ -13,10 +13,10 @@
     <option name="ADD_CONTENT_ROOTS" value="false" />
     <option name="ADD_SOURCE_ROOTS" value="false" />
     <option name="launchJavascriptDebuger" value="false" />
-    <option name="port" value="8000" />
+    <option name="port" value="4001" />
     <option name="host" value="0.0.0.0" />
     <option name="additionalOptions" value="" />
-    <option name="browserUrl" value="http://{{ cookiecutter.backend_app_dev_hostname }}:8000/" />
+    <option name="browserUrl" value="http://localhost:4001/" />
     <option name="runTestServer" value="false" />
     <option name="runNoReload" value="false" />
     <option name="useCustomRunCommand" value="false" />

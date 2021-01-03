@@ -15,6 +15,4 @@
 #backend_app_secret_key: "<your-production-django-secret-key>"
 #backend_app_cors_origin_whitelist:
 #  - "https://{{ frontend_server_name }}"
-#backend_app_allowed_hosts:
-#  - "{{ backend_server_name }}"
 {% endraw %}

@@ -3,6 +3,8 @@
 backend_app_database_name: "{{ database_name }}"
 backend_app_database_user: "{{ database_user }}"
 backend_app_database_password: "{{ database_password }}"
+backend_app_allowed_hosts:
+  - "{{ backend_server_name }}"
 
 ssl_common_name: "{{ backend_server_name }}"
 ssl_private_key_name: "backend_app.pem"

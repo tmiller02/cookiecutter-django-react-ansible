@@ -20,7 +20,6 @@ Vagrant.configure("2") do |config|
   config.vagrant.plugins = {
     "vagrant-proxyconf" => {"version" => ">=2.0.10"},
     "vagrant-vbguest" => {"version" => ">=0.24.0"},
-    "vagrant-hostmanager" => {"version" => ">=1.8.9"}
   }
 
   # If we're using VirtualBox as the provider, apply the following config for all VMs
@@ -63,14 +62,12 @@ Vagrant.configure("2") do |config|
   config.proxy.http = "{{ cookiecutter.vagrant_http_proxy }}"
   config.proxy.https = "{{ cookiecutter.vagrant_https_proxy }}"
 
-  config.hostmanager.enabled = false
-  config.hostmanager.manage_host = false
-  config.hostmanager.manage_guest = false
-
-  config.vm.define "dev", primary: true do |machine|
-    machine.vm.hostname = "{{ cookiecutter.frontend_app_dev_hostname }}"
-    machine.hostmanager.aliases = ["{{ cookiecutter.backend_app_dev_hostname }}"]
-    machine.vm.network "private_network", ip: "172.18.177.21"
+  config.vm.define "backend", primary: true do |machine|
+    machine.vm.network "private_network", ip: "172.18.177.20"
+    # Forward the https port being served via nginx
+    machine.vm.network "forwarded_port", guest: 443, host: 4000
+    # Forward the a port that can be used when running the django dev server
+    machine.vm.network "forwarded_port", guest: 4001, host: 4001
     # Enables X11 forwarding. This can be useful when running Selenium tests
     # since you can see exactly what's happening in the browser during the tests.
     # This requires an X11 server on your host machine, see https://www.xquartz.org
@@ -89,8 +86,18 @@ Vagrant.configure("2") do |config|
 
   end
 
+  config.vm.define "frontend" do |machine|
+    machine.vm.network "private_network", ip: "172.18.177.21"
+    # Forward the https port being served via nginx
+    machine.vm.network "forwarded_port", guest: 443, host: 5000
+
+    machine.vm.provider :virtualbox do |virtualbox|
+      virtualbox.name = "{{ cookiecutter.project_slug }}_db"
+      virtualbox.memory = 512
+    end
+  end
+
   config.vm.define "db" do |machine|
-    machine.vm.hostname = "{{ cookiecutter.database_dev_hostname }}"
     machine.vm.network "private_network", ip: "172.18.177.22"
 
     machine.vm.provider :virtualbox do |virtualbox|
@@ -110,14 +117,9 @@ Vagrant.configure("2") do |config|
   # However, this process does result in the creation of a 'provisioner' VM,
   # which increases the system resources used for this dev environment.
   config.vm.define "provisioner" do |machine|
-    # By default Vagrant adds the host's name to the loopback address when
-    # setting machine.vm.hostname. This can result in unexpected behaviour
-    # when attempting to bind to the host, such as when running the frontend
-    # app dev server with 'yarn start'. So, we instead use a hostname alias and
-    # set the hostname later on ourselves in an inline shell script.
-    # See https://github.com/hashicorp/vagrant/issues/7263 for more.
-    machine.hostmanager.aliases = ["{{ cookiecutter.provisioner_hostname }}"]
-    machine.vm.network "private_network", ip: "172.18.177.20"
+    machine.vm.network "private_network", ip: "172.18.177.23"
+    # Forward a port that can be used if starting the frontend dev server
+    machine.vm.network "forwarded_port", guest: 5001, host: 5001
     # Mount the folder containing the dev vm ssh keys with explicit file
     # permissions. This addresses 'unprotected private key file' errors on
     # Windows, due to mounts on Windows having 777 file permissions by default.
@@ -135,9 +137,8 @@ Vagrant.configure("2") do |config|
     machine.vm.provision "shell" do |shell|
       shell.name = "ansible setup"
       shell.privileged = false
+      # install ansible requirements
       shell.inline = <<-SCRIPT
-        sudo hostnamectl set-hostname {{ cookiecutter.provisioner_hostname }}
-        # install ansible requirements
         sudo apt-get update
         sudo apt-get install -y curl rsync python3 python3-venv python3-pip python3-apt libssl-dev
         python3.8 -m venv ~/provision_venv --system-site-packages

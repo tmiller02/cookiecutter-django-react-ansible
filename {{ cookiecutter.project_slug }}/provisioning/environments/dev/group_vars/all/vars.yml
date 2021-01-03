@@ -1,13 +1,14 @@
 ---
-
+{% raw %}
 deploy_check_display_confirmation_prompts: false
 
 base_show_production_login_warning: false
 base_install_updates_automatically: true
 
-backend_server_name: "{{ cookiecutter.backend_app_dev_hostname }}"
+backend_server_name: "localhost"
 
-frontend_server_name: "{{ cookiecutter.frontend_app_dev_hostname }}"
+frontend_server_name: "localhost"
+frontend_app_backend_url: "https://{{ backend_server_name }}:4000"
 
 database_password: "$DATABASE PASSWORD$"
 
@@ -16,7 +17,6 @@ firewalld_zones:
     ip_addresses:
      - 172.17.177.21
 
-{% raw %}
 firewalld_additional_rules:
   # Ensure the django dev server is accessible from any address
   - port: "8000/tcp"

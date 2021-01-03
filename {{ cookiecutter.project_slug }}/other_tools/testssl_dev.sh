@@ -14,5 +14,5 @@ fi
 
 cd "$REPO_DIR" || exit
 
-./testssl.sh --full https://{{ cookiecutter.frontend_app_dev_hostname }}
-./testssl.sh --full https://{{ cookiecutter.backend_app_dev_hostname }}
+./testssl.sh --full https://localhost:4000
+./testssl.sh --full https://localhost:5000

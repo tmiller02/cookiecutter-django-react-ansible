@@ -8,7 +8,7 @@
     <node-interpreter value="node" />
     <package-manager value="yarn" />
     <envs>
-      <env name="REACT_APP_BACKEND_URL" value="http://{{ cookiecutter.backend_app_dev_hostname }}:8000" />
+      <env name="REACT_APP_BACKEND_URL" value="http://localhost:4001" />
     </envs>
     <method v="2" />
   </configuration>

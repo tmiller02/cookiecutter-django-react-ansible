@@ -4,7 +4,7 @@ backend_app_user: "vagrant"
 backend_app_group: "vagrant"
 backend_app_vagrant_mount: true
 backend_app_debug: true
-backend_app_database_host: "172.17.177.22"
+backend_app_database_host: "172.18.177.22"
 backend_app_secret_key: "$DJANGO SECRET KEY$"
 backend_app_cors_origin_whitelist:
   - "https://{{ frontend_server_name }}"

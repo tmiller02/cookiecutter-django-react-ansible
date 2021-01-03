@@ -4,9 +4,7 @@
   apt:
     name:
       - firefox
+      - firefox-geckodriver
       - xauth
       - x11-apps
     state: present
-
-- import_role:
-    name: tmiller02.geckodriver

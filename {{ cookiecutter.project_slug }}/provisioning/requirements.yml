@@ -15,6 +15,3 @@ roles:
 
   - name: tmiller02.neofetch
     version: "0.1.0"
-
-  - name: tmiller02.geckodriver
-    version: "0.1.0"

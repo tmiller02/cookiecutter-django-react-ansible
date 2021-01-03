@@ -37,7 +37,7 @@
         firewalld_rules: "{{ firewalld_base_rules + firewalld_additional_rules }}"
   roles:
     - base
-    - firewalld
+#    - firewalld
   tasks:
     - name: "Set release version facts"
       set_fact:

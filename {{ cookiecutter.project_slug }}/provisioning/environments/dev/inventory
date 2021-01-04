@@ -1,6 +1,6 @@
-{{ cookiecutter.project_slug }}_backend ansible_host=172.18.177.20 ansible_ssh_private_key_file="/vagrant_ansible_key/id_rsa"
-{{ cookiecutter.project_slug }}_frontend ansible_host=172.18.177.21 ansible_ssh_private_key_file="/vagrant_ansible_key/id_rsa"
-{{ cookiecutter.project_slug }}_db ansible_host=172.18.177.22 ansible_ssh_private_key_file="/vagrant_ansible_key/id_rsa"
+{{ cookiecutter.project_slug }}_backend  ansible_host=172.18.177.20
+{{ cookiecutter.project_slug }}_frontend ansible_host=172.18.177.21
+{{ cookiecutter.project_slug }}_db       ansible_host=172.18.177.22
 
 [backend]
 {{ cookiecutter.project_slug }}_backend

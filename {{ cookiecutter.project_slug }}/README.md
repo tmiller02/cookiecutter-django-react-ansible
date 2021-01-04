@@ -8,8 +8,8 @@
 
 * [Vagrant](https://www.vagrantup.com/)
 * One of the following:  
-  * [VirtualBox](https://www.virtualbox.org/)
   * [Docker](https://www.docker.com/)
+  * [VirtualBox](https://www.virtualbox.org/)
 
 ## Optional Dependencies
 

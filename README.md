@@ -72,8 +72,8 @@ $ git push -u origin master
 To get up and running quickly, make sure you have the following requirements installed:
 * [Vagrant](https://www.vagrantup.com/)
 * One of the following:  
-  * [VirtualBox](https://www.virtualbox.org/)
   * [Docker](https://www.docker.com/)
+  * [VirtualBox](https://www.virtualbox.org/)
 
 First, navigate to the project's directory:
 ```

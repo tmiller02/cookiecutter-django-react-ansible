@@ -71,43 +71,43 @@ Vagrant.configure("2") do |config|
   config.proxy.http = "{{ cookiecutter.vagrant_http_proxy }}"
   config.proxy.https = "{{ cookiecutter.vagrant_https_proxy }}"
 
-  config.vm.define "backend", primary: true do |machine|
-    machine.vm.network "private_network", ip: "172.18.177.20"
+  config.vm.define "backend", primary: true do |backend|
+    backend.vm.network "private_network", ip: "172.18.177.20"
     # Forward the https port being served via nginx
-    machine.vm.network "forwarded_port", guest: 443, host: 4000
+    backend.vm.network "forwarded_port", guest: 443, host: 4000
     # Forward the a port that can be used when running the django dev server
-    machine.vm.network "forwarded_port", guest: 4001, host: 4001
+    backend.vm.network "forwarded_port", guest: 4001, host: 4001
     # Enables X11 forwarding. This can be useful when running Selenium tests
     # since you can see exactly what's happening in the browser during the tests.
     # This requires an X11 server on your host machine, see https://www.xquartz.org
     # for Mac hosts or http://x.cygwin.com for Windows hosts.
-    machine.ssh.forward_x11 = true
-    machine.vm.synced_folder(
+    backend.ssh.forward_x11 = true
+    backend.vm.synced_folder(
       "./backend_app",
       "/opt/{{ cookiecutter.project_slug }}_backend/current",
     )
 
-    machine.vm.provider :virtualbox do |virtualbox|
+    backend.vm.provider :virtualbox do |virtualbox|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
     end
 
   end
 
-  config.vm.define "frontend" do |machine|
-    machine.vm.network "private_network", ip: "172.18.177.21"
+  config.vm.define "frontend" do |frontend|
+    frontend.vm.network "private_network", ip: "172.18.177.21"
     # Forward the https port being served via nginx
-    machine.vm.network "forwarded_port", guest: 443, host: 5000
+    frontend.vm.network "forwarded_port", guest: 443, host: 5000
 
-    machine.vm.provider :virtualbox do |virtualbox|
+    frontend.vm.provider :virtualbox do |virtualbox|
       virtualbox.memory = 512
     end
   end
 
-  config.vm.define "db" do |machine|
-    machine.vm.network "private_network", ip: "172.18.177.22"
+  config.vm.define "db" do |db|
+    db.vm.network "private_network", ip: "172.18.177.22"
 
-    machine.vm.provider :virtualbox do |virtualbox|
+    db.vm.provider :virtualbox do |virtualbox|
       virtualbox.memory = 512
     end
   end
@@ -122,24 +122,24 @@ Vagrant.configure("2") do |config|
   #
   # However, this process does result in the creation of a 'provisioner' VM,
   # which increases the system resources used for this dev environment.
-  config.vm.define "provisioner" do |machine|
-    machine.vm.network "private_network", ip: "172.18.177.23"
+  config.vm.define "provisioner" do |provisioner|
+    provisioner.vm.network "private_network", ip: "172.18.177.23"
     # Forward a port that can be used if starting the frontend dev server
-    machine.vm.network "forwarded_port", guest: 5001, host: 5001
+    provisioner.vm.network "forwarded_port", guest: 5001, host: 5001
     # Mount the folder containing the dev vm ssh keys with explicit file
     # permissions. This addresses 'unprotected private key file' errors on
     # Windows, due to mounts on Windows having 777 file permissions by default.
-    machine.vm.synced_folder(
+    provisioner.vm.synced_folder(
       "./vagrant_ansible_key",
       "/vagrant_ansible_key",
       mount_options: ["fmode=600"]
     )
 
-    machine.vm.provider :virtualbox do |virtualbox|
+    provisioner.vm.provider :virtualbox do |virtualbox|
       virtualbox.memory = 1024
     end
 
-    machine.vm.provision "shell" do |shell|
+    provisioner.vm.provision "shell" do |shell|
       shell.name = "ansible setup"
       shell.privileged = false
       # install ansible requirements
@@ -155,7 +155,7 @@ Vagrant.configure("2") do |config|
 
     # See https://www.vagrantup.com/docs/provisioning/ansible_local.html and
     # https://www.vagrantup.com/docs/provisioning/ansible_common.html
-    machine.vm.provision "ansible_local" do |ansible|
+    provisioner.vm.provision "ansible_local" do |ansible|
       ansible.compatibility_mode = "2.0"
       ansible.playbook = "playbook.yml"
       ansible.playbook_command = "~/provision_venv/bin/ansible-playbook"

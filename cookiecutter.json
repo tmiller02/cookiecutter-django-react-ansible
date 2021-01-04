@@ -2,10 +2,6 @@
     "project_name": "My Project",
     "project_slug": "{{ cookiecutter.project_name.lower() | replace(' ', '_') | replace('-', '_') | replace('.', '_') | trim() }}",
     "project_overview": "My project overview",
-    "frontend_app_dev_hostname": "{{ cookiecutter.project_slug | replace('_', '-') }}.vagrant",
-    "backend_app_dev_hostname": "api.{{ cookiecutter.project_slug | replace('_', '-') }}.vagrant",
-    "database_dev_hostname": "db.{{ cookiecutter.project_slug | replace('_', '-') }}.vagrant",
-    "provisioner_hostname": "provisioner.{{ cookiecutter.project_slug | replace('_', '-') }}.vagrant",
     "vagrant_apt_proxy": "",
     "vagrant_http_proxy": "",
     "vagrant_https_proxy": ""

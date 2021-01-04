@@ -42,7 +42,7 @@ $ ./ssh_frontend.sh
 [vagrant@provisioner frontend_app]$ yarn run start
 ```
 
-You can then access the dev server at http://{{ cookiecutter.provisioner_hostname }}:3000
+You can then access the dev server at http://localhost:5001
 
 ## Formatting
 
@@ -75,8 +75,8 @@ If you want to see this build in action on the Vagrant dev environment, run:
 vagrant up --provision
 ```
 
-and visit https://{{ cookiecutter.frontend_app_dev_hostname }} where it is being
-served via NGINX on the 'dev' Vagrant VM.
+and visit https://localhost:5000 where it is being
+served via NGINX on the 'frontend' Vagrant VM.
 
 You can also use ansible tags to limit the playbook to just the tasks needed to
 update the frontend app:

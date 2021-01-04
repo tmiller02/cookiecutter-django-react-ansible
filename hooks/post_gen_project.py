@@ -73,22 +73,30 @@ def convert_crlf_to_lf():
 success_message = u"""
 This project has the following requirements. Make sure these are installed \
 before getting started:
-
-  \u2022 VirtualBox - https://www.virtualbox.org/
   \u2022 Vagrant - https://www.vagrantup.com/
+  \u2022 One of the following:
+    \u25e6 Docker - https://www.docker.com/
+    \u25e6 VirtualBox - https://www.virtualbox.org/
     
 To get started, run:
 
   $ cd {{ cookiecutter.project_slug }}
+  
+If using Docker, build the base Docker image:
+ 
+  $ docker build -t {{ cookiecutter.project_slug}}_base_image .   
+  
+Next, provision with Vagrant:
+  
   $ vagrant up --provision
     
 Once provisioning has finished, you can access the backend app at:
 
-  https://{{ cookiecutter.backend_app_dev_hostname }}
+  https://localhost:4000
 
 and the frontend app at:
 
-  https://{{ cookiecutter.frontend_app_dev_hostname }}
+  https://localhost:5000
     
 Check the documentation at  {{ cookiecutter.project_slug }}/README.md for more.
 """

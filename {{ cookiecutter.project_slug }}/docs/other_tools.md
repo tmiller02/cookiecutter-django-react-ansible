@@ -29,7 +29,7 @@ file and restart the gunicorn workers by running
 Then we'll start locust pointing to our dev environment:
 
 ```
-LOCUST_HOST=https://{{ cookiecutter.backend_app_dev_hostname }} locust -f locustfile.py
+LOCUST_HOST=https://localhost:4000 locust -f locustfile.py
 ```
 
 And you can start using locust at http://localhost:8089

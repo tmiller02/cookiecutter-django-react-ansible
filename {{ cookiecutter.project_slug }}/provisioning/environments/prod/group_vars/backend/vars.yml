@@ -5,7 +5,7 @@
 {% raw %}
 #backend_app_vagrant_mount: false
 #backend_app_debug: false
-#backend_app_database_host: "<your-production-database-host>"
+#backend_app_database_host_ip: "<your-production-database-host-ip>"
 ## To generate a new secret key using django:
 ## $ python manage.py shell
 ## >>> from django.core.management import utils
@@ -15,6 +15,4 @@
 #backend_app_secret_key: "<your-production-django-secret-key>"
 #backend_app_cors_origin_whitelist:
 #  - "https://{{ frontend_server_name }}"
-#backend_app_allowed_hosts:
-#  - "{{ backend_server_name }}"
 {% endraw %}

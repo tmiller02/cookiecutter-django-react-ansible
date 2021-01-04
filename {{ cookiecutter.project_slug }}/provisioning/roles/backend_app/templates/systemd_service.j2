@@ -3,9 +3,6 @@
 Description = {{ cookiecutter.project_name }}
 {% raw %}
 After = network.target
-{% if backend_app_vagrant_mount %}
-RequiresMountsFor={{ backend_app_deploy_helper.current_path }}
-{% endif %}
 
 [Service]
 RuntimeDirectory = {{ backend_app_systemd_runtime_dir }}
@@ -20,5 +17,5 @@ ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
 
 [Install]
-WantedBy={% if backend_app_vagrant_mount %}{{ backend_app_vagrant_systemd_mount_name }}{% else %}multi-user.target{% endif %}
+WantedBy = multi-user.target
 {% endraw %}

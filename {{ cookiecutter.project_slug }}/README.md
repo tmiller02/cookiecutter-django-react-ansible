@@ -6,8 +6,10 @@
 
 ## Required Dependencies
 
-* [VirtualBox](https://www.virtualbox.org/)
 * [Vagrant](https://www.vagrantup.com/)
+* One of the following:  
+  * [Docker](https://www.docker.com/)
+  * [VirtualBox](https://www.virtualbox.org/)
 
 ## Optional Dependencies
 
@@ -19,18 +21,32 @@
 
 ## Quickstart
 
-To provision the development environment, run:
+First, navigate to the project's directory:
+
 ```
 $ cd {{ cookiecutter.project_slug }}
+```
+
+This project has been configured to work with either VirtualBox or Docker
+as part of the Vagrant provisioning process via 
+[vagrant providers](https://www.vagrantup.com/docs/providers).
+
+If you are using Docker, you'll need to build the base Docker image:
+
+```
+$ docker build -t {{ cookiecutter.project_slug}}_base_image .
+```
+
+Provision the Vagrant dev environment:
+
+```
 $ vagrant up --provision
 ```
 
 You may need to re-run this command if Vagrant needed to install plugins.
-You may also be prompted for a password if the `vagrant-vbguest` plugin is
-making changes to your `/etc/hosts` file.
 
-Once provisioning has finished, you can access the django app at https://{{ cookiecutter.backend_app_dev_hostname }}
-and the frontend app at https://{{ cookiecutter.frontend_app_dev_hostname }}
+Once provisioning has finished, you can access the django app at https://localhost:4000
+and the frontend app at https://localhost:5000
 
 ## Next Steps
 

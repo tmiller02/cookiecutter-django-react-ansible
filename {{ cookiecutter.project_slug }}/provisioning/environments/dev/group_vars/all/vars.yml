@@ -1,33 +1,33 @@
 ---
-
+{% raw %}
 deploy_check_display_confirmation_prompts: false
 
 base_show_production_login_warning: false
 base_install_updates_automatically: true
 
-backend_server_name: "{{ cookiecutter.backend_app_dev_hostname }}"
+backend_server_name: "localhost"
 
-frontend_server_name: "{{ cookiecutter.frontend_app_dev_hostname }}"
+frontend_server_name: "localhost"
+frontend_app_backend_url: "https://{{ backend_server_name }}:4000"
 
 database_password: "$DATABASE PASSWORD$"
 
-firewalld_zones:
-  - name: backend
-    ip_addresses:
-     - 172.17.177.21
+ufw_firewall_database_allow_from_ip:
+ - 172.17.177.21
 
-{% raw %}
-firewalld_additional_rules:
+ufw_firewall_additional_rules:
   # Ensure the django dev server is accessible from any address
-  - port: "8000/tcp"
-    state: "enabled"
-    zone: "public"
+  - port: "4001"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: ["any"]
     when: "{{ 'backend' in group_names }}"
   # Ensure the postgres server is accessible from any address. Don't set this
   # in a production environment!
-  - port: "5432/tcp"
-    state: "enabled"
-    zone: "public"
+  - port: "5432"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: ["any"]
     when: "{{ 'database' in group_names }}"
 {% endraw %}
 ssl_provider: 'selfsigned'

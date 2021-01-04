@@ -5,20 +5,30 @@
 database_name: "{{ cookiecutter.project_slug }}"
 database_user: "{{ cookiecutter.project_slug }}"
 {% raw %}
-firewalld_base_rules:
-  - service: "http"
-    state: "enabled"
-    zone: "public"
-    when: "{{ 'backend' in group_names }}"
+ufw_firewall_base_rules:
 
-  - service: "https"
-    state: "enabled"
-    zone: "public"
-    when: "{{ 'backend' in group_names }}"
+  - port: "ssh"
+    proto: "tcp"
+    rule: "limit"
+    from_ip: ["any"]
+    when: true
 
-  - port: "5432/tcp"
-    state: "enabled"
-    zone: "backend"
+  - port: "http"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: ["any"]
+    when: "{{ 'backend' in group_names or 'frontend' in group_names }}"
+
+  - port: "https"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: ["any"]
+    when: "{{ 'backend' in group_names or 'frontend' in group_names }}"
+
+  - port: "5432"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: "{{ ufw_firewall_database_allow_from_ip }}"
     when: "{{ 'database' in group_names }}"
 {% endraw %}
 nginx_remove_default_vhost: true

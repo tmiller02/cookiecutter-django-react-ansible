@@ -7,8 +7,8 @@
 # https://create-react-app.dev/docs/adding-custom-environment-variables/#what-other-env-files-can-be-used
 # as well as via regular environment variables in some PyCharm run configurations.
 
-PROVISIONER_HOSTNAME="{{ cookiecutter.provisioner_hostname }}"
-if [ "$(uname -n)" = $PROVISIONER_HOSTNAME ]; then
-  export HOST=$PROVISIONER_HOSTNAME
+if [ "$(whoami)" = "vagrant" ]; then
+  export HOST=0.0.0.0
+  export PORT=5001
   export CHOKIDAR_USEPOLLING=true
 fi

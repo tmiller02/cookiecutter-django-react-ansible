@@ -1,3 +1,4 @@
+{% raw %}
 #---
 #
 #deploy_check_display_confirmation_prompts: true
@@ -8,16 +9,16 @@
 #backend_server_name: "<your-production-server-backend-cname>"
 #
 #frontend_server_name: "<your-production-server-frontend-cname>"
+#frontend_app_backend_url: "https://{{ backend_server_name }}"
 #
 ## See README.txt - store sensitive variables like this using ansible vault
 #database_password: "<your-production-database-password>"
 #
-# firewalld_zones:
-#  - name: backend
-#    ip_addresses:
-#     - <your-production-backend-ip-address>
+#ufw_firewall_database_allow_from_ip:
+# - <your-production-backend-ip-address>
 #
-# firewalld_additional_rules: []
+#ufw_firewall_additional_rules: []
 #
 #ssl_provider: 'certbot'
 #ssl_certbot_email: '<your-certbot-notification-email>'
+{% endraw %}

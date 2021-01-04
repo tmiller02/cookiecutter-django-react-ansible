@@ -45,10 +45,6 @@ options. Once you've provided these values, your project will be generated.
 ```
 project_name [My Project]: My Project
 project_slug [my_project]: my_project
-frontend_app_dev_hostname [my-project.test]: my-project.vagrant
-backend_app_dev_hostname [api.my-project.vagrant]: api.my-project.vagrant
-database_dev_hostname [db.my-project.vagrant]: db.my-project.vagrant
-provisioner_hostname [provisioner.my-project.vagrant]: provisioner.my-project.vagrant
 # if you aren't using a proxy just leave these blank
 vagrant_apt_proxy []: 
 vagrant_http_proxy []: 
@@ -74,19 +70,34 @@ $ git push -u origin master
 ## Quickstart
 
 To get up and running quickly, make sure you have the following requirements installed:
-* [VirtualBox](https://www.virtualbox.org/)
 * [Vagrant](https://www.vagrantup.com/)
+* One of the following:  
+  * [Docker](https://www.docker.com/)
+  * [VirtualBox](https://www.virtualbox.org/)
 
-To provision the development environment, run:
+First, navigate to the project's directory:
 ```
-$ cd my_project
+$ cd {{ cookiecutter.project_slug }}
+```
+
+This project has been configured to work with either VirtualBox or Docker
+as part of the Vagrant provisioning process via 
+[vagrant providers](https://www.vagrantup.com/docs/providers).
+
+If you are using Docker, you'll need to build the base Docker image:
+
+```
+$ docker build -t {{ cookiecutter.project_slug}}_base_image .
+```
+
+Provision the Vagrant dev environment:
+
+```
 $ vagrant up --provision
 ```
-    
-Once provisioning has finished, you can access the django app at the hostname you
-set for the `backend_app_dev_hostname` option, e.g. https://api.my-project.vagrant.
-You can access the react app at the hostname you set for the
-`frontend_app_dev_hostname`, e.g. https://my-project.vagrant.
+
+Once provisioning has finished, you can access the django app at https://localhost:4000.
+You can access the react app at https://localhost:5000.
 
 ## Next Steps
 

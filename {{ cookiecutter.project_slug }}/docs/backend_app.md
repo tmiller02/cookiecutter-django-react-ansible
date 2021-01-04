@@ -21,25 +21,25 @@ virtualenv. We can use the `ssh_backend.sh` helper script to do this:
 $ ./ssh_backend.sh 
 ```
 
-Then we'll start the django dev server, binding to all IP addresses on port 8000:
+Then we'll start the django dev server, binding to all IP addresses on port 4001:
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ python manage.py runserver 0:8000
+(venv) [{{ cookiecutter.project_slug }}]$ python manage.py runserver 0:4001
 ```
 
 Or alternatively, we can pass these arguments directly into the `ssh_backend.sh`
 script to do this in a single step:
 
 ```
-./ssh_backend.sh python manage.py runserver 0:8000
+./ssh_backend.sh python manage.py runserver 0:4001
 ```
 
 You can view pages being served by this dev server by going to
-http://{{ cookiecutter.backend_app_dev_hostname }}:8000.
+http://localhost:4001.
 
 Note that the dev server url is **http** (not **https**) and is on port
-**8000**. Make sure not to confuse this url with the https url, which is served
-instead by NGINX and gunicorn. Unlike the django dev server, these will
+**4001**. Make sure not to confuse this url with the https url, which is served
+instead by NGINX and gunicorn. Unlike the django dev server, the NGINX url will
 **not** automatically reload after any code changes.
 
 ## Running Tests
@@ -138,5 +138,5 @@ The django app is run as a systemd service
 (`{{ cookiecutter.project_slug }}.service`) with gunicorn which exposes the 
 application on localhost:8080. NGINX is configured as a reverse proxy for this
 location. You can access the django app being served via NGINX by going to
-http://{{ cookiecutter.backend_app_dev_hostname }} (note that you may need to
+https://localhost:4000 (note that you may need to
 restart the systemd service to pick up any code changes.)

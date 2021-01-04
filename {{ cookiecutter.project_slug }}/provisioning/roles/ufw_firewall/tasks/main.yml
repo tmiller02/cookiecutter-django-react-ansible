@@ -1,0 +1,21 @@
+---
+{% raw %}
+- name: ensure UFW is installed
+  apt:
+    name: ufw
+    state: present
+
+- name: apply UFW firewall rules
+  ufw:
+    port: "{{ item.0.port }}"
+    proto: "{{ item.0.proto }}"
+    rule: "{{ item.0.rule }}"
+    from_ip: '{{ item.1 }}'
+  when: item.0.when | bool
+  loop: "{{ ufw_firewall_rules | subelements('from_ip') }}"
+
+- name: enable UFW
+  ufw:
+    state: enabled
+    default: deny
+{% endraw %}

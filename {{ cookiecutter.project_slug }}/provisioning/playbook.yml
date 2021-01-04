@@ -34,10 +34,10 @@
     - vars/shared.yml
   pre_tasks:
     - set_fact:
-        firewalld_rules: "{{ firewalld_base_rules + firewalld_additional_rules }}"
+        ufw_firewall_rules: "{{ ufw_firewall_base_rules + ufw_firewall_additional_rules }}"
   roles:
     - base
-    - firewalld
+    - ufw_firewall
   tasks:
     - name: "Set release version facts"
       set_fact:

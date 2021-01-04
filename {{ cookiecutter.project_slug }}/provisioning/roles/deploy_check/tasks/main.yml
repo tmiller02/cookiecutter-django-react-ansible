@@ -13,11 +13,6 @@
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: sanity check some variables
-  assert:
-    that:
-      - "frontend_server_name != backend_server_name"
-
 - name: prompt when the git working directory is not clean
   block:
     - name: run git status

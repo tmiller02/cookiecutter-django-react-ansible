@@ -1,7 +1,9 @@
 ---
 
-- import_role:
-    name: tmiller02.neofetch
+- name: install neofetch
+  apt:
+    name: neofetch
+    state: present
 
 - name: ensure neofetch config directory exists
   file:

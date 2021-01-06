@@ -2,7 +2,7 @@
 
 roles:
   - name: geerlingguy.postgresql
-    version: "2.2.1"
+    version: "3.0.0"
 
   - name: geerlingguy.nginx
     version: "2.8.0"

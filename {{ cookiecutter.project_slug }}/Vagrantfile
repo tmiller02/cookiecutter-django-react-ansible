@@ -57,7 +57,11 @@ Vagrant.configure("2") do |config|
   # be using this key to make ssh connections when running Ansible to provision
   # the Vagrant dev environment (see the 'ansible_local' configuration).
   config.vm.provision "shell" do |shell|
-    vagrant_ansible_key_pub = File.readlines("provisioning/vagrant_ansible_key/id_rsa.pub").first.strip
+    vagrant_ansible_key_pub = File.readlines(
+        File.join(
+            File.dirname(__FILE__), "provisioning/vagrant_ansible_key/id_rsa.pub"
+        )
+    ).first.strip
     shell.name = "add custom vagrant ansible key to authorized keys"
     shell.privileged = false
     shell.inline = <<-SCRIPT
@@ -131,7 +135,12 @@ Vagrant.configure("2") do |config|
       virtualbox.memory = 1024
     end
 
-    provisioner.vm.provision "file", source: "provisioning/vagrant_ansible_key/id_rsa", destination: "/home/vagrant/.ssh/vagrant_ansible_key"
+    provisioner.vm.provision "file" do |file|
+      file.source = File.join(
+        File.dirname(__FILE__), "provisioning/vagrant_ansible_key/id_rsa"
+      )
+      file.destination = "/home/vagrant/.ssh/vagrant_ansible_key"
+    end
 
     provisioner.vm.provision "shell" do |shell|
       shell.name = "ansible setup"

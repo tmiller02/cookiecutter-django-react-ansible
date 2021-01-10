@@ -107,6 +107,14 @@ And to run `flake8`:
 (venv) [{{ cookiecutter.project_slug }}]$ make lint
 ```
 
+## Type Checking
+
+To run type checking with [mypy](https://mypy.readthedocs.io/en/stable/introduction.html):
+
+```
+(venv) [{{ cookiecutter.project_slug }}]$ make type_check
+```
+
 ## Updating Dependencies
 
 This project uses [pip-tools](https://github.com/jazzband/pip-tools) to

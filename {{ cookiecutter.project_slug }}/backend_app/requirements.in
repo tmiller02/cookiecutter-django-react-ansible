@@ -4,10 +4,12 @@ Django
 django-cors-headers
 django-environ
 django-extensions
+django-stubs
 djangorestframework
 flake8
 gunicorn
 ipython
+mypy
 psycopg2-binary
 safety
 selenium

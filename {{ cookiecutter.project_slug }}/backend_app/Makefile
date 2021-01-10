@@ -21,3 +21,7 @@ lint:
 safety_check:
 	. ~/.venvrc
 	safety check
+
+type_check:
+	. ~/.venvrc
+	mypy --config-file=mypy.ini

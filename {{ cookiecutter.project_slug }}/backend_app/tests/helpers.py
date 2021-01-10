@@ -7,6 +7,9 @@ from django.conf import settings
 
 
 class SeleniumLiveServerTestCase(StaticLiveServerTestCase):
+
+    selenium: Firefox
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

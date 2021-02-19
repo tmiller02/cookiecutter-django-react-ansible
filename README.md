@@ -9,12 +9,12 @@ a Django 3.1 & React project with Ansible provisioning and some opinionated defa
 * Python 3.8
 * React using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
+* Ansible 3.0 for provisioning  
 * Follows the [12-Factor methodology](https://12factor.net/)
 * Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/),
   Firefox and optional X11 forwarding
 * Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)
 * Works on Linux, macOS and Windows host environments
-* Ansible 2.10 for provisioning
 * PostgreSQL 12
 * NGINX web server set up with HTTP/2 support
 * Ubuntu 20.04 (Focal Fossa)

@@ -113,6 +113,15 @@ Vagrant.configure("2") do |config|
     # Forward a port that can be used if starting the frontend dev server
     provisioner.vm.network "forwarded_port", guest: 5001, host: 5001
 
+    # Mount the folder containing the dev vm ssh keys with explicit file
+    # permissions. This addresses 'unprotected private key file' errors on
+    # Windows, due to mounts on Windows having 777 file permissions by default.
+    provisioner.vm.synced_folder(
+      "./.vagrant/machines",
+      "/vagrant_machines",
+      mount_options: ["fmode=600"]
+    )
+
     provisioner.vm.provider :virtualbox do |virtualbox|
       virtualbox.memory = 1024
     end

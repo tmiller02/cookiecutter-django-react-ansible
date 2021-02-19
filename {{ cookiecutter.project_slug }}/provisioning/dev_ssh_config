@@ -1,11 +1,11 @@
 Host 172.18.177.20
-    IdentityFile=/vagrant/.vagrant/machines/backend/virtualbox/private_key
-    IdentityFile=/vagrant/.vagrant/machines/backend/docker/private_key
+    IdentityFile=/vagrant_machines/backend/virtualbox/private_key
+    IdentityFile=/vagrant_machines/backend/docker/private_key
 
 Host 172.18.177.21
-    IdentityFile=/vagrant/.vagrant/machines/frontend/virtualbox/private_key
-    IdentityFile=/vagrant/.vagrant/machines/frontend/docker/private_key
+    IdentityFile=/vagrant_machines/frontend/virtualbox/private_key
+    IdentityFile=/vagrant_machines/frontend/docker/private_key
 
 Host 172.18.177.22
-    IdentityFile=/vagrant/.vagrant/machines/db/virtualbox/private_key
-    IdentityFile=/vagrant/.vagrant/machines/db/docker/private_key
+    IdentityFile=/vagrant_machines/db/virtualbox/private_key
+    IdentityFile=/vagrant_machines/db/docker/private_key

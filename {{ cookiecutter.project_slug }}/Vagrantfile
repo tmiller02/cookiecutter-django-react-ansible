@@ -154,7 +154,7 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "playbook.yml"
       ansible.playbook_command = "~/provisioning_venv/bin/ansible-playbook"
       ansible.provisioning_path = "/vagrant/provisioning"
-      ansible.config_file = "ansible-vagrant.cfg"
+      ansible.config_file = "ansible_vagrant.cfg"
       ansible.install = false # we do this in the above inline setup script
       ansible.galaxy_role_file = "requirements.yml"
       ansible.galaxy_command = " ~/provisioning_venv/bin/ansible-galaxy install --role-file=%{role_file}"

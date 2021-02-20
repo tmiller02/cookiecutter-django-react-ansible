@@ -8,6 +8,6 @@ class AdminTests(SeleniumLiveServerTestCase):
         Check that navigating to /admin/ displays the login page for the
         django admin.
         """
-        self.selenium.get("%s%s" % (self.live_server_url, "/admin/"))
+        self.selenium.get(f"{self.live_server_url}/admin/")
         site_name_element = self.selenium.find_element_by_id("site-name")
         self.assertEqual(site_name_element.text, "Django administration")

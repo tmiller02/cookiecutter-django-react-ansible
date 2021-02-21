@@ -58,6 +58,7 @@
 - name: display a report of the python dependencies using 'safety'
   become: true
   become_user: "{{ backend_app_user }}"
+  run_once: true
   command: make safety_check
   args:
     chdir: "{{ backend_app_deploy_helper.current_path }}"

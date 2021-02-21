@@ -12,6 +12,7 @@
     django_manage_migrate
 
 - name: display migrate output
+  run_once: true
   debug:
     msg: "{{ django_manage_migrate.out }}"
 {% endraw %}

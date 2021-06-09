@@ -104,9 +104,9 @@ django-stubs==1.7.0 \
     --hash=sha256:30a7d99c694acf79c5d93d69a5a8e4b54d2a8c11dd672aa869006789e2189fa6 \
     --hash=sha256:ddd190aca5b9adb4d30760d5c64f67cb3658703f5f42c3bb0c2c71ff4d752c39
     # via -r requirements.in
-django==3.1.7 \
-    --hash=sha256:32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7 \
-    --hash=sha256:baf099db36ad31f970775d0be5587cc58a6256a6771a44eb795b554d45f211b8
+django==3.1.10 \
+    --hash=sha256:973c968e63518859732f018975364785dd96f0581b1e4b12e2a4b749415ac43a \
+    --hash=sha256:cd6ec37db950a384dba3341b135394fdc776ede4d149fc7abde1e45a21ec4f22
     # via
     #   -r requirements.in
     #   django-cors-headers

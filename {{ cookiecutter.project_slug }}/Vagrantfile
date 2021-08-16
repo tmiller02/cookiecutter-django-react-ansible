@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
 
   # If we're using Docker as the provider, apply the following config for all containers
   config.vm.provider :docker do |docker, override|
-    docker.image = "{{ cookiecutter.project_slug}}_base_image"
+    docker.build_dir = "."
     docker.remains_running = true
     docker.has_ssh = true
     docker.create_args = [

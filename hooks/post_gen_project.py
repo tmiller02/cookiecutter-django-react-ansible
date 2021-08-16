@@ -81,11 +81,7 @@ before getting started:
 To get started, run:
 
   $ cd {{ cookiecutter.project_slug }}
-  
-If using Docker, build the base Docker image:
- 
-  $ docker build -t {{ cookiecutter.project_slug}}_base_image .   
-  
+
 Next, provision with Vagrant:
   
   $ vagrant up --provision

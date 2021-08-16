@@ -31,12 +31,6 @@ This project has been configured to work with either VirtualBox or Docker
 as part of the Vagrant provisioning process via 
 [vagrant providers](https://www.vagrantup.com/docs/providers).
 
-If you are using Docker, you'll need to build the base Docker image:
-
-```
-$ docker build -t {{ cookiecutter.project_slug}}_base_image .
-```
-
 Provision the Vagrant dev environment:
 
 ```

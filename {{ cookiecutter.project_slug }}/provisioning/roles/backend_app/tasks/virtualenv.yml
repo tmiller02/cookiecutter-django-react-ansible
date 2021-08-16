@@ -15,7 +15,7 @@
   become_user: "{{ backend_app_user }}"
   pip:
     virtualenv: "{{ backend_app_virtualenv_dir }}"
-    virtualenv_command: /usr/bin/python3.8 -m venv
+    virtualenv_command: /usr/bin/python3.9 -m venv
     name:
       - pip==21.0.1
       - pip-tools==5.5.0

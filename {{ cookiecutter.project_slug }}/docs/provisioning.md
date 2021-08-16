@@ -6,7 +6,7 @@ This project uses [Ansible](https://docs.ansible.com/ansible/latest/index.html)
 to provision code and [Vagrant](https://www.vagrantup.com) to manage VMs for
 the dev environment.
 
-All hosts are [Ubuntu 20.04 (Focal Fossa)](https://releases.ubuntu.com/20.04/).
+All hosts are [Ubuntu 21.04 (Hirsute Hippo)](https://releases.ubuntu.com/21.04/).
 
 ## Development Environment
 
@@ -41,7 +41,7 @@ You may need to re-run this command if Vagrant needed to install plugins.
 ## Production Environment
 
 This project includes a sample production environment. All hosts that are added
-to the inventory should be running Ubuntu 20.04 (Focal Fossa). See the README at
+to the inventory should be running Ubuntu 21.04 (Hirsute Hippo). See the README at
 `provisioning/prod/README.txt` for more.
 
 You are strongly advised to use [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html),

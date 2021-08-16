@@ -6,7 +6,7 @@ a Django 3.1 & React project with Ansible provisioning and some opinionated defa
 
 ## Key Features and Technologies
 * Django 3.1
-* Python 3.8
+* Python 3.9
 * React using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
 * Ansible 3.0 for provisioning  
@@ -15,9 +15,9 @@ a Django 3.1 & React project with Ansible provisioning and some opinionated defa
   Firefox and optional X11 forwarding
 * Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)
 * Works on Linux, macOS and Windows host environments
-* PostgreSQL 12
+* PostgreSQL 13
 * NGINX web server set up with HTTP/2 support
-* Ubuntu 20.04 (Focal Fossa)
+* Ubuntu 21.04 (Hirsute Hippo)
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
   SSL certificates for production, auto-generated self-signed SSL certificates for development.
 * Checks to python dependencies provided via [pyup.io](https://pyup.io/)

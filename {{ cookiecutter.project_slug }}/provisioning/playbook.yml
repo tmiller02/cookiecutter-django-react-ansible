@@ -6,7 +6,7 @@
   tasks:
     - name: set ansible facts
       set_fact:
-        ansible_python_interpreter: "/usr/bin/python3.8"
+        ansible_python_interpreter: "/usr/bin/python3.9"
         any_errors_fatal: true
     - name: install python 3.8 and ansible python dependencies
       raw: apt-get update && apt-get install -y python3 python3-apt

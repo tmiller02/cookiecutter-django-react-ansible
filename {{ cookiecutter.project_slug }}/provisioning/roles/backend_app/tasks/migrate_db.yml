@@ -5,7 +5,7 @@
   become_user: "{{ backend_app_user }}"
   run_once: true
   django_manage:
-    command: "migrate --noinput"
+    command: "migrate"
     app_path: "{{ backend_app_deploy_helper.current_path }}"
     virtualenv: "{{ backend_app_virtualenv_dir }}"
   register:

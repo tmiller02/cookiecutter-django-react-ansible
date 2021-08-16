@@ -4,7 +4,8 @@
   become: true
   become_user: "{{ backend_app_user }}"
   django_manage:
-    command: "collectstatic --clear --noinput"
+    command: "collectstatic"
+    clear: yes
     app_path: "{{ backend_app_deploy_helper.new_release_path }}"
     virtualenv: "{{ backend_app_virtualenv_dir }}"
   register:

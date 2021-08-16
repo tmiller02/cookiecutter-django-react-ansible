@@ -2,10 +2,10 @@
 
 cookiecutter-django-react-ansible is a 
 [cookiecutter](https://github.com/pydanny/cookiecutter) template for setting up
-a Django 3.1 & React project with Ansible provisioning and some opinionated defaults.
+a Django 3.2 & React project with Ansible provisioning and some opinionated defaults.
 
 ## Key Features and Technologies
-* Django 3.1
+* Django 3.2
 * Python 3.9
 * React using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript

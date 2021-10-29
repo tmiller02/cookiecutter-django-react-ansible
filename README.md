@@ -17,7 +17,7 @@ a Django 3.2 & React project with Ansible provisioning and some opinionated defa
 * Works on Linux, macOS and Windows host environments
 * PostgreSQL 13
 * NGINX web server set up with HTTP/2 support
-* Ubuntu 21.04 (Hirsute Hippo)
+* Ubuntu 21.10 (Impish Indri)
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
   SSL certificates for production, auto-generated self-signed SSL certificates for development.
 * Checks to python dependencies provided via [pyup.io](https://pyup.io/)

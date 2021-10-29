@@ -42,7 +42,7 @@ You may need to re-run this command if Vagrant needed to install plugins.
 
 This project includes a sample production environment. All hosts that are added
 to the inventory should be running Ubuntu 21.04 (Hirsute Hippo). See the README at
-`provisioning/prod/README.txt` for more.
+`provisioning/environments/prod/README.txt` for more.
 
 You are strongly advised to use [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html),
 and remember to never add sensitive information such as production passwords or

@@ -4,8 +4,8 @@
 #
 #    pip-compile --generate-hashes --output-file=requirements.txt requirements.in
 #
-ansible==4.7.0 \
-    --hash=sha256:0b7c52ec51e326941aa1af5affd9bfed9c1bfc61619c1c4210dce1665a4c4b29
+ansible==4.8.0 \
+    --hash=sha256:1345fa61c9ac2edcc6c16e0d3f872a73303a61b799a7f16236ca6279e0ae8e36
     # via -r requirements.in
 ansible-core==2.11.6 \
     --hash=sha256:93d50283c7c5b476debf83dc089b3f679b939a8b9a7b5d628d28daafbb3d303a
@@ -163,9 +163,9 @@ packaging==21.2 \
     --hash=sha256:096d689d78ca690e4cd8a89568ba06d07ca097e3306a4381635073ca91479966 \
     --hash=sha256:14317396d1e8cdb122989b916fa2c7e9ca8e2be9e8060a6eff75b6b7b4d8a7e0
     # via ansible-core
-pycparser==2.20 \
-    --hash=sha256:2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0 \
-    --hash=sha256:7582ad22678f0fcd81102833f60ef8d0e57288b6b5fb00323d101be910e35705
+pycparser==2.21 \
+    --hash=sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9 \
+    --hash=sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206
     # via cffi
 pyparsing==2.4.7 \
     --hash=sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1 \

@@ -11,5 +11,6 @@ gunicorn
 ipython
 mypy
 psycopg2-binary
+pywatchman
 safety
 selenium

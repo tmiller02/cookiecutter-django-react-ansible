@@ -7,24 +7,15 @@
 # machine to the 'backend_app' folder on the host machine, so we don't need to do
 # anything else to make any code changes available on the target machine (compare to
 # the tasks in 'run_deploy.yml').
-#
-# We configure the 'venv' folder to be alongside (rather than within) the 'current'
-# directory when running a Vagrant environment.
-#
-# It is desirable to have the virtualenv exist within the code directory with the
-# deployment strategy used in 'run_deploy.yml', since rolling back by changing the
-# 'current' symlink will roll back both the code and the virtualenv. However, running a
-# virtualenv from within a vagrant mounted directory comes with a substantial
-# performance impact, especially with the StatReloader as used by default when running
-# django runserver.
-#
-# By locating the virtualenv directory alongside the 'current' directory we exclude its
-# contents from the vagrant mount, thereby avoiding this performance impact.
 
-- name: set deploy_helper and backend_app_virtualenv_dir facts needed by other tasks
+- name: set deploy_helper facts needed by other tasks
   set_fact:
     backend_app_deploy_helper:
       new_release_path: "{{ backend_app_root }}/current"
       current_path: "{{ backend_app_root }}/current"
-    backend_app_virtualenv_dir: "{{ backend_app_root }}/venv"
+
+- name: set backend_app_virtualenv_dir fact
+  set_fact:
+    backend_app_virtualenv_dir: "{{ backend_app_deploy_helper.new_release_path }}/venv"
+
 {% endraw %}

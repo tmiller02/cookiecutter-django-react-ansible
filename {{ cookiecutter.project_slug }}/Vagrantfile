@@ -46,10 +46,11 @@ Vagrant.configure("2") do |config|
     docker.create_args = [
       '--mount', 'type=tmpfs,destination=/run',
       '--mount', 'type=tmpfs,destination=/run/lock',
-      '--cap-add=NET_ADMIN'
+      '--cap-add=NET_ADMIN',
+      '--cgroupns=host'
     ]
     docker.volumes = [
-      '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+      '/sys/fs/cgroup:/sys/fs/cgroup:rw'
     ]
   end
 

@@ -57,6 +57,7 @@ Vagrant.configure("2") do |config|
   config.apt_proxy.http = "{{ cookiecutter.vagrant_apt_proxy }}"
   config.proxy.http = "{{ cookiecutter.vagrant_http_proxy }}"
   config.proxy.https = "{{ cookiecutter.vagrant_https_proxy }}"
+  config.proxy.enabled = {% if cookiecutter.vagrant_apt_proxy or cookiecutter.vagrant_http_proxy or cookiecutter.vagrant_https_proxy %}true{% else %}false{% endif %}
 
   config.vm.define "backend", primary: true do |backend|
     backend.vm.network "private_network", ip: "172.18.177.20"

@@ -1,0 +1,9 @@
+---
+{% raw %}
+- name: enable corepack
+  command: corepack enable
+  become: true
+
+- name: install and activate yarn
+  command: corepack prepare yarn@{{ yarn_version }} --activate
+{% endraw %}

@@ -18,7 +18,7 @@
   roles:
     - { role: deploy_check, tags: [always] }
     - { role: geerlingguy.nodejs, become: true }
-    - { role: tmiller02.yarn, become: true }
+    - { role: yarn }
   tasks:
     - name: build frontend app
       import_role:

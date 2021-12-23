@@ -9,6 +9,3 @@ roles:
 
   - name: geerlingguy.nodejs
     version: "6.0.0"
-
-  - name: tmiller02.yarn
-    version: "0.1.0"

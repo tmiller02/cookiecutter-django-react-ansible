@@ -19,9 +19,9 @@
     virtualenv_command: /usr/bin/python3.9 -m venv
     name:
       - pip==21.3.1
-      - pip-tools==6.4.0
-      - setuptools==59.5.0
-      - wheel==0.37.0
+      - pip-tools==6.5.0
+      - setuptools==60.7.1
+      - wheel==0.37.1
 
 - name: install requirements using pip-sync
   become: true

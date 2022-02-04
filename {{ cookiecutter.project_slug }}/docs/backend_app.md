@@ -21,17 +21,17 @@ virtualenv. We can use the `ssh_backend.sh` helper script to do this:
 $ ./ssh_backend.sh 
 ```
 
-Then we'll start the django dev server, binding to all IP addresses on port 4001:
+Then we'll start the uvicorn dev server, binding to all IP addresses on port 4001:
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ python manage.py runserver 0:4001
+(venv) [{{ cookiecutter.project_slug }}]$ ./start_dev_server.sh
 ```
 
 Or alternatively, we can pass these arguments directly into the `ssh_backend.sh`
 script to do this in a single step:
 
 ```
-./ssh_backend.sh python manage.py runserver 0:4001
+./ssh_backend.sh ./start_dev_server.sh
 ```
 
 You can view pages being served by this dev server by going to

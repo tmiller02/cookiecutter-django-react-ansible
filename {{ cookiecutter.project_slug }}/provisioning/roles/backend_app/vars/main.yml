@@ -5,4 +5,4 @@ backend_app_systemd_runtime_dir: "{{ cookiecutter.project_slug }}"
 {% raw %}backend_app_gunicorn_pid_file: "/var/run/{{ backend_app_systemd_runtime_dir }}/gunicorn.pid"{% endraw %}
 backend_app_gunicorn_bind: "127.0.0.1:8080"
 backend_app_systemd_unit_name: "{{ cookiecutter.project_slug }}"
-backend_app_wsgi: "{{ cookiecutter.project_slug }}.wsgi:application"
+backend_app_asgi: "{{ cookiecutter.project_slug }}.asgi:application"

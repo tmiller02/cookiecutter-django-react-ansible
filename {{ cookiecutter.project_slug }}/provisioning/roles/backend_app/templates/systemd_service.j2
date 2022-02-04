@@ -12,7 +12,7 @@ Group = {{ backend_app_group }}
 WorkingDirectory = {{ backend_app_deploy_helper.current_path }}
 ExecStart = {{ backend_app_virtualenv_dir }}/bin/gunicorn \
             --config gunicorn_config.py \
-            {{ backend_app_wsgi }}
+            {{ backend_app_asgi }}
 ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
 

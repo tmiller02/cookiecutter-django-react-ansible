@@ -7,7 +7,9 @@
 asgiref==3.5.0 \
     --hash=sha256:2f8abc20f7248433085eda803936d98992f1343ddb022065779f37c5da0181d0 \
     --hash=sha256:88d59c13d634dcffe0510be048210188edd79aeccb6a6c9028cdad6f31d730a9
-    # via django
+    # via
+    #   django
+    #   uvicorn
 asttokens==2.0.5 \
     --hash=sha256:0844691e88552595a6f4a4281a9f7f79b8dd45ca4ccea82e5e05b4bbdb76705c \
     --hash=sha256:9a54c114f02c7a9480d56550932546a3f1fe71d8a02f1bc7ccd0ee3ee35cf4d5
@@ -123,6 +125,7 @@ click==8.0.3 \
     # via
     #   black
     #   safety
+    #   uvicorn
 coverage[toml]==6.3.1 \
     --hash=sha256:1245ab82e8554fa88c4b2ab1e098ae051faac5af829efdcf2ce6b34dccd5567c \
     --hash=sha256:1bc6d709939ff262fd1432f03f080c5042dc6508b6e0d3d20e61dd045456a1a0 \
@@ -247,7 +250,9 @@ gunicorn==20.1.0 \
 h11==0.13.0 \
     --hash=sha256:70813c1135087a248a4d38cc0e1a0181ffab2188141a93eaf567940c3957ff06 \
     --hash=sha256:8ddd78563b633ca55346c8cd41ec0af27d3c79931828beffb46ce70a379e7442
-    # via wsproto
+    # via
+    #   uvicorn
+    #   wsproto
 idna==3.3 \
     --hash=sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff \
     --hash=sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d
@@ -551,6 +556,10 @@ urllib3[secure]==1.26.8 \
     # via
     #   requests
     #   selenium
+uvicorn==0.17.4 \
+    --hash=sha256:25850bbc86195a71a6477b3e4b3b7b4c861fb687fb96912972ce5324472b1011 \
+    --hash=sha256:e85872d84fb651cccc4c5d2a71cf7ead055b8fb4d8f1e78e36092282c0cf2aec
+    # via -r requirements.in
 wcwidth==0.2.5 \
     --hash=sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784 \
     --hash=sha256:c4d647b99872929fdb7bdcaa4fbe7f01413ed3d98077df798530e5b04f116c83

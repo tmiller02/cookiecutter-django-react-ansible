@@ -197,9 +197,9 @@ decorator==5.1.1 \
     --hash=sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330 \
     --hash=sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186
     # via ipython
-django==4.0.2 \
-    --hash=sha256:110fb58fb12eca59e072ad59fc42d771cd642dd7a2f2416582aa9da7a8ef954a \
-    --hash=sha256:996495c58bff749232426c88726d8cd38d24c94d7c1d80835aafffa9bc52985a
+django==4.0.4 \
+    --hash=sha256:07c8638e7a7f548dc0acaaa7825d84b7bd42b10e8d22268b3d572946f1e9b687 \
+    --hash=sha256:4e8177858524417563cc0430f29ea249946d831eacb0068a1455686587df40b5
     # via
     #   -r requirements.in
     #   django-cors-headers
@@ -466,9 +466,6 @@ pytz==2021.3 \
     # via
     #   -r requirements.in
     #   djangorestframework
-pywatchman==1.4.1 \
-    --hash=sha256:d0047eb275deafb0011eda0a1a815fbd9742478c3d2b5ad6956d300e447dc2f9
-    # via -r requirements.in
 pyyaml==6.0 \
     --hash=sha256:0283c35a6a9fbf047493e3a0ce8d79ef5030852c51e9d911a27badfde0605293 \
     --hash=sha256:055d937d65826939cb044fc8c9b08889e8c743fdc6a32b33e2390f66013e449b \
@@ -578,7 +575,6 @@ typing-extensions==4.0.1 \
     --hash=sha256:4ca091dea149f945ec56afb48dae714f21e8692ef22a395223bcd328961b6a0e \
     --hash=sha256:7f001e5ac290a0c0401508864c7ec868be4e701886d5b573a9528ed3973d9d3b
     # via
-    #   black
     #   django-stubs
     #   django-stubs-ext
     #   mypy

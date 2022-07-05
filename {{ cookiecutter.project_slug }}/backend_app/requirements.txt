@@ -197,9 +197,9 @@ decorator==5.1.1 \
     --hash=sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330 \
     --hash=sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186
     # via ipython
-django==4.0.2 \
-    --hash=sha256:110fb58fb12eca59e072ad59fc42d771cd642dd7a2f2416582aa9da7a8ef954a \
-    --hash=sha256:996495c58bff749232426c88726d8cd38d24c94d7c1d80835aafffa9bc52985a
+django==4.0.6 \
+    --hash=sha256:a67a793ff6827fd373555537dca0da293a63a316fe34cb7f367f898ccca3c3ae \
+    --hash=sha256:ca54ebedfcbc60d191391efbf02ba68fb52165b8bf6ccd6fe71f098cac1fe59e
     # via
     #   -r requirements.in
     #   django-cors-headers
@@ -578,7 +578,6 @@ typing-extensions==4.0.1 \
     --hash=sha256:4ca091dea149f945ec56afb48dae714f21e8692ef22a395223bcd328961b6a0e \
     --hash=sha256:7f001e5ac290a0c0401508864c7ec868be4e701886d5b573a9528ed3973d9d3b
     # via
-    #   black
     #   django-stubs
     #   django-stubs-ext
     #   mypy

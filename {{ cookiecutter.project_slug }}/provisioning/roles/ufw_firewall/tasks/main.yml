@@ -14,8 +14,8 @@
   when: item.0.when | bool
   loop: "{{ ufw_firewall_rules | subelements('from_ip') }}"
 
-- name: enable UFW
+- name: set UFW state to "{{ ufw_firewall_state }}"
   ufw:
-    state: enabled
+    state: "{{ ufw_firewall_state }}"
     default: deny
 {% endraw %}

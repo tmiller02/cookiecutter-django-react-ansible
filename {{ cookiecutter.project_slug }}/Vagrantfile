@@ -43,14 +43,15 @@ Vagrant.configure("2") do |config|
     docker.build_dir = "."
     docker.remains_running = true
     docker.has_ssh = true
+    # Set volume path using create_args instead of docker.volumes,
+    # workaround for issue when running Docker on WSL 2, see
+    # https://github.com/hashicorp/vagrant/issues/12602
     docker.create_args = [
       '--mount', 'type=tmpfs,destination=/run',
       '--mount', 'type=tmpfs,destination=/run/lock',
+      '-v', '/sys/fs/cgroup:/sys/fs/cgroup:rw',
       '--cap-add=NET_ADMIN',
       '--cgroupns=host'
-    ]
-    docker.volumes = [
-      '/sys/fs/cgroup:/sys/fs/cgroup:rw'
     ]
   end
 

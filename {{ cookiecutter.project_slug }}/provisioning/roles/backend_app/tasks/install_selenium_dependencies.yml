@@ -4,7 +4,6 @@
   apt:
     name:
       - firefox
-      - firefox-geckodriver
       - xauth
       - x11-apps
     state: present

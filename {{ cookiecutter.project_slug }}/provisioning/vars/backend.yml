@@ -1,5 +1,7 @@
 ---
 {% raw %}
+geckodriver_version: "0.31.0"
+
 backend_app_database_name: "{{ database_name }}"
 backend_app_database_user: "{{ database_user }}"
 backend_app_database_password: "{{ database_password }}"

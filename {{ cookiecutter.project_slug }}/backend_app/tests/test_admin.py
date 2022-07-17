@@ -1,3 +1,5 @@
+from selenium.webdriver.common.by import By
+
 from .helpers import SeleniumLiveServerTestCase
 
 
@@ -9,5 +11,5 @@ class AdminTests(SeleniumLiveServerTestCase):
         django admin.
         """
         self.selenium.get(f"{self.live_server_url}/admin/")
-        site_name_element = self.selenium.find_element_by_id("site-name")
+        site_name_element = self.selenium.find_element(By.ID, "site-name")
         self.assertEqual(site_name_element.text, "Django administration")

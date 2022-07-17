@@ -6,7 +6,7 @@ This project uses [Ansible](https://docs.ansible.com/ansible/latest/index.html)
 to provision code and [Vagrant](https://www.vagrantup.com) to manage VMs for
 the dev environment.
 
-All hosts are [Ubuntu 21.10 (Impish Indri)](https://releases.ubuntu.com/21.04/).
+All hosts are [Ubuntu 22.04 (Jammy Jellyfish)](https://releases.ubuntu.com/22.04/).
 
 ## Development Environment
 

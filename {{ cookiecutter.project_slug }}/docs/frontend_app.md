@@ -14,12 +14,12 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Running the dev server on your host machine
 
-If you have `yarn` installed on your host machine, you can start the dev server
-by running `yarn start`:
+If you have `npm` installed on your host machine, you can start the dev server
+by running `npm start`:
 
 ```
 $ cd frontend_app
-$ yarn run start
+$ npm run start
 ```
 
 You can then access the dev server at http://localhost:3000
@@ -34,12 +34,12 @@ to the Windows command prompt, such as Cygwin.
 
 ## Running the dev server from the provisioner VM
 
-If you don't have `yarn` installed on your host machine you can start the dev
+If you don't have `npm` installed on your host machine you can start the dev
 server on the `provisioner` VM instead, although you may find this to be slower:
 
 ```
 $ ./ssh_frontend.sh
-[vagrant@provisioner frontend_app]$ yarn run start
+[vagrant@provisioner frontend_app]$ npm run start
 ```
 
 You can then access the dev server at http://localhost:5001
@@ -49,7 +49,7 @@ You can then access the dev server at http://localhost:5001
 To run the [prettier](https://prettier.io) formatter:
 
 ```
-$ yarn run prettier
+$ npm run prettier
 ```
 
 ## Running Tests
@@ -57,7 +57,7 @@ $ yarn run prettier
 You can run tests with:
 
 ```
-$ yarn run test
+$ npm run test
 ```
 
 For more information see the Create React App documentation on

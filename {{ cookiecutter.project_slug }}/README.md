@@ -13,7 +13,6 @@
 
 ## Optional Dependencies
 
-* [Yarn](https://yarnpkg.com/en/)
 * [Cygwin](https://www.cygwin.com) if you're using Windows. This will allow you
   to use the helper scripts such as `ssh_frontend.sh`.
 * An X11 server such as [XQuartz](https://www.xquartz.org) for Mac or

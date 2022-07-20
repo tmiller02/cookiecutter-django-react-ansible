@@ -47,7 +47,7 @@ click the green play button:
 
 ## Running frontend app tests from PyCharm
 
-> **INFO**: You need to have `node` and `yarn` installed on your host machine to
+> **INFO**: You need to have `npm` installed on your host machine to
 > run these commands from PyCharm.
 
 To run the unit tests for the react frontend app, select 'Frontend app tests' and

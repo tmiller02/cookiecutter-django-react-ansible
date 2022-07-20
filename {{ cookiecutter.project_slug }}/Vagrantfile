@@ -1,25 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+ENV["VAGRANT_EXPERIMENTAL"] = "typed_triggers"
+
 Vagrant.require_version ">= 2.2.5"
-
-if Vagrant::Util::Platform.windows? then
-  def running_as_admin?
-    # query the LOCAL SERVICE account reg key (requires admin privileges)
-    system('reg query "HKU\S-1-5-19"', :out => File::NULL)
-  end
-
-  unless running_as_admin?
-    puts "Admin rights are required to create symlinks. Try running this Vagrantfile again from an admin command prompt."
-    exit 1
-  end
-end
 
 Vagrant.configure("2") do |config|
 
   config.vagrant.plugins = {
     "vagrant-proxyconf" => {"version" => ">=2.0.10"},
     "vagrant-vbguest" => {"version" => ">=0.24.0"},
+    "vagrant-bindfs" => {"version" => ">=1.1.9"}
   }
 
   # Prefer using the VirtualBox provider over Docker if both are available
@@ -76,9 +67,17 @@ Vagrant.configure("2") do |config|
       "/opt/{{ cookiecutter.project_slug }}_backend/current",
     )
 
-    backend.vm.provider :virtualbox do |virtualbox|
+    backend.vm.provider :virtualbox do |virtualbox, override|
       virtualbox.memory = 1024
       virtualbox.cpus = 1
+      override.trigger.after :"Vagrant::Action::Builtin::WaitForCommunicator", type: :action do |trigger|
+        trigger.run_remote = {inline: "mkdir -p /home/vagrant/backend_app_venv"}
+      end
+      override.bindfs.bind_folder(
+        "/home/vagrant/backend_app_venv",
+        "/opt/{{ cookiecutter.project_slug }}_backend/current/venv",
+        after: :synced_folders
+      )
     end
 
   end
@@ -125,8 +124,16 @@ Vagrant.configure("2") do |config|
       mount_options: ["fmode=600"]
     )
 
-    provisioner.vm.provider :virtualbox do |virtualbox|
+    provisioner.vm.provider :virtualbox do |virtualbox, override|
       virtualbox.memory = 1024
+      override.trigger.after :"Vagrant::Action::Builtin::WaitForCommunicator", type: :action do |trigger|
+        trigger.run_remote = {inline: "mkdir -p /home/vagrant/frontend_app_node_modules"}
+      end
+      override.bindfs.bind_folder(
+        "/home/vagrant/frontend_app_node_modules",
+        "/vagrant/frontend_app/node_modules",
+        after: :synced_folders
+      )
     end
 
     provisioner.vm.provision "file" do |file|

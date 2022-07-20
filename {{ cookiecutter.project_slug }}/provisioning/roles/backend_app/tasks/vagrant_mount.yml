@@ -14,8 +14,4 @@
       new_release_path: "{{ backend_app_root }}/current"
       current_path: "{{ backend_app_root }}/current"
 
-- name: set backend_app_virtualenv_dir fact
-  set_fact:
-    backend_app_virtualenv_dir: "{{ backend_app_deploy_helper.new_release_path }}/venv"
-
 {% endraw %}

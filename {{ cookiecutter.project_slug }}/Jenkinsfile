@@ -41,7 +41,7 @@ pipeline {
         stage('Run frontend tests') {
             steps {
                 echo 'Running unit tests...'
-                sh 'vagrant ssh provisioner -c "cd /vagrant/frontend_app && CI=true yarn test"'
+                sh 'vagrant ssh provisioner -c "cd /vagrant/frontend_app && CI=true npm test"'
             }
         }
 
@@ -54,8 +54,8 @@ pipeline {
 
         stage('Run frontend checks') {
             steps {
-                echo 'Checking for known vulnerabilities using "yarn audit"...'
-                sh 'vagrant ssh provisioner -c "cd /vagrant/frontend_app && yarn audit"'
+                echo 'Checking for known vulnerabilities using "npm audit"...'
+                sh 'vagrant ssh provisioner -c "cd /vagrant/frontend_app && npm audit"'
             }
         }
 

@@ -3,6 +3,17 @@
 
 ENV["VAGRANT_EXPERIMENTAL"] = "typed_triggers"
 
+# Set volume path using create_args instead of docker.volumes, workaround for
+# issue when running Docker on WSL 2, see
+# https://github.com/hashicorp/vagrant/issues/12602
+DEFAULT_DOCKER_CREATE_ARGS = [
+  '--mount', 'type=tmpfs,destination=/run',
+  '--mount', 'type=tmpfs,destination=/run/lock',
+  '-v', '/sys/fs/cgroup:/sys/fs/cgroup:rw',
+  '--cap-add=NET_ADMIN',
+  '--cgroupns=host'
+]
+
 Vagrant.require_version ">= 2.2.5"
 
 Vagrant.configure("2") do |config|
@@ -83,6 +94,13 @@ Vagrant.configure("2") do |config|
       )
     end
 
+    backend.vm.provider :docker do |docker, override|
+      docker.create_args = DEFAULT_DOCKER_CREATE_ARGS + [
+        "-v", "venv:/opt/{{ cookiecutter.project_slug }}_backend/current/venv"
+      ]
+      override.vm.provision "shell", inline: "chown vagrant:vagrant /opt/{{ cookiecutter.project_slug }}_backend/current/venv"
+    end
+
   end
 
   config.vm.define "frontend" do |frontend|
@@ -141,6 +159,13 @@ Vagrant.configure("2") do |config|
         "/vagrant/frontend_app/node_modules",
         after: :synced_folders
       )
+    end
+
+    provisioner.vm.provider :docker do |docker, override|
+      docker.create_args = DEFAULT_DOCKER_CREATE_ARGS + [
+        "-v", "node_modules:/vagrant/frontend_app/node_modules"
+      ]
+      override.vm.provision "shell", inline: "chown vagrant:vagrant /vagrant/frontend_app/node_modules"
     end
 
     provisioner.vm.provision "file" do |file|

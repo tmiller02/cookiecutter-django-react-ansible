@@ -1,5 +1,5 @@
 .ONESHELL:
-.PHONY: test format lint safety_check
+.PHONY: test format lint safety_check type_check
 
 test:
 	. ~/.venvrc
@@ -28,4 +28,4 @@ safety_check:
 
 type_check:
 	. ~/.venvrc
-	mypy --config-file=mypy.ini
+	mypy --config-file=pyproject.toml

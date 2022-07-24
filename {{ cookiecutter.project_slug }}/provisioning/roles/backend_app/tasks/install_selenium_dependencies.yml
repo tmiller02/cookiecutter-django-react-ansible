@@ -1,9 +1,13 @@
 ---
 
+- name: add the mozilla ppa
+  apt_repository:
+    repo: "ppa:mozillateam/ppa"
+
 - name: install packages used with selenium and X11 forwarding
   apt:
     name:
-      - firefox
+      - firefox-esr
       - xauth
       - x11-apps
     state: present

@@ -17,4 +17,5 @@ pytz
 pywatchman
 safety
 selenium
+tzdata
 uvicorn[standard]

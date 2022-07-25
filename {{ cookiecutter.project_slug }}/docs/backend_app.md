@@ -15,23 +15,16 @@ $ vagrant up --provision
 ```
 
 Next, we'll ssh onto the dev VM with our django project and activate the
-virtualenv. We can use the `ssh_backend.sh` helper script to do this:
+virtualenv:
 
 ```
-$ ./ssh_backend.sh 
+$ vagrant ssh backend
 ```
 
 Then we'll start the uvicorn dev server, binding to all IP addresses on port 4001:
 
 ```
 (venv) [{{ cookiecutter.project_slug }}]$ ./start_dev_server.sh
-```
-
-Or alternatively, we can pass these arguments directly into the `ssh_backend.sh`
-script to do this in a single step:
-
-```
-./ssh_backend.sh ./start_dev_server.sh
 ```
 
 You can view pages being served by this dev server by going to
@@ -49,15 +42,8 @@ backend app includes a `Makefile` with a command for running the tests with
 coverage analysis:
 
 ```
-$ ./ssh_backend.sh
+$ vagrant ssh backend
 (venv) [{{ cookiecutter.project_slug }}]$ make test
-```
-
-or to just run the tests:
-
-```
-$ ./ssh_backend.sh
-(venv) [{{ cookiecutter.project_slug }}]$ python manage.py test
 ```
 
 ### Selenium X11 forwarding (Optional)
@@ -76,7 +62,7 @@ for Windows.
 To verify that X11 forwarding is working:
 
 ```
-$ ./ssh_backend.sh
+$ vagrant ssh backend
 (venv) [{{ cookiecutter.project_slug }}]$ xeyes
 ```
 
@@ -97,7 +83,7 @@ formatter and [flake8](http://flake8.pycqa.org/en/latest/) for linting.
 To run the black formatter:
 
 ```
-$ ./ssh_backend.sh
+$ vagrant ssh backend
 (venv) [{{ cookiecutter.project_slug }}]$ make format
 ```
 

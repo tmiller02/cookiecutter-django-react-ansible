@@ -37,4 +37,19 @@
   args:
     chdir: "{{ backend_app_deploy_helper.new_release_path }}"
   changed_when: true
+
+- name: add .venvrc file that can be used to activate the virtualenv
+  become: true
+  become_user: "{{ backend_app_user }}"
+  template:
+    src: venvrc.j2
+    dest: "~/.venvrc"
+
+- name: update .bashrc file to source .venvrc file
+  become: true
+  become_user: "{{ backend_app_user }}"
+  blockinfile:
+    path: "~/.bashrc"
+    block: |
+      . ~/.venvrc
 {% endraw %}

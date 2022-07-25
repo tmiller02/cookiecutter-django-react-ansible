@@ -38,7 +38,8 @@ If you don't have `npm` installed on your host machine you can start the dev
 server on the `provisioner` VM instead, although you may find this to be slower:
 
 ```
-$ ./ssh_frontend.sh
+$ vagrant ssh provisioner
+$ cd /vagrant/frontend_app/
 [vagrant@provisioner frontend_app]$ npm run start
 ```
 

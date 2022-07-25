@@ -71,7 +71,8 @@ An example for provisioning to the production environment using the
 **provisioner** VM:
 
 ```
-$ ./ssh_provisioning.sh
+$ vagrant ssh provisioner
+$ source ~/provisioning_venv/bin/activate
 [vagrant@provisioner provisioning]$ ansible-playbook playbook.yml --inventory environments/prod/inventory --user <myuser> --private-key <my-private-key>
 ```
 

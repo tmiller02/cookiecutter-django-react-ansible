@@ -1,6 +1,6 @@
 black
 coverage[toml]
-Django
+Django>=4.0,<4.1
 django-cors-headers
 django-environ
 django-extensions

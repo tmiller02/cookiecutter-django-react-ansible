@@ -111,14 +111,14 @@ defined in a `requirements.in` file.
 To upgrade a top-level dependency, edit `requirements.in` and then run:
 
 ```
-pip-compile --allow-unsafe --generate-hashes --output-file=requirements.txt requirements.in
+pip-compile --generate-hashes --output-file=requirements.txt requirements.in
 ```
 
 To upgrade all packages whilst fulfilling the constraints in the `requirements.in`
 file: 
 
 ```
-pip-compile --allow-unsafe --generate-hashes --upgrade --output-file=requirements.txt requirements.in
+pip-compile --generate-hashes --upgrade --output-file=requirements.txt requirements.in
 ```
 
 ## Django Settings

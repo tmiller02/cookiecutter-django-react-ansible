@@ -15,4 +15,5 @@ __pycache__/
 /backend_app/geckodriver.log
 /frontend_app/node_modules/
 /frontend_app/build/
+/frontend_app/npm-debug.log*
 /other_tools/testssl.sh/

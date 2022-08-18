@@ -3,8 +3,7 @@
 ## Overview
 
 The 'Frontend App' uses [Create React App](https://github.com/facebook/create-react-app)
-with [TypeScript](https://www.typescriptlang.org) and
-[react-router](https://reacttraining.com/react-router/).
+with [TypeScript](https://www.typescriptlang.org).
 
 You can learn more in the
 [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
@@ -92,8 +91,7 @@ The production build of the frontend app is served with NGINX.
 
 NGINX has been configured to redirect http requests to https. The contents of
 `build/static/` are served as regular files, with all other urls served using
-`index.html` if no file with a matching name is found. We rely on `react-router` 
-to handle matching/non matching routes accordingly.
+`index.html` if no file with a matching name is found.
 
 NGINX has also been configured to serve the frontend app with 
 [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)

@@ -22,9 +22,9 @@
     virtualenv: "{{ backend_app_virtualenv_dir }}"
     virtualenv_command: /usr/bin/python3.10 -m venv
     name:
-      - pip==22.1.2
+      - pip==22.2.2
       - pip-tools==6.8.0
-      - setuptools==63.2.0
+      - setuptools==65.1.0
       - wheel==0.37.1
 
 - name: install requirements using pip-sync

@@ -26,7 +26,7 @@
 
           {{ deploy_check_status_command.stdout }}
 
-          Press Crtl+C then A to abort, or press Enter to continue anyway.
+          Press Ctrl+C then A to abort, or press Enter to continue anyway.
       when: "deploy_check_status_command.stdout | length > 0"
   when: deploy_check_display_confirmation_prompts | bool
 

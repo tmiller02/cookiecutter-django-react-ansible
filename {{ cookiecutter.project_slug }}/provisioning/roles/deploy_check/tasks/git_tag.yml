@@ -28,7 +28,7 @@
         prompt: |
           INFO: Found git tag "{{ deploy_check_get_tags_command.stdout }}"
 
-          Press Crtl+C then A to abort, or press Enter to continue.
+          Press Ctrl+C then A to abort, or press Enter to continue.
       when: deploy_check_display_confirmation_prompts | bool
 
     - name: set deploy check tag fact

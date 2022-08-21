@@ -58,7 +58,7 @@
   become: true
   roles:
     - ssl
-    - nginx
+    - geerlingguy.nginx
     - tmiller02.geckodriver
     - { role: backend_app, tags: [update_backend_app] }
   vars_files:
@@ -69,7 +69,7 @@
   become: true
   roles:
     - ssl
-    - nginx
+    - geerlingguy.nginx
     - { role: frontend_app, tags: [update_frontend_app] }
   vars_files:
     - vars/shared.yml

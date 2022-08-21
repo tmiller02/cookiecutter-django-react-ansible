@@ -11,7 +11,7 @@
   openssl_privatekey:
     path: "{{ ssl_private_key_dest }}"
     backup: true
-  notify: "updated ssl"
+  notify: "restart nginx"
 
 - name: generate an OpenSSL certificate signing request
   openssl_csr:
@@ -33,5 +33,5 @@
     csr_path: "{{ ssl_csr_path }}"
     provider: selfsigned
     selfsigned_not_after: "+365d"
-  notify: "updated ssl"
+  notify: "restart nginx"
 {% endraw %}

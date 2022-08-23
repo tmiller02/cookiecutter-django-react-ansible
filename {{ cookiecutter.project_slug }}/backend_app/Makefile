@@ -1,5 +1,15 @@
 .ONESHELL:
-.PHONY: test format lint safety_check type_check
+.PHONY: runserver test format lint safety_check type_check
+
+runserver:
+	. ~/.venvrc
+	uvicorn \
+		{{ cookiecutter.project_slug }}.asgi:application \
+		--workers 1 \
+		--host 0.0.0.0 \
+		--port 4001 \
+		--reload \
+		--reload-exclude ".git, .idea, venv"
 
 test:
 	. ~/.venvrc

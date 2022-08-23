@@ -24,7 +24,7 @@ $ vagrant ssh backend
 Then we'll start the uvicorn dev server, binding to all IP addresses on port 4001:
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ ./start_dev_server.sh
+(venv) [{{ cookiecutter.project_slug }}]$ make runserver
 ```
 
 You can view pages being served by this dev server by going to

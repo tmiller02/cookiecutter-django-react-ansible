@@ -3,36 +3,36 @@
 # See https://docs.ansible.com/ansible/latest/modules/deploy_helper_module.html#deploy-helper-module
 # for more info.
 
-- name: install rsync
-  apt:
+- name: Install rsync
+  ansible.builtin.command.apt:
     name: rsync
     state: present
 
-- name: initialize the frontend app deploy root and gather facts
+- name: Initialize the frontend app deploy root and gather facts
   become: true
-  deploy_helper:
+  community.general.deploy_helper:
     path: "{{ frontend_app_root }}"
     release: "{{ frontend_app_release_version }}"
     state: present
     shared_path: ""
   register: frontend_app_deploy_helper_output
 
-- name: set deploy helper fact
-  set_fact:
+- name: Set deploy helper fact
+  ansible.builtin.set_fact:
     frontend_app_deploy_helper: "{{ frontend_app_deploy_helper_output['ansible_facts']['deploy_helper'] }}"
 
-- name: synchronize the frontend_app build to the new release folder
+- name: Synchronize the frontend_app build to the new release folder
   become: true
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ playbook_dir }}/../frontend_app/build/"
     dest: "{{ frontend_app_deploy_helper.new_release_path }}"
 
-- name: finalize the deploy, switching the 'current' symlink
+- name: Finalize the deploy, switching the 'current' symlink
   become: true
-  deploy_helper:
+  community.general.deploy_helper:
     path: "{{ frontend_app_root }}"
     release: '{{ frontend_app_deploy_helper.new_release }}'
     state: finalize
     clean: true
     keep_releases: 10
-{% endraw %}
+{% endraw -%}

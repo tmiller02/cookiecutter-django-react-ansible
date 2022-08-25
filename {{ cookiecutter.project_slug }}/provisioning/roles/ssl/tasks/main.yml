@@ -1,21 +1,21 @@
 ---
 
-- name: assert that required variables are defined
-  assert:
+- name: Assert that required variables are defined
+  ansible.builtin.assert:
     that:
       - ssl_provider is defined
       - ssl_provider in ['selfsigned', 'copy', 'certbot']
 
-- name: install packages required for interacting with OpenSSL
-  apt:
+- name: Install packages required for interacting with OpenSSL
+  ansible.builtin.apt:
     name: python3-cryptography
     state: present
 
-- import_tasks: selfsigned.yml
+- ansible.builtin.import_tasks: selfsigned.yml
   when: ssl_provider == 'selfsigned'
 
-- import_tasks: copy.yml
+- ansible.builtin.import_tasks: copy.yml
   when: ssl_provider == 'copy'
 
-- import_tasks: certbot.yml
+- ansible.builtin.import_tasks: certbot.yml
   when: ssl_provider == 'certbot'

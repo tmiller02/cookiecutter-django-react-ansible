@@ -1,27 +1,27 @@
 ---
 {% raw %}
-- name: assert required variables are defined
-  assert:
+- name: Assert required variables are defined
+  ansible.builtin.assert:
     that:
       ssl_certbot_email is defined
 
-- name: install certbot
-  apt:
+- name: Install certbot
+  ansible.builtin.apt:
     name: certbot
     state: present
 
-- name: populate service facts
-  service_facts:
+- name: Populate service facts
+  ansible.builtin.service_facts:
 
-- name: stop conflicting services when generating a certificate
-  systemd:
+- name: Stop conflicting services when generating a certificate
+  ansible.builtin.systemd:
     name: "{{ item }}"
     state: stopped
   when: "item in ansible_facts.services"
   loop: "{{ ssl_certbot_stop_services }}"
 
-- name: generate certificate using certbot
-  command: >-
+- name: Generate certificate using certbot
+  ansible.builtin.command: >-
     certbot certonly
       --standalone
       --noninteractive
@@ -29,45 +29,44 @@
       --email {{ ssl_certbot_email }}
       --domains {{ ssl_common_name }}
 
-- name: create a symbolic link to the letsencrypt private key
-  file:
+- name: Create a symbolic link to the letsencrypt private key
+  ansible.builtin.file:
     src: "/etc/letsencrypt/live/{{ ssl_common_name }}/privkey.pem"
     dest: "{{ ssl_private_key_dest }}"
     state: link
 
 - name: Create a symbolic link to the letsencrypt certificate chain
-  file:
+  ansible.builtin.file:
     src: "/etc/letsencrypt/live/{{ ssl_common_name }}/fullchain.pem"
     dest: "{{ ssl_certificate_dest }}"
     state: link
 
-- name: start conflicting services
-  systemd:
+- name: Start conflicting services
+  ansible.builtin.systemd:
     name: "{{ item }}"
     state: started
   when: "item in ansible_facts.services"
   loop: "{{ ssl_certbot_stop_services }}"
 
-- name: add pre renewal hook to stop services
-  template:
+- name: Add pre renewal hook to stop services
+  ansible.builtin.template:
     src: certbot_pre_renew.sh
     dest: /etc/letsencrypt/renewal-hooks/pre/certbot_pre_renew.sh
     owner: root
     group: root
     mode: "u=rwx,g=r,o=r"
 
-- name: add post renewal hook to start services
-  template:
+- name: Add post renewal hook to start services
+  ansible.builtin.template:
     src: certbot_post_renew.sh
     dest: /etc/letsencrypt/renewal-hooks/post/certbot_post_renew.sh
     owner: root
     group: root
     mode: "u=rwx,g=r,o=r"
 
-- name: start and enable the certbot-renew systemd timer
-  systemd:
+- name: Start and enable the certbot-renew systemd timer
+  ansible.builtin.systemd:
     name: certbot-renew.timer
     state: started
     enabled: true
-
-{% endraw %}
+{% endraw -%}

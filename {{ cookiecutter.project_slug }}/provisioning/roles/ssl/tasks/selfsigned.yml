@@ -1,19 +1,19 @@
 ---
 {% raw %}
-- name: create a directory for storing certificate signing requests
-  file:
+- name: Create a directory for storing certificate signing requests
+  ansible.builtin.file:
     state: directory
     path: "/etc/ssl/csr/"
     owner: root
     group: root
 
-- name: generate an OpenSSL private key.
+- name: Generate an OpenSSL private key.
   openssl_privatekey:
     path: "{{ ssl_private_key_dest }}"
     backup: true
   notify: "restart nginx"
 
-- name: generate an OpenSSL certificate signing request
+- name: Generate an OpenSSL certificate signing request
   openssl_csr:
     path: "{{ ssl_csr_path }}"
     privatekey_path: "{{ ssl_private_key_dest }}"
@@ -26,7 +26,7 @@
     extended_key_usage:
       - serverAuth
 
-- name: generate a self-signed OpenSSL certificate
+- name: Generate a self-signed OpenSSL certificate
   openssl_certificate:
     path: "{{ ssl_certificate_dest }}"
     privatekey_path: "{{ ssl_private_key_dest }}"
@@ -34,4 +34,4 @@
     provider: selfsigned
     selfsigned_not_after: "+365d"
   notify: "restart nginx"
-{% endraw %}
+{% endraw -%}

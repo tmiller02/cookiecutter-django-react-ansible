@@ -1,1 +1,3 @@
 ansible
+ansible-lint
+pip-tools

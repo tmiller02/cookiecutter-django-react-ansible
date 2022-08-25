@@ -1,13 +1,13 @@
 ---
 {% raw %}
-- name: assert that required variables are defined
-  assert:
+- name: Assert that required variables are defined
+  ansible.builtin.assert:
     that:
       - ssl_private_key_src is defined
       - ssl_certificate_src is defined
 
-- name: copy private key
-  copy:
+- name: Copy private key
+  ansible.builtin.copy:
     src: "{{ ssl_private_key_src }}"
     dest: "{{ ssl_private_key_dest }}"
     owner: root
@@ -15,12 +15,12 @@
     mode: "u=rw,o=,o="
   notify: "restart nginx"
 
-- name: copy certificate
-  copy:
+- name: Copy certificate
+  ansible.builtin.copy:
     src: "{{ ssl_certificate_src }}"
     dest: "{{ ssl_certificate_dest }}"
     owner: root
     group: root
     mode: "u=rw,o=r,o=r"
   notify: "restart nginx"
-{% endraw %}
+{% endraw -%}

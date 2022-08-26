@@ -44,6 +44,7 @@
   ansible.builtin.template:
     src: venvrc.j2
     dest: "~/.venvrc"
+    mode: "u=rw,g=,o="
 
 - name: Update .bashrc file to source .venvrc file
   become: true

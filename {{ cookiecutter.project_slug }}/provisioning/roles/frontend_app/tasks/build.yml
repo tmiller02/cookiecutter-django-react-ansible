@@ -11,6 +11,7 @@
     chdir: "{{ playbook_dir }}/../frontend_app/"
   environment:
     REACT_APP_BACKEND_URL: "{{ frontend_app_backend_url }}"
+  changed_when: true
 
 # Note that this doesn't fail the playbook if vulnerable packages are found.
 # This only displays the report in the ansible output so we don't cause any
@@ -20,5 +21,5 @@
   args:
     chdir: "{{ playbook_dir }}/../frontend_app/"
   ignore_errors: true
-  changed_when: false
+  changed_when: true
 {% endraw -%}

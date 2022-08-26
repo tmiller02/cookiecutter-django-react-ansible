@@ -6,6 +6,7 @@
     path: "/etc/ssl/csr/"
     owner: root
     group: root
+    mode: "u=rwx,g=,o="
 
 - name: Generate an OpenSSL private key.
   openssl_privatekey:

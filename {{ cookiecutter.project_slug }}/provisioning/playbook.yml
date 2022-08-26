@@ -1,6 +1,7 @@
 ---
 {% raw %}
-- hosts: all
+- name: Initial setup
+  hosts: all
   gather_facts: false
   become: true
   tasks:
@@ -8,9 +9,10 @@
       ansible.builtin.ping:
     - name: Ensure apt cache is up to date
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
 
-- hosts: localhost
+- name: Run deploy check and build frontend app
+  hosts: localhost
   roles:
     - { role: deploy_check, tags: [always] }
     - { role: geerlingguy.nodejs, become: true }
@@ -23,12 +25,14 @@
   vars_files:
     - vars/frontend.yml
 
-- hosts: all
+- name: Install roles common to all hosts
+  hosts: all
   become: true
   vars_files:
     - vars/shared.yml
   pre_tasks:
-    - ansible.builtin.set_fact:
+    - name: Set ufw_firewall_rules fact
+      ansible.builtin.set_fact:
         ufw_firewall_rules: "{{ ufw_firewall_base_rules + ufw_firewall_additional_rules }}"
   roles:
     - base
@@ -46,7 +50,8 @@
         frontend_app_release_version: "{{ hostvars['localhost']['deploy_check_tag'] }}-{{ release_date }}"
       tags: [always]
 
-- hosts: database
+- name: Set up database
+  hosts: database
   become: true
   roles:
     - geerlingguy.postgresql
@@ -54,7 +59,8 @@
     - vars/shared.yml
     - vars/postgresql.yml
 
-- hosts: backend
+- name: Provision backend app
+  hosts: backend
   become: true
   roles:
     - ssl
@@ -65,7 +71,8 @@
     - vars/shared.yml
     - vars/backend.yml
 
-- hosts: frontend
+- name: Provision frontend app
+  hosts: frontend
   become: true
   roles:
     - ssl

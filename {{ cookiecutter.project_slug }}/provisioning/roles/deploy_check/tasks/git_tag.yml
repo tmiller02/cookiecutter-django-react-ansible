@@ -32,7 +32,7 @@
       when: deploy_check_display_confirmation_prompts | bool
 
     - name: Set deploy check tag fact
-      set_fact:
+      ansible.builtin.set_fact:
         deploy_check_tag: "{{ deploy_check_get_tags_command.stdout }}"
   when: "deploy_check_get_tags_command.rc == 0"
 {% endraw -%}

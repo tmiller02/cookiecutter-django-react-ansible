@@ -1,13 +1,13 @@
 ---
 {% raw %}
-- name: install unattended-upgrades
-  apt:
+- name: Install unattended-upgrades
+  ansible.builtin.apt:
     name: unattended-upgrades
     state: present
 
-- name: configure Unattended-Upgrade
-  lineinfile:
+- name: Configure Unattended-Upgrade
+  ansible.builtin.lineinfile:
     dest: "/etc/apt/apt.conf.d/20auto-upgrades"
     regexp: "^APT::Periodic::Unattended-Upgrade"
     line: "APT::Periodic::Unattended-Upgrade \"{{ base_install_updates_automatically | bool | ternary(1, 0) }}\";"
-{% endraw %}
+{% endraw -%}

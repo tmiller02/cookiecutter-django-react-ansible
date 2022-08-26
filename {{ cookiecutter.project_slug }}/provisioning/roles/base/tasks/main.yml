@@ -4,8 +4,8 @@
 
 - import_tasks: login_info.yml
 
-- name: install useful packages
-  apt:
+- name: Install useful packages
+  ansible.builtin.apt:
     name:
       - atop
       - htop

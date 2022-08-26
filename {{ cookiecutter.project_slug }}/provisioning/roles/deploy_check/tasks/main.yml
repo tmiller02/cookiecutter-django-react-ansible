@@ -13,14 +13,14 @@
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: prompt when the git working directory is not clean
+- name: Prompt when the git working directory is not clean
   block:
-    - name: run git status
-      command: git status --porcelain # noqa 303
+    - name: Run git status
+      ansible.builtin.command: git status --porcelain # noqa 303
       register: deploy_check_status_command
 
-    - name: display a prompt when the git working directory is not clean
-      pause:
+    - name: Display a prompt when the git working directory is not clean
+      ansible.builtin.pause:
         prompt: |
           WARNING: There appear to be uncommitted changes in your working directory:
 
@@ -31,5 +31,4 @@
   when: deploy_check_display_confirmation_prompts | bool
 
 - import_tasks: git_tag.yml
-
-{% endraw %}
+{% endraw -%}

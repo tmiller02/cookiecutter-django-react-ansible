@@ -1,38 +1,38 @@
 ---
 {% raw %}
-- name: get the current git tag
-  command: "git describe HEAD --tags --exact-match"
+- name: Get the current git tag
+  ansible.builtin.command: "git describe HEAD --tags --exact-match"
   register:
     deploy_check_get_tags_command
   failed_when: false
 
-- name: handle git tag not found
+- name: Handle git tag not found
   block:
-    - name: diplay prompt when a git tag could not be found
-      pause:
+    - name: Diplay prompt when a git tag could not be found
+      ansible.builtin.pause:
         prompt: |
           WARNING: Could not find a git tag.
 
           Press Crtl+C then A to abort, or press Enter to continue anyway.
       when: deploy_check_display_confirmation_prompts | bool
 
-    - name: set deploy check tag fact
-      set_fact:
+    - name: Set deploy check tag fact
+      ansible.builtin.set_fact:
         deploy_check_tag: "no-tag"
   when: "deploy_check_get_tags_command.rc != 0"
 
-- name: handle git tag found
+- name: Handle git tag found
   block:
-    - name: display prompt when git tag is found
-      pause:
+    - name: Display prompt when git tag is found
+      ansible.builtin.pause:
         prompt: |
           INFO: Found git tag "{{ deploy_check_get_tags_command.stdout }}"
 
           Press Ctrl+C then A to abort, or press Enter to continue.
       when: deploy_check_display_confirmation_prompts | bool
 
-    - name: set deploy check tag fact
+    - name: Set deploy check tag fact
       set_fact:
         deploy_check_tag: "{{ deploy_check_get_tags_command.stdout }}"
   when: "deploy_check_get_tags_command.rc == 0"
-{% endraw %}
+{% endraw -%}

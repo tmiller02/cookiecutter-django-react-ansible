@@ -1,28 +1,28 @@
 ---
 
-- name: install neofetch
-  apt:
+- name: Install neofetch
+  ansible.builtin.apt:
     name: neofetch
     state: present
 
-- name: ensure neofetch config directory exists
-  file:
+- name: Ensure neofetch config directory exists
+  ansible.builtin.file:
     path: "/etc/neofetch/"
     state: "directory"
     owner: "root"
     group: "root"
     mode: "u=rwx,g=rx,o=rx"
 
-- name: add the custom neofetch config
-  template:
+- name: Add the custom neofetch config
+  ansible.builtin.template:
     src: neofetch_config.conf.j2
     dest: /etc/neofetch/neofetch_custom_config.conf
     owner: "root"
     group: "root"
     mode: "u=rw,g=r,o=r"
 
-- name: add the profile.d neofetch script
-  template:
+- name: Add the profile.d neofetch script
+  ansible.builtin.template:
     src: neofetch.sh.j2
     dest: /etc/profile.d/neofetch.sh
     owner: root

@@ -9,4 +9,4 @@
   ansible.builtin.user:
     name: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
-{% endraw %}
+{% endraw -%}

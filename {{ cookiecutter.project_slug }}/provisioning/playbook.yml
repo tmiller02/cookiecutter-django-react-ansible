@@ -4,10 +4,10 @@
   gather_facts: false
   become: true
   tasks:
-    - name: check connectivity to all hosts
-      ping:
-    - name: ensure apt cache is up to date
-      apt:
+    - name: Check connectivity to all hosts
+      ansible.builtin.ping:
+    - name: Ensure apt cache is up to date
+      ansible.builtin.apt:
         update_cache: yes
 
 - hosts: localhost
@@ -15,8 +15,8 @@
     - { role: deploy_check, tags: [always] }
     - { role: geerlingguy.nodejs, become: true }
   tasks:
-    - name: build frontend app
-      import_role:
+    - name: Build frontend app
+      ansible.builtin.import_role:
         name: frontend_app
         tasks_from: build.yml
       tags: [update_frontend_app]
@@ -28,20 +28,20 @@
   vars_files:
     - vars/shared.yml
   pre_tasks:
-    - set_fact:
+    - ansible.builtin.set_fact:
         ufw_firewall_rules: "{{ ufw_firewall_base_rules + ufw_firewall_additional_rules }}"
   roles:
     - base
     - ufw_firewall
   tasks:
-    - name: "Set release version facts"
-      set_fact:
-        release_date: "{{ lookup('pipe','date \"+%Y-%m-%d-%H-%M-%S-%Z\"') }}"
+    - name: Set release version facts
+      ansible.builtin.set_fact:
+        release_date: "{{ lookup('pipe', 'date \"+%Y-%m-%d-%H-%M-%S-%Z\"') }}"
       delegate_to: localhost
       run_once: true
       tags: [always]
-    - name: "Set release version facts"
-      set_fact:
+    - name: Set release version facts
+      ansible.builtin.set_fact:
         backend_app_release_version: "{{ hostvars['localhost']['deploy_check_tag'] }}-{{ release_date }}"
         frontend_app_release_version: "{{ hostvars['localhost']['deploy_check_tag'] }}-{{ release_date }}"
       tags: [always]

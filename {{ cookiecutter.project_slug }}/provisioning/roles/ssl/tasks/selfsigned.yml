@@ -18,7 +18,7 @@
     path: "{{ ssl_csr_path }}"
     privatekey_path: "{{ ssl_private_key_dest }}"
     common_name: "{{ ssl_common_name }}"
-    use_common_name_for_san: yes
+    use_common_name_for_san: true
     key_usage:
       - nonRepudiation
       - digitalSignature

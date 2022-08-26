@@ -5,7 +5,7 @@
   become_user: "{{ backend_app_user }}"
   community.general.django_manage:
     command: "collectstatic"
-    clear: yes
+    clear: true
     app_path: "{{ backend_app_deploy_helper.new_release_path }}"
     virtualenv: "{{ backend_app_virtualenv_dir }}"
   register:

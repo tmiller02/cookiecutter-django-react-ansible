@@ -1,7 +1,7 @@
 ---
 
 - name: Ensure git is installed
-  become: yes
+  become: true
   ansible.builtin.apt:
     name: git
     state: present

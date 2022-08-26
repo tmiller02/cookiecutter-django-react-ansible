@@ -1,9 +1,9 @@
 ---
 {% raw %}
-- name: run collect static files
+- name: Run collect static files
   become: true
   become_user: "{{ backend_app_user }}"
-  django_manage:
+  community.general.django_manage:
     command: "collectstatic"
     clear: yes
     app_path: "{{ backend_app_deploy_helper.new_release_path }}"
@@ -11,7 +11,7 @@
   register:
     django_manage_collectstatic
 
-- name: display collectstatic output
-  debug:
+- name: Display collectstatic output
+  ansible.builtin.debug:
     msg: "{{ django_manage_collectstatic.out }}"
-{% endraw %}
+{% endraw -%}

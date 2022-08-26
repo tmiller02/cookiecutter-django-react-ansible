@@ -1,18 +1,18 @@
 ---
 {% raw %}
-- name: run database migrations
+- name: Run database migrations
   become: true
   become_user: "{{ backend_app_user }}"
   run_once: true
-  django_manage:
+  community.general.django_manage:
     command: "migrate"
     app_path: "{{ backend_app_deploy_helper.current_path }}"
     virtualenv: "{{ backend_app_virtualenv_dir }}"
   register:
     django_manage_migrate
 
-- name: display migrate output
+- name: Display migrate output
   run_once: true
-  debug:
+  ansible.builtin.debug:
     msg: "{{ django_manage_migrate.out }}"
-{% endraw %}
+{% endraw -%}

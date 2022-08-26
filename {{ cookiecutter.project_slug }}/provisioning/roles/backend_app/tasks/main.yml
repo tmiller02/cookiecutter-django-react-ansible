@@ -4,8 +4,8 @@
 
 - include_tasks: users.yml
 
-- name: ensure backend app root folder exists with correct ownership
-  file:
+- name: Ensure backend app root folder exists with correct ownership
+  ansible.builtin.file:
     path: "{{ backend_app_root }}"
     state: directory
     owner: "{{ backend_app_user }}"
@@ -19,8 +19,8 @@
 
 - import_tasks: virtualenv.yml
 
-- name: template settings into the new release path
-  template:
+- name: Template settings into the new release path
+  ansible.builtin.template:
     src: settings.env.j2
     dest: "{{ backend_app_deploy_helper.new_release_path }}/settings.env"
     owner: "{{ backend_app_user }}"
@@ -29,10 +29,10 @@
 
 - import_tasks: collect_static.yml
 
-- name: finalize the deploy, removing the unfinished file and switching the 'current' symlink
+- name: Finalize the deploy, removing the unfinished file and switching the 'current' symlink
   become: true
   become_user: "{{ backend_app_user }}"
-  deploy_helper:
+  community.general.deploy_helper:
     path: "{{ backend_app_root }}"
     release: '{{ backend_app_deploy_helper.new_release }}'
     state: finalize
@@ -48,11 +48,11 @@
 # only displays the report in the ansible output, so we don't cause any deployment to
 # fail unexpectedly. There is a dedicated 'Run checks' step in the Jenkinsfile which
 # *will* cause the Jenkins job to fail if a vulnerable package is detected.
-- name: display a report of the python dependencies using 'safety'
+- name: Display a report of the python dependencies using 'safety'
   become: true
   become_user: "{{ backend_app_user }}"
   run_once: true
-  command: make safety_check
+  ansible.builtin.command: make safety_check
   args:
     chdir: "{{ backend_app_deploy_helper.current_path }}"
   ignore_errors: true
@@ -63,4 +63,4 @@
 - import_tasks: systemd.yml
 
 - import_tasks: cron_jobs.yml
-{% endraw %}
+{% endraw -%}

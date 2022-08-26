@@ -1,12 +1,12 @@
 ---
 {% raw %}
-- name: set backend_app_virtualenv_dir fact
-  set_fact:
+- name: Set backend_app_virtualenv_dir fact
+  ansible.builtin.set_fact:
     backend_app_virtualenv_dir: "{{ backend_app_deploy_helper.new_release_path }}/venv"
 
-- name: install python packages and build dependencies
+- name: Install python packages and build dependencies
   become: true
-  apt:
+  ansible.builtin.apt:
     name:
       - libpq-dev
       - python3-dev
@@ -15,10 +15,10 @@
       - watchman
     state: present
 
-- name: set up virtualenv in new release path
+- name: Set up virtualenv in new release path
   become: true
   become_user: "{{ backend_app_user }}"
-  pip:
+  ansible.builtin.pip:
     virtualenv: "{{ backend_app_virtualenv_dir }}"
     virtualenv_command: /usr/bin/python3.10 -m venv
     name:
@@ -27,29 +27,29 @@
       - setuptools==65.1.0
       - wheel==0.37.1
 
-- name: install requirements using pip-sync
+- name: Install requirements using pip-sync
   become: true
   become_user: "{{ backend_app_user }}"
   # Use legacy pip resolver, work around issue https://github.com/pypa/pip/issues/9243
   # where the new resolver may try to install a sub-dependency version that differs
   # from the pinned version in requirements.txt
-  command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync --pip-args='--use-deprecated=legacy-resolver'"
+  ansible.builtin.command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync --pip-args='--use-deprecated=legacy-resolver'"
   args:
     chdir: "{{ backend_app_deploy_helper.new_release_path }}"
   changed_when: true
 
-- name: add .venvrc file that can be used to activate the virtualenv
+- name: Add .venvrc file that can be used to activate the virtualenv
   become: true
   become_user: "{{ backend_app_user }}"
-  template:
+  ansible.builtin.template:
     src: venvrc.j2
     dest: "~/.venvrc"
 
-- name: update .bashrc file to source .venvrc file
+- name: Update .bashrc file to source .venvrc file
   become: true
   become_user: "{{ backend_app_user }}"
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "~/.bashrc"
     block: |
       . ~/.venvrc
-{% endraw %}
+{% endraw -%}

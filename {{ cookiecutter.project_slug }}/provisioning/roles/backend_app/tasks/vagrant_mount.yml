@@ -8,10 +8,9 @@
 # anything else to make any code changes available on the target machine (compare to
 # the tasks in 'run_deploy.yml').
 
-- name: set deploy_helper facts needed by other tasks
-  set_fact:
+- name: Set deploy_helper facts needed by other tasks
+  ansible.builtin.set_fact:
     backend_app_deploy_helper:
       new_release_path: "{{ backend_app_root }}/current"
       current_path: "{{ backend_app_root }}/current"
-
-{% endraw %}
+{% endraw -%}

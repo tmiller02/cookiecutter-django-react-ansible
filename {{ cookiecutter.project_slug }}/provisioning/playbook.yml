@@ -74,4 +74,4 @@
   vars_files:
     - vars/shared.yml
     - vars/frontend.yml
-{% endraw %}
+{% endraw -%}

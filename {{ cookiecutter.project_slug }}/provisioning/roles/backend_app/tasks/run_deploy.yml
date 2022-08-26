@@ -16,29 +16,29 @@
 # See https://docs.ansible.com/ansible/latest/modules/deploy_helper_module.html#deploy-helper-module
 # for more info.
 
-- name: install rsync
-  apt:
+- name: Install rsync
+  ansible.builtin.apt:
     name: rsync
     state: present
 
-- name: initialize the deploy root and gather facts
+- name: Initialize the deploy root and gather facts
   become: true
   become_user: "{{ backend_app_user }}"
-  deploy_helper:
+  community.general.deploy_helper:
     path: "{{ backend_app_root }}"
     release: "{{ backend_app_release_version }}"
     state: present
     shared_path: ""
   register: backend_app_deploy_helper_output
 
-- name: set backend_app_deploy_helper fact
-  set_fact:
+- name: Set backend_app_deploy_helper fact
+  ansible.builtin.set_fact:
     backend_app_deploy_helper: "{{ backend_app_deploy_helper_output['ansible_facts']['deploy_helper'] }}"
 
-- name: synchronize backend_app to the new release folder
+- name: Synchronize backend_app to the new release folder
   become: true
   become_user: "{{ backend_app_user }}"
-  synchronize:
+  ansible.posix.synchronize:
     src: "{{ playbook_dir }}/../backend_app/"
     dest: "{{ backend_app_deploy_helper.new_release_path }}"
     rsync_opts:
@@ -50,10 +50,10 @@
       - "--exclude=.DS_Store"
       - "--chown={{ backend_app_user }}:{{ backend_app_group }}"
 
-- name: add an unfinished file to allow cleanup on successful finalize
+- name: Add an unfinished file to allow cleanup on successful finalize
   become: true
   become_user: "{{ backend_app_user }}"
-  file:
+  ansible.builtin.file:
     path: '{{ backend_app_deploy_helper.new_release_path }}/{{ backend_app_deploy_helper.unfinished_filename }}'
     state: touch
-{% endraw %}
+{% endraw -%}

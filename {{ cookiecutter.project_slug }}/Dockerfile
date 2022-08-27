@@ -1,4 +1,6 @@
 FROM ubuntu:22.04
+ARG VAGRANT_UID=1000
+ARG VAGRANT_GID=1000
 RUN apt-get update \
     && apt-get install -y \
     systemd \
@@ -7,7 +9,8 @@ RUN apt-get update \
     sudo \
     whois \
     iputils-ping
-RUN useradd --create-home --password $(mkpasswd -m sha-512 vagrant) -s /bin/bash vagrant
+RUN groupadd --gid $VAGRANT_GID vagrant
+RUN useradd --uid $VAGRANT_UID --gid $VAGRANT_GID --create-home --password $(mkpasswd -m sha-512 vagrant) -s /bin/bash vagrant
 RUN usermod -aG sudo vagrant
 RUN mkdir /home/vagrant/.ssh
 # Insert the default insecure Vagrant ssh key (Vagrant will detect and replace this when provisioning an environment)

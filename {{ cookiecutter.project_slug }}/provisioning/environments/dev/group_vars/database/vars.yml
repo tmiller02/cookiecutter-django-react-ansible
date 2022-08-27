@@ -4,7 +4,7 @@ postgresql_hba_entries:
   - { type: local, database: all, user: postgres, auth_method: peer }
   - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
   - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
-  - { type: host, database: all, user: all, address: '172.18.177.21/32', auth_method: md5 }
+  - { type: host, database: all, user: all, address: '192.168.56.3/32', auth_method: md5 }
   # Ensure the dev postgres server is accessible from any address (to allow access
   # from tools such as PyCharm of pgAdmin). Don't set this in a production environment!
   - { type: host, database: all, user: all, address: '0.0.0.0/0', auth_method: md5 }

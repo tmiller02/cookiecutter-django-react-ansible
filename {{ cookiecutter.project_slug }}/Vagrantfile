@@ -63,7 +63,7 @@ Vagrant.configure("2") do |config|
   config.proxy.enabled = {% if cookiecutter.vagrant_apt_proxy or cookiecutter.vagrant_http_proxy or cookiecutter.vagrant_https_proxy %}true{% else %}false{% endif %}
 
   config.vm.define "backend", primary: true do |backend|
-    backend.vm.network "private_network", ip: "172.18.177.20"
+    backend.vm.network "private_network", ip: "192.168.56.2"
     # Forward the https port being served via nginx
     backend.vm.network "forwarded_port", guest: 443, host: 4000
     # Forward the a port that can be used when running the django dev server
@@ -106,7 +106,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "frontend" do |frontend|
-    frontend.vm.network "private_network", ip: "172.18.177.21"
+    frontend.vm.network "private_network", ip: "192.168.56.3"
     # Forward the https port being served via nginx
     frontend.vm.network "forwarded_port", guest: 443, host: 5000
 
@@ -116,7 +116,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "db" do |db|
-    db.vm.network "private_network", ip: "172.18.177.22"
+    db.vm.network "private_network", ip: "192.168.56.4"
 
     db.vm.provider :virtualbox do |virtualbox|
       virtualbox.memory = 512
@@ -134,7 +134,7 @@ Vagrant.configure("2") do |config|
   # However, this process does result in the creation of a 'provisioner' VM,
   # which increases the system resources used for this dev environment.
   config.vm.define "provisioner" do |provisioner|
-    provisioner.vm.network "private_network", ip: "172.18.177.23"
+    provisioner.vm.network "private_network", ip: "192.168.56.5"
     # Forward a port that can be used if starting the frontend dev server
     provisioner.vm.network "forwarded_port", guest: 5001, host: 5001
 

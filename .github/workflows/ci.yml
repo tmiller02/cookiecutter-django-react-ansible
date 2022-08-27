@@ -52,7 +52,7 @@ jobs:
 
       - name: Build base docker image
         if: ${{ matrix.vagrant-provider == 'docker' }}
-        run: docker build --build-arg VAGRANT_UID=$UID --build-arg VAGRANT_GID=$GID --tag my_project_base_image .
+        run: docker build --build-arg VAGRANT_UID=$(id -u) --build-arg VAGRANT_GID=$(id -g) --tag my_project_base_image .
         working-directory: my_project
 
       - name: Cache Vagrant boxes

@@ -9,9 +9,9 @@ a Django 4.1 & React project with Ansible provisioning and some opinionated defa
 ## Key Features and Technologies
 * Django 4.1
 * Python 3.10
-* React using the [create-react-app](https://github.com/facebook/create-react-app) script
+* React 18 using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
-* Ansible 6.1 for provisioning  
+* Ansible 6.3 for provisioning  
 * Follows the [12-Factor methodology](https://12factor.net/)
 * Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/),
   Firefox and optional X11 forwarding

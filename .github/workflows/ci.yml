@@ -15,18 +15,46 @@ concurrency:
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-12
+            vagrant-provider: virtualbox
+          - os: ubuntu-22.04
+            vagrant-provider: docker
+      fail-fast: false
+    env:
+      VAGRANT_DEFAULT_PROVIDER: ${{ matrix.vagrant-provider }}
     steps:
+
       - uses: actions/checkout@v3
         with:
           path: cookiecutter-django-react-ansible
-      # Install python and cookiecutter requirements.
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'pip'
           cache-dependency-path: 'cookiecutter-django-react-ansible/requirements.txt'
+
       - run: pip install -r cookiecutter-django-react-ansible/requirements.txt
+
+      - name: Generate project from cookiecutter template
+        run: cookiecutter cookiecutter-django-react-ansible --no-input
+
+      - name: install vagrant on Ubuntu
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
+        run: sudo apt install -y vagrant
+
+      - name: Install vagrant plugins
+        run: vagrant plugin install vagrant-bindfs vagrant-proxyconf vagrant-vbguest
+
+      - name: Build base docker image
+        if: ${{ matrix.vagrant-provider == 'docker' }}
+        run: docker build --build-arg VAGRANT_UID=$UID --build-arg VAGRANT_GID=$GID --tag my_project_base_image .
+        working-directory: my_project
+
       - name: Cache Vagrant boxes
         uses: actions/cache@v2
         with:
@@ -34,16 +62,15 @@ jobs:
           key: ${{ runner.os }}-vagrant-${{ hashFiles('cookiecutter-django-react-ansible/Vagrantfile') }}
           restore-keys: |
             ${{ runner.os }}-vagrant-
-      - name: Generate project from cookiecutter template
-        run: cookiecutter cookiecutter-django-react-ansible --no-input
-      - name: Install vagrant plugins
-        run: vagrant plugin install vagrant-bindfs vagrant-proxyconf vagrant-vbguest
+
       - name: Provision dev environment
         run: vagrant up --provision
         working-directory: my_project
+
       - name: Run backend tests
         run: vagrant ssh backend -c "cd /vagrant/backend_app && make test"
         working-directory: my_project
+
       - name: Run frontend tests
         run: vagrant ssh provisioner -c "cd /vagrant/frontend_app && CI=true npm test"
         working-directory: my_project

@@ -1,5 +1,7 @@
 # Cookiecutter Django React Ansible
 
+![CI action status](https://github.com/tmiller02/cookiecutter-django-react-ansible/actions/workflows/ci.yml/badge.svg?branch=master)
+
 cookiecutter-django-react-ansible is a 
 [cookiecutter](https://github.com/pydanny/cookiecutter) template for setting up
 a Django 4.1 & React project with Ansible provisioning and some opinionated defaults.

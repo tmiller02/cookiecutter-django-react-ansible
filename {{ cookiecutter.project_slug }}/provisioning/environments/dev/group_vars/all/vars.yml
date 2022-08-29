@@ -12,7 +12,6 @@ frontend_app_backend_url: "https://{{ backend_server_name }}:4000"
 
 database_password: "$DATABASE PASSWORD$"
 
-ufw_firewall_state: "disabled"
 ufw_firewall_database_allow_from_ip:
  - 172.17.177.21
 

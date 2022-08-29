@@ -1,7 +1,7 @@
 ---
 {% raw %}
 
-nodejs_version: "16.x"
+nodejs_version: "18.x"
 
 ssl_common_name: "{{ frontend_server_name }}"
 ssl_private_key_name: "frontend_app.pem"

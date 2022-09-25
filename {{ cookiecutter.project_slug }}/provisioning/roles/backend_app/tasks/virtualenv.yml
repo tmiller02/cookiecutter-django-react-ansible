@@ -24,7 +24,7 @@
     name:
       - pip==22.2.2
       - pip-tools==6.8.0
-      - setuptools==65.1.0
+      - setuptools==65.4.0
       - wheel==0.37.1
 
 - name: Install requirements using pip-sync

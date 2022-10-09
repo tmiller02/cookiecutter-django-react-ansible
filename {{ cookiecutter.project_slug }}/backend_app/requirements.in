@@ -10,12 +10,12 @@ flake8
 gunicorn
 ipython
 mypy
+pip-audit
 # We install psycopg2 rather than psycopg2-binary to work around a libpq issue
 # when running Docker on M1 Macs, see https://stackoverflow.com/q/62807717
 psycopg2
 pytz
 pywatchman
-safety
 selenium
 tzdata
 uvicorn[standard]

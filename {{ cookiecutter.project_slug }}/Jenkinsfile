@@ -47,8 +47,8 @@ pipeline {
 
         stage('Run backend checks') {
             steps {
-                echo 'Checking for known vulnerabilities using "safety"...'
-                sh 'vagrant ssh backend -c "cd /vagrant/backend_app && make safety_check"'
+                echo 'Checking for known vulnerabilities using "pip-audit"...'
+                sh 'vagrant ssh backend -c "cd /vagrant/backend_app && make pip_audit"'
             }
         }
 

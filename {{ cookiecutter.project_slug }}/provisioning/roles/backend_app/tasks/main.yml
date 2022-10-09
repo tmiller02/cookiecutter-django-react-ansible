@@ -40,19 +40,18 @@
     keep_releases: 10
   when: not backend_app_vagrant_mount | bool
 
-# Note - this uses the open vulnerability database which is updated on a monthly basis.
-# To get access to vulnerabilities as soon as they are added, you will need a Safety
-# API key. See https://pypi.org/project/safety/ for more.
+# Note - this uses the Python Packaging Advisory Database
+# (https://github.com/pypa/advisory-database)
 #
 # Note also that this doesn't fail the playbook if vulnerable packages are found. This
 # only displays the report in the ansible output, so we don't cause any deployment to
 # fail unexpectedly. There is a dedicated 'Run checks' step in the Jenkinsfile which
 # *will* cause the Jenkins job to fail if a vulnerable package is detected.
-- name: Display a report of the python dependencies using 'safety'
+- name: Display a report of the python dependencies using 'pip-audit'
   become: true
   become_user: "{{ backend_app_user }}"
   run_once: true
-  ansible.builtin.command: make safety_check
+  ansible.builtin.command: make pip_audit
   args:
     chdir: "{{ backend_app_deploy_helper.current_path }}"
   ignore_errors: true

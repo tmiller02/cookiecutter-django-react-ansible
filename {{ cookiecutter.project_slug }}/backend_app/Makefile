@@ -1,5 +1,5 @@
 .ONESHELL:
-.PHONY: runserver test format lint safety_check type_check
+.PHONY: runserver test format lint pip_audit type_check
 
 runserver:
 	. ~/.venvrc
@@ -28,9 +28,9 @@ lint:
 	. ~/.venvrc
 	flake8 --config .flake8 .
 
-safety_check:
+pip_audit:
 	. ~/.venvrc
-	safety check
+	pip-audit
 
 type_check:
 	. ~/.venvrc

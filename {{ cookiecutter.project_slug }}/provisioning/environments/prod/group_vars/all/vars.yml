@@ -17,7 +17,13 @@
 #ufw_firewall_database_allow_from_ip:
 # - <your-production-backend-ip-address>
 #
-#ufw_firewall_additional_rules: []
+## Allow SSH connections, rate limit to limit brute force attacks
+#ufw_firewall_additional_rules:
+# - port: "ssh"
+#   proto: "tcp"
+#   rule: "limit"
+#   from_ip: ["any"]
+#   when: true
 #
 #ssl_provider: 'certbot'
 #ssl_certbot_email: '<your-certbot-notification-email>'

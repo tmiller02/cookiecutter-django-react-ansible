@@ -16,6 +16,11 @@ ufw_firewall_database_allow_from_ip:
  - 172.17.177.21
 
 ufw_firewall_additional_rules:
+  - port: "ssh"
+    proto: "tcp"
+    rule: "allow"
+    from_ip: ["any"]
+    when: true
   # Ensure the django dev server is accessible from any address
   - port: "4001"
     proto: "tcp"

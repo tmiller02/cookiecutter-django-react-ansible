@@ -45,7 +45,9 @@ jobs:
 
       - name: install vagrant on Ubuntu
         if: ${{ matrix.os == 'ubuntu-22.04' }}
-        run: sudo apt install -y vagrant
+        run: |
+          sudo apt update
+          sudo apt install -y vagrant
 
       - name: Install vagrant plugins
         run: vagrant plugin install vagrant-bindfs vagrant-proxyconf vagrant-vbguest

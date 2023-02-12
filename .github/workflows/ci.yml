@@ -58,7 +58,7 @@ jobs:
         working-directory: my_project
 
       - name: Cache Vagrant boxes
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.vagrant.d/boxes
           key: ${{ runner.os }}-vagrant-${{ hashFiles('cookiecutter-django-react-ansible/Vagrantfile') }}

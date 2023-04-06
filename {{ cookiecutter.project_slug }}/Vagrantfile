@@ -64,6 +64,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "backend", primary: true do |backend|
     backend.vm.network "private_network", ip: "192.168.56.2"
+    # Forward the https port being served via nginx
+    backend.vm.network "forwarded_port", guest: 443, host: 4000
     # Forward the port that can be used when running the django dev server
     backend.vm.network "forwarded_port", guest: 4001, host: 4001
     # Enables X11 forwarding. This can be useful when running Selenium tests

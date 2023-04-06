@@ -1,6 +1,6 @@
 black
 coverage[toml]
-Django>=4.1,<4.2
+Django>=4.2,<5.0
 django-cors-headers
 django-environ
 django-extensions
@@ -11,9 +11,7 @@ gunicorn
 ipython
 mypy
 pip-audit
-# We install psycopg2 rather than psycopg2-binary to work around a libpq issue
-# when running Docker on M1 Macs, see https://stackoverflow.com/q/62807717
-psycopg2
+psycopg[binary]
 pytz
 pywatchman
 selenium

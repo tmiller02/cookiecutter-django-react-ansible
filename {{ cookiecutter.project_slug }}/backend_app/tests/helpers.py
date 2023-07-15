@@ -1,6 +1,7 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.service import Service
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.conf import settings
@@ -17,11 +18,11 @@ class SeleniumLiveServerTestCase(StaticLiveServerTestCase):
         options.add_argument("--width=1024")
         options.add_argument("--height=768")
         options.headless = settings.SELENIUM_TESTS_RUN_HEADLESS
+        options.binary_location = "/usr/bin/firefox-esr"
 
-        cls.selenium = Firefox(
-            firefox_binary=FirefoxBinary(firefox_path="/usr/bin/firefox-esr"),
-            executable_path="/usr/bin/geckodriver", options=options
-        )
+        driver_service = Service("/usr/bin/geckodriver")
+
+        cls.selenium = Firefox(service=driver_service, options=options)
         cls.selenium.implicitly_wait(10)
 
     @classmethod

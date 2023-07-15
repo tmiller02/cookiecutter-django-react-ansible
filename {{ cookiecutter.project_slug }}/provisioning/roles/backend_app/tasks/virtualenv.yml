@@ -22,18 +22,15 @@
     virtualenv: "{{ backend_app_virtualenv_dir }}"
     virtualenv_command: /usr/bin/python3.10 -m venv
     name:
-      - pip==23.1.2
-      - pip-tools==6.13.0
-      - setuptools==67.7.2
+      - pip==23.2
+      - pip-tools==7.0.0
+      - setuptools==68.0.0
       - wheel==0.40.0
 
 - name: Install requirements using pip-sync
   become: true
   become_user: "{{ backend_app_user }}"
-  # Use legacy pip resolver, work around issue https://github.com/pypa/pip/issues/9243
-  # where the new resolver may try to install a sub-dependency version that differs
-  # from the pinned version in requirements.txt
-  ansible.builtin.command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync --pip-args='--use-deprecated=legacy-resolver'"
+  ansible.builtin.command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync"
   args:
     chdir: "{{ backend_app_deploy_helper.new_release_path }}"
   changed_when: true

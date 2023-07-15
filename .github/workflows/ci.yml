@@ -21,8 +21,6 @@ jobs:
         include:
           - os: macos-12
             vagrant-provider: virtualbox
-          - os: ubuntu-22.04
-            vagrant-provider: docker
       fail-fast: false
     env:
       VAGRANT_DEFAULT_PROVIDER: ${{ matrix.vagrant-provider }}
@@ -51,11 +49,6 @@ jobs:
 
       - name: Install vagrant plugins
         run: vagrant plugin install vagrant-bindfs vagrant-proxyconf vagrant-vbguest
-
-      - name: Build base docker image
-        if: ${{ matrix.vagrant-provider == 'docker' }}
-        run: docker build --build-arg VAGRANT_UID=$(id -u) --build-arg VAGRANT_GID=$(id -g) --tag my_project_base_image .
-        working-directory: my_project
 
       - name: Cache Vagrant boxes
         uses: actions/cache@v3

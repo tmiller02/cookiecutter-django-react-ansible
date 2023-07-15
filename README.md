@@ -74,23 +74,20 @@ $ git push -u origin master
 To get up and running quickly, make sure you have the following requirements installed:
 * [Vagrant](https://www.vagrantup.com/)
 * One of the following:  
-  * [Docker](https://www.docker.com/)
+  * [VMWare Fusion Player](https://customerconnect.vmware.com/evalcenter?p=fusion-player-personal-13)
   * [VirtualBox](https://www.virtualbox.org/)
+
+If using VMWare Fusion Player, make sure that you have also installed the [Vagrant VMWare Utility](https://developer.hashicorp.com/vagrant/docs/providers/vmware/installation)
+and the `vagrant-vmware-desktop` plugin.
 
 First, navigate to the project's directory:
 ```
 $ cd my_project/
 ```
 
-This project has been configured to work with either VirtualBox or Docker
+This project has been configured to work with either VMWare Fusion or VirtualBox 
 as part of the Vagrant provisioning process via 
 [vagrant providers](https://www.vagrantup.com/docs/providers).
-
-If you are using Docker, you'll need to build the base Docker image:
-
-```
-$ docker build -t {{ cookiecutter.project_slug}}_base_image .
-```
 
 Provision the Vagrant dev environment:
 

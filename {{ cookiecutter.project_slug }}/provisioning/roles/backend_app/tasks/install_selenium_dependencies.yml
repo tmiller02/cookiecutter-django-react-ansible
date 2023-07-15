@@ -8,6 +8,7 @@
   ansible.builtin.apt:
     name:
       - firefox-esr
+      - firefox-esr-geckodriver
       - xauth
       - x11-apps
     state: present

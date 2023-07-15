@@ -65,7 +65,6 @@
   roles:
     - ssl
     - geerlingguy.nginx
-    - tmiller02.geckodriver
     - { role: backend_app, tags: [update_backend_app] }
   vars_files:
     - vars/shared.yml

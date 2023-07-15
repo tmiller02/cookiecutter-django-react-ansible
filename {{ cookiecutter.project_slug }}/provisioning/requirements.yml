@@ -1,9 +1,6 @@
 ---
 
 roles:
-  - name: tmiller02.geckodriver
-    version: "0.1.0"
-
   - name: geerlingguy.postgresql
     version: "3.4.2"
 

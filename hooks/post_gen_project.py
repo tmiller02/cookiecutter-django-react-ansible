@@ -75,17 +75,15 @@ This project has the following requirements. Make sure these are installed \
 before getting started:
   \u2022 Vagrant - https://www.vagrantup.com/
   \u2022 One of the following:
-    \u25e6 Docker - https://www.docker.com/
+    \u25e6 VMWare Fusion Player - https://customerconnect.vmware.com/evalcenter?p=fusion-player-personal-13
     \u25e6 VirtualBox - https://www.virtualbox.org/
+    
+If using VMWare Fusion Player, make sure that this is set up to work with Vagrant - https://developer.hashicorp.com/vagrant/docs/providers/vmware/installation
     
 To get started, run:
 
   $ cd {{ cookiecutter.project_slug }}
-  
-If using Docker, build the base Docker image:
- 
-  $ docker build -t {{ cookiecutter.project_slug}}_base_image .   
-  
+
 Next, provision with Vagrant:
   
   $ vagrant up --provision

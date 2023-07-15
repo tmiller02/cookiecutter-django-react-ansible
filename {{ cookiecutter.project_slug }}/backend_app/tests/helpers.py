@@ -20,7 +20,7 @@ class SeleniumLiveServerTestCase(StaticLiveServerTestCase):
 
         cls.selenium = Firefox(
             firefox_binary=FirefoxBinary(firefox_path="/usr/bin/firefox-esr"),
-            executable_path="/usr/local/bin/geckodriver", options=options
+            executable_path="/usr/bin/geckodriver", options=options
         )
         cls.selenium.implicitly_wait(10)
 

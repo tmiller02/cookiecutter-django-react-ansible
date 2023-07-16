@@ -8,7 +8,7 @@
 
 * [Vagrant](https://www.vagrantup.com/)
 * One of the following:  
-  * [Docker](https://www.docker.com/)
+  * [VMWare Fusion Player](https://customerconnect.vmware.com/evalcenter?p=fusion-player-personal-13)
   * [VirtualBox](https://www.virtualbox.org/)
 
 ## Optional Dependencies
@@ -24,15 +24,9 @@ First, navigate to the project's directory:
 $ cd {{ cookiecutter.project_slug }}
 ```
 
-This project has been configured to work with either VirtualBox or Docker
+This project has been configured to work with either VMWare Fusion or VirtualBox
 as part of the Vagrant provisioning process via 
 [vagrant providers](https://www.vagrantup.com/docs/providers).
-
-If you are using Docker, you'll need to build the base Docker image:
-
-```
-$ docker build -t {{ cookiecutter.project_slug}}_base_image .
-```
 
 Provision the Vagrant dev environment:
 

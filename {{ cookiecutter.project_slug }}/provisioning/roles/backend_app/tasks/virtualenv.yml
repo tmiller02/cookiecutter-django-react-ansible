@@ -30,7 +30,8 @@
 - name: Install requirements using pip-sync
   become: true
   become_user: "{{ backend_app_user }}"
-  ansible.builtin.command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync"
+  # workaround for https://github.com/pypa/pip/issues/9644
+  ansible.builtin.command: "{{ backend_app_virtualenv_dir }}/bin/pip-sync --pip-args='--no-deps'"
   args:
     chdir: "{{ backend_app_deploy_helper.new_release_path }}"
   changed_when: true

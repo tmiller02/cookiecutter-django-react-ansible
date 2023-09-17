@@ -41,8 +41,8 @@ You may need to re-run this command if Vagrant needed to install plugins.
 ## Production Environment
 
 This project includes a sample production environment. All hosts that are added
-to the inventory should be running Ubuntu 21.10 (Impish Indri). See the README at
-`provisioning/environments/prod/README.txt` for more.
+to the inventory should be running [Ubuntu 22.04 (Jammy Jellyfish)](https://releases.ubuntu.com/22.04/). 
+See the README at `provisioning/environments/prod/README.txt` for more.
 
 You are strongly advised to use [ansible-vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html),
 and remember to never add sensitive information such as production passwords or

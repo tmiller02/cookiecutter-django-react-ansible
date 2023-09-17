@@ -22,7 +22,7 @@ a Django 4.2 & React project with Ansible provisioning and some opinionated defa
 * Ubuntu 22.04 (Jammy Jellyfish)
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
   SSL certificates for production, auto-generated self-signed SSL certificates for development.
-* Checks to python dependencies provided via [pyup.io](https://pyup.io/)
+* Checks to python dependencies provided via [pip-audit](https://pypi.org/project/pip-audit/)
 * Vagrant for the development environment
 * Comes with a Jenkinsfile for your CI / CD pipelines
 

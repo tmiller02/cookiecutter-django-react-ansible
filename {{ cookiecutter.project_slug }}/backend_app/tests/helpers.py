@@ -1,6 +1,5 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.firefox.service import Service
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase

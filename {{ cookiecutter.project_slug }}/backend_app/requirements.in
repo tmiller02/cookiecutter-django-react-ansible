@@ -6,7 +6,6 @@ django-environ
 django-extensions
 django-stubs
 djangorestframework
-flake8
 gunicorn
 ipython
 mypy
@@ -14,6 +13,7 @@ pip-audit
 psycopg[binary]
 pytz
 pywatchman
+ruff
 selenium
 tzdata
 uvicorn[standard]

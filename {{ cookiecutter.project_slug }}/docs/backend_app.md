@@ -78,7 +78,7 @@ To display Firefox, set the `SELENIUM_TESTS_RUN_HEADLESS` to `False` in
 ## Formatting and Linting
 
 This project is set up with the [black](https://github.com/psf/black) code
-formatter and [flake8](http://flake8.pycqa.org/en/latest/) for linting.
+formatter and [ruff](https://docs.astral.sh/ruff/) for linting.
 
 To run the black formatter:
 
@@ -87,7 +87,7 @@ $ vagrant ssh backend
 (venv) [{{ cookiecutter.project_slug }}]$ make format
 ```
 
-And to run `flake8`: 
+And to run `ruff`: 
 
 ```
 (venv) [{{ cookiecutter.project_slug }}]$ make lint

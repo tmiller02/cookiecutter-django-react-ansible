@@ -26,7 +26,7 @@ format:
 
 lint:
 	. ~/.venvrc
-	flake8 --config .flake8 .
+	ruff check .
 
 pip_audit:
 	. ~/.venvrc

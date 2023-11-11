@@ -1,13 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Newer versions of Vagrant create the ssh key with CRLF line endings on
-# Windows hosts, which causes problems when trying to use these ssh keys
-# in the Linux VMs, see:
-# https://github.com/hashicorp/vagrant/issues/13284
-Vagrant.require_version "< 2.4.0"
-
 if Vagrant::Util::Platform.windows? then
+
+  # Newer versions of Vagrant create the ssh key with CRLF line endings on
+  # Windows hosts, which causes problems when trying to use these ssh keys
+  # in the Linux VMs, see:
+  # https://github.com/hashicorp/vagrant/issues/13284
+  Vagrant.require_version "< 2.4.0"
+
   def running_as_admin?
     # query the LOCAL SERVICE account reg key (requires admin privileges)
     system('reg query "HKU\S-1-5-19"', :out => File::NULL)

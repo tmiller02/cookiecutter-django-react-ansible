@@ -1,9 +1,23 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-ENV["VAGRANT_EXPERIMENTAL"] = "typed_triggers"
+# Newer versions of Vagrant create the ssh key with CRLF line endings on
+# Windows hosts, which causes problems when trying to use these ssh keys
+# in the Linux VMs, see:
+# https://github.com/hashicorp/vagrant/issues/13284
+Vagrant.require_version "< 2.4.0"
 
-Vagrant.require_version ">= 2.2.5"
+if Vagrant::Util::Platform.windows? then
+  def running_as_admin?
+    # query the LOCAL SERVICE account reg key (requires admin privileges)
+    system('reg query "HKU\S-1-5-19"', :out => File::NULL)
+  end
+
+  unless running_as_admin?
+    puts "Admin rights are required to create symlinks. Try running this Vagrantfile again from an admin command prompt."
+    exit 1
+  end
+end
 
 Vagrant.configure("2") do |config|
 

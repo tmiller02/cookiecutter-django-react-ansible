@@ -14,10 +14,11 @@ class SeleniumLiveServerTestCase(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         options = Options()
+        options.binary_location = "/usr/bin/firefox-esr"
         options.add_argument("--width=1024")
         options.add_argument("--height=768")
-        options.headless = settings.SELENIUM_TESTS_RUN_HEADLESS
-        options.binary_location = "/usr/bin/firefox-esr"
+        if settings.SELENIUM_TESTS_RUN_HEADLESS:
+            options.add_argument("--headless")
 
         driver_service = Service("/usr/bin/geckodriver")
 

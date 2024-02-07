@@ -1,8 +1,5 @@
 ---
 {% raw %}
-- name: Set backend_app_virtualenv_dir fact
-  ansible.builtin.set_fact:
-    backend_app_virtualenv_dir: "{{ backend_app_deploy_helper.new_release_path }}/venv"
 
 - name: Install python packages and build dependencies
   become: true

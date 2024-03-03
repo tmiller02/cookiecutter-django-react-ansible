@@ -9,5 +9,5 @@ podman compose --file compose.yaml exec --user developer provisioner bash -c '
   sudo ~/provisioning_venv/bin/ansible-galaxy install --role-file=requirements.yml
   ANSIBLE_CONFIG=ansible_vagrant.cfg ~/provisioning_venv/bin/ansible-playbook playbook.yml \
    --inventory environments/dev/inventory \
-   --extra-vars "ansible_user=developer ansible_password=developer"
+   --extra-vars "ansible_user=developer ansible_password=developer backend_app_user=developer backend_app_group=developer"
 '

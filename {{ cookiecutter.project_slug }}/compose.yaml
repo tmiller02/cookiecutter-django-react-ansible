@@ -2,18 +2,27 @@ version: '3.8'
 
 services:
   backend:
-    build: .
+    build:
+      context: .
+      args:
+        - "DEVELOPER_UID=${DEVELOPER_UID}"
+        - "DEVELOPER_GID=${DEVELOPER_GID}"
     container_name: {{ cookiecutter.project_slug }}_backend
     restart: always
     privileged: true
     volumes:
       - .:/workspace
+      - ./backend_app:/opt/{{ cookiecutter.project_slug }}_backend/current
     networks:
       service1_net:
           ipv4_address: 172.22.0.2
 
   frontend:
-    build: .
+    build:
+      context: .
+      args:
+        - "DEVELOPER_UID=${DEVELOPER_UID}"
+        - "DEVELOPER_GID=${DEVELOPER_GID}"
     container_name: {{ cookiecutter.project_slug }}_frontend
     restart: always
     privileged: true
@@ -24,7 +33,11 @@ services:
           ipv4_address: 172.22.0.3
 
   db:
-    build: .
+    build:
+      context: .
+      args:
+        - "DEVELOPER_UID=${DEVELOPER_UID}"
+        - "DEVELOPER_GID=${DEVELOPER_GID}"
     container_name: {{ cookiecutter.project_slug }}_db
     restart: always
     privileged: true
@@ -33,7 +46,11 @@ services:
           ipv4_address: 172.22.0.4
 
   provisioner:
-    build: .
+    build:
+      context: .
+      args:
+        - "DEVELOPER_UID=${DEVELOPER_UID}"
+        - "DEVELOPER_GID=${DEVELOPER_GID}"
     container_name: {{ cookiecutter.project_slug }}_provisioner
     restart: always
     privileged: true

@@ -13,6 +13,9 @@ services:
     volumes:
       - .:/workspace
       - ./backend_app:/opt/{{ cookiecutter.project_slug }}_backend/current
+    ports:
+      - "4000:443"
+      - "4001:4001"
     networks:
       service1_net:
           ipv4_address: 172.22.0.2
@@ -28,6 +31,8 @@ services:
     privileged: true
     volumes:
       - .:/workspace
+    ports:
+      - "5000:443"
     networks:
       service1_net:
           ipv4_address: 172.22.0.3

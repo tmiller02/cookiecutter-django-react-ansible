@@ -1,14 +1,11 @@
 Host 172.22.0.2
     IdentityFile=/vagrant_machines/backend/virtualbox/private_key
     IdentityFile=/vagrant_machines/backend/vmware_desktop/private_key
-    IdentityFile=/workspace/provisioning/podman_dev_key
 
 Host 172.22.0.3
     IdentityFile=/vagrant_machines/frontend/virtualbox/private_key
     IdentityFile=/vagrant_machines/frontend/vmware_desktop/private_key
-    IdentityFile=/workspace/provisioning/podman_dev_key
 
 Host 172.22.0.4
     IdentityFile=/vagrant_machines/db/virtualbox/private_key
     IdentityFile=/vagrant_machines/db/vmware_desktop/private_key
-    IdentityFile=/workspace/provisioning/podman_dev_key

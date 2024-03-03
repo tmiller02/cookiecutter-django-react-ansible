@@ -24,7 +24,6 @@
     src: settings.env.j2
     dest: "{{ backend_app_deploy_helper.new_release_path }}/settings.env"
     owner: "{{ backend_app_user }}"
-    group: "{{ backend_app_group }}"
     mode: "u=rw,g=,o="
 
 - import_tasks: collect_static.yml

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: {{ cookiecutter.project_slug }}_backend
+    restart: always
+    privileged: true
+    volumes:
+      - .:/workspace
+    networks:
+      service1_net:
+          ipv4_address: 172.22.0.2
+
+  frontend:
+    build: .
+    container_name: {{ cookiecutter.project_slug }}_frontend
+    restart: always
+    privileged: true
+    volumes:
+      - .:/workspace
+    networks:
+      service1_net:
+          ipv4_address: 172.22.0.3
+
+  db:
+    build: .
+    container_name: {{ cookiecutter.project_slug }}_db
+    restart: always
+    privileged: true
+    networks:
+      service1_net:
+          ipv4_address: 172.22.0.4
+
+  provisioner:
+    build: .
+    container_name: {{ cookiecutter.project_slug }}_provisioner
+    restart: always
+    privileged: true
+    volumes:
+      - .:/workspace
+    networks:
+      service1_net:
+          ipv4_address: 172.22.0.5
+
+networks:
+  service1_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16

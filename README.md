@@ -8,7 +8,7 @@ a Django 4.2 & React project with Ansible provisioning and some opinionated defa
 
 ## Key Features and Technologies
 * Django 4.2
-* Python 3.10
+* Python 3.11
 * React 18 using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
 * Ansible 9 for provisioning  

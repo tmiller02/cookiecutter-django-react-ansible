@@ -24,7 +24,7 @@ directory = "coverage_html_report"
 # https://mypy.readthedocs.io/en/stable/config_file.html#using-a-pyproject-toml-file
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 plugins = "mypy_django_plugin.main"
 files = "."
 check_untyped_defs = true

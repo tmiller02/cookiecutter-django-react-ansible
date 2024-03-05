@@ -5,6 +5,7 @@
   become: true
   ansible.builtin.apt:
     name:
+      - make
       - gcc
       - libpq-dev
       - python3.11-dev

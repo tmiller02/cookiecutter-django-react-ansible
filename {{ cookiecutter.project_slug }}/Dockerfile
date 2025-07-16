@@ -8,6 +8,7 @@ RUN dnf update -y \
     initscripts \
     libcurl \
     openssh-server \
+    openssh-clients \
     openssl-devel \
     python3.12 \
     python3.12-devel \
@@ -26,4 +27,6 @@ COPY provisioning/requirements.txt provisioning/requirements.txt
 RUN python3.12 -m venv ~/provision_venv && \
     ~/provision_venv/bin/pip install pip==25.0 wheel==0.44.0 setuptools==80.9.0 && \
     ~/provision_venv/bin/pip install -r provisioning/requirements.txt
+COPY provisioning/requirements.yml provisioning/requirements.yml
+RUN ~/provision_venv/bin/ansible-galaxy install -r provisioning/requirements.yml
 CMD [ "/sbin/init" ]

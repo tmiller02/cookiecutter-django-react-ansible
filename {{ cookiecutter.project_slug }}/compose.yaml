@@ -1,9 +1,18 @@
 services:
-  backend_app:
+  {{ cookiecutter.project_slug }}_backend:
     privileged: true
     build:
       context: .
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
     ports:
       - "443:443"
+    volumes:
+      - .:/workdir/
+  {{ cookiecutter.project_slug }}_frontend:
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
+  {{ cookiecutter.project_slug }}_db:
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
+  provisioner:
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
     volumes:
       - .:/workdir/

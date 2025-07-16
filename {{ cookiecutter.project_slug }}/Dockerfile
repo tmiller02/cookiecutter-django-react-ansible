@@ -1,23 +1,22 @@
-FROM rockylinux/rockylinux:9.6
+FROM ubuntu:24.04
 WORKDIR /workdir/
 # Install base packages for initial ansible provisioning
-RUN dnf update -y \
-    && dnf install -y \
-    crontabs \
+RUN apt update -y \
+    && apt upgrade -y \
+    && apt install -y \
+    cron \
     gcc \
-    initscripts \
-    libcurl \
+    libcurl4 \
     openssh-server \
-    openssh-clients \
-    openssl-devel \
-    python3.12 \
-    python3.12-devel \
-    python3.12-pip \
+    openssh-client \
+    libssl-dev \
+    python3-dev \
+    python3-pip \
+    python3-venv \
     rsync \
     sudo \
     systemd \
-    systemd-sysv \
-    --allowerasing
+    systemd-sysv
 # Create a shared ssh key. This image is used for each container, so the
 # ansible 'provisioner' container is able to ssh onto the other containers.
 RUN mkdir -p /root/.ssh && \

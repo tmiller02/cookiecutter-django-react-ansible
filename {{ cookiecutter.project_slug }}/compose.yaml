@@ -1,0 +1,9 @@
+services:
+  backend_app:
+    privileged: true
+    build:
+      context: .
+    ports:
+      - "443:443"
+    volumes:
+      - .:/workdir/

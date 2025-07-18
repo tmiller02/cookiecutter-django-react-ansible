@@ -14,7 +14,7 @@ a Django 4.2 & React project with Ansible provisioning and some opinionated defa
 * Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/) and Firefox
 * Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)
 * Works on Linux, macOS and Windows host environments
-* PostgreSQL 14
+* PostgreSQL 16
 * NGINX web server set up with HTTP/2 support
 * Ubuntu 24.04 (Jammy Jellyfish)
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)

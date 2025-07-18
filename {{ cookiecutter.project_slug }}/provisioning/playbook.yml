@@ -34,9 +34,10 @@
     - name: Set ufw_firewall_rules fact
       ansible.builtin.set_fact:
         ufw_firewall_rules: "{{ ufw_firewall_base_rules + ufw_firewall_additional_rules }}"
+      when: configure_ufw_firewall | bool
   roles:
     - base
-    - ufw_firewall
+    - { role: ufw_firewall, when: configure_ufw_firewall }
   tasks:
     - name: Set release version facts
       ansible.builtin.set_fact:

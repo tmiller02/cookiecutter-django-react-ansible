@@ -73,20 +73,15 @@ def convert_crlf_to_lf():
 success_message = u"""
 This project has the following requirements. Make sure these are installed \
 before getting started:
-  \u2022 Vagrant - https://www.vagrantup.com/
-  \u2022 One of the following:
-    \u25e6 VMWare Fusion Player - https://customerconnect.vmware.com/evalcenter?p=fusion-player-personal-13
-    \u25e6 VirtualBox - https://www.virtualbox.org/
-    
-If using VMWare Fusion Player, make sure that this is set up to work with Vagrant - https://developer.hashicorp.com/vagrant/docs/providers/vmware/installation
-    
+  \u2022 Podman - https://podman.io/
+        
 To get started, run:
 
   $ cd {{ cookiecutter.project_slug }}
 
-Next, provision with Vagrant:
+Next, provision the podman containers:
   
-  $ vagrant up --provision
+  $ ./provision_dev_environment.sh
     
 Once provisioning has finished, you can access the backend app at:
 

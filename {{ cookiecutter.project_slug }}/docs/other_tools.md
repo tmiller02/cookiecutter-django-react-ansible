@@ -52,5 +52,5 @@ TLS/SSL encryption configuration of hosts in the 'dev' environment with
 Example usage:
 
     cd {{ cookiecutter.project_slug }}
-    vagrant up --provision
+    ./provision_dev_environment.sh
     ./other_tools/testssl_dev.sh

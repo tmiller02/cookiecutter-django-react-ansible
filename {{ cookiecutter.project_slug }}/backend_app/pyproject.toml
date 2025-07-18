@@ -1,14 +1,23 @@
-[tool.black]
-line-length = 88
-target-version = ['py310']
-exclude = '/(venv)/'
-
 # https://docs.astral.sh/ruff/configuration/#using-pyprojecttoml
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+]
 
 [tool.ruff]
 exclude = ["venv"]
 line-length = 88
-target-version = "py310"
+target-version = "py312"
 
 [tool.coverage.run]
 source = ["."]
@@ -24,7 +33,7 @@ directory = "coverage_html_report"
 # https://mypy.readthedocs.io/en/stable/config_file.html#using-a-pyproject-toml-file
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 plugins = "mypy_django_plugin.main"
 files = "."
 check_untyped_defs = true

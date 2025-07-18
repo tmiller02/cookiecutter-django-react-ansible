@@ -22,11 +22,11 @@ test:
 
 format:
 	. ~/.venvrc
-	black --config pyproject.toml .
+	ruff format --config pyproject.toml .
 
 lint:
 	. ~/.venvrc
-	ruff check .
+	ruff check --config pyproject.toml .
 
 pip_audit:
 	. ~/.venvrc

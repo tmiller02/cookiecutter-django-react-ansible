@@ -1,4 +1,3 @@
-black
 coverage[toml]
 Django>=4.2,<5.0
 django-cors-headers

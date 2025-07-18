@@ -4,11 +4,9 @@
   ansible.builtin.apt_repository:
     repo: "ppa:mozillateam/ppa"
 
-- name: Install packages used with selenium and X11 forwarding
+- name: Install packages used with selenium
   ansible.builtin.apt:
     name:
       - firefox-esr
       - firefox-esr-geckodriver
-      - xauth
-      - x11-apps
     state: present

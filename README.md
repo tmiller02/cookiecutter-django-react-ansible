@@ -6,13 +6,12 @@ a Django 4.2 & React project with Ansible provisioning and some opinionated defa
 
 ## Key Features and Technologies
 * Django 4.2
-* Python 3.11
+* Python 3.12
 * React 18 using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
 * Ansible 9 for provisioning  
 * Follows the [12-Factor methodology](https://12factor.net/)
-* Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/),
-  Firefox and optional X11 forwarding
+* Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/) and Firefox
 * Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)
 * Works on Linux, macOS and Windows host environments
 * PostgreSQL 14
@@ -21,8 +20,7 @@ a Django 4.2 & React project with Ansible provisioning and some opinionated defa
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
   SSL certificates for production, auto-generated self-signed SSL certificates for development.
 * Checks to python dependencies provided via [pip-audit](https://pypi.org/project/pip-audit/)
-* Vagrant for the development environment
-* Comes with a Jenkinsfile for your CI / CD pipelines
+* Podman for the development environment
 
 ## Templating a Project
 

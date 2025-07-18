@@ -1,9 +1,9 @@
 ---
 {% raw -%}
 # Tasks to be run when the backend_app code is made available on the target machine
-# via a vagrant mount from the host machine (i.e. when using a dev VM).
+# via a bind mount from the host machine (i.e. when using a dev container).
 #
-# The Vagrantfile has been configured to mount the 'current' folder on the target
+# The podman compose.yaml has been configured to mount the 'current' folder on the target
 # machine to the 'backend_app' folder on the host machine, so we don't need to do
 # anything else to make any code changes available on the target machine (compare to
 # the tasks in 'run_deploy.yml').
@@ -13,5 +13,5 @@
     backend_app_deploy_helper:
       new_release_path: "{{ backend_app_root }}/current"
       current_path: "{{ backend_app_root }}/current"
-    backend_app_virtualenv_dir: "/home/vagrant/backend_app_venv"
+    backend_app_virtualenv_dir: "/root/backend_app_venv"
 {% endraw -%}

@@ -1,0 +1,22 @@
+services:
+  {{ cookiecutter.project_slug }}_backend:
+    privileged: true
+    build:
+      context: .
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
+    ports:
+      - "4000:443" # Forward the backend served via gunicorn + nginx on port 4000
+      - "4001:4001" # Forward a port that can be used when running the django dev server
+    volumes:
+      - ./backend_app/:/opt/{{ cookiecutter.project_slug }}_backend/current
+  {{ cookiecutter.project_slug }}_frontend:
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
+    ports:
+      # Forward the prod frontend build served via nginx to port 5000
+      - "5000:443"
+  {{ cookiecutter.project_slug }}_db:
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
+  provisioner:
+    image: localhost/{{ cookiecutter.project_slug }}-base:latest
+    volumes:
+      - .:/workdir/

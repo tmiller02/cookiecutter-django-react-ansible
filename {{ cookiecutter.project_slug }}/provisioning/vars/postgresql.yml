@@ -8,9 +8,11 @@ postgresql_global_config_options:
 
 postgresql_databases:
   - name: "{{ database_name }}"
+    owner: "{{ database_user }}"
 
 postgresql_users:
   - name: "{{ database_user }}"
     password: "{{ database_password }}"
     role_attr_flags: CREATEDB
+    priv: ALL
 {% endraw %}

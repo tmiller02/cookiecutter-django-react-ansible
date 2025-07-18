@@ -7,18 +7,18 @@ and follows the [twelve factor app](https://12factor.net) approach.
 
 ## Running the Django Dev Server
 
-First let's make sure that the dev VMs are up and provisioned:
+First let's make sure that the dev containers are up and provisioned:
 
 ```
 $ cd {{ cookiecutter.project_slug }}
-$ vagrant up --provision
+$ ./provision_dev_environment.sh
 ```
 
-Next, we'll ssh onto the dev VM with our django project and activate the
+Next, we'll exec onto the backend container with our django project and activate the
 virtualenv:
 
 ```
-$ vagrant ssh backend
+$ podman compose exec {{ cookiecutter.project_slug }}_backend bash
 ```
 
 Then we'll start the uvicorn dev server, binding to all IP addresses on port 4001:
@@ -42,36 +42,7 @@ backend app includes a `Makefile` with a command for running the tests with
 coverage analysis:
 
 ```
-$ vagrant ssh backend
-(venv) [{{ cookiecutter.project_slug }}]$ make test
-```
-
-### Selenium X11 forwarding (Optional)
-
-The tests have been set up so Selenium and Firefox may be used for any
-browser-reliant tests.
-
-The browser is set up to run in headless mode by default. However, if you
-have an X11 server running on your host machine, you can change this to display
-the browser window during the tests.
-
-This requires an X11 server on your host machine, such as
-[XQuartz](https://www.xquartz.org) for Mac or [Cygwin/X](https://x.cygwin.com)
-for Windows.
-
-To verify that X11 forwarding is working:
-
-```
-$ vagrant ssh backend
-(venv) [{{ cookiecutter.project_slug }}]$ xeyes
-```
-
-If all is working as expected, you should see a new window with eyes appear.
-
-To display Firefox, set the `SELENIUM_TESTS_RUN_HEADLESS` to `False` in
-`settings.py`and re-run the tests:
-
-```
+$ podman compose exec {{ cookiecutter.project_slug }}_backend bash
 (venv) [{{ cookiecutter.project_slug }}]$ make test
 ```
 
@@ -83,7 +54,7 @@ formatter and [ruff](https://docs.astral.sh/ruff/) for linting.
 To run the black formatter:
 
 ```
-$ vagrant ssh backend
+$ podman compose exec {{ cookiecutter.project_slug }}_backend bash
 (venv) [{{ cookiecutter.project_slug }}]$ make format
 ```
 

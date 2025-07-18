@@ -11,11 +11,11 @@
     owner: "{{ backend_app_user }}"
     group: "{{ backend_app_group }}"
 
-- import_tasks: vagrant_mount.yml
-  when: backend_app_vagrant_mount | bool
+- import_tasks: podman_mount.yml
+  when: backend_app_podman_mount | bool
 
 - import_tasks: run_deploy.yml
-  when: not backend_app_vagrant_mount | bool
+  when: not backend_app_podman_mount | bool
 
 - import_tasks: virtualenv.yml
 
@@ -38,7 +38,7 @@
     state: finalize
     clean: true
     keep_releases: 10
-  when: not backend_app_vagrant_mount | bool
+  when: not backend_app_podman_mount | bool
 
 # Note - this uses the Python Packaging Advisory Database
 # (https://github.com/pypa/advisory-database)

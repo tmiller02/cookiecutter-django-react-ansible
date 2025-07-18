@@ -1,7 +1,5 @@
 # Cookiecutter Django React Ansible
 
-[![CI Build Status](https://github.com/tmiller02/cookiecutter-django-react-ansible/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/tmiller02/cookiecutter-django-react-ansible/actions?query=branch%3Amaster)
-
 cookiecutter-django-react-ansible is a 
 [cookiecutter](https://github.com/pydanny/cookiecutter) template for setting up
 a Django 4.2 & React project with Ansible provisioning and some opinionated defaults.
@@ -19,7 +17,7 @@ a Django 4.2 & React project with Ansible provisioning and some opinionated defa
 * Works on Linux, macOS and Windows host environments
 * PostgreSQL 14
 * NGINX web server set up with HTTP/2 support
-* Ubuntu 22.04 (Jammy Jellyfish)
+* Ubuntu 24.04 (Jammy Jellyfish)
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
   SSL certificates for production, auto-generated self-signed SSL certificates for development.
 * Checks to python dependencies provided via [pip-audit](https://pypi.org/project/pip-audit/)
@@ -47,10 +45,6 @@ options. Once you've provided these values, your project will be generated.
 ```
 project_name [My Project]: My Project
 project_slug [my_project]: my_project
-# if you aren't using a proxy just leave these blank
-vagrant_apt_proxy []: 
-vagrant_http_proxy []: 
-vagrant_https_proxy []:
 ```
 
 Enter the project and take a look around:
@@ -72,27 +66,17 @@ $ git push -u origin master
 ## Quickstart
 
 To get up and running quickly, make sure you have the following requirements installed:
-* [Vagrant](https://www.vagrantup.com/)
-* One of the following:  
-  * [VMWare Fusion Player](https://customerconnect.vmware.com/evalcenter?p=fusion-player-personal-13)
-  * [VirtualBox](https://www.virtualbox.org/)
-
-If using VMWare Fusion Player, make sure that you have also installed the [Vagrant VMWare Utility](https://developer.hashicorp.com/vagrant/docs/providers/vmware/installation)
-and the `vagrant-vmware-desktop` plugin.
+* [Podman](https://podman.io/)
 
 First, navigate to the project's directory:
 ```
 $ cd my_project/
 ```
 
-This project has been configured to work with either VMWare Fusion or VirtualBox 
-as part of the Vagrant provisioning process via 
-[vagrant providers](https://www.vagrantup.com/docs/providers).
-
 Provision the Vagrant dev environment:
 
 ```
-$ vagrant up --provision
+$ ./provision_dev_environment.sh
 ```
 
 Once provisioning has finished, you can access the django app at https://localhost:4000.

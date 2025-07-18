@@ -1,7 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Frontend + Backend dev servers" type="CompoundRunConfigurationType">
-    <toRun name="Backend dev server" type="Python.DjangoServer" />
-    <toRun name="Frontend dev server (using backend dev server)" type="js.build_tools.npm" />
-    <method v="2" />
-  </configuration>
-</component>

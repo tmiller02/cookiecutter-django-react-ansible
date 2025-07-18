@@ -10,9 +10,8 @@ All hosts are [Ubuntu 24.04 (Jammy Jellyfish)](https://releases.ubuntu.com/24.04
 
 ## Development Environment
 
-The local development environment is a multi-container configuration using Podman and the
-[Ansible Local](https://www.vagrantup.com/docs/provisioning/ansible_local.html)
-provisioner. These containers are defined as follows:
+The local development environment is a multi-container configuration using Podman and Ansible.
+These containers are defined as follows:
 
 * The **backend** container has the 'backend' django app
 * The **frontend** container has the 'frontend' react app

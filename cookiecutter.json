@@ -1,8 +1,5 @@
 {
     "project_name": "My Project",
     "project_slug": "{{ cookiecutter.project_name.lower() | replace(' ', '_') | replace('-', '_') | replace('.', '_') | trim() }}",
-    "project_overview": "My project overview",
-    "vagrant_apt_proxy": "",
-    "vagrant_http_proxy": "",
-    "vagrant_https_proxy": ""
+    "project_overview": "My project overview"
 }

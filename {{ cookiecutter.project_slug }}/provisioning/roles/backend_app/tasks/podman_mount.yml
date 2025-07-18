@@ -1,7 +1,7 @@
 ---
 {% raw -%}
 # Tasks to be run when the backend_app code is made available on the target machine
-# via a vagrant mount from the host machine (i.e. when using a dev VM).
+# via a bind mount from the host machine (i.e. when using a dev container).
 #
 # The podman compose.yaml has been configured to mount the 'current' folder on the target
 # machine to the 'backend_app' folder on the host machine, so we don't need to do

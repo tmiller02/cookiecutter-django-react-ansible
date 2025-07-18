@@ -16,7 +16,7 @@ First, navigate to the project's directory:
 $ cd {{ cookiecutter.project_slug }}
 ```
 
-Provision the Vagrant dev environment:
+Provision the Podman dev environment:
 
 ```
 $ ./provision_dev_environment.sh

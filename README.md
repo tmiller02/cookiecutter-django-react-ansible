@@ -71,7 +71,7 @@ First, navigate to the project's directory:
 $ cd my_project/
 ```
 
-Provision the Vagrant dev environment:
+Provision the Podman dev environment:
 
 ```
 $ ./provision_dev_environment.sh

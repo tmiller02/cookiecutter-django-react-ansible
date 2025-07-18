@@ -9,7 +9,7 @@ a Django 4.2 & React project with Ansible provisioning and some opinionated defa
 * Python 3.12
 * React 18 using the [create-react-app](https://github.com/facebook/create-react-app) script
 * TypeScript
-* Ansible 9 for provisioning  
+* Ansible 11 for provisioning  
 * Follows the [12-Factor methodology](https://12factor.net/)
 * Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/) and Firefox
 * Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)

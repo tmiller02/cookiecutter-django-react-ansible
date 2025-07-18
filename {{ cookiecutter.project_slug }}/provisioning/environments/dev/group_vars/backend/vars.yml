@@ -1,8 +1,8 @@
 ---
 {% raw %}
-backend_app_user: "vagrant"
-backend_app_group: "vagrant"
-backend_app_vagrant_mount: true
+backend_app_user: "root"
+backend_app_group: "root"
+backend_app_podman_mount: true
 backend_app_debug: true
 backend_app_database_host_ip: "192.168.56.4"
 backend_app_secret_key: "$DJANGO SECRET KEY$"

@@ -3,7 +3,7 @@
 #backend_app_user: "{{ cookiecutter.project_slug }}"
 #backend_app_group: "{{ cookiecutter.project_slug }}"
 {% raw %}
-#backend_app_vagrant_mount: false
+#backend_app_podman_mount: false
 #backend_app_debug: false
 #backend_app_database_host_ip: "<your-production-database-host-ip>"
 ## To generate a new secret key using django:

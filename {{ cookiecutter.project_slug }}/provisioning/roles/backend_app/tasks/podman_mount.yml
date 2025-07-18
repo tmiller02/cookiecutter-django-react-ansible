@@ -13,5 +13,5 @@
     backend_app_deploy_helper:
       new_release_path: "{{ backend_app_root }}/current"
       current_path: "{{ backend_app_root }}/current"
-    backend_app_virtualenv_dir: "/home/vagrant/backend_app_venv"
+    backend_app_virtualenv_dir: "/root/backend_app_venv"
 {% endraw -%}

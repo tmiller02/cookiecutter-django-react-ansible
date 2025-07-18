@@ -7,7 +7,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - .:/workdir/
+      - ./backend_app/:/opt/{{ cookiecutter.project_slug }}_backend/current
   {{ cookiecutter.project_slug }}_frontend:
     image: localhost/{{ cookiecutter.project_slug }}-base:latest
   {{ cookiecutter.project_slug }}_db:

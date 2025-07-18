@@ -8,9 +8,9 @@
       - make
       - gcc
       - libpq-dev
-      - python3.11-dev
-      - python3.11-venv
-      - python3.11
+      - python3.12-dev
+      - python3.12-venv
+      - python3.12
       - watchman
     state: present
 
@@ -19,10 +19,10 @@
   become_user: "{{ backend_app_user }}"
   ansible.builtin.pip:
     virtualenv: "{{ backend_app_virtualenv_dir }}"
-    virtualenv_command: /usr/bin/python3.11 -m venv
+    virtualenv_command: /usr/bin/python3.12 -m venv
     name:
-      - pip==24.0
-      - pip-tools==7.4.0
+      - pip==25.0
+      - pip-tools==7.4.1
       - setuptools==69.1.1
       - wheel==0.42.0
 

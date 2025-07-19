@@ -1,0 +1,7 @@
+[project]
+name = "{{ cookiecutter.project_slug }}_provisioning"
+version = "0.1.0"
+dependencies = [
+    "ansible",
+    "ansible-lint",
+]

@@ -38,17 +38,3 @@ The certificates in the sample Ansible production environment are regenerated
 with certbot in 'standalone' mode. This approach means the NGINX webserver gets
 automatically stopped briefly around every 60 days. If this doesn't suit your
 needs, consider using a different approach for generating production certificates.
-
-## Automatic apt package updates
-
-The 'base' role is set to configure `unattended-upgrades` to automatically install updates.
-This should help ensure that servers are up to date, but unmanaged system updates
-may introduce an element of risk and instability which may not be appropriate
-for your use case.
-
-If you'd like to disable automatic package updates, set
-`base_install_updates_automatically` to `false` in `environments/prod/group_vars/all`. 
-
-Keep in mind that some updates (such as kernel updates) require a reboot to take
-effect. You still need to occasionally reboot the system to ensure that updates
-are applied, `unattended-upgrades` won't take care of this for you.

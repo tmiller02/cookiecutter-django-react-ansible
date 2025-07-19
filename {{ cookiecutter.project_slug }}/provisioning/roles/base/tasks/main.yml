@@ -1,7 +1,5 @@
 ---
 
-- import_tasks: unattended_upgrades.yml
-
 - import_tasks: login_info.yml
 
 - name: Install useful packages

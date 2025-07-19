@@ -3,7 +3,6 @@
 deploy_check_display_confirmation_prompts: false
 
 base_show_production_login_warning: false
-base_install_updates_automatically: true
 
 backend_server_name: "localhost"
 

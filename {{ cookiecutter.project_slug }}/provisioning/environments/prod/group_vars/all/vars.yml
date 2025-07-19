@@ -4,7 +4,6 @@
 #deploy_check_display_confirmation_prompts: true
 #
 #base_show_production_login_warning: true
-#base_install_updates_automatically: true
 #
 #backend_server_name: "<your-production-server-backend-cname>"
 #

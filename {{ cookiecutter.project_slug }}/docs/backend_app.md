@@ -2,63 +2,52 @@
 
 ## Overview
 
-The backend app uses the [Django web framework](https://www.djangoproject.com)
-and follows the [twelve factor app](https://12factor.net) approach.
+The backend app is built with the [Django web framework](https://www.djangoproject.com) and follows the [Twelve-Factor App](https://12factor.net) methodology for modern, maintainable web applications.
 
-## Running the Django Dev Server
+## Running the Django Development Server
 
-First let's make sure that the dev containers are up and provisioned:
-
-```
-$ cd {{ cookiecutter.project_slug }}
-$ ./provision_dev_environment.sh
-```
-
-Next, we'll exec onto the backend container with our django project and activate the
-virtualenv:
+To start the development environment, first ensure the containers are up and provisioned:
 
 ```
-$ podman compose exec {{ cookiecutter.project_slug }}_backend bash
+cd {{ cookiecutter.project_slug }}
+./provision_dev_environment.sh
 ```
 
-Then we'll start the uvicorn dev server, binding to all IP addresses on port 4001:
+Next, access the backend container and activate the virtual environment:
+
+```
+podman compose exec {{ cookiecutter.project_slug }}_backend bash
+```
+
+Start the Django development server using Uvicorn, binding to all IP addresses on port 4001:
 
 ```
 (venv) [{{ cookiecutter.project_slug }}]$ make runserver
 ```
 
-You can view pages being served by this dev server by going to
-http://localhost:4001.
-
-Note that the dev server url is **http** (not **https**) and is on port
-**4001**. Make sure not to confuse this url with the https url, which is served
-instead by NGINX and gunicorn. Unlike the django dev server, the NGINX url will
-**not** automatically reload after any code changes.
+Visit http://localhost:4001 to view the app. Note: The dev server uses **http** on port **4001**. This is different from the production server, which uses **https** and is served by NGINX and Gunicorn. The dev server automatically reloads on code changes, while the production server does not.
 
 ## Running Tests
 
-Tests are set up to use the `unittest` framework (Django's default). The
-backend app includes a `Makefile` with a command for running the tests with
-coverage analysis:
+Tests use Django's default `unittest` framework. Run tests with coverage analysis using the provided Makefile:
 
 ```
-$ podman compose exec {{ cookiecutter.project_slug }}_backend bash
+podman compose exec {{ cookiecutter.project_slug }}_backend bash
 (venv) [{{ cookiecutter.project_slug }}]$ make test
 ```
 
 ## Formatting and Linting
 
-This project is set up with the [black](https://github.com/psf/black) code
-formatter and [ruff](https://docs.astral.sh/ruff/) for linting.
+Code formatting is handled by [black](https://github.com/psf/black), and linting by [ruff](https://docs.astral.sh/ruff/):
 
-To run the black formatter:
+To format code:
 
 ```
-$ podman compose exec {{ cookiecutter.project_slug }}_backend bash
+podman compose exec {{ cookiecutter.project_slug }}_backend bash
 (venv) [{{ cookiecutter.project_slug }}]$ make format
 ```
 
-And to run `ruff`: 
+To lint code:
 
 ```
 (venv) [{{ cookiecutter.project_slug }}]$ make lint
@@ -66,27 +55,23 @@ And to run `ruff`:
 
 ## Type Checking
 
-To run type checking with [mypy](https://mypy.readthedocs.io/en/stable/introduction.html):
+Type checking is performed with [mypy](https://mypy.readthedocs.io/en/stable/introduction.html):
 
 ```
 (venv) [{{ cookiecutter.project_slug }}]$ make type_check
 ```
 
-## Updating Dependencies
+## Managing Dependencies
 
-This project uses [pip-tools](https://github.com/jazzband/pip-tools) to
-manage dependencies. This allows us to compile a complete `requirements.txt`
-manifest of all python dependencies from a simple list of top-level dependencies
-defined in a `requirements.in` file.
+Dependencies are managed with [pip-tools](https://github.com/jazzband/pip-tools). This tool compiles a complete `requirements.txt` from a list of top-level dependencies in `requirements.in`.
 
-To upgrade a top-level dependency, edit `requirements.in` and then run:
+To upgrade a specific dependency, edit `requirements.in` and run:
 
 ```
 pip-compile --generate-hashes --output-file=requirements.txt requirements.in
 ```
 
-To upgrade all packages whilst fulfilling the constraints in the `requirements.in`
-file: 
+To upgrade all packages according to `requirements.in` constraints:
 
 ```
 pip-compile --generate-hashes --upgrade --output-file=requirements.txt requirements.in
@@ -94,14 +79,8 @@ pip-compile --generate-hashes --upgrade --output-file=requirements.txt requireme
 
 ## Django Settings
 
-The Ansible provisioning adds a `settings.env` file which is then loaded via
-[django-environ](https://github.com/joke2k/django-environ) in `settings.py`.
+Ansible provisioning creates a `settings.env` file, which is loaded by [django-environ](https://github.com/joke2k/django-environ) in `settings.py`.
 
-## Serving in Production
+## Production Deployment
 
-The django app is run as a systemd service
-(`{{ cookiecutter.project_slug }}.service`) with gunicorn which exposes the 
-application on localhost:8080. NGINX is configured as a reverse proxy for this
-location. You can access the django app being served via NGINX by going to
-https://localhost:4000 (note that you may need to
-restart the systemd service to pick up any code changes.)
+In production, the Django app runs as a systemd service (`{{ cookiecutter.project_slug }}.service`) using Gunicorn, exposing the app on localhost:8080. NGINX acts as a reverse proxy, serving the app at https://localhost:4000. Restart the systemd service to apply code changes in production.

@@ -4,7 +4,7 @@
 # for more info.
 
 - name: Install rsync
-  ansible.builtin.command.apt:
+  ansible.builtin.apt:
     name: rsync
     state: present
 

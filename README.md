@@ -15,7 +15,7 @@ cookiecutter-django-react-ansible is a
 * NGINX web server with HTTP/2 support
 * Ubuntu 24.04 (Jammy Jellyfish) base
 * [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/) SSL certificates for production, and auto-generated self-signed SSL certificates for development
-* Python dependency security checks with [pip-audit](https://pypi.org/project/pip-audit/)
+* Python dependency security checks with [uv](https://docs.astral.sh/uv/)
 * Podman for containerized development environments
 
 ## Getting Started

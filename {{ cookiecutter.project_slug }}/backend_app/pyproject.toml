@@ -1,3 +1,27 @@
+[project]
+name = "{{ cookiecutter.project_slug }}"
+version = "0.1.0"
+dependencies = [
+    "coverage[toml]>=7.9.2",
+    "django>=5.2,<6.0",
+    "django-cors-headers>=4.7.0",
+    "django-environ>=0.12.0",
+    "django-extensions>=4.1",
+    "django-stubs>=5.2.2",
+    "djangorestframework>=3.16.0",
+    "gunicorn>=23.0.0",
+    "ipython>=9.4.0",
+    "mypy>=1.17.0",
+    "pip-audit>=2.9.0",
+    "psycopg[binary]>=3.2.9",
+    "pytz>=2025.2",
+    "pywatchman>=3.0.0",
+    "ruff>=0.12.4",
+    "selenium>=4.34.2",
+    "tzdata>=2025.2",
+    "uvicorn[standard]>=0.35.0",
+]
+
 # https://docs.astral.sh/ruff/configuration/#using-pyprojecttoml
 
 [tool.ruff.lint]

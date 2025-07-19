@@ -7,7 +7,7 @@
   community.general.django_manage:
     command: "migrate"
     app_path: "{{ backend_app_deploy_helper.current_path }}"
-    virtualenv: "{{ backend_app_virtualenv_dir }}"
+    virtualenv: "{{ backend_app_deploy_helper.current_path }}/.venv/"
   register:
     django_manage_migrate
 

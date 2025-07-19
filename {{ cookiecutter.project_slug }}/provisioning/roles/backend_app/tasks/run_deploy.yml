@@ -35,10 +35,6 @@
   ansible.builtin.set_fact:
     backend_app_deploy_helper: "{{ backend_app_deploy_helper_output['ansible_facts']['deploy_helper'] }}"
 
-- name: Set backend_app_virtualenv_dir fact
-  ansible.builtin.set_fact:
-    backend_app_virtualenv_dir: "{{ backend_app_deploy_helper.new_release_path }}/venv"
-
 - name: Synchronize backend_app to the new release folder
   become: true
   become_user: "{{ backend_app_user }}"

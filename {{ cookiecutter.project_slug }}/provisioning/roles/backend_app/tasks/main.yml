@@ -17,7 +17,7 @@
 - import_tasks: run_deploy.yml
   when: not backend_app_podman_mount | bool
 
-- import_tasks: virtualenv.yml
+- import_tasks: install_dependencies.yml
 
 - name: Template settings into the new release path
   ansible.builtin.template:

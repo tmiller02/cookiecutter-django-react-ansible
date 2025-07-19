@@ -2,8 +2,7 @@
 .PHONY: runserver test format lint pip_audit type_check
 
 runserver:
-	. ~/.venvrc
-	uvicorn \
+	.venv/bin/uvicorn \
 		{{ cookiecutter.project_slug }}.asgi:application \
 		--workers 1 \
 		--host 0.0.0.0 \
@@ -12,8 +11,7 @@ runserver:
 		--reload-exclude ".git, .idea, venv"
 
 test:
-	. ~/.venvrc
-	coverage run manage.py test
+	.venv/bin/coverage run manage.py test
 	TEST_EXIT_CODE=$$?;
 	coverage html
 	echo Coverage html report written to coverage_html_report/index.html
@@ -21,17 +19,13 @@ test:
 	exit $$TEST_EXIT_CODE
 
 format:
-	. ~/.venvrc
-	ruff format --config pyproject.toml .
+	.venv/bin/ruff format --config pyproject.toml .
 
 lint:
-	. ~/.venvrc
-	ruff check --config pyproject.toml .
+	.venv/bin/ruff check --config pyproject.toml .
 
 pip_audit:
-	. ~/.venvrc
-	pip-audit
+	.venv/bin/pip-audit
 
 type_check:
-	. ~/.venvrc
-	mypy --config-file=pyproject.toml
+	.venv/bin/mypy --config-file=pyproject.toml

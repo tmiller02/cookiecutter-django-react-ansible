@@ -16,13 +16,13 @@ cd {{ cookiecutter.project_slug }}
 Next, access the backend container and activate the virtual environment:
 
 ```
-podman compose exec {{ cookiecutter.project_slug }}_backend bash
+$ ./exec_backend.sh
 ```
 
 Start the Django development server using Uvicorn, binding to all IP addresses on port 4001:
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ make runserver
+$ make runserver
 ```
 
 Visit http://localhost:4001 to view the app. Note: The dev server uses **http** on port **4001**. This is different from the production server, which uses **https** and is served by NGINX and Gunicorn. The dev server automatically reloads on code changes, while the production server does not.
@@ -32,8 +32,8 @@ Visit http://localhost:4001 to view the app. Note: The dev server uses **http** 
 Tests use Django's default `unittest` framework. Run tests with coverage analysis using the provided Makefile:
 
 ```
-podman compose exec {{ cookiecutter.project_slug }}_backend bash
-(venv) [{{ cookiecutter.project_slug }}]$ make test
+$ ./exec_backend.sh
+$ make test
 ```
 
 ## Formatting and Linting
@@ -43,14 +43,14 @@ Code formatting is handled by [black](https://github.com/psf/black), and linting
 To format code:
 
 ```
-podman compose exec {{ cookiecutter.project_slug }}_backend bash
-(venv) [{{ cookiecutter.project_slug }}]$ make format
+$ ./exec_backend.sh
+$ make format
 ```
 
 To lint code:
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ make lint
+$ make lint
 ```
 
 ## Type Checking
@@ -58,24 +58,12 @@ To lint code:
 Type checking is performed with [mypy](https://mypy.readthedocs.io/en/stable/introduction.html):
 
 ```
-(venv) [{{ cookiecutter.project_slug }}]$ make type_check
+$ make type_check
 ```
 
 ## Managing Dependencies
 
-Dependencies are managed with [pip-tools](https://github.com/jazzband/pip-tools). This tool compiles a complete `requirements.txt` from a list of top-level dependencies in `requirements.in`.
-
-To upgrade a specific dependency, edit `requirements.in` and run:
-
-```
-pip-compile --generate-hashes --output-file=requirements.txt requirements.in
-```
-
-To upgrade all packages according to `requirements.in` constraints:
-
-```
-pip-compile --generate-hashes --upgrade --output-file=requirements.txt requirements.in
-```
+Dependencies are managed with [uv](https://docs.astral.sh/uv/).
 
 ## Django Settings
 

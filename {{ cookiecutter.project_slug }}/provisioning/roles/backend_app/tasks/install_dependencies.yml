@@ -1,0 +1,42 @@
+---
+{% raw %}
+
+- name: Install python packages and build dependencies
+  become: true
+  ansible.builtin.apt:
+    name:
+      - make
+      - gcc
+      - libpq-dev
+      - pipx
+      - python3.12-dev
+      - python3.12-venv
+      - python3.12
+      - watchman
+    state: present
+
+- name: Install uv
+  command: pipx install uv==0.8.0
+  become: true
+  become_user: "{{ backend_app_user }}"
+
+- name: Update .bashrc file to add .local to path
+  become: true
+  become_user: "{{ backend_app_user }}"
+  lineinfile:
+    path: "~/.bashrc"
+    regexp: '^export PATH=.*?\.local/bin'
+    insertafter: EOF
+    state: present
+    create: yes
+    line: 'export PATH="$HOME/.local/bin:$PATH"'
+
+- name: Install requirements using uv
+  become: true
+  become_user: "{{ backend_app_user }}"
+  ansible.builtin.command: "~/.local/bin/uv sync"
+  args:
+    chdir: "{{ backend_app_deploy_helper.new_release_path }}"
+  changed_when: true
+
+{% endraw -%}

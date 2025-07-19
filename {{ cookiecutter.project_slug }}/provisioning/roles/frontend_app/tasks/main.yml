@@ -24,7 +24,7 @@
 - name: Synchronize the frontend_app build to the new release folder
   become: true
   ansible.posix.synchronize:
-    src: "{{ playbook_dir }}/../frontend_app/build/"
+    src: "{{ playbook_dir }}/../frontend_app/dist/"
     dest: "{{ frontend_app_deploy_helper.new_release_path }}"
 
 - name: Finalize the deploy, switching the 'current' symlink

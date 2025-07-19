@@ -1,84 +1,80 @@
 # Cookiecutter Django React Ansible
 
 cookiecutter-django-react-ansible is a 
-[cookiecutter](https://github.com/pydanny/cookiecutter) template for setting up
-a Django 5.2 & React project with Ansible provisioning and some opinionated defaults.
+[cookiecutter](https://github.com/pydanny/cookiecutter) template for quickly setting up a Django 5.2 & React project with Ansible provisioning and sensible defaults.
 
 ## Key Features and Technologies
 * Django 5.2 with Python 3.12
-* React 19 with [vite](https://vite.dev/) and TypeScript.
-* Ansible 11 for provisioning  
-* Follows the [12-Factor methodology](https://12factor.net/)
-* Sets up functional tests with [Selenium](https://selenium-python.readthedocs.io/) and Firefox
-* Better python dependency management with [pip-tools](https://github.com/jazzband/pip-tools)
-* Works on Linux, macOS and Windows host environments
-* PostgreSQL 16
-* NGINX web server set up with HTTP/2 support
-* Ubuntu 24.04 (Jammy Jellyfish)
-* [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/)
-  SSL certificates for production, auto-generated self-signed SSL certificates for development.
-* Checks to python dependencies provided via [pip-audit](https://pypi.org/project/pip-audit/)
-* Podman for the development environment
+* React 19 powered by [Vite](https://vite.dev/) and TypeScript
+* Ansible 11 for automated provisioning
+* Adheres to the [12-Factor methodology](https://12factor.net/)
+* Functional testing with [Selenium](https://selenium-python.readthedocs.io/) and Firefox
+* Robust Python dependency management via [pip-tools](https://github.com/jazzband/pip-tools)
+* Compatible with Linux, macOS, and Windows hosts
+* PostgreSQL 16 database
+* NGINX web server with HTTP/2 support
+* Ubuntu 24.04 (Jammy Jellyfish) base
+* [Certbot](https://certbot.eff.org/about/) / [Let's Encrypt](https://letsencrypt.org/) SSL certificates for production, and auto-generated self-signed SSL certificates for development
+* Python dependency security checks with [pip-audit](https://pypi.org/project/pip-audit/)
+* Podman for containerized development environments
 
-## Templating a Project
+## Getting Started
 
-First, you'll need to make sure that you have cookiecutter installed:
+First, ensure you have cookiecutter installed:
 
 ```
 $ pip install "cookiecutter>=1.6.0"
 ```
 
-Next, run cookiecutter against this project:
+Next, clone this repository and generate your project:
 
 ```
 $ git clone https://github.com/tmiller02/cookiecutter-django-react-ansible.git
 $ cookiecutter cookiecutter-django-react-ansible
 ```
 
-You'll be prompted for some values. Answer these prompts with your desired
-options. Once you've provided these values, your project will be generated.
+You'll be prompted for project details. Enter your desired values:
 
 ```
 project_name [My Project]: My Project
 project_slug [my_project]: my_project
 ```
 
-Enter the project and take a look around:
+Navigate into your new project directory:
 
 ```
 $ cd my_project/
 $ ls
 ```
 
-Create a git repo and push it there:
+Initialize a git repository and push to your remote:
 
 ```
 $ git init
 $ git add .
 $ git commit -m "Initial commit"
-$ git remote add origin git@github.com:<my-git-user>/<my-git-repo>.git
+$ git remote add origin git@github.com:<your-github-username>/<your-repo>.git
 $ git push -u origin master
 ```
+
 ## Quickstart
 
-To get up and running quickly, make sure you have the following requirements installed:
+To get started quickly, install the following requirement:
 * [Podman](https://podman.io/)
 
-First, navigate to the project's directory:
+Navigate to your project directory:
 ```
 $ cd my_project/
 ```
 
-Provision the Podman dev environment:
+Provision the Podman development environment:
 
 ```
 $ ./provision_dev_environment.sh
 ```
 
-Once provisioning has finished, you can access the django app at https://localhost:4000.
-You can access the react app at https://localhost:5000.
+After provisioning, access the Django app at https://localhost:4000 and the React app at https://localhost:5000.
 
 ## Next Steps
 
-Check out the documentation in `README.md` in your generated project for more
-detailed instructions on getting started.
+Refer to the `README.md` in your generated project for more detailed setup and usage instructions.

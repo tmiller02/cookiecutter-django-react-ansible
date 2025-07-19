@@ -6,11 +6,11 @@ This project comes with some basic security configuration such as a
 firewall with firewalld, but remember that the security of your servers
 is YOUR responsibility.
 
-This project intentionally does NOT configure some security enhancements so as
-to minimise the risk of users inadvertently locking themselves out of their own
+This project intentionally does NOT configure some security enhancements to
+minimise the risk of users inadvertently locking themselves out of their own
 servers.
 
-You may want to also consider disabling root login, mandating SSH key based
+You may want to also consider disabling root login, mandating SSH key-based
 authentication, adding SSH monitoring tools such as fail2ban and adding a
 centralised logging server.
 
